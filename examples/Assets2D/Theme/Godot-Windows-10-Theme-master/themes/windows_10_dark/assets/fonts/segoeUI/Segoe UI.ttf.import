@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://cy3d5uve74ykk"
+path="res://.godot/imported/Segoe UI.ttf-a38ca24ab1a6d193d06011710bc7f993.fontdata"
+
+[deps]
+
+source_file="res://Assets2D/Theme/Godot-Windows-10-Theme-master/themes/windows_10_dark/assets/fonts/segoeUI/Segoe UI.ttf"
+dest_files=["res://.godot/imported/Segoe UI.ttf-a38ca24ab1a6d193d06011710bc7f993.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

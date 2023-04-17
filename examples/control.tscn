@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bh3x2y0viarxt"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FileDialog" type="FileDialog" parent="."]
+size = Vector2i(800, 800)
+visible = true

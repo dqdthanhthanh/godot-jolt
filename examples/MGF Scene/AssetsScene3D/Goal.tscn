@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://b4ptqc4d4gle6"]
+
+[ext_resource type="Material" uid="uid://btdaufajeuj74" path="res://Assets3D/Goal/M_COT.material" id="2_jswwc"]
+[ext_resource type="Material" uid="uid://ctdtqvmu0wt11" path="res://Assets3D/Goal/M_LUOI.material" id="3_5ckjx"]
+[ext_resource type="PackedScene" uid="uid://0s5nwq0l36j4" path="res://Assets3D/Goal/khungthanh.glb" id="6"]
+
+[sub_resource type="BoxShape3D" id="1"]
+resource_local_to_scene = true
+margin = 0.01
+size = Vector3(0.282108, 0.22145, 0.869294)
+
+[sub_resource type="PhysicsMaterial" id="6"]
+
+[sub_resource type="BoxShape3D" id="2"]
+margin = 0.01
+size = Vector3(0.397326, 0.275162, 0.0427664)
+
+[sub_resource type="BoxShape3D" id="3"]
+margin = 0.01
+size = Vector3(0.6493, 0.259924, 0.989216)
+
+[sub_resource type="BoxShape3D" id="5"]
+margin = 0.01
+size = Vector3(0.405434, 0.220386, 0.992834)
+
+[sub_resource type="BoxShape3D" id="7"]
+resource_local_to_scene = true
+margin = 0.01
+size = Vector3(1.2, 1, 1.6)
+
+[sub_resource type="BoxShape3D" id="8"]
+size = Vector3(0.974, 0.211462, 0.38056)
+
+[sub_resource type="BoxShape3D" id="9"]
+size = Vector3(1.30074, 0.623254, 0.630168)
+
+[node name="Goal" type="Area3D"]
+collision_layer = 8
+collision_mask = 2
+
+[node name="khungthanh" parent="." instance=ExtResource("6")]
+
+[node name="khungthanh2" parent="khungthanh" index="0"]
+lod_bias = 100.0
+ignore_occlusion_culling = true
+surface_material_override/0 = ExtResource("2_jswwc")
+surface_material_override/1 = ExtResource("3_5ckjx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199537, 0.110919, 0)
+shape = SubResource("1")
+
+[node name="GoalStatic" type="StaticBody3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+physics_material_override = SubResource("6")
+
+[node name="CollisionShapeP" type="CollisionShape3D" parent="GoalStatic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198668, 0.136801, -0.478188)
+shape = SubResource("2")
+
+[node name="CollisionShapeT" type="CollisionShape3D" parent="GoalStatic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199258, 0.136801, 0.476218)
+shape = SubResource("2")
+
+[node name="CollisionShapeSau" type="CollisionShape3D" parent="GoalStatic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.707458, 0.109855, -0.001)
+shape = SubResource("3")
+
+[node name="CollisionShapeTren" type="CollisionShape3D" parent="GoalStatic"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.198988, 0.332125, -0.00167693)
+shape = SubResource("5")
+
+[node name="EffekseerEmitter" type="Node3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.213623, 0.111784, 0)
+
+[node name="Gk" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Gk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.3, 0)
+shape = SubResource("7")
+
+[node name="KickingBall" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KickingBall"]
+transform = Transform3D(-1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.201683, 0.335592, 0)
+shape = SubResource("8")
+
+[node name="CollisionShape2" type="CollisionShape3D" parent="KickingBall"]
+transform = Transform3D(-1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0.715923, 0.195, 0)
+shape = SubResource("9")
+
+[node name="BallKick" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.388357, 0, 0)
+
+[editable path="khungthanh"]

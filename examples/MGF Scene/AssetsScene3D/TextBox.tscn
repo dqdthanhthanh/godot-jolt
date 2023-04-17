@@ -1,0 +1,109 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/TextBox.gd" id="2"]
+[ext_resource type="Gradient" uid="uid://ddpxipctyrldn" path="res://Assets2D/Theme/GradientPowerBar.tres" id="3"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="3_etibe"]
+[ext_resource type="Texture2D" uid="uid://cwd7an5e7pwhp" path="res://Assets2D/UI/IconDown.png" id="4_p3ari"]
+[ext_resource type="Texture2D" uid="uid://dwts3lv81x557" path="res://Assets2D/AppLogo/0.png" id="5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focmk"]
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c10lr"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 8
+border_width_top = 5
+border_width_right = 8
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_b1yh7"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jtltj"]
+viewport_path = NodePath("Viewport2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_p4gvc"]
+viewport_path = NodePath("Viewport3")
+
+[node name="TextBox" type="Node3D"]
+script = ExtResource("2")
+gradient = ExtResource("3")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(300, 25)
+
+[node name="Label" type="Label" parent="SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_etibe")
+theme_override_font_sizes/font_size = 15
+text = "Vũ trụ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Viewport2" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(300, 25)
+
+[node name="TextureRect" type="TextureRect" parent="Viewport2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("5")
+expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="Viewport2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/background = SubResource("StyleBoxFlat_focmk")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c10lr")
+value = 100.0
+rounded = true
+show_percentage = false
+
+[node name="Viewport3" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(256, 256)
+
+[node name="TextureRect" type="TextureRect" parent="Viewport3"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("4_p3ari")
+expand_mode = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0.2, -0.474254)
+flip_v = true
+billboard = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.007222, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_b1yh7")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(0.16, 0, 0, 0, 0.4, 4.08562e-14, 0, 0, 0.6, 0, 0.221345, 0.2)
+billboard = 1
+texture = SubResource("ViewportTexture_jtltj")
+
+[node name="Sprite3D3" type="Sprite3D" parent="Sprite3D"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.393183, 0.2)
+billboard = 1
+texture = SubResource("ViewportTexture_p4gvc")
+
+[connection signal="value_changed" from="Viewport2/ProgressBar" to="." method="_on_value_changed"]

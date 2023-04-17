@@ -1,0 +1,423 @@
+{
+  "settings": {
+    "show_details_preview": true
+  },
+  "categories": [
+    {
+      "title": "Task",
+      "color": "6495ed"
+    }
+  ],
+  "columns": [
+    {
+      "stages": [
+        0
+      ]
+    },
+    {
+      "stages": [
+        1
+      ]
+    },
+    {
+      "stages": [
+        2
+      ]
+    },
+    {
+      "stages": [
+        3
+      ]
+    }
+  ],
+  "stages": [
+    {
+      "title": "Todo",
+      "tasks": [
+        34,
+        35,
+        36,
+        41
+      ]
+    },
+    {
+      "title": "Doing",
+      "tasks": [
+        38,
+        2,
+        43,
+        52,
+        56,
+        46
+      ]
+    },
+    {
+      "title": "Bug",
+      "tasks": [
+        58,
+        59
+      ]
+    },
+    {
+      "title": "Done",
+      "tasks": [
+        32,
+        4,
+        5,
+        7,
+        6,
+        9,
+        12,
+        16,
+        17,
+        21,
+        23,
+        1,
+        49,
+        31,
+        25,
+        11,
+        42,
+        8,
+        13,
+        26,
+        22,
+        24,
+        15,
+        28,
+        29,
+        30,
+        14,
+        33,
+        20,
+        19,
+        10,
+        37,
+        39,
+        40,
+        0,
+        18,
+        44,
+        3,
+        45,
+        50,
+        51,
+        48,
+        47,
+        27,
+        54,
+        53,
+        55,
+        57,
+        60
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "category": 0,
+      "title": "Match Details",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Thiết kế mô hình cơ sở dữ liệu",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Cơ chế mua bán cầu thủ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "AI FSM",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Test New Plugin",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "GameModeOp",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "BaseUI",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Add new player",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Tranfer player, remove player from team",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Player Price",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Vật liệu trùng nhau khi chọn cầu ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Lag state khi chuyển lượt 1-2s ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Thao tác zoom bị ngược ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Cơ chế điều khiển các đội còn lại ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Season Giải Đấu ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Thay Người trong Game",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Nhiều Scence chưa có nhạc ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Nhạc Scence hơi to ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Tỷ lệ màn hình tràn ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Sửa phần scroll nhỏ, không kéo xuống đt ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Chọn chế độ trên mobile khó nhìn ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Điều khiển cầu thủ trên mobile ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Swipe để lấy góc và lực sút ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Giới hạn vùng di chuyển cầu thủ trên mobile ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Lỗi điều khiển AI đổi chế độ Player Player ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Test modes new features",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Lỗi shotpower 2 player Võ Sĩ, Đầu Lâu ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Swipe đôi khi mất trên mobile",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Season Tạo và lưu cặp đấu",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Season player data",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Season player data list",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Nhiều season",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Thi đấu season",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Bug error formation when create season",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "New Character Design",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "New logo design",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Stadium design",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Match Timer Change Turn",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "TestMode new features",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Season player match",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Season player next match",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Season cup, price",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Simulate Shoot",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Finish Sub Change",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Pass Accurate",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Fix Player Collision",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Ai chech target, behaviour",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Cam input từ nhiều ngón thành 1 ngón",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Next season đổi sang clb CB",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Lỗi đổi lượt khi chưa hết thanh time của player",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Formation khi vào thi đấu vị trí LF RF",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Chuyển mode Menu Game",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "MatchDetail game",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Player input shoot error animation",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "New Texture Mat CB player error",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Start second half, AI action double animation",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "UI main game end game",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Bóng bay qua goal, tính thành bàn thắng",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Vạch power red khi vẫn đầy",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Player Frozen (translation =null)",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Player accurate shoot",
+      "details": ""
+    }
+  ]
+}

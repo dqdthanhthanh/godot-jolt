@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2s2ypw4gh3d7"]
+
+[ext_resource type="PackedScene" uid="uid://5eaase5kldcy" path="res://MGF Scene/SwipeMenu/CardItem.tscn" id="4"]
+[ext_resource type="Script" path="res://MGF Scene/SwipeMenu/SwipeScrollMenu.gd" id="5"]
+
+[node name="ScrollContainer" type="ScrollContainer"]
+clip_contents = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("5")
+scroll_duration = 0.3
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 750
+theme_override_constants/margin_top = 250
+theme_override_constants/margin_right = 750
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="CardItem" parent="CenterContainer/MarginContainer/HBoxContainer" instance=ExtResource("4")]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+
+[node name="CardItem2" parent="CenterContainer/MarginContainer/HBoxContainer" instance=ExtResource("4")]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+
+[node name="CardItem3" parent="CenterContainer/MarginContainer/HBoxContainer" instance=ExtResource("4")]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

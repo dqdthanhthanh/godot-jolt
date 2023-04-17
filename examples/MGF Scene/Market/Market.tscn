@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3wj7a2ylbo4c"]
+
+[ext_resource type="PackedScene" uid="uid://cwnic1s8y1ex1" path="res://MGF Scene/Market/PanelPlayerData.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bqxpuye666ns1" path="res://MGF Scene/Setup/Account.tscn" id="2"]
+[ext_resource type="Script" path="res://MGF Scene/Market/Market.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://cmsyvb5wbfi" path="res://MGF Scene/Setup/HomeButton.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://du3nkd40esve6" path="res://MGF Scene/Setup/BGSetup.tscn" id="8"]
+
+[node name="Market" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
+
+[node name="BGSetup" parent="." instance=ExtResource("8")]
+layout_mode = 1
+
+[node name="PanelPlayerData" parent="." instance=ExtResource("1")]
+layout_mode = 1
+
+[node name="Home" parent="." instance=ExtResource("4")]
+layout_mode = 1
+grow_horizontal = 0
+
+[node name="Account" parent="." instance=ExtResource("2")]
+layout_mode = 1

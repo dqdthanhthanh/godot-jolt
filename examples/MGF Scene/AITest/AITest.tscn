@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://hbixbcpcmfr7"]
+
+[ext_resource type="PackedScene" uid="uid://b22q7h8yly56p" path="res://MGF Scene/AITest/Target.tscn" id="1"]
+
+[sub_resource type="CylinderMesh" id="20"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.01
+
+[sub_resource type="CylinderMesh" id="19"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.01
+
+[node name="AITest" type="Node3D"]
+
+[node name="Area3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.53244)
+visible = false
+
+[node name="Mesh" type="MeshInstance3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0056752, 0)
+mesh = SubResource("20")
+skeleton = NodePath("")
+
+[node name="Point" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.53244)
+visible = false
+
+[node name="Mesh" type="MeshInstance3D" parent="Point"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0056752, 0)
+mesh = SubResource("19")
+skeleton = NodePath("")
+
+[node name="Target" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.08165e-12, 2.08165e-12)
+visible = false
+
+[node name="Enemy" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2.08165e-12, 5)
+visible = false
+mass = 20.0

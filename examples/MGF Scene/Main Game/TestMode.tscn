@@ -1,0 +1,604 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="1"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="2"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnBlackOp.tres" id="4"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="4_u3w7s"]
+[ext_resource type="Theme" uid="uid://58mjttbtmdiu" path="res://Assets2D/Fonts/ThemeTestMode.tres" id="6"]
+[ext_resource type="Script" path="res://MGF Scene/Main Game/TestMode.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://bgus0ka15pe6r" path="res://MGF Scene/Setup/ButtonClose.tscn" id="8"]
+
+[node name="TestMode" type="Panel"]
+custom_minimum_size = Vector2(1024, 576)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -288.0
+offset_right = 512.0
+offset_bottom = 288.0
+theme_override_styles/panel = ExtResource("4")
+script = ExtResource("7")
+
+[node name="LabelBase" type="Label" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.113636
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+text = "TestMode"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonClose" parent="." instance=ExtResource("8")]
+layout_mode = 1
+offset_left = -64.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 66.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+
+[node name="BallStart" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0625
+anchor_top = 0.15625
+anchor_right = 0.400391
+anchor_bottom = 0.223958
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ChangeGoal" type="CheckButton" parent="BallStart"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/pressed = ExtResource("1")
+theme_override_styles/disabled = ExtResource("1")
+theme_override_styles/hover = ExtResource("1")
+theme_override_styles/hover_pressed = ExtResource("1")
+theme_override_styles/focus = ExtResource("1")
+text = "Side"
+alignment = 1
+
+[node name="xIput" type="LineEdit" parent="BallStart"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "0"
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="zIput" type="LineEdit" parent="BallStart"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "0"
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="yIput" type="LineEdit" parent="BallStart"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "0"
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TeamA" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0625
+anchor_top = 0.295139
+anchor_right = 0.394531
+anchor_bottom = 0.368056
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="OptionATeam" type="OptionButton" parent="TeamA"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6")
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/normal_mirrored = ExtResource("2")
+theme_override_styles/hover_mirrored = ExtResource("2")
+theme_override_styles/pressed_mirrored = ExtResource("2")
+theme_override_styles/disabled_mirrored = ExtResource("2")
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+
+[node name="OptionAPlay" type="OptionButton" parent="TeamA"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6")
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/normal_mirrored = ExtResource("2")
+theme_override_styles/hover_mirrored = ExtResource("2")
+theme_override_styles/pressed_mirrored = ExtResource("2")
+theme_override_styles/disabled_mirrored = ExtResource("2")
+alignment = 1
+expand_icon = true
+
+[node name="OptionAPos" type="OptionButton" parent="TeamA"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/normal_mirrored = ExtResource("2")
+theme_override_styles/hover_mirrored = ExtResource("2")
+theme_override_styles/pressed_mirrored = ExtResource("2")
+theme_override_styles/disabled_mirrored = ExtResource("2")
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+
+[node name="TeamB" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0625
+anchor_top = 0.420139
+anchor_right = 0.394531
+anchor_bottom = 0.493056
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="OptionBTeam" type="OptionButton" parent="TeamB"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6")
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/normal_mirrored = ExtResource("2")
+theme_override_styles/hover_mirrored = ExtResource("2")
+theme_override_styles/pressed_mirrored = ExtResource("2")
+theme_override_styles/disabled_mirrored = ExtResource("2")
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+
+[node name="OptionBPlay" type="OptionButton" parent="TeamB"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme = ExtResource("6")
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/normal_mirrored = ExtResource("2")
+theme_override_styles/hover_mirrored = ExtResource("2")
+theme_override_styles/pressed_mirrored = ExtResource("2")
+theme_override_styles/disabled_mirrored = ExtResource("2")
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+
+[node name="OptionBPos" type="OptionButton" parent="TeamB"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/normal_mirrored = ExtResource("2")
+theme_override_styles/hover_mirrored = ExtResource("2")
+theme_override_styles/pressed_mirrored = ExtResource("2")
+theme_override_styles/disabled_mirrored = ExtResource("2")
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+
+[node name="GKS" type="Label" parent="."]
+visible = false
+layout_mode = 0
+anchor_left = 0.572917
+anchor_top = 0.214286
+anchor_right = 0.739583
+anchor_bottom = 0.285714
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+text = "BallS"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="max" type="LineEdit" parent="GKS"]
+layout_mode = 0
+anchor_left = 0.6875
+anchor_right = 1.32813
+anchor_bottom = 1.09375
+text = "0"
+
+[node name="min" type="LineEdit" parent="GKS"]
+visible = false
+layout_mode = 0
+anchor_left = 1.5
+anchor_right = 2.14063
+anchor_bottom = 1.09375
+text = "0"
+
+[node name="Foot" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0625
+anchor_top = 0.559028
+anchor_right = 0.398438
+anchor_bottom = 0.631944
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-152, -56)
+theme_override_constants/separation = 20
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Foot" type="Label" parent="Foot"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+text = "Foot"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FootSize" type="LineEdit" parent="Foot"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "55"
+alignment = 1
+
+[node name="FootFix" type="LineEdit" parent="Foot"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "30"
+alignment = 1
+
+[node name="FootAngle" type="LineEdit" parent="Foot"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "10"
+alignment = 1
+
+[node name="Power" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.625
+anchor_top = 0.28125
+anchor_right = 0.896484
+anchor_bottom = 0.350694
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Power" type="Label" parent="Power"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+text = "AIShot"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="min" type="LineEdit" parent="Power"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "0"
+alignment = 1
+
+[node name="max" type="LineEdit" parent="Power"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "100"
+alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="Power"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/pressed = ExtResource("1")
+theme_override_styles/disabled = ExtResource("1")
+theme_override_styles/hover = ExtResource("1")
+theme_override_styles/hover_pressed = ExtResource("1")
+theme_override_styles/focus = ExtResource("1")
+
+[node name="GKH" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.625
+anchor_top = 0.420139
+anchor_right = 0.894531
+anchor_bottom = 0.489583
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="GKH" type="Label" parent="GKH"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+text = "GKHand"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="min" type="LineEdit" parent="GKH"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "0"
+alignment = 1
+
+[node name="max" type="LineEdit" parent="GKH"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "0"
+alignment = 1
+
+[node name="GKD" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.625
+anchor_top = 0.559028
+anchor_right = 0.894531
+anchor_bottom = 0.628472
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+
+[node name="GKD" type="Label" parent="GKD"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+text = "GKDef"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="min" type="LineEdit" parent="GKD"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "0"
+alignment = 1
+
+[node name="max" type="LineEdit" parent="GKD"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/read_only = ExtResource("2")
+text = "0"
+alignment = 1
+
+[node name="ButtonApply" type="Button" parent="."]
+layout_mode = 0
+anchor_top = 0.875
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/focus = ExtResource("2")
+text = "Apply"
+icon_alignment = 1
+
+[node name="ShootTest" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.625
+anchor_top = 0.15625
+anchor_right = 0.8125
+anchor_bottom = 0.223958
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/pressed = ExtResource("1")
+theme_override_styles/disabled = ExtResource("1")
+theme_override_styles/hover = ExtResource("1")
+theme_override_styles/hover_pressed = ExtResource("1")
+theme_override_styles/focus = ExtResource("1")
+text = "Shoot Test"
+metadata/_edit_use_anchors_ = true
+
+[node name="AIActive" type="CheckButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0625
+anchor_top = 0.711806
+anchor_right = 0.1875
+anchor_bottom = 0.779514
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-400, 72)
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/pressed = ExtResource("1")
+theme_override_styles/disabled = ExtResource("1")
+theme_override_styles/hover = ExtResource("1")
+theme_override_styles/hover_pressed = ExtResource("1")
+theme_override_styles/focus = ExtResource("1")
+text = "AI Active"
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AIState" type="OptionButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.21875
+anchor_top = 0.711806
+anchor_right = 0.334961
+anchor_bottom = 0.784722
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6")
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/normal_mirrored = ExtResource("2")
+theme_override_styles/hover_mirrored = ExtResource("2")
+theme_override_styles/pressed_mirrored = ExtResource("2")
+theme_override_styles/disabled_mirrored = ExtResource("2")
+alignment = 1
+icon_alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[node name="CreatPlayer" type="OptionButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.625
+anchor_top = 0.711806
+anchor_right = 0.819336
+anchor_bottom = 0.786458
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-64, -32)
+theme = ExtResource("6")
+theme_override_fonts/font = ExtResource("4_u3w7s")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/normal_mirrored = ExtResource("2")
+theme_override_styles/hover_mirrored = ExtResource("2")
+theme_override_styles/pressed_mirrored = ExtResource("2")
+theme_override_styles/disabled_mirrored = ExtResource("2")
+alignment = 1
+expand_icon = true
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="ButtonClose" to="." method="_on_ButtonClose_pressed"]
+[connection signal="pressed" from="BallStart/ChangeGoal" to="." method="_on_ChangeGoal_pressed"]
+[connection signal="toggled" from="BallStart/ChangeGoal" to="." method="_on_ChangeGoal_toggled"]
+[connection signal="text_changed" from="BallStart/xIput" to="." method="_on_BallxIput_text_changed"]
+[connection signal="text_changed" from="BallStart/zIput" to="." method="_on_BallzIput_text_changed"]
+[connection signal="item_selected" from="TeamA/OptionATeam" to="." method="_on_OptionATeam_item_selected"]
+[connection signal="item_selected" from="TeamA/OptionAPlay" to="." method="_on_OptionAPlay_item_selected"]
+[connection signal="item_selected" from="TeamA/OptionAPos" to="." method="_on_OptionAPos_item_selected"]
+[connection signal="item_selected" from="TeamB/OptionBTeam" to="." method="_on_OptionBTeam_item_selected"]
+[connection signal="item_selected" from="TeamB/OptionBPlay" to="." method="_on_OptionBPlay_item_selected"]
+[connection signal="item_selected" from="TeamB/OptionBPos" to="." method="_on_OptionBPos_item_selected"]
+[connection signal="text_changed" from="Foot/FootSize" to="." method="_on_FootSize_text_changed"]
+[connection signal="text_changed" from="Foot/FootFix" to="." method="_on_FootFix_text_changed"]
+[connection signal="text_changed" from="Foot/FootAngle" to="." method="_on_FootAngle_text_changed"]
+[connection signal="text_changed" from="Power/max" to="." method="_on_PowerMax_text_changed"]
+[connection signal="toggled" from="Power/CheckButton" to="." method="_on_CheckButton_toggled"]
+[connection signal="text_changed" from="GKH/min" to="." method="_on_GkHandMin_text_changed"]
+[connection signal="text_changed" from="GKH/max" to="." method="_on_GkMax_text_changed"]
+[connection signal="text_changed" from="GKD/min" to="." method="_on_GkDefMin_text_changed"]
+[connection signal="text_changed" from="GKD/max" to="." method="_on_GkDefMax_text_changed"]
+[connection signal="pressed" from="ButtonApply" to="." method="_on_ButtonApply_pressed"]
+[connection signal="pressed" from="ShootTest" to="." method="_on_ShootTest_pressed"]
+[connection signal="toggled" from="ShootTest" to="." method="_on_ShootTest_toggled"]
+[connection signal="pressed" from="AIActive" to="." method="_on_AIActive_pressed"]
+[connection signal="toggled" from="AIActive" to="." method="_on_AIActive_toggled"]
+[connection signal="item_selected" from="AIState" to="." method="_on_AIState_item_selected"]
+[connection signal="item_selected" from="CreatPlayer" to="." method="_on_CreatPlayer_item_selected"]

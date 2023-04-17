@@ -1,0 +1,14 @@
+[remap]
+
+importer="effekseer.resource"
+type="Resource"
+path="res://.import/Arrow.efkmodel-2b839e9caa2e08c980f4ea9964ed30bd.res"
+
+[deps]
+
+source_file="res://Assets3D/VFX/00_Basic/Model/Arrow.efkmodel"
+dest_files=[ "res://.import/Arrow.efkmodel-2b839e9caa2e08c980f4ea9964ed30bd.res" ]
+
+[params]
+
+compress=true

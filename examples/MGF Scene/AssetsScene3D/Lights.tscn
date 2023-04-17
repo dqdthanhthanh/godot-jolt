@@ -1,0 +1,110 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MGF Scene/AssetsScene3D/Light.tscn" type="PackedScene" id=1]
+
+[node name="Lights" type="Node3D"]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.34377, -0.00580215 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight2" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.34377, -1.01065 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight3" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.34377, 0.994074 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight4" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.8576, 1.34377, -0.00580215 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight5" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.8576, 1.34377, -1.01065 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight6" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.8576, 1.34377, 0.994074 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight7" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.53932, 1.34377, -0.00580215 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight8" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.53932, 1.34377, -1.01065 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight9" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1.53932, 1.34377, 0.994074 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight10" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2.84181, 1.34377, -0.00580215 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight11" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2.84181, 1.34377, -1.01065 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight12" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2.84181, 1.34377, 0.994074 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight13" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.45248, 1.34377, -0.00580215 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight14" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.45248, 1.34377, -1.01065 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622
+
+[node name="SpotLight15" type="SpotLight3D" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -1.45248, 1.34377, 0.994074 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622

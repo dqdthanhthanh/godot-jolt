@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets2D/Theme/btnUIBGN.tres" type="StyleBox" id=1]
+[ext_resource path="res://MGF Scene/TestData.gd" type="Script" id=2]
+
+[node name="TestData" type="RichTextLabel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 2
+custom_styles/normal = ExtResource( 1 )
+scroll_following = true
+selection_enabled = true
+script = ExtResource( 2 )

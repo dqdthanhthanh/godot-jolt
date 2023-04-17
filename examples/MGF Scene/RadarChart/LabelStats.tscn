@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="1_c30kr"]
+
+[node name="LabelStats" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 0.291139
+anchor_bottom = 0.25
+offset_left = -76.0
+offset_top = -57.0
+offset_right = 73.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("1_c30kr")
+theme_override_font_sizes/font_size = 100
+text = "Atk"
+horizontal_alignment = 1
+vertical_alignment = 1

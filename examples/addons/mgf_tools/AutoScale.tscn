@@ -1,0 +1,204 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://MGF Scene/Market/PlayerData.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/mgf_tools/GridContainerAutoScale.gd" type="Script" id=2]
+[ext_resource path="res://Assets2D/UI/iconSettings.png" type="Texture2D" id=3]
+[ext_resource path="res://MGF Scene/Setup/ButtonBase.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/mgf_tools/UIAutoScale.gd" type="Script" id=5]
+[ext_resource path="res://Assets2D/UI/user.png" type="Texture2D" id=6]
+[ext_resource path="res://Assets2D/UI/iconBall.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets2D/UI/iconTest.png" type="Texture2D" id=8]
+[ext_resource path="res://Assets2D/UI/iconStats.png" type="Texture2D" id=9]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VScrollBarBXH" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = -16.0
+offset_bottom = -16.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="GridContainer" type="GridContainer" parent="VScrollBarBXH"]
+offset_right = 396.0
+offset_bottom = 634.0
+custom_minimum_size = Vector2( 396, 0 )
+mouse_filter = 2
+custom_constants/v_separation = 90
+custom_constants/h_separation = 106
+columns = 3
+script = ExtResource( 2 )
+debug = true
+sizeX = 396
+separationX = 90
+separationY = 106
+itemSizeX = 72.0
+itemSizeY = 91
+
+[node name="Panel" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_right = 72.0
+offset_bottom = 91.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel2" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_left = 178.0
+offset_right = 250.0
+offset_bottom = 91.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel3" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_left = 356.0
+offset_right = 428.0
+offset_bottom = 91.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel4" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_top = 181.0
+offset_right = 72.0
+offset_bottom = 272.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel5" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_left = 178.0
+offset_top = 181.0
+offset_right = 250.0
+offset_bottom = 272.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel6" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_left = 356.0
+offset_top = 181.0
+offset_right = 428.0
+offset_bottom = 272.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel7" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_top = 362.0
+offset_right = 72.0
+offset_bottom = 453.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel8" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_left = 178.0
+offset_top = 362.0
+offset_right = 250.0
+offset_bottom = 453.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel9" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_left = 356.0
+offset_top = 362.0
+offset_right = 428.0
+offset_bottom = 453.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel10" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_top = 543.0
+offset_right = 72.0
+offset_bottom = 634.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel11" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_left = 178.0
+offset_top = 543.0
+offset_right = 250.0
+offset_bottom = 634.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="Panel12" parent="VScrollBarBXH/GridContainer" instance=ExtResource( 1 )]
+offset_left = 356.0
+offset_top = 543.0
+offset_right = 428.0
+offset_bottom = 634.0
+custom_minimum_size = Vector2( 72, 91 )
+
+[node name="MainBtn" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 664.0
+offset_top = 72.0
+offset_right = -640.0
+offset_bottom = -76.0
+custom_constants/separation = 104
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+debug = true
+size = 848
+separation = 104
+
+[node name="BtnManager" parent="MainBtn" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 488.0
+offset_bottom = 85.0
+custom_minimum_size = Vector2( 0, 85 )
+text = "Manager"
+icon = ExtResource( 6 )
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnNextMatch" parent="MainBtn" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 189.0
+offset_right = 488.0
+offset_bottom = 274.0
+custom_minimum_size = Vector2( 0, 85 )
+text = "League"
+icon = ExtResource( 7 )
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnLeague" parent="MainBtn" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 378.0
+offset_right = 488.0
+offset_bottom = 463.0
+custom_minimum_size = Vector2( 0, 85 )
+text = "Players"
+icon = ExtResource( 8 )
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnMarket" parent="MainBtn" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 567.0
+offset_right = 488.0
+offset_bottom = 652.0
+custom_minimum_size = Vector2( 0, 85 )
+text = "Market"
+icon = ExtResource( 9 )
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnSettings" parent="MainBtn" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 756.0
+offset_right = 488.0
+offset_bottom = 841.0
+custom_minimum_size = Vector2( 0, 85 )
+text = "Settings"
+icon = ExtResource( 3 )
+icon_alignment = 0
+expand_icon = true

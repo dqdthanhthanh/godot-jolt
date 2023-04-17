@@ -1,0 +1,231 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Assets2D/Theme/btnOp.tres" type="StyleBox" id=1]
+[ext_resource path="res://Assets2D/Theme/btnUIN.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets2D/Theme/btnUIP.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets2D/Fonts/UI.tres" type="FontFile" id=4]
+[ext_resource path="res://addons/CreateCharacter/Layer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/CreateCharacter/CreateCharacter.gd" type="Script" id=6]
+[ext_resource path="res://addons/mgf_tools/UIAutoScale.gd" type="Script" id=7]
+[ext_resource path="res://addons/CreateCharacter/Line.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/CreateCharacter/Rig/RigTest.tscn" type="PackedScene" id=9]
+[ext_resource path="res://MGF Scene/Setup/ButtonBase.tscn" type="PackedScene" id=10]
+
+[node name="CreateCharacter" type="CanvasLayer"]
+layer = 0
+script = ExtResource( 6 )
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MainBtn" type="Panel" parent="."]
+offset_right = 256.0
+offset_bottom = 960.0
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MainBtn" type="VBoxContainer" parent="MainBtn"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+custom_constants/separation = 10
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+debug = true
+size = 928
+separation = 10
+
+[node name="CreateLayer" type="Button" parent="MainBtn/MainBtn"]
+offset_right = 224.0
+offset_bottom = 224.0
+custom_minimum_size = Vector2( 0, 224 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Create Layer"
+icon_alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Transform3D" type="Button" parent="MainBtn/MainBtn"]
+offset_top = 234.0
+offset_right = 224.0
+offset_bottom = 458.0
+custom_minimum_size = Vector2( 0, 224 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Transform3D"
+icon_alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Earse" type="Button" parent="MainBtn/MainBtn"]
+offset_top = 468.0
+offset_right = 224.0
+offset_bottom = 692.0
+custom_minimum_size = Vector2( 0, 224 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Earse"
+icon_alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Save" type="Button" parent="MainBtn/MainBtn"]
+offset_top = 702.0
+offset_right = 224.0
+offset_bottom = 926.0
+custom_minimum_size = Vector2( 0, 224 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 3 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Save"
+icon_alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Tools" type="Panel" parent="."]
+offset_left = 1280.0
+offset_right = 1448.0
+offset_bottom = 960.0
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Tools"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -8.0
+offset_bottom = -16.0
+
+[node name="MainBtn" type="VBoxContainer" parent="Tools/ScrollContainer"]
+offset_right = 140.0
+offset_bottom = 140.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ButtonLine" parent="Tools/ScrollContainer/MainBtn" instance=ExtResource( 10 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 140.0
+offset_bottom = 60.0
+custom_minimum_size = Vector2( 140, 60 )
+text = "Line"
+
+[node name="ButtonColor" parent="Tools/ScrollContainer/MainBtn" instance=ExtResource( 10 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 80.0
+offset_right = 140.0
+offset_bottom = 140.0
+custom_minimum_size = Vector2( 140, 60 )
+text = "Shape3D"
+
+[node name="Layers" type="Panel" parent="."]
+offset_left = 1456.0
+offset_right = 1792.0
+offset_bottom = 960.0
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Layers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 544.0
+offset_right = -8.0
+offset_bottom = -16.0
+
+[node name="MainBtn" type="VBoxContainer" parent="Layers/ScrollContainer"]
+offset_right = 300.0
+offset_bottom = 80.0
+custom_constants/separation = 10
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Layer" parent="Layers/ScrollContainer/MainBtn" instance=ExtResource( 5 )]
+offset_right = 300.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 300, 80 )
+
+[node name="GodotBot" parent="." instance=ExtResource( 9 )]
+visible = false
+
+[node name="Lines" type="Node2D" parent="."]
+
+[node name="Line" parent="Lines" instance=ExtResource( 8 )]
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="ColorPicker" type="ColorPicker" parent="."]
+offset_left = 1484.0
+offset_top = 28.0
+offset_right = 1792.0
+offset_bottom = 490.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="HSlider" type="HSlider" parent="."]
+offset_left = 1528.0
+offset_top = 472.0
+offset_right = 1784.0
+offset_bottom = 536.0
+value = 15.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = 1464.0
+offset_top = 472.0
+offset_right = 1528.0
+offset_bottom = 536.0
+custom_fonts/font = ExtResource( 4 )
+text = "15"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="MainBtn/MainBtn/CreateLayer" to="." method="_on_CreateLayer_pressed"]
+[connection signal="pressed" from="MainBtn/MainBtn/Transform3D" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="MainBtn/MainBtn/Earse" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="MainBtn/MainBtn/Save" to="." method="_on_Save_pressed"]
+[connection signal="pressed" from="Tools/ScrollContainer/MainBtn/ButtonLine" to="." method="_on_ButtonLine_pressed"]
+[connection signal="pressed" from="Tools/ScrollContainer/MainBtn/ButtonColor" to="." method="_on_ButtonColor_pressed"]
+[connection signal="color_changed" from="ColorPicker" to="." method="_on_ColorPicker_color_changed"]
+[connection signal="drag_ended" from="HSlider" to="." method="_on_HSlider_drag_ended"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_HSlider_value_changed"]

@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="SpotLight3D" type="SpotLight3D"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.34377, -0.00580215 )
+light_energy = 0.5
+shadow_enabled = true
+shadow_contact = 16.0
+spot_range = 1.90622

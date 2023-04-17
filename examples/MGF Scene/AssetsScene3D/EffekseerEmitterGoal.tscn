@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/effekseer/src/EffekseerEmitter.gdns" type="Script" id=1]
+[ext_resource path="res://Assets3D/VFX/00_Basic/Simple_Sprite_BillBoard.efkefc" type="Resource" id=2]
+
+[node name="EffekseerEmitter" type="Node3D"]
+transform = Transform3D( 0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.3, 0 )
+script = ExtResource( 1 )
+effect = ExtResource( 2 )
+autoplay = false
+speed = 0.2

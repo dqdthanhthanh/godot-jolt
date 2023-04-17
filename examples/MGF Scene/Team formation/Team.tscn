@@ -1,0 +1,533 @@
+[gd_scene load_steps=128 format=3 uid="uid://db4d54u3vld75"]
+
+[ext_resource type="PackedScene" uid="uid://8hlhpu15p310" path="res://MGF Scene/AssetsScene3D/Player/CB/SieuLucSi.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/CB/ChienBinhBang.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dv0ju24e3k1py" path="res://MGF Scene/AssetsScene3D/Player/CB/KiemLua.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/ChimMay.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://br1enl5inay3a" path="res://MGF Scene/AssetsScene3D/Player/CB/ChienBinhNuoc.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://drk52u65os7ip" path="res://MGF Scene/AssetsScene3D/Player/DV/SuTu.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/CB/MayBua.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/DeMay.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/GauChien.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/SoiMay.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/TrauChien.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://1sijg2elcwrf" path="res://MGF Scene/AssetsScene3D/Player/CB/VoSi.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/CB/HoangTuThienNhien.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://bgy64g0hqxwu1" path="res://MGF Scene/AssetsScene3D/Player/CB/VuTru.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/ChimUng.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/SieuNhanUng.tscn" id="16"]
+[ext_resource type="PackedScene" uid="uid://clygi8mx7fxfb" path="res://MGF Scene/AssetsScene3D/Player/KH/NhaDa.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://bnnceq51tf7l4" path="res://MGF Scene/AssetsScene3D/Player/KH/MayTinhTinh.tscn" id="18"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/GiapMangXa.tscn" id="19"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/GiapSi.tscn" id="20"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/HiepKhach.tscn" id="21"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/PhuThuyNho.tscn" id="22"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/XuongSo.tscn" id="23"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/ThanBinh.tscn" id="24"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/MayQuy.tscn" id="25"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/KhongGian.tscn" id="26"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/MaySang.tscn" id="27"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/MayTa.tscn" id="28"]
+[ext_resource type="PackedScene" uid="uid://cygdensj272fb" path="res://MGF Scene/AssetsScene3D/Player/MN/Robodo.tscn" id="29"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/MayBay.tscn" id="30"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/MaySat.tscn" id="31"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/ThanMay.tscn" id="32"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QB/S_ChienBinhRet.tscn" id="33"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QB/S_ChienBinhDiaNguc.tscn" id="34"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QB/S_DoVat.tscn" id="35"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QB/S_BinhSi.tscn" id="36"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QB/S_SieuNhan.tscn" id="37"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QB/S_ThoDan.tscn" id="38"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QB/S_LucSi.tscn" id="39"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QB/S_BongDem.tscn" id="40"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QD/TinhTinh.tscn" id="41"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QD/Demon.tscn" id="42"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QD/QuaiMay.tscn" id="43"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QD/GiapMa.tscn" id="44"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QD/QuyGiap.tscn" id="45"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QD/QuyDoi.tscn" id="46"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QD/QuaiThu.tscn" id="47"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QD/DauLau.tscn" id="48"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QD/QuyDiaNguc.tscn" id="49"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QP/S_ChienBinhThep.tscn" id="50"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QP/S_SieuNhan.tscn" id="51"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QP/S_PhuThuyMa.tscn" id="52"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QP/S_ChienBinhBac.tscn" id="53"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QP/S_SatThuGiap.tscn" id="54"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QP/S_HacCa.tscn" id="55"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QP/S_LaChan.tscn" id="56"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QP/S_ChienBinhSuTu.tscn" id="57"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QV/S_QuaiLaVa.tscn" id="58"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QV/S_QuyDo.tscn" id="59"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QV/S_SuTuQuai.tscn" id="60"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QV/S_QuaiMangXa.tscn" id="61"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QV/S_MaQuai.tscn" id="62"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QV/S_QuySoi.tscn" id="63"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QV/S_QuaiChien.tscn" id="64"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/QV/S_QuaiMa.tscn" id="65"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_SamuraiGiap.tscn" id="66"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_SamuraiSatThu.tscn" id="67"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_BoxingMay.tscn" id="68"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_MayChien.tscn" id="69"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_MayDa.tscn" id="70"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_MayBinhSi.tscn" id="71"]
+[ext_resource type="PackedScene" uid="uid://dflyw8qg650ll" path="res://MGF Scene/AssetsScene3D/Player/RB/S_Boxing.tscn" id="72"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_MayDien.tscn" id="73"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongTinhThach.tscn" id="74"]
+[ext_resource type="PackedScene" uid="uid://dytqcsxkdjnuj" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongQuy.tscn" id="75"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongSung.tscn" id="76"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongMay.tscn" id="77"]
+[ext_resource type="PackedScene" uid="uid://n1gs3dffvrr1" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongLua.tscn" id="78"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongHaiDau.tscn" id="79"]
+[ext_resource type="PackedScene" uid="uid://1pceypwsutxm" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongBang.tscn" id="80"]
+[ext_resource type="PackedScene" uid="uid://dyvodclwjjpvg" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongKhungLong.tscn" id="81"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuDo.tscn" id="82"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuNinJa.tscn" id="83"]
+[ext_resource type="PackedScene" uid="uid://b2ms6wanrlo7g" path="res://MGF Scene/AssetsScene3D/Player/ST/S_PhapSu.tscn" id="84"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_KiemSi.tscn" id="85"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuKiem.tscn" id="86"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuKiemSi.tscn" id="87"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_TuSi.tscn" id="88"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuBoxing.tscn" id="89"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuMay.tscn" id="90"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/VT/S_ThanPhuThuy.tscn" id="91"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/VT/S_ThanSet.tscn" id="92"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/VT/S_ThanUng.tscn" id="93"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/VT/S_ThanGiap.tscn" id="94"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/VT/S_ThanTrang.tscn" id="95"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/VT/S_SucManh.tscn" id="96"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/VT/S_ThanChet.tscn" id="97"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/VT/S_ThanAnhSang.tscn" id="98"]
+
+[sub_resource type="PhysicsMaterial" id="2"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="3"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="4"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="5"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="6"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="7"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="8"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="9"]
+
+[sub_resource type="PhysicsMaterial" id="10"]
+
+[sub_resource type="PhysicsMaterial" id="11"]
+
+[sub_resource type="PhysicsMaterial" id="12"]
+
+[sub_resource type="PhysicsMaterial" id="13"]
+
+[sub_resource type="PhysicsMaterial" id="14"]
+
+[sub_resource type="PhysicsMaterial" id="15"]
+
+[sub_resource type="PhysicsMaterial" id="16"]
+
+[sub_resource type="PhysicsMaterial" id="17"]
+
+[sub_resource type="PhysicsMaterial" id="18"]
+
+[sub_resource type="PhysicsMaterial" id="19"]
+
+[sub_resource type="PhysicsMaterial" id="20"]
+
+[sub_resource type="PhysicsMaterial" id="21"]
+
+[sub_resource type="PhysicsMaterial" id="22"]
+
+[sub_resource type="PhysicsMaterial" id="23"]
+
+[sub_resource type="PhysicsMaterial" id="24"]
+
+[sub_resource type="PhysicsMaterial" id="25"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="26"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="27"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="28"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="29"]
+bounce = 0.3
+
+[sub_resource type="PhysicsMaterial" id="30"]
+bounce = 0.3
+
+[node name="Team" type="Node"]
+
+[node name="CB" type="Node3D" parent="."]
+
+[node name="SieuLucSi" parent="CB" instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36513, 0, 0)
+mass = 1000.0
+
+[node name="ChienBinhBang" parent="CB" instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.86524, 0, 0)
+
+[node name="ChienBinhNuoc" parent="CB" instance=ExtResource("5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.420011, 0, 0)
+
+[node name="MayBua" parent="CB" instance=ExtResource("7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182619, 0, 0)
+
+[node name="KiemLua" parent="CB" instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.397397, 0, 0)
+
+[node name="VuTru" parent="CB" instance=ExtResource("14")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.738622, 0, 0)
+
+[node name="VoSi" parent="CB" instance=ExtResource("12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07942, 0, 0)
+
+[node name="HoangTu" parent="CB" instance=ExtResource("13")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4354, 0, 0)
+
+[node name="DV" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.439816)
+
+[node name="SuTu" parent="DV" instance=ExtResource("6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52786, 0, 0)
+
+[node name="TrauChien" parent="DV" instance=ExtResource("11")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05254, 0, 0)
+
+[node name="GauChien" parent="DV" instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.488091, 0, 0)
+
+[node name="SoiMay" parent="DV" instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00781476, 0, 0)
+
+[node name="DeMay" parent="DV" instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.383338, 0, 0)
+
+[node name="SieuNhanUng" parent="DV" instance=ExtResource("16")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84876, 0, 0)
+
+[node name="ChimMay" parent="DV" instance=ExtResource("4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27704, 0, 0)
+playerPositionMath = "GK"
+
+[node name="ChimUng" parent="DV" instance=ExtResource("15")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65829, 0, 0)
+playerPositionMath = "RF"
+
+[node name="KH" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.07022)
+
+[node name="NhaDa" parent="KH" instance=ExtResource("17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24864, 0, 0)
+physics_material_override = SubResource("2")
+
+[node name="MayTinhTinh" parent="KH" instance=ExtResource("18")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.790431, 0, 0)
+physics_material_override = SubResource("3")
+
+[node name="GiapMangXa" parent="KH" instance=ExtResource("19")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.429495, 0, 0)
+physics_material_override = SubResource("4")
+
+[node name="GiapSi" parent="KH" instance=ExtResource("20")]
+physics_material_override = SubResource("5")
+
+[node name="HiepKhach" parent="KH" instance=ExtResource("21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.373735, 0, 0)
+physics_material_override = SubResource("6")
+
+[node name="PhuThuyNho" parent="KH" instance=ExtResource("22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.724925, 0, 0)
+physics_material_override = SubResource("7")
+
+[node name="XuongSo" parent="KH" instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00921, 0, 0)
+physics_material_override = SubResource("8")
+
+[node name="ThanBinh" parent="KH" instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34488, 0, 0)
+
+[node name="NM" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60712)
+
+[node name="MayBay" parent="NM" instance=ExtResource("30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.06884, 0, 0)
+physics_material_override = SubResource("9")
+
+[node name="MaySat" parent="NM" instance=ExtResource("31")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.698674, 0, 0)
+physics_material_override = SubResource("10")
+
+[node name="ThanMay" parent="NM" instance=ExtResource("32")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.343366, 0, 0)
+physics_material_override = SubResource("11")
+
+[node name="MayTa" parent="NM" instance=ExtResource("28")]
+physics_material_override = SubResource("12")
+
+[node name="RoBoDo" parent="NM" instance=ExtResource("29")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.415024, 0, 0)
+physics_material_override = SubResource("13")
+
+[node name="MayQuy" parent="NM" instance=ExtResource("25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.801878, 0, 0)
+physics_material_override = SubResource("14")
+
+[node name="KhongGian" parent="NM" instance=ExtResource("26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14188, 0, 0)
+physics_material_override = SubResource("15")
+
+[node name="MaySang" parent="NM" instance=ExtResource("27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49703, 0, 0)
+physics_material_override = SubResource("16")
+
+[node name="QB" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.13965)
+
+[node name="ChienBinhRet" parent="QB" instance=ExtResource("33")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87713, 0, 0)
+physics_material_override = SubResource("17")
+
+[node name="ChienBinhDiaNguc" parent="QB" instance=ExtResource("34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46967, 0, 0)
+physics_material_override = SubResource("18")
+
+[node name="DoVat" parent="QB" instance=ExtResource("35")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.06917, 0, 0)
+physics_material_override = SubResource("19")
+
+[node name="ThoDan" parent="QB" instance=ExtResource("38")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.532841, 0, 0)
+physics_material_override = SubResource("20")
+
+[node name="LucSi" parent="QB" instance=ExtResource("39")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.407467, 0, 0)
+physics_material_override = SubResource("21")
+playerPosition = "CM"
+
+[node name="BongDem" parent="QB" instance=ExtResource("40")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.825382, 0, 0)
+physics_material_override = SubResource("22")
+playerPositionMath = "RF"
+
+[node name="SieuNhan" parent="QB" instance=ExtResource("37")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25559, 0, 0)
+physics_material_override = SubResource("23")
+playerPositionMath = "LF"
+
+[node name="BinhSi" parent="QB" instance=ExtResource("36")]
+physics_material_override = SubResource("24")
+
+[node name="QD" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.71023)
+
+[node name="QuyDiaNguc" parent="QD" instance=ExtResource("49")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26075, 0, 0)
+physics_material_override = SubResource("25")
+
+[node name="TinhTinh" parent="QD" instance=ExtResource("41")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.851341, 0, 0)
+physics_material_override = SubResource("26")
+
+[node name="Demon" parent="QD" instance=ExtResource("42")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.459722, 0, 0)
+physics_material_override = SubResource("27")
+
+[node name="QuaiMay" parent="QD" instance=ExtResource("43")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0271006, 0, 0)
+physics_material_override = SubResource("28")
+
+[node name="GiapMa" parent="QD" instance=ExtResource("44")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.479509, 0, 0)
+physics_material_override = SubResource("29")
+
+[node name="DauLau" parent="QD" instance=ExtResource("48")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.898916, 0, 0)
+
+[node name="QuyDoi" parent="QD" instance=ExtResource("46")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40553, 0, 0)
+physics_material_override = SubResource("30")
+
+[node name="QuaiThu" parent="QD" instance=ExtResource("47")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88458, 0, 0)
+
+[node name="QuyGiap" parent="QD" instance=ExtResource("45")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29551, 0, 0)
+
+[node name="QP" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.50903)
+
+[node name="LaChan" parent="QP" instance=ExtResource("56")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55291, 0, 0)
+
+[node name="ChienBinhSuTu" parent="QP" instance=ExtResource("57")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19186, 0, 0)
+
+[node name="HacCa" parent="QP" instance=ExtResource("55")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.807968, 0, 0)
+
+[node name="ChienBinhThep" parent="QP" instance=ExtResource("50")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.421397, 0, 0)
+
+[node name="SieuNhan" parent="QP" instance=ExtResource("51")]
+
+[node name="PhuThuyMa" parent="QP" instance=ExtResource("52")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320401, 0, 0)
+
+[node name="ChienBinhBac" parent="QP" instance=ExtResource("53")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05872, 0, 0)
+
+[node name="SatThuGiap" parent="QP" instance=ExtResource("54")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.700007, 0, 0)
+
+[node name="QV" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.16519)
+
+[node name="QuaiLaVa" parent="QV" instance=ExtResource("58")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68923, 0, 0)
+
+[node name="QuyDo" parent="QV" instance=ExtResource("59")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25876, 0, 0)
+
+[node name="SuTuQuai" parent="QV" instance=ExtResource("60")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.820599, 0, 0)
+
+[node name="QuaiMangXa" parent="QV" instance=ExtResource("61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41255, 0, 0)
+
+[node name="MaQuai" parent="QV" instance=ExtResource("62")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.994091, 0, 0)
+
+[node name="QuySoi" parent="QV" instance=ExtResource("63")]
+transform = Transform3D(0.999805, 0, 0, 0, 0.999805, 0, 0, 0, 0.999805, 0.0142882, 0, 0)
+
+[node name="QuaiChien" parent="QV" instance=ExtResource("64")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.504192, 0, 0)
+
+[node name="QuaiMa" parent="QV" instance=ExtResource("65")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34625, 0, 0)
+
+[node name="RB" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.76429)
+
+[node name="SamuraiGiap" parent="RB" instance=ExtResource("66")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73896, 0, 0)
+
+[node name="SamuraiSatThu" parent="RB" instance=ExtResource("67")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.828561, 0, 0)
+
+[node name="BoxingMay" parent="RB" instance=ExtResource("68")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25819, 0, 0)
+
+[node name="MayChien" parent="RB" instance=ExtResource("69")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.378479, 0, 0)
+
+[node name="MayDa" parent="RB" instance=ExtResource("70")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.490999, 0, 0)
+
+[node name="MayBinhSi" parent="RB" instance=ExtResource("71")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0511456, 0, 0)
+
+[node name="Boxing" parent="RB" instance=ExtResource("72")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46277, 0, 0)
+
+[node name="MayDien" parent="RB" instance=ExtResource("73")]
+transform = Transform3D(0.999805, 0, 0, 0, 0.999805, 0, 0, 0, 0.999805, 0.96154, 0, 0)
+
+[node name="RO" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.51555)
+
+[node name="RongTinhThach" parent="RO" instance=ExtResource("74")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52465, 0, 0)
+
+[node name="RongMay" parent="RO" instance=ExtResource("77")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17964, 0, 0)
+
+[node name="RongLua" parent="RO" instance=ExtResource("78")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.850885, 0, 0)
+
+[node name="RongHaiDau" parent="RO" instance=ExtResource("79")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.451227, 0, 0)
+
+[node name="RongBang" parent="RO" instance=ExtResource("80")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0780919, 0, 0)
+
+[node name="RongSung" parent="RO" instance=ExtResource("76")]
+transform = Transform3D(0.999805, 0, 0, 0, 0.999805, 0, 0, 0, 0.999805, 0.28603, 0, 0)
+
+[node name="RongQuy" parent="RO" instance=ExtResource("75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.609876, 0, 0)
+
+[node name="RongKhungLong" parent="RO" instance=ExtResource("81")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06597, 0, 0)
+
+[node name="ST" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.05759)
+
+[node name="SatThuKiem" parent="ST" instance=ExtResource("86")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5646, 0, 0)
+
+[node name="TuSi" parent="ST" instance=ExtResource("88")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11846, 0, 0)
+
+[node name="SatThuBoxing" parent="ST" instance=ExtResource("89")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.73814, 0, 0)
+
+[node name="SatThuMay" parent="ST" instance=ExtResource("90")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.422284, 0, 0)
+
+[node name="PhapSu" parent="ST" instance=ExtResource("84")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00973272, 0, 0)
+
+[node name="KiemSi" parent="ST" instance=ExtResource("85")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.452872, 0, -0.0277228)
+
+[node name="SatThuNinJa" parent="ST" instance=ExtResource("83")]
+transform = Transform3D(0.999805, 0, 0, 0, 0.999805, 0, 0, 0, 0.999805, 0.809353, 0, 0)
+
+[node name="SatThuKiemSi" parent="ST" instance=ExtResource("87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.18053, 0, 0)
+
+[node name="SatThuDo" parent="ST" instance=ExtResource("82")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55213, 0, 0)
+
+[node name="VT" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.68522)
+
+[node name="ThanPhuThuy" parent="VT" instance=ExtResource("91")]
+transform = Transform3D(0.999805, 0, 0, 0, 0.999805, 0, 0, 0, 0.999805, -1.52773, 0, 0)
+
+[node name="ThanSet" parent="VT" instance=ExtResource("92")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17319, 0, 0)
+
+[node name="ThanUng" parent="VT" instance=ExtResource("93")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79287, 0, 0)
+
+[node name="BaoHo" parent="VT" instance=ExtResource("94")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.348089, 0, 0)
+
+[node name="ThanTrang" parent="VT" instance=ExtResource("95")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.453712, 0, 0)
+
+[node name="SucManh" parent="VT" instance=ExtResource("96")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0322304, 0, 0)
+
+[node name="ThanChet" parent="VT" instance=ExtResource("97")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.844439, 0, 0)
+
+[node name="ThanAnhSang" parent="VT" instance=ExtResource("98")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22476, 0, 0)

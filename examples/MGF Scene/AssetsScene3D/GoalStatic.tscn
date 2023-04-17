@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+
+[sub_resource type="BoxShape3D" id=2]
+margin = 0.01
+extents = Vector3( 0.155, 0.131721, 0.015 )
+
+[sub_resource type="BoxShape3D" id=3]
+margin = 0.01
+extents = Vector3( 0.32465, 0.129962, 0.494608 )
+
+[sub_resource type="BoxShape3D" id=5]
+margin = 0.01
+extents = Vector3( 0.155, 0.0140703, 0.496417 )
+
+[node name="GoalStatic" type="StaticBody3D"]
+collision_layer = 8
+collision_mask = 2
+physics_material_override = SubResource( 1 )
+
+[node name="CollisionShapeP" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.154, 0.109269, -0.477 )
+shape = SubResource( 2 )
+
+[node name="CollisionShapeT" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.154, 0.109269, 0.478 )
+shape = SubResource( 2 )
+
+[node name="CollisionShapeSau" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.620753, 0.109855, -0.001 )
+shape = SubResource( 3 )
+
+[node name="CollisionShapeTren" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15432, 0.222334, -0.00167693 )
+shape = SubResource( 5 )

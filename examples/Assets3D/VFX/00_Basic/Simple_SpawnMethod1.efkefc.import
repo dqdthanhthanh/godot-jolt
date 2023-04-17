@@ -1,0 +1,16 @@
+[remap]
+
+importer="effekseer.effect"
+type="Resource"
+path="res://.import/Simple_SpawnMethod1.efkefc-0b9b3581ee13e0f4a8c80b6da056fa1e.res"
+
+[deps]
+
+source_file="res://Assets3D/VFX/00_Basic/Simple_SpawnMethod1.efkefc"
+dest_files=[ "res://.import/Simple_SpawnMethod1.efkefc-0b9b3581ee13e0f4a8c80b6da056fa1e.res" ]
+
+[params]
+
+scale=1.0
+data_type=0
+compress=true

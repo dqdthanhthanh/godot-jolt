@@ -1,0 +1,16 @@
+[remap]
+
+importer="effekseer.effect"
+type="Resource"
+path="res://.import/Simple_Ribbon_Sword.efkefc-d68e8c0ce9b4ddbe0eadb945165e65dd.res"
+
+[deps]
+
+source_file="res://Assets3D/VFX/00_Basic/Simple_Ribbon_Sword.efkefc"
+dest_files=[ "res://.import/Simple_Ribbon_Sword.efkefc-d68e8c0ce9b4ddbe0eadb945165e65dd.res" ]
+
+[params]
+
+scale=1.0
+data_type=0
+compress=true

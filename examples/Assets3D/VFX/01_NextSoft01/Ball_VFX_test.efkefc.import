@@ -1,0 +1,16 @@
+[remap]
+
+importer="effekseer.effect"
+type="Resource"
+path="res://.import/Ball_VFX_test.efkefc-8ffa779cec2a6066351d79f174bef6e1.res"
+
+[deps]
+
+source_file="res://Assets3D/VFX/01_NextSoft01/Ball_VFX_test.efkefc"
+dest_files=[ "res://.import/Ball_VFX_test.efkefc-8ffa779cec2a6066351d79f174bef6e1.res" ]
+
+[params]
+
+scale=1.0
+data_type=0
+compress=true

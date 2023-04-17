@@ -1,0 +1,14 @@
+[remap]
+
+importer="effekseer.resource"
+type="Resource"
+path="res://.import/Emissive.efkmat-94354763ecb39f6d058d0225cb2b4aab.res"
+
+[deps]
+
+source_file="res://Assets3D/VFX/00_Basic/Material/Emissive.efkmat"
+dest_files=[ "res://.import/Emissive.efkmat-94354763ecb39f6d058d0225cb2b4aab.res" ]
+
+[params]
+
+compress=true

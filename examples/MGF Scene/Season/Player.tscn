@@ -1,0 +1,103 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="StyleBox" uid="uid://bvc4xkbpf56rx" path="res://Assets2D/Theme/broadBorder.tres" id="2"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="2_tpn6x"]
+[ext_resource type="Script" path="res://MGF Scene/Season/Match.gd" id="6"]
+
+[node name="Player" type="HBoxContainer"]
+custom_minimum_size = Vector2(338, 30)
+offset_right = 586.0
+offset_bottom = 35.0
+theme_override_constants/separation = -2
+script = ExtResource("6")
+
+[node name="mvp" type="Button" parent="."]
+visible = false
+layout_mode = 2
+disabled = true
+
+[node name="info" type="Button" parent="."]
+visible = false
+layout_mode = 2
+flat = true
+
+[node name="pos" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tpn6x")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("2")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="name" type="Label" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tpn6x")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("2")
+text = "Name"
+vertical_alignment = 1
+
+[node name="goal" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tpn6x")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("2")
+text = "G"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="assits" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tpn6x")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("2")
+text = "A"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="shots" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tpn6x")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("2")
+text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="passes" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tpn6x")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("2")
+text = "P"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="blocks" type="Label" parent="."]
+custom_minimum_size = Vector2(49, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tpn6x")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("2")
+text = "D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="saves" type="Label" parent="."]
+custom_minimum_size = Vector2(49, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tpn6x")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("2")
+text = "S"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="info" to="." method="_on_info_pressed"]

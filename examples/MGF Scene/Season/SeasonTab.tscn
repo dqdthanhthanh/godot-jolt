@@ -1,0 +1,721 @@
+[gd_scene load_steps=26 format=3 uid="uid://eevcsj25pesi"]
+
+[ext_resource type="Texture2D" uid="uid://da16yrh6273dc" path="res://Assets2D/UI/iconBall.png" id="2"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGO.tres" id="2_dxr47"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnOp.tres" id="4"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Season/TeamIndex.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Season/Match.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://b4fjy2aevfiwl" path="res://MGF Scene/Setup/ButtonBase.tscn" id="8"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="8_00vnm"]
+[ext_resource type="Texture2D" uid="uid://xed65qpa36mf" path="res://Assets2D/UI/iconStar.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://c5x6q0vhc8236" path="res://Assets2D/UI/iconFormation.png" id="10"]
+[ext_resource type="PackedScene" uid="uid://cwnic1s8y1ex1" path="res://MGF Scene/Market/PanelPlayerData.tscn" id="11"]
+[ext_resource type="Script" path="res://MGF Scene/Season/SeasonManager.gd" id="13"]
+[ext_resource type="Script" path="res://MGF Scene/Season/SeasonSettings.gd" id="14"]
+[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="14_mf56a"]
+[ext_resource type="Script" path="res://MGF Scene/Season/SeasonTab.gd" id="15"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="15_8hkpe"]
+[ext_resource type="Script" path="res://MGF Scene/Season/SeasonLeague.gd" id="19"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Season/BtnTab.tscn" id="20"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Season/PlayerStats.tscn" id="21"]
+[ext_resource type="Script" path="res://MGF Scene/Season/SeasonNextMatch.gd" id="22"]
+[ext_resource type="Texture2D" uid="uid://m6ucjy1yxp4j" path="res://Assets2D/UI/iconTrain.png" id="23"]
+[ext_resource type="Script" path="res://addons/mgf_tools/UIAutoScale.gd" id="26"]
+[ext_resource type="Texture2D" uid="uid://b4em5740i3e5f" path="res://Assets2D/UI/iconSaveGoal.png" id="27"]
+[ext_resource type="Texture2D" uid="uid://cnyefrvfjakcl" path="res://Assets2D/UI/user.png" id="28"]
+[ext_resource type="Texture2D" uid="uid://cppwkywx41tt" path="res://Assets2D/UI/iconDef.png" id="29"]
+
+[sub_resource type="GDScript" id="6"]
+script/source = "extends Panel
+
+@onready var setIndex = $HBox/Index
+@onready var setIcon = $HBox/Logo/Sprite2D
+@onready var setTeamName = $HBox/Label
+@onready var setMatch = $HBox/Match
+@onready var setW = $HBox/W
+@onready var setD = $HBox/D
+@onready var setL = $HBox/L
+@onready var setPoint = $HBox/Point
+@onready var setPointW = $HBox/PW
+@onready var setPointL = $HBox/PL
+@onready var setCup = $HBox/Cup
+
+var index: int = 0
+var teamIcon
+var teamName: String = \"CB\"
+
+var point: int = 0
+var pointW: int = 0
+var pointL: int = 0
+
+var matchTime: int = 0
+var matchW: int = 0
+var matchD: int = 0
+var matchL: int = 0
+
+var cup: int = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func get_team_data():
+	setIndex.text = str(index)
+	setIcon.texture = teamIcon
+	setTeamName.text = teamName
+	
+	setMatch.text = str(matchTime)
+	setW.text = str(matchW)
+	setD.text = str(matchD)
+	setL.text = str(matchL)
+	
+	setPoint.text = str(point)
+	setPointW.text = str(pointW)
+	setPointL.text = str(pointL)
+	
+	setCup.text = str(cup)
+"
+
+[node name="SeasonTab" type="TabContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/tab_selected = ExtResource("2_dxr47")
+theme_override_styles/tab_unselected = ExtResource("2_dxr47")
+theme_override_styles/tab_disabled = ExtResource("2_dxr47")
+theme_override_styles/panel = ExtResource("2_dxr47")
+theme_override_styles/tabbar_background = ExtResource("2_dxr47")
+tabs_visible = false
+script = ExtResource("15")
+
+[node name="SeasonManager" type="TabBar" parent="."]
+layout_mode = 2
+theme_override_styles/tab_selected = ExtResource("2_dxr47")
+theme_override_styles/tab_unselected = ExtResource("2_dxr47")
+theme_override_styles/tab_disabled = ExtResource("2_dxr47")
+theme_override_styles/button_pressed = ExtResource("2_dxr47")
+theme_override_styles/button_highlight = ExtResource("2_dxr47")
+script = ExtResource("13")
+
+[node name="League" type="Control" parent="SeasonManager"]
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -334.0
+offset_right = 348.0
+offset_bottom = 353.0
+
+[node name="VScrollBarBXH" type="ScrollContainer" parent="SeasonManager/League"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -343.5
+offset_right = 370.0
+offset_bottom = -183.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SeasonManager/League/VScrollBarBXH"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -2
+
+[node name="TeamIndex2" parent="SeasonManager/League/VScrollBarBXH/VBoxContainer" instance=ExtResource("6")]
+layout_mode = 2
+script = SubResource("6")
+
+[node name="PlayerStats" type="ScrollContainer" parent="SeasonManager"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -241.0
+offset_right = 352.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Players" type="VBoxContainer" parent="SeasonManager/PlayerStats"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="Player" parent="SeasonManager/PlayerStats/Players" instance=ExtResource("21")]
+layout_mode = 2
+
+[node name="TabBtns" type="Panel" parent="SeasonManager"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -350.0
+offset_right = -160.0
+offset_bottom = 362.0
+theme_override_styles/panel = ExtResource("4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SeasonManager/TabBtns"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("26")
+_size = 680
+separation = 10
+
+[node name="BtnFormation" parent="SeasonManager/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 219)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Formation  "
+icon = ExtResource("10")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnStartMatch" parent="SeasonManager/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 219)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Start Match  "
+icon = ExtResource("2")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnTrainning" parent="SeasonManager/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 219)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Trainning  "
+icon = ExtResource("23")
+icon_alignment = 0
+expand_icon = true
+
+[node name="NextMatch" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+script = ExtResource("22")
+
+[node name="League" type="Control" parent="NextMatch"]
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -342.0
+offset_right = 348.0
+offset_bottom = 362.0
+
+[node name="VScrollBarBXH" type="ScrollContainer" parent="NextMatch/League"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -343.5
+offset_right = 370.0
+offset_bottom = 343.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NextMatch/League/VScrollBarBXH"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -2
+
+[node name="TeamIndex2" parent="NextMatch/League/VScrollBarBXH/VBoxContainer" instance=ExtResource("6")]
+layout_mode = 2
+script = SubResource("6")
+
+[node name="TabBtns" type="Panel" parent="NextMatch"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -350.0
+offset_right = -152.0
+offset_bottom = 370.0
+theme_override_styles/panel = ExtResource("4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NextMatch/TabBtns"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -12.0
+theme_override_constants/separation = 20
+
+[node name="LabelBase" type="Button" parent="NextMatch/TabBtns/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("14_mf56a")
+theme_override_styles/hover = ExtResource("15_8hkpe")
+theme_override_styles/pressed = ExtResource("15_8hkpe")
+theme_override_styles/disabled = ExtResource("15_8hkpe")
+theme_override_styles/focus = ExtResource("15_8hkpe")
+text = "Round 1"
+expand_icon = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NextMatch/TabBtns/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Match" parent="NextMatch/TabBtns/VBoxContainer/VBoxContainer" instance=ExtResource("7")]
+layout_mode = 2
+
+[node name="Match2" parent="NextMatch/TabBtns/VBoxContainer/VBoxContainer" instance=ExtResource("7")]
+layout_mode = 2
+
+[node name="Match3" parent="NextMatch/TabBtns/VBoxContainer/VBoxContainer" instance=ExtResource("7")]
+layout_mode = 2
+
+[node name="Match4" parent="NextMatch/TabBtns/VBoxContainer/VBoxContainer" instance=ExtResource("7")]
+layout_mode = 2
+
+[node name="Match5" parent="NextMatch/TabBtns/VBoxContainer/VBoxContainer" instance=ExtResource("7")]
+layout_mode = 2
+
+[node name="Match6" parent="NextMatch/TabBtns/VBoxContainer/VBoxContainer" instance=ExtResource("7")]
+layout_mode = 2
+
+[node name="NextMatch" parent="NextMatch/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Start Match"
+icon = ExtResource("2")
+icon_alignment = 0
+expand_icon = true
+
+[node name="NextLeft" parent="NextMatch/TabBtns/VBoxContainer" instance=ExtResource("8")]
+visible = false
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "<"
+
+[node name="NextRight" parent="NextMatch/TabBtns/VBoxContainer" instance=ExtResource("8")]
+visible = false
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = ">"
+
+[node name="League" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+script = ExtResource("19")
+
+[node name="TabBar" type="Control" parent="League"]
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -364.0
+offset_top = -332.0
+offset_right = 360.0
+offset_bottom = 338.0
+
+[node name="Players" type="Control" parent="League/TabBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerTab" type="TabContainer" parent="League/TabBar/Players"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -426.5
+offset_top = -354.5
+offset_right = 469.5
+offset_bottom = 320.5
+theme_override_styles/tab_selected = ExtResource("2_dxr47")
+theme_override_styles/tab_unselected = ExtResource("2_dxr47")
+theme_override_styles/tab_disabled = ExtResource("2_dxr47")
+theme_override_styles/panel = ExtResource("2_dxr47")
+theme_override_styles/tabbar_background = ExtResource("2_dxr47")
+tabs_visible = false
+
+[node name="Point" type="TabBar" parent="League/TabBar/Players/PlayerTab"]
+layout_mode = 2
+
+[node name="Goals" type="TabBar" parent="League/TabBar/Players/PlayerTab"]
+visible = false
+layout_mode = 2
+
+[node name="Assits" type="TabBar" parent="League/TabBar/Players/PlayerTab"]
+visible = false
+layout_mode = 2
+
+[node name="Shots" type="TabBar" parent="League/TabBar/Players/PlayerTab"]
+visible = false
+layout_mode = 2
+
+[node name="Passes" type="TabBar" parent="League/TabBar/Players/PlayerTab"]
+visible = false
+layout_mode = 2
+
+[node name="Defends" type="TabBar" parent="League/TabBar/Players/PlayerTab"]
+visible = false
+layout_mode = 2
+
+[node name="Saves" type="TabBar" parent="League/TabBar/Players/PlayerTab"]
+visible = false
+layout_mode = 2
+
+[node name="Team" type="TabBar" parent="League/TabBar/Players/PlayerTab"]
+visible = false
+layout_mode = 2
+
+[node name="PlayerStats" type="ScrollContainer" parent="League/TabBar/Players"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Players" type="VBoxContainer" parent="League/TabBar/Players/PlayerStats"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = -2
+
+[node name="Player" parent="League/TabBar/Players/PlayerStats/Players" instance=ExtResource("21")]
+layout_mode = 2
+
+[node name="TabBtns" type="Panel" parent="League"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -350.0
+offset_right = -160.0
+offset_bottom = 370.0
+theme_override_styles/panel = ExtResource("4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="League/TabBtns"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("26")
+_size = 680
+separation = 10
+
+[node name="BtnPlayers" parent="League/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Point"
+icon = ExtResource("9")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnGoals" parent="League/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Goals"
+icon = ExtResource("2")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnAssits" parent="League/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Assits"
+icon = ExtResource("2")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnShots" parent="League/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Shoots"
+icon = ExtResource("2")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnPasses" parent="League/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Passes"
+icon = ExtResource("2")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnDefends" parent="League/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Defends"
+icon = ExtResource("29")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnSaves" parent="League/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Saves"
+icon = ExtResource("27")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnTeam" parent="League/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 76)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Team"
+icon = ExtResource("28")
+icon_alignment = 0
+expand_icon = true
+
+[node name="Market" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="PanelPlayerData" parent="Market" instance=ExtResource("11")]
+layout_mode = 1
+
+[node name="TabBtns" type="Panel" parent="Market"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -479.0
+offset_top = -349.0
+offset_right = -159.0
+offset_bottom = 371.0
+theme_override_styles/panel = ExtResource("4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Market/TabBtns"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -17.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("26")
+_size = 680
+separation = 10
+
+[node name="ButtonNextSeason" parent="Market/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 219)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Buy"
+
+[node name="ButtonNewSeason" parent="Market/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 219)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Sell"
+
+[node name="ButtonResetData" parent="Market/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 219)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Loan"
+
+[node name="Settings" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+script = ExtResource("14")
+
+[node name="Seasons" type="Panel" parent="Settings"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -349.5
+offset_right = 376.0
+offset_bottom = 354.5
+theme_override_styles/panel = ExtResource("4")
+
+[node name="Label" type="Label" parent="Settings/Seasons"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -648.0
+theme_override_styles/normal = ExtResource("14_mf56a")
+
+[node name="Text" type="Label" parent="Settings/Seasons/Label"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -24.0
+offset_right = 100.0
+offset_bottom = 24.0
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "All Seasons"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VScrollBarBXH" type="ScrollContainer" parent="Settings/Seasons"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = -16.0
+offset_bottom = -16.0
+
+[node name="SeasonList" type="GridContainer" parent="Settings/Seasons/VScrollBarBXH"]
+layout_mode = 2
+mouse_filter = 2
+columns = 4
+
+[node name="BtnTab" parent="Settings/Seasons/VScrollBarBXH/SeasonList" instance=ExtResource("20")]
+visible = false
+layout_mode = 2
+
+[node name="BtnTab2" parent="Settings/Seasons/VScrollBarBXH/SeasonList" instance=ExtResource("20")]
+visible = false
+layout_mode = 2
+
+[node name="BtnTab3" parent="Settings/Seasons/VScrollBarBXH/SeasonList" instance=ExtResource("20")]
+visible = false
+layout_mode = 2
+
+[node name="BtnTab4" parent="Settings/Seasons/VScrollBarBXH/SeasonList" instance=ExtResource("20")]
+visible = false
+layout_mode = 2
+
+[node name="TabBtns" type="Panel" parent="Settings"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -479.0
+offset_top = -349.5
+offset_right = -159.0
+offset_bottom = 370.5
+theme_override_styles/panel = ExtResource("4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/TabBtns"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -17.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("26")
+_size = 680
+separation = 10
+
+[node name="ButtonNextSeason" parent="Settings/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 219)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Next Season"
+
+[node name="ButtonNewSeason" parent="Settings/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 219)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "New Season"
+
+[node name="ButtonResetData" parent="Settings/TabBtns/VBoxContainer" instance=ExtResource("8")]
+custom_minimum_size = Vector2(0, 219)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_00vnm")
+theme_override_font_sizes/font_size = 25
+text = "Reset Data"
+
+[connection signal="tab_changed" from="." to="." method="_on_SeasonTab_tab_changed"]
+[connection signal="pressed" from="SeasonManager/TabBtns/VBoxContainer/BtnFormation" to="SeasonManager" method="_on_BtnFormation_pressed"]
+[connection signal="pressed" from="SeasonManager/TabBtns/VBoxContainer/BtnStartMatch" to="SeasonManager" method="_on_BtnStartMatch_pressed"]
+[connection signal="pressed" from="NextMatch/TabBtns/VBoxContainer/LabelBase" to="NextMatch" method="_on_SkipMatch_pressed"]
+[connection signal="pressed" from="NextMatch/TabBtns/VBoxContainer/NextMatch" to="NextMatch" method="_on_NextMatch_pressed"]
+[connection signal="pressed" from="NextMatch/TabBtns/VBoxContainer/NextLeft" to="NextMatch" method="_on_NextLeft_pressed"]
+[connection signal="pressed" from="NextMatch/TabBtns/VBoxContainer/NextRight" to="NextMatch" method="_on_NextRight_pressed"]
+[connection signal="tab_changed" from="League/TabBar/Players/PlayerTab" to="League" method="_on_PlayerTab_tab_changed"]
+[connection signal="pressed" from="League/TabBtns/VBoxContainer/BtnPlayers" to="League" method="_on_BtnPlayers_pressed"]
+[connection signal="pressed" from="League/TabBtns/VBoxContainer/BtnGoals" to="League" method="_on_BtnGoals_pressed"]
+[connection signal="pressed" from="League/TabBtns/VBoxContainer/BtnAssits" to="League" method="_on_BtnAssits_pressed"]
+[connection signal="pressed" from="League/TabBtns/VBoxContainer/BtnShots" to="League" method="_on_BtnShots_pressed"]
+[connection signal="pressed" from="League/TabBtns/VBoxContainer/BtnPasses" to="League" method="_on_BtnPasses_pressed"]
+[connection signal="pressed" from="League/TabBtns/VBoxContainer/BtnDefends" to="League" method="_on_BtnDefends_pressed"]
+[connection signal="pressed" from="League/TabBtns/VBoxContainer/BtnSaves" to="League" method="_on_BtnSaves_pressed"]
+[connection signal="pressed" from="League/TabBtns/VBoxContainer/BtnTeam" to="League" method="_on_BtnTeam_pressed"]
+[connection signal="pressed" from="Settings/TabBtns/VBoxContainer/ButtonNextSeason" to="Settings" method="_on_ButtonNextSeason_pressed"]
+[connection signal="pressed" from="Settings/TabBtns/VBoxContainer/ButtonNewSeason" to="Settings" method="_on_ButtonNewSeason_pressed"]
+[connection signal="pressed" from="Settings/TabBtns/VBoxContainer/ButtonResetData" to="Settings" method="_on_ButtonResetData_pressed"]

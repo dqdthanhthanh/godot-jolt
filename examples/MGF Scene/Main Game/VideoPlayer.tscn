@@ -1,0 +1,205 @@
+[gd_scene load_steps=19 format=3]
+
+[ext_resource type="PackedScene" uid="uid://bgus0ka15pe6r" path="res://MGF Scene/Setup/ButtonClose.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://bkl6xrksnb1hu" path="res://Assets2D/UI/iconLoad.png" id="2"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGO.tres" id="2_6xmgf"]
+[ext_resource type="Texture2D" uid="uid://blfxknufhe437" path="res://Assets2D/UI/iconPlay.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://2i37u48gx0nm" path="res://Assets2D/UI/IconMoveRight.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://ch77degek1evu" path="res://Assets2D/UI/IconMoveLeft.png" id="5"]
+[ext_resource type="StyleBox" uid="uid://caqacj77hshxv" path="res://Assets2D/Theme/btnUICN.tres" id="5_obkq2"]
+[ext_resource type="Theme" uid="uid://58mjttbtmdiu" path="res://Assets2D/Fonts/ThemeTestMode.tres" id="6"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUICP.tres" id="6_i7noe"]
+[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="9"]
+[ext_resource type="Script" path="res://MGF Scene/Main Game/VideoPlayer.gd" id="10"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Main Game/BtnGoalTime.tscn" id="11"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnOp.tres" id="12"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="12_r0hje"]
+[ext_resource type="StyleBox" uid="uid://cc73o4hddi4cy" path="res://Assets2D/Theme/barSlideBG.tres" id="15_2x174"]
+[ext_resource type="StyleBox" uid="uid://dworqadymfxbc" path="res://MGF Scene/Main Game/barSlideFill.tres" id="16_jg5cm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_863gf"]
+bg_color = Color(0.623529, 0, 0, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+shadow_color = Color(0, 0, 0, 0.117647)
+shadow_size = 30
+
+[sub_resource type="ImageTexture" id="ImageTexture_6qt65"]
+
+[node name="VideoStreamPlayer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-288, -56)
+script = ExtResource("10")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource("2_6xmgf")
+
+[node name="PanelMain" type="Panel" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -888.0
+offset_top = -132.0
+offset_right = 888.0
+offset_bottom = -8.0
+theme_override_styles/panel = ExtResource("12")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelMain"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -108.0
+offset_bottom = -20.0
+alignment = 1
+
+[node name="ButtonNextLeft" type="Button" parent="PanelMain/HBoxContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+tooltip_text = "Next Frame"
+theme = ExtResource("6")
+theme_override_styles/normal = ExtResource("5_obkq2")
+theme_override_styles/hover = ExtResource("6_i7noe")
+theme_override_styles/pressed = ExtResource("6_i7noe")
+theme_override_styles/disabled = ExtResource("6_i7noe")
+theme_override_styles/focus = ExtResource("6_i7noe")
+icon = ExtResource("5")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BtnReplayPlay" type="Button" parent="PanelMain/HBoxContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+tooltip_text = "Play"
+theme = ExtResource("6")
+theme_override_styles/normal = ExtResource("5_obkq2")
+theme_override_styles/hover = ExtResource("6_i7noe")
+theme_override_styles/pressed = ExtResource("6_i7noe")
+theme_override_styles/disabled = ExtResource("6_i7noe")
+theme_override_styles/focus = ExtResource("6_i7noe")
+toggle_mode = true
+icon = ExtResource("3")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonNextRight" type="Button" parent="PanelMain/HBoxContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+tooltip_text = "Next Frame"
+theme = ExtResource("6")
+theme_override_styles/normal = ExtResource("5_obkq2")
+theme_override_styles/hover = ExtResource("6_i7noe")
+theme_override_styles/pressed = ExtResource("6_i7noe")
+theme_override_styles/disabled = ExtResource("6_i7noe")
+theme_override_styles/focus = ExtResource("6_i7noe")
+icon = ExtResource("4")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BtnReplayClose" parent="PanelMain/HBoxContainer" instance=ExtResource("1")]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+
+[node name="goals" type="Control" parent="PanelMain"]
+anchors_preset = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -252.0
+offset_bottom = -164.0
+
+[node name="BtnGoalTime" parent="PanelMain/goals" instance=ExtResource("11")]
+visible = false
+layout_mode = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 88.0
+offset_bottom = 88.0
+
+[node name="BtnOpen" type="Label" parent="PanelMain"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_top = -80.0
+offset_right = 72.0
+offset_bottom = -8.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("12_r0hje")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = ExtResource("9")
+text = "      Replay"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="PanelMain/BtnOpen"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -20.0
+offset_right = -24.0
+offset_bottom = 20.0
+pivot_offset = Vector2(20, 20)
+theme_override_styles/normal = SubResource("StyleBoxFlat_863gf")
+
+[node name="TextureRect" type="TextureRect" parent="PanelMain/BtnOpen/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BtnVideoReplaySlider" type="HSlider" parent="PanelMain"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = -144.0
+offset_right = -128.0
+offset_bottom = -124.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_icons/grabber = SubResource("ImageTexture_6qt65")
+theme_override_icons/grabber_highlight = SubResource("ImageTexture_6qt65")
+theme_override_icons/grabber_disabled = SubResource("ImageTexture_6qt65")
+theme_override_icons/tick = SubResource("ImageTexture_6qt65")
+theme_override_styles/slider = ExtResource("15_2x174")
+theme_override_styles/grabber_area = ExtResource("16_jg5cm")
+theme_override_styles/grabber_area_highlight = ExtResource("16_jg5cm")
+step = 0.001
+value = 50.0
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="pressed" from="PanelMain/HBoxContainer/ButtonNextLeft" to="." method="_on_ButtonNextLeft_pressed"]
+[connection signal="pressed" from="PanelMain/HBoxContainer/BtnReplayPlay" to="." method="_on_BtnReplayPlay_pressed"]
+[connection signal="pressed" from="PanelMain/HBoxContainer/ButtonNextRight" to="." method="_on_ButtonNextRight_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

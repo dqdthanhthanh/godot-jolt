@@ -1,0 +1,16 @@
+[remap]
+
+importer="effekseer.effect"
+type="Resource"
+path="res://.import/Laser01.efkefc-1b5fc0448055117b0db8de618b4fa017.res"
+
+[deps]
+
+source_file="res://Assets3D/VFX/00_Basic/Laser01.efkefc"
+dest_files=[ "res://.import/Laser01.efkefc-1b5fc0448055117b0db8de618b4fa017.res" ]
+
+[params]
+
+scale=1.0
+data_type=0
+compress=true

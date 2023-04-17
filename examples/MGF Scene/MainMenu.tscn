@@ -1,0 +1,252 @@
+[gd_scene load_steps=9 format=3 uid="uid://oobfcgfimkvt"]
+
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/Account.tscn" id="3"]
+[ext_resource type="FontFile" uid="uid://cgnpaaq1ihcyh" path="res://addons/mgf_Json_table/assets/FiraSans-Medium.otf" id="3_28yc7"]
+[ext_resource type="Script" path="res://MGF Scene/MGFBT.gd" id="4"]
+[ext_resource type="Script" path="res://MGF Scene/MainMenu.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://du3nkd40esve6" path="res://MGF Scene/Setup/BGSetup.tscn" id="6"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="8"]
+
+[sub_resource type="FontFile" id="FontFile_nbt2t"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+fallbacks = Array[Font]([ExtResource("3_28yc7")])
+face_index = null
+embolden = null
+transform = null
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/50/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/100/0 = Vector2(0, 0)
+cache/0/35/0/ascent = 0.0
+cache/0/35/0/descent = 0.0
+cache/0/35/0/underline_position = 0.0
+cache/0/35/0/underline_thickness = 0.0
+cache/0/35/0/scale = 1.0
+cache/0/35/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/35/0/kerning_overrides/100/0 = Vector2(0, 0)
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/20/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/20/0/kerning_overrides/100/0 = Vector2(0, 0)
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/100/0 = Vector2(0, 0)
+cache/0/15/0/ascent = 0.0
+cache/0/15/0/descent = 0.0
+cache/0/15/0/underline_position = 0.0
+cache/0/15/0/underline_thickness = 0.0
+cache/0/15/0/scale = 1.0
+cache/0/15/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/15/0/kerning_overrides/100/0 = Vector2(0, 0)
+cache/0/25/0/ascent = 0.0
+cache/0/25/0/descent = 0.0
+cache/0/25/0/underline_position = 0.0
+cache/0/25/0/underline_thickness = 0.0
+cache/0/25/0/scale = 1.0
+cache/0/25/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/100/0 = Vector2(0, 0)
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/100/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/100/0/kerning_overrides/35/0 = Vector2(0, 0)
+cache/0/100/0/kerning_overrides/20/0 = Vector2(0, 0)
+cache/0/100/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/100/0/kerning_overrides/15/0 = Vector2(0, 0)
+cache/0/100/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/100/0/kerning_overrides/100/0 = Vector2(0, 0)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5")
+
+[node name="BGSetup" parent="." instance=ExtResource("6")]
+layout_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 152.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontFile_nbt2t")
+theme_override_font_sizes/font_size = 50
+text = "Magic FootBall World3D"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -254.0
+offset_right = 600.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 60
+theme_override_constants/v_separation = 60
+columns = 3
+
+[node name="Button3" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(360, 260)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_nbt2t")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("8")
+theme_override_styles/hover = ExtResource("7")
+theme_override_styles/pressed = ExtResource("7")
+theme_override_styles/disabled = ExtResource("7")
+theme_override_styles/focus = ExtResource("7")
+text = "Career"
+
+[node name="Button2" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(360, 260)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_nbt2t")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("8")
+theme_override_styles/hover = ExtResource("7")
+theme_override_styles/pressed = ExtResource("7")
+theme_override_styles/disabled = ExtResource("7")
+theme_override_styles/focus = ExtResource("7")
+text = "Season"
+
+[node name="Button" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(360, 260)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_nbt2t")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("8")
+theme_override_styles/hover = ExtResource("7")
+theme_override_styles/pressed = ExtResource("7")
+theme_override_styles/disabled = ExtResource("7")
+theme_override_styles/focus = ExtResource("7")
+text = "Training"
+
+[node name="Button4" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(360, 260)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_nbt2t")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("8")
+theme_override_styles/hover = ExtResource("7")
+theme_override_styles/pressed = ExtResource("7")
+theme_override_styles/disabled = ExtResource("7")
+theme_override_styles/focus = ExtResource("7")
+text = "Rank"
+
+[node name="Button5" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(360, 260)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_nbt2t")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("8")
+theme_override_styles/hover = ExtResource("7")
+theme_override_styles/pressed = ExtResource("7")
+theme_override_styles/disabled = ExtResource("7")
+theme_override_styles/focus = ExtResource("7")
+text = "Shop"
+
+[node name="Button6" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(360, 260)
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_nbt2t")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("8")
+theme_override_styles/hover = ExtResource("7")
+theme_override_styles/pressed = ExtResource("7")
+theme_override_styles/disabled = ExtResource("7")
+theme_override_styles/focus = ExtResource("7")
+text = "Setting"
+
+[node name="PanelTop" type="Control" parent="."]
+anchors_preset = 0
+anchor_right = 1.0
+offset_bottom = 128.0
+
+[node name="PanelBottom" type="Control" parent="."]
+anchors_preset = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+
+[node name="ver" type="Label" parent="PanelBottom"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -304.0
+offset_top = -84.0
+offset_right = -47.0
+offset_bottom = -35.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1, 1.00792)
+theme_override_font_sizes/font_size = 25
+text = "Ver 1.0.0 "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Account" parent="." instance=ExtResource("3")]
+visible = false
+layout_mode = 1
+
+[node name="MGFBT" type="Node" parent="."]
+script = ExtResource("4")

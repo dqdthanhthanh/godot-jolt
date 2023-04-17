@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=2]
+
+[sub_resource type="BoxShape3D" id=19]
+extents = Vector3( 0.574778, 1, 1.4256 )
+
+[sub_resource type="BoxShape3D" id=14]
+extents = Vector3( 0.51859, 1, 1.4256 )
+
+[sub_resource type="BoxShape3D" id=15]
+extents = Vector3( 0.63252, 1, 1.4256 )
+
+[sub_resource type="BoxShape3D" id=17]
+extents = Vector3( 0.403446, 1, 0.270273 )
+
+[sub_resource type="BoxShape3D" id=18]
+extents = Vector3( 0.188322, 1, 0.473331 )
+
+[sub_resource type="BoxShape3D" id=13]
+extents = Vector3( 0.400595, 1, 0.890496 )
+
+[sub_resource type="BoxShape3D" id=16]
+extents = Vector3( 0.197294, 1, 0.487137 )
+
+[node name="PosAISignal" type="Node3D"]
+
+[node name="GK1" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GK1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25581, 0, 0 )
+shape = SubResource( 19 )
+
+[node name="CB1" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CB1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.156, 0, 0 )
+shape = SubResource( 14 )
+
+[node name="CM1" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CM1"]
+shape = SubResource( 15 )
+
+[node name="CollisionShape2" type="CollisionShape3D" parent="CM1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0824, 0, 1.1567 )
+shape = SubResource( 17 )
+
+[node name="CollisionShape3" type="CollisionShape3D" parent="CM1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08192, 0, -1.157 )
+shape = SubResource( 17 )
+
+[node name="CollisionShape4" type="CollisionShape3D" parent="CM1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6755, 0, 0.960867 )
+shape = SubResource( 18 )
+
+[node name="CollisionShape5" type="CollisionShape3D" parent="CM1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.676, 0, -0.961 )
+shape = SubResource( 18 )
+
+[node name="AM1" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AM1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15577, 0, 0 )
+shape = SubResource( 14 )
+
+[node name="CF1" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CF1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0822, 0, 0 )
+shape = SubResource( 13 )
+
+[node name="CollisionShape2" type="CollisionShape3D" parent="CF1"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.67361, 0, 0 )
+shape = SubResource( 16 )

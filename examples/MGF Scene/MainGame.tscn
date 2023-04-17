@@ -1,0 +1,158 @@
+[gd_scene load_steps=22 format=3 uid="uid://cn77jnm7okavr"]
+
+[ext_resource type="PackedScene" uid="uid://bf7eksdvckbk4" path="res://Assets3D/Stadium/stadium.glb" id="1"]
+[ext_resource type="PackedScene" uid="uid://dacewxp7wga7r" path="res://MGF Scene/AssetsScene3D/Ball.tscn" id="2"]
+[ext_resource type="AudioStream" uid="uid://da5im0d6l88u6" path="res://Sounds/SoundFX/Sound_ShootBall1.mp3" id="3"]
+[ext_resource type="Script" path="res://scripts/WorldLight.gd" id="4_mcr0c"]
+[ext_resource type="AudioStream" uid="uid://bsltb7mtpuw6p" path="res://Sounds/SoundFX/Crow1.mp3" id="10"]
+[ext_resource type="AudioStream" uid="uid://v7ucaxllpliy" path="res://Sounds/SoundFX/Sound_PlayerMoving.mp3" id="12"]
+[ext_resource type="PackedScene" uid="uid://hbixbcpcmfr7" path="res://MGF Scene/AITest/AITest.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://br37m8eey4be8" path="res://MGF Scene/Main Game/MainGameUI.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://2x25o04wj462" path="res://MGF Scene/AssetsScene3D/Ground.tscn" id="21"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Arrow.tscn" id="22"]
+[ext_resource type="PackedScene" uid="uid://bwhbwmyqudef3" path="res://MGF Scene/AssetsScene3D/Map.tscn" id="23"]
+[ext_resource type="PackedScene" uid="uid://b4ptqc4d4gle6" path="res://MGF Scene/AssetsScene3D/Goal.tscn" id="24"]
+[ext_resource type="Script" path="res://MGF Scene/MainGame.gd" id="25"]
+[ext_resource type="Script" path="res://scripts/screen_shake.gd" id="27"]
+[ext_resource type="PackedScene" path="res://MGF Scene/ConfigController/SoundFx.tscn" id="33"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5p0yd"]
+
+[sub_resource type="Sky" id="Sky_tvqb2"]
+sky_material = SubResource("ProceduralSkyMaterial_5p0yd")
+
+[sub_resource type="Environment" id="Environment_2r3q2"]
+background_mode = 2
+sky = SubResource("Sky_tvqb2")
+reflected_light_source = 1
+tonemap_mode = 2
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+glow_enabled = true
+adjustment_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_35phc"]
+resource_local_to_scene = true
+friction = 0.2
+rough = true
+bounce = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vwh0c"]
+size = Vector3(7.11118, 2, 0.1)
+
+[sub_resource type="BoxShape3D" id="4"]
+size = Vector3(7.07066, 0.4, 3)
+
+[node name="MainGame" type="Node3D"]
+script = ExtResource("25")
+
+[node name="UI" parent="." instance=ExtResource("17")]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerStop" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerNewTurn" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerSub" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerStartGame" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerSaveReplay" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="TimerPlayReplay" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="AITimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 0)
+current = true
+fov = 50.0
+size = 3.6
+script = ExtResource("27")
+
+[node name="WorldLight" type="Node3D" parent="."]
+script = ExtResource("4_mcr0c")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldLight"]
+environment = SubResource("Environment_2r3q2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldLight"]
+transform = Transform3D(-0.855221, 0.397141, -0.332979, -0.15522, 0.416721, 0.895685, 0.494473, 0.817693, -0.294744, 0, 3.42781, 0.0541763)
+light_energy = 0.8
+shadow_enabled = true
+directional_shadow_blend_splits = true
+
+[node name="stadium" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -0.1)
+
+[node name="Map" parent="." instance=ExtResource("23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015, 0, 0.006)
+collision_layer = 255
+collision_mask = 255
+
+[node name="Ground" parent="." instance=ExtResource("21")]
+collision_layer = 255
+collision_mask = 255
+
+[node name="Ball" parent="." instance=ExtResource("2")]
+physics_material_override = SubResource("PhysicsMaterial_35phc")
+
+[node name="Arrow" parent="." instance=ExtResource("22")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+
+[node name="BallStart" type="Marker3D" parent="."]
+
+[node name="GoalA" parent="." instance=ExtResource("24")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82575, -0.05, 0)
+
+[node name="GoalB" parent="." instance=ExtResource("24")]
+transform = Transform3D(-1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, -2.826, -0.05, 0)
+
+[node name="PosGameSignal" type="Node3D" parent="."]
+
+[node name="OutBall" type="StaticBody3D" parent="PosGameSignal"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PosGameSignal/OutBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.485)
+shape = SubResource("BoxShape3D_vwh0c")
+
+[node name="CollisionShape2" type="CollisionShape3D" parent="PosGameSignal/OutBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.485)
+shape = SubResource("BoxShape3D_vwh0c")
+
+[node name="CollisionShape3" type="CollisionShape3D" parent="PosGameSignal/OutBall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("4")
+
+[node name="SoundBackGround" parent="." instance=ExtResource("33")]
+stream = ExtResource("10")
+volume_db = -25.0
+
+[node name="PlayerMovingSFX" parent="." instance=ExtResource("33")]
+stream = ExtResource("12")
+volume_db = -5.0
+autoplay = false
+
+[node name="PlayerShootSFX" parent="." instance=ExtResource("33")]
+stream = ExtResource("3")
+volume_db = -5.0
+autoplay = false
+
+[node name="EffekseerEmitter" type="Node3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.3, 0)
+
+[node name="AITest" parent="." instance=ExtResource("15")]

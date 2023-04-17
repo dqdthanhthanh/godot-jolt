@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4fjy2aevfiwl"]
+
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIN.tres" id="1"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="2"]
+
+[node name="ButtonBase" type="Button"]
+anchors_preset = -1
+anchor_left = 0.416667
+anchor_top = 0.666667
+anchor_right = 0.583333
+anchor_bottom = 0.833333
+theme_override_styles/normal = ExtResource("1")
+theme_override_styles/hover = ExtResource("2")
+theme_override_styles/pressed = ExtResource("2")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/focus = ExtResource("2")
+text = "Apply"
+icon_alignment = 1

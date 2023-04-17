@@ -1,0 +1,16 @@
+[remap]
+
+importer="effekseer.effect"
+type="Resource"
+path="res://.import/Simple_Track1.efkefc-b79846f151d6df7ea37457f67d0dc063.res"
+
+[deps]
+
+source_file="res://Assets3D/VFX/00_Basic/Simple_Track1.efkefc"
+dest_files=[ "res://.import/Simple_Track1.efkefc-b79846f151d6df7ea37457f67d0dc063.res" ]
+
+[params]
+
+scale=1.0
+data_type=0
+compress=true

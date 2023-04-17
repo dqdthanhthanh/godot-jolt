@@ -1,0 +1,362 @@
+[gd_scene load_steps=15 format=3 uid="uid://kl2dbwn0ckt0"]
+
+[ext_resource type="Texture2D" uid="uid://c0taixpymey1r" path="res://Assets2D/UI/iconStadium.png" id="1"]
+[ext_resource type="PackedScene" path="res://MGF Scene/ConfigController/TeamShow.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://b4fjy2aevfiwl" path="res://MGF Scene/Setup/ButtonBase.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://du3nkd40esve6" path="res://MGF Scene/Setup/BGSetup.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cmsyvb5wbfi" path="res://MGF Scene/Setup/HomeButton.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://da16yrh6273dc" path="res://Assets2D/UI/iconBall.png" id="6"]
+[ext_resource type="Script" path="res://MGF Scene/Season/SeasonMatch.gd" id="7"]
+[ext_resource type="Theme" uid="uid://58mjttbtmdiu" path="res://Assets2D/Fonts/ThemeTestMode.tres" id="8"]
+[ext_resource type="PackedScene" uid="uid://bqxpuye666ns1" path="res://MGF Scene/Setup/Account.tscn" id="9"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="10"]
+[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="11"]
+[ext_resource type="PackedScene" uid="uid://bktiny3q77n14" path="res://MGF Scene/SwipeMenu/SwipeMenu.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://cknlnd6t3iuqn" path="res://MGF Scene/RadarChart/RadarChartStats.tscn" id="16"]
+[ext_resource type="Texture2D" uid="uid://d126nb33axa2c" path="res://Assets2D/UI/iconMenu.png" id="17"]
+
+[node name="SeasonMatch" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-336, 336)
+script = ExtResource("7")
+
+[node name="BGSetup" parent="." instance=ExtResource("4")]
+layout_mode = 1
+
+[node name="Teamselect1" parent="." instance=ExtResource("2")]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -222.0
+offset_right = -224.0
+offset_bottom = -38.0
+theme_override_styles/normal = ExtResource("11")
+theme_override_styles/hover = ExtResource("10")
+theme_override_styles/pressed = ExtResource("10")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
+
+[node name="Teamselect2" parent="." instance=ExtResource("2")]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 224.0
+offset_top = -222.0
+offset_right = 416.0
+offset_bottom = -38.0
+theme_override_styles/normal = ExtResource("11")
+theme_override_styles/hover = ExtResource("10")
+theme_override_styles/pressed = ExtResource("10")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
+teamSelect = "teamID2"
+
+[node name="OptionButtonSetGameMode" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -222.0
+offset_right = 130.0
+offset_bottom = -137.0
+theme = ExtResource("8")
+theme_override_styles/normal = ExtResource("11")
+theme_override_styles/hover = ExtResource("10")
+theme_override_styles/pressed = ExtResource("10")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
+text = "GameMode"
+icon = ExtResource("17")
+expand_icon = true
+
+[node name="OptionButtonSetStadium" type="Button" parent="."]
+custom_minimum_size = Vector2(230, 80)
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -102.0
+offset_right = 128.0
+offset_bottom = -22.0
+theme = ExtResource("8")
+theme_override_styles/normal = ExtResource("11")
+theme_override_styles/hover = ExtResource("10")
+theme_override_styles/pressed = ExtResource("10")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
+text = "Stadium"
+icon = ExtResource("1")
+expand_icon = true
+
+[node name="ButtonTeamApply" parent="." instance=ExtResource("3")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.498605
+anchor_top = 0.573068
+anchor_right = 0.501953
+anchor_bottom = 0.573068
+offset_left = -125.5
+offset_top = -42.5
+offset_right = 125.5
+offset_bottom = 42.5
+text = "Start"
+icon = ExtResource("6")
+icon_alignment = 0
+expand_icon = true
+
+[node name="TeamStatsA" type="Panel" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -448.0
+offset_top = -6.0
+offset_right = -192.0
+offset_bottom = 122.0
+theme_override_styles/panel = ExtResource("11")
+metadata/_edit_group_ = true
+
+[node name="TeamAStats" type="ItemList" parent="TeamStatsA"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -52.0
+offset_right = 104.0
+offset_bottom = 52.0
+select_mode = 1
+max_columns = 4
+
+[node name="teamOve" type="Label" parent="TeamStatsA/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 12.0
+offset_right = 248.0
+offset_bottom = 51.0
+text = "0"
+
+[node name="teamAtk" type="Label" parent="TeamStatsA/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 36.0
+offset_right = 248.0
+offset_bottom = 79.0
+text = "0
+"
+
+[node name="teamMid" type="Label" parent="TeamStatsA/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 60.0
+offset_right = 248.0
+offset_bottom = 103.0
+text = "0
+"
+
+[node name="teamDef" type="Label" parent="TeamStatsA/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 84.0
+offset_right = 248.0
+offset_bottom = 127.0
+text = "0
+"
+
+[node name="teamOve2" type="Label" parent="TeamStatsA/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 192.0
+offset_bottom = 51.0
+text = "AVG"
+
+[node name="teamDef2" type="Label" parent="TeamStatsA/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 36.0
+offset_right = 192.0
+offset_bottom = 79.0
+text = "ATK
+"
+
+[node name="teamMid2" type="Label" parent="TeamStatsA/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 60.0
+offset_right = 192.0
+offset_bottom = 126.0
+text = "MID
+
+"
+
+[node name="teamFor2" type="Label" parent="TeamStatsA/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 84.0
+offset_right = 192.0
+offset_bottom = 150.0
+text = "DEF
+
+"
+
+[node name="RadarChartStats" parent="TeamStatsA" instance=ExtResource("16")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -40.0
+offset_right = -42.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TeamStatsB" type="Panel" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 192.0
+offset_top = -6.0
+offset_right = 448.0
+offset_bottom = 122.0
+theme_override_styles/panel = ExtResource("11")
+metadata/_edit_group_ = true
+
+[node name="TeamAStats" type="ItemList" parent="TeamStatsB"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -52.0
+offset_right = 104.0
+offset_bottom = 52.0
+select_mode = 1
+max_columns = 4
+
+[node name="teamOve" type="Label" parent="TeamStatsB/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 12.0
+offset_right = 248.0
+offset_bottom = 51.0
+text = "0"
+
+[node name="teamAtk" type="Label" parent="TeamStatsB/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 36.0
+offset_right = 248.0
+offset_bottom = 79.0
+text = "0
+"
+
+[node name="teamMid" type="Label" parent="TeamStatsB/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 60.0
+offset_right = 248.0
+offset_bottom = 103.0
+text = "0
+"
+
+[node name="teamDef" type="Label" parent="TeamStatsB/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 84.0
+offset_right = 248.0
+offset_bottom = 127.0
+text = "0
+"
+
+[node name="teamOve2" type="Label" parent="TeamStatsB/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 192.0
+offset_bottom = 51.0
+text = "AVG"
+
+[node name="teamDef2" type="Label" parent="TeamStatsB/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 36.0
+offset_right = 192.0
+offset_bottom = 79.0
+text = "ATK
+"
+
+[node name="teamMid2" type="Label" parent="TeamStatsB/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 60.0
+offset_right = 192.0
+offset_bottom = 126.0
+text = "MID
+
+"
+
+[node name="teamFor2" type="Label" parent="TeamStatsB/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 84.0
+offset_right = 192.0
+offset_bottom = 150.0
+text = "DEF
+
+"
+
+[node name="RadarChartStats" parent="TeamStatsB" instance=ExtResource("16")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -40.0
+offset_right = -42.0
+offset_bottom = 35.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="SwipeMenu" parent="." instance=ExtResource("13")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+
+[node name="Home" parent="." instance=ExtResource("5")]
+layout_mode = 1
+grow_horizontal = 0
+script = null
+
+[node name="Account" parent="." instance=ExtResource("9")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="Teamselect1" to="." method="_on_Teamselect1_pressed"]
+[connection signal="pressed" from="Teamselect2" to="." method="_on_Teamselect2_pressed"]
+[connection signal="button_up" from="OptionButtonSetGameMode" to="." method="_on_OptionButtonSetGameMode_button_up"]
+[connection signal="pressed" from="OptionButtonSetStadium" to="." method="_on_OptionButtonSetStadium_pressed"]
+[connection signal="pressed" from="ButtonTeamApply" to="." method="_on_ButtonTeamApply_pressed"]
+[connection signal="pressed" from="Home" to="." method="_on_Home_pressed"]

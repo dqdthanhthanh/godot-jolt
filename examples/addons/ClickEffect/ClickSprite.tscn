@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds6yps5fvg45v"]
+
+[ext_resource type="Texture2D" uid="uid://cfck76orjht8n" path="res://addons/ClickEffect/cirleeffectclick.png" id="1_2avvt"]
+
+[node name="ClickSprite" type="Sprite2D"]
+process_mode = 3
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_2avvt")

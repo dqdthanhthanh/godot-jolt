@@ -1,0 +1,1188 @@
+[gd_scene load_steps=21 format=3]
+
+[ext_resource type="PackedScene" uid="uid://du3nkd40esve6" path="res://MGF Scene/Setup/BGSetup.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://dngiivihjf64c" path="res://MGF Scene/Formation/FormationSlots.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://cwnic1s8y1ex1" path="res://MGF Scene/Market/PanelPlayerData.tscn" id="3"]
+[ext_resource type="Theme" uid="uid://58mjttbtmdiu" path="res://Assets2D/Fonts/ThemeTestMode.tres" id="4"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="5_5jswh"]
+[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="5_07ui0"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="5_g4oxn"]
+[ext_resource type="PackedScene" uid="uid://cknlnd6t3iuqn" path="res://MGF Scene/RadarChart/RadarChartStats.tscn" id="8"]
+[ext_resource type="Script" path="res://MGF Scene/Formation/FormationGroup.gd" id="9"]
+[ext_resource type="Texture2D" uid="uid://cr2rw5ucq8m4r" path="res://Assets2D/Logo/QD.png" id="10"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUINO.tres" id="10_7qpu2"]
+[ext_resource type="Texture2D" uid="uid://b1s48jmdlwd2q" path="res://Assets2D/Players/VT/T_ThanUng.png" id="11"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCN.tres" id="11_3x73h"]
+[ext_resource type="Script" path="res://scripts/Button.gd" id="12"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCP.tres" id="12_x4jim"]
+[ext_resource type="Script" path="res://MGF Scene/Formation/Finance.gd" id="15"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGOBorder.tres" id="15_ghxig"]
+[ext_resource type="Texture2D" uid="uid://j3mv2607r0ck" path="res://Assets2D/UI/home-2502.png" id="18"]
+[ext_resource type="PackedScene" uid="uid://bqxpuye666ns1" path="res://MGF Scene/Setup/Account.tscn" id="19"]
+[ext_resource type="Script" path="res://MGF Scene/Formation/Formation.gd" id="21"]
+
+[node name="Formation" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("21")
+
+[node name="BGSetup" parent="." instance=ExtResource("1")]
+layout_mode = 1
+
+[node name="BackGroundMain" parent="BGSetup" index="1"]
+visible = true
+
+[node name="PanelR" parent="BGSetup/BackGroundMain" index="0"]
+anchor_left = 0.75
+offset_left = 0.0
+
+[node name="PanelL" parent="BGSetup/BackGroundMain" index="1"]
+offset_right = 448.0
+
+[node name="PanelT" parent="BGSetup/BackGroundMain" index="2"]
+visible = false
+
+[node name="PanelD" parent="BGSetup/BackGroundMain" index="3"]
+visible = false
+
+[node name="GroupSlots" type="Control" parent="."]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("9")
+
+[node name="slot1" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 202.0
+offset_right = 86.0
+offset_bottom = 352.0
+pos = "GK"
+
+[node name="slot2" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 34.0
+offset_right = 86.0
+offset_bottom = 184.0
+uid = 1
+pos = "CB"
+
+[node name="slot3" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = 34.0
+offset_right = 278.0
+offset_bottom = 184.0
+uid = 2
+pos = "LB"
+
+[node name="slot4" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = 34.0
+offset_right = -106.0
+offset_bottom = 184.0
+uid = 3
+pos = "RB"
+
+[node name="slot5" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -154.0
+offset_right = 86.0
+offset_bottom = -4.0
+uid = 4
+pos = "CM"
+
+[node name="slot6" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -334.0
+offset_right = -106.0
+offset_bottom = -184.0
+uid = 5
+pos = "LF"
+
+[node name="slot7" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = -334.0
+offset_right = 278.0
+offset_bottom = -184.0
+uid = 6
+pos = "RF"
+
+[node name="slot8" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 184.0
+offset_top = -374.0
+offset_right = 334.0
+offset_bottom = -224.0
+uid = 7
+
+[node name="slot9" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 184.0
+offset_top = -182.0
+offset_right = 334.0
+offset_bottom = -32.0
+uid = 8
+
+[node name="slot10" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.502
+offset_left = 184.0
+offset_top = 10.0
+offset_right = 334.0
+offset_bottom = 160.0
+uid = 9
+
+[node name="slot11" parent="GroupSlots" instance=ExtResource("2")]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+anchors_preset = 0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.502
+offset_left = 184.0
+offset_top = 202.0
+offset_right = 334.0
+offset_bottom = 352.0
+uid = 10
+
+[node name="ItemList" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 0.425121
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("5_07ui0")
+theme_override_styles/hover = ExtResource("5_5jswh")
+theme_override_styles/pressed = ExtResource("5_5jswh")
+theme_override_styles/disabled = ExtResource("5_5jswh")
+theme_override_styles/focus = ExtResource("5_5jswh")
+
+[node name="RadarChartStats" parent="ItemList" instance=ExtResource("8")]
+layout_mode = 1
+anchor_left = 0.0892857
+anchor_top = 0.681818
+anchor_right = 0.263393
+anchor_bottom = 0.914773
+
+[node name="texturePlayer" type="TextureRect" parent="ItemList"]
+layout_mode = 0
+anchor_left = 0.0290179
+anchor_right = 0.314732
+anchor_bottom = 0.630682
+texture = ExtResource("11")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Popular" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_top = 0.0227273
+anchor_right = 0.34375
+anchor_bottom = 0.113153
+offset_left = -4.86374e-05
+offset_right = -4.57764e-05
+theme_override_colors/font_color = Color(1, 0.682353, 0.152941, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "##########"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Overall" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.125
+anchor_top = 0.0227273
+anchor_right = 0.225
+anchor_bottom = 0.112669
+offset_left = -5.34058e-05
+offset_right = -5.34058e-05
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 20
+text = "90"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Transfer" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.0178571
+anchor_top = 0.446022
+anchor_right = 0.317857
+anchor_bottom = 0.504532
+offset_left = 2.47955e-05
+offset_right = 3.05176e-05
+offset_bottom = 1.87257
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "10"
+horizontal_alignment = 1
+
+[node name="Wage" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.0178571
+anchor_top = 0.519886
+anchor_right = 0.317857
+anchor_bottom = 0.578396
+offset_left = 2.47955e-05
+offset_right = 3.05176e-05
+offset_bottom = 1.87256
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "10"
+horizontal_alignment = 1
+
+[node name="namePlayer" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.0227273
+anchor_right = 0.864286
+anchor_bottom = 0.0812379
+offset_bottom = 1.87235
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Name"
+
+[node name="nameTeam" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.514286
+anchor_top = 0.0865571
+anchor_right = 1.03929
+anchor_bottom = 0.145068
+offset_bottom = 1.87235
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+
+[node name="nameTeam2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.0865571
+anchor_right = 0.864286
+anchor_bottom = 0.145068
+offset_bottom = 4.87235
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Team"
+
+[node name="playerPosition2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.164242
+anchor_right = 0.864286
+anchor_bottom = 0.279593
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
+offset_bottom = 3.31928
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Form
+"
+
+[node name="playerStatGames2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.227515
+anchor_right = 0.864286
+anchor_bottom = 0.331238
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Game"
+
+[node name="playerStatGoals2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.291345
+anchor_right = 0.864286
+anchor_bottom = 0.404074
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
+offset_bottom = 3.31929
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Goals
+"
+
+[node name="playerStatAssits2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.355174
+anchor_right = 0.864286
+anchor_bottom = 0.40764
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
+offset_bottom = 1.53168
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Assits"
+
+[node name="playerPosition" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.164773
+anchor_right = 1.06786
+anchor_bottom = 0.288845
+offset_bottom = 3.31928
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0
+"
+
+[node name="playerStatGames" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.228046
+anchor_right = 1.04286
+anchor_bottom = 0.340775
+offset_bottom = 3.31929
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0
+"
+
+[node name="playerStatGoals" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.291876
+anchor_right = 1.04286
+anchor_bottom = 0.404605
+offset_bottom = 3.31929
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0
+"
+
+[node name="playerStatAssits" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.355705
+anchor_right = 1.04286
+anchor_bottom = 0.468435
+offset_bottom = 3.31894
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0
+"
+
+[node name="Passes" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.164773
+anchor_right = 1.13214
+anchor_bottom = 0.268496
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Shots"
+
+[node name="Moves" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.228046
+anchor_right = 1.13214
+anchor_bottom = 0.331769
+offset_left = 3.05176e-05
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Passes"
+
+[node name="OwnGoals" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.291876
+anchor_right = 1.13214
+anchor_bottom = 0.395599
+offset_left = 3.05176e-05
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Defend"
+
+[node name="Mistakes" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.355705
+anchor_right = 1.13214
+anchor_bottom = 0.408172
+offset_left = 3.05176e-05
+offset_bottom = 1.53168
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Saves"
+
+[node name="playerPasses" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.164773
+anchor_right = 1.06071
+anchor_bottom = 0.288845
+offset_bottom = 3.31928
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0
+"
+
+[node name="playerMoves" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.227273
+anchor_right = 1.31071
+anchor_bottom = 0.340002
+offset_bottom = 3.31929
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0
+"
+
+[node name="playerOwnGoals" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.291103
+anchor_right = 1.31071
+anchor_bottom = 0.403832
+offset_bottom = 3.31929
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0
+"
+
+[node name="playerMistakes" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.354932
+anchor_right = 1.31071
+anchor_bottom = 0.467662
+offset_bottom = 3.31894
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0
+"
+
+[node name="playerOverall2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.443311
+anchor_right = 0.864286
+anchor_bottom = 0.558662
+offset_bottom = 3.31927
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Overall
+"
+
+[node name="playerFinishing2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.513079
+anchor_right = 0.864286
+anchor_bottom = 0.616803
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Finishing"
+
+[node name="playerShotPower2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.582846
+anchor_right = 0.864286
+anchor_bottom = 0.636533
+offset_top = 1.52588e-05
+offset_bottom = 1.53169
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "ShPower"
+
+[node name="playerAccurate2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.652614
+anchor_right = 0.864286
+anchor_bottom = 0.7063
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
+offset_bottom = 1.53204
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Accurate"
+
+[node name="playerSpeed2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.722381
+anchor_right = 0.864286
+anchor_bottom = 0.776067
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
+offset_bottom = 1.53204
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Speed"
+
+[node name="playerControll2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.792149
+anchor_right = 0.864286
+anchor_bottom = 0.845836
+offset_bottom = 1.53168
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Ball Ctr"
+
+[node name="playerStamina2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.861916
+anchor_right = 0.864286
+anchor_bottom = 0.915602
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
+offset_bottom = 16.9844
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Stamina"
+
+[node name="playerEnergy2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.339286
+anchor_top = 0.931683
+anchor_right = 0.864286
+anchor_bottom = 1.1087
+offset_left = -6.10352e-05
+offset_right = -6.10352e-05
+offset_bottom = 5.10583
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Energy
+
+"
+
+[node name="playerOverall" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.446023
+anchor_right = 1.04287
+anchor_bottom = 0.549746
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerFinishing" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.515791
+anchor_right = 1.04286
+anchor_bottom = 0.619515
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerShotPower" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.585558
+anchor_right = 1.04286
+anchor_bottom = 0.639245
+offset_top = 1.52588e-05
+offset_bottom = 18.0398
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerAccurate" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.655326
+anchor_right = 1.04286
+anchor_bottom = 0.709012
+offset_bottom = 1.53204
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerSpeed" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.725093
+anchor_right = 1.04286
+anchor_bottom = 0.778779
+offset_bottom = 1.53204
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerControll" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.794861
+anchor_right = 1.04286
+anchor_bottom = 0.848548
+offset_bottom = 1.53168
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerStamina" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.864628
+anchor_right = 1.04286
+anchor_bottom = 0.918314
+offset_bottom = 16.9844
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerEnergy" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.517857
+anchor_top = 0.934395
+anchor_right = 1.04286
+anchor_bottom = 1.09397
+offset_bottom = -3.05176e-05
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerPotential2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.443182
+anchor_right = 1.13214
+anchor_bottom = 0.620199
+offset_left = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = 5.1062
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Potential
+
+"
+
+[node name="playerPower2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.51295
+anchor_right = 1.13214
+anchor_bottom = 0.566636
+offset_left = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = 1.53206
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Power"
+
+[node name="playerBody2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.582717
+anchor_right = 1.13214
+anchor_bottom = 0.636404
+offset_left = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = 1.53168
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Body"
+
+[node name="playerInterception2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.652485
+anchor_right = 1.13214
+anchor_bottom = 0.706171
+offset_left = -3.05176e-05
+offset_top = -1.52588e-05
+offset_right = -6.10352e-05
+offset_bottom = 1.53201
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Intercep"
+
+[node name="playerDefend2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.722252
+anchor_right = 1.13214
+anchor_bottom = 0.775938
+offset_left = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = 1.53204
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Defend"
+
+[node name="playerReflexes2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.79202
+anchor_right = 1.13214
+anchor_bottom = 0.845707
+offset_left = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = 1.53165
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Reflexes"
+
+[node name="playerPenSave2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.861787
+anchor_right = 1.13213
+anchor_bottom = 1.0388
+offset_left = -3.05176e-05
+offset_bottom = 5.10587
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "Save
+
+"
+
+[node name="playerInjuryRate2" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.607143
+anchor_top = 0.931555
+anchor_right = 1.13214
+anchor_bottom = 1.10857
+offset_left = -3.05176e-05
+offset_right = -6.10352e-05
+offset_bottom = 5.10583
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "InjuryR
+
+"
+
+[node name="playerPotential" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.446023
+anchor_right = 1.31071
+anchor_bottom = 0.605598
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerPower" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.515791
+anchor_right = 1.31071
+anchor_bottom = 0.569477
+offset_bottom = 1.53206
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerBody" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.585558
+anchor_right = 1.31071
+anchor_bottom = 0.639245
+offset_bottom = 1.53168
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerInterception" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.655326
+anchor_right = 1.31071
+anchor_bottom = 0.709012
+offset_top = -1.52588e-05
+offset_bottom = 1.53201
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerDefend" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.725093
+anchor_right = 1.31071
+anchor_bottom = 0.778779
+offset_bottom = 1.53204
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerReflexes" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.794861
+anchor_right = 1.31071
+anchor_bottom = 0.848548
+offset_bottom = 1.53165
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerPenSave" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.864628
+anchor_right = 1.3107
+anchor_bottom = 1.0242
+offset_bottom = -3.05176e-05
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="playerInjuryRate" type="Label" parent="ItemList" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.785714
+anchor_top = 0.934396
+anchor_right = 1.31071
+anchor_bottom = 1.09397
+offset_bottom = -3.05176e-05
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 18
+text = "0"
+
+[node name="Finance" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.75
+anchor_top = 0.502415
+anchor_right = 1.0
+anchor_bottom = 0.603865
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = ExtResource("5_07ui0")
+theme_override_styles/hover = ExtResource("5_5jswh")
+theme_override_styles/pressed = ExtResource("5_5jswh")
+theme_override_styles/disabled = ExtResource("5_5jswh")
+theme_override_styles/focus = ExtResource("5_5jswh")
+script = ExtResource("15")
+
+[node name="texturePlayer" type="TextureRect" parent="Finance"]
+layout_mode = 0
+offset_right = 192.0
+offset_bottom = 84.0
+texture = ExtResource("10")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TransferAll" type="Label" parent="Finance" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_right = 96.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WageAll" type="Label" parent="Finance" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -42.0
+offset_right = 96.0
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="Control" parent="."]
+anchors_preset = 0
+anchor_left = 0.75
+anchor_top = 0.608696
+anchor_right = 1.0
+anchor_bottom = 0.961353
+
+[node name="OptionButtonSetFormation" type="OptionButton" parent="Options"]
+custom_minimum_size = Vector2(320, 80)
+layout_mode = 0
+anchor_top = 0.219178
+anchor_right = 1.0
+anchor_bottom = 0.493151
+theme = ExtResource("4")
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = ExtResource("5_5jswh")
+theme_override_styles/normal = ExtResource("5_07ui0")
+theme_override_styles/hover = ExtResource("5_5jswh")
+theme_override_styles/pressed = ExtResource("5_5jswh")
+theme_override_styles/disabled = ExtResource("5_5jswh")
+alignment = 1
+expand_icon = true
+item_count = 5
+selected = 0
+popup/item_0/text = "3-1-2"
+popup/item_0/id = 0
+popup/item_1/text = "3-2-1"
+popup/item_1/id = 1
+popup/item_2/text = "2-2-2"
+popup/item_2/id = 2
+popup/item_3/text = "1-3-2"
+popup/item_3/id = 3
+popup/item_4/text = "0-3-3"
+popup/item_4/id = 4
+
+[node name="OptionButtonSetTatical" type="OptionButton" parent="Options"]
+custom_minimum_size = Vector2(320, 80)
+layout_mode = 0
+anchor_top = 0.712329
+anchor_right = 1.0
+anchor_bottom = 0.986301
+theme = ExtResource("4")
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = ExtResource("5_5jswh")
+theme_override_styles/normal = ExtResource("5_07ui0")
+theme_override_styles/hover = ExtResource("5_5jswh")
+theme_override_styles/pressed = ExtResource("5_5jswh")
+theme_override_styles/disabled = ExtResource("5_5jswh")
+alignment = 1
+expand_icon = true
+item_count = 5
+selected = 0
+popup/item_0/text = "Attack"
+popup/item_0/id = 0
+popup/item_1/text = "Blance"
+popup/item_1/id = 1
+popup/item_2/text = "Defend"
+popup/item_2/id = 2
+popup/item_3/text = "Mid"
+popup/item_3/id = 3
+popup/item_4/text = "HaftSpace"
+popup/item_4/id = 4
+
+[node name="LabelFinance" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 0.75
+anchor_top = 0.425121
+anchor_right = 1.0
+anchor_bottom = 0.502415
+offset_bottom = -3.05176e-05
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 30
+text = "Finance"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelFormation" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 0.75
+anchor_top = 0.608696
+anchor_right = 1.0
+anchor_bottom = 0.68599
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 30
+text = "Formation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelTatical" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 0.75
+anchor_top = 0.782609
+anchor_right = 1.0
+anchor_bottom = 0.859903
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 30
+text = "Tatical"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 136.0
+offset_top = 218.0
+offset_right = 272.0
+offset_bottom = 338.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.00412)
+theme_override_styles/panel = ExtResource("10_7qpu2")
+
+[node name="Label" type="Label" parent="Stats"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 62.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 22
+text = "ATK"
+
+[node name="Label2" type="Label" parent="Stats"]
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -12.0
+offset_right = 62.0
+offset_bottom = 13.0
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 22
+text = "MID"
+
+[node name="Label3" type="Label" parent="Stats"]
+layout_mode = 0
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -32.0
+offset_right = 62.0
+offset_bottom = -7.0
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 22
+text = "DEF"
+
+[node name="ATK" type="Label" parent="Stats"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -56.0
+offset_top = 8.0
+offset_right = -10.0
+offset_bottom = 33.0
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="MID" type="Label" parent="Stats"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -12.0
+offset_right = -10.0
+offset_bottom = 13.0
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="DEF" type="Label" parent="Stats"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -32.0
+offset_right = -10.0
+offset_bottom = -7.0
+theme_override_fonts/font = ExtResource("5_g4oxn")
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="PanelPlayerData" parent="." instance=ExtResource("3")]
+visible = false
+layout_mode = 1
+
+[node name="Disable" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource("15_ghxig")
+
+[node name="ButtonTeamSelect" type="Button" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 164.0
+offset_right = 128.0
+offset_bottom = 260.0
+theme_override_styles/normal = ExtResource("11_3x73h")
+theme_override_styles/hover = ExtResource("12_x4jim")
+theme_override_styles/pressed = ExtResource("12_x4jim")
+theme_override_styles/disabled = ExtResource("12_x4jim")
+theme_override_styles/focus = ExtResource("12_x4jim")
+icon = ExtResource("18")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("12")
+
+[node name="Account" parent="." instance=ExtResource("19")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="ItemList" to="GroupSlots" method="_on_ItemList_pressed"]
+[connection signal="item_selected" from="Options/OptionButtonSetFormation" to="GroupSlots" method="_on_OptionButtonSetFormation_item_selected"]
+[connection signal="pressed" from="ButtonTeamSelect" to="GroupSlots" method="_on_ButtonTeamSelect_pressed"]
+
+[editable path="BGSetup"]

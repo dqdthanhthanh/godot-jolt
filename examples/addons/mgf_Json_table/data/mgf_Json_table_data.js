@@ -1,0 +1,1 @@
+{"maxLoad":12,"path":"user://save/baseData.json"}

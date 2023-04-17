@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvk3jvoi6qdhj"]
+
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIWhite.tres" id="3"]
+[ext_resource type="Script" path="res://MGF Scene/Setup/NotiItem.gd" id="4"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="4_4rlrx"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="6"]
+[ext_resource type="PackedScene" uid="uid://bgus0ka15pe6r" path="res://MGF Scene/Setup/ButtonClose.tscn" id="7"]
+
+[node name="NotiItem" type="Button"]
+custom_minimum_size = Vector2(1000, 100)
+offset_left = 8.0
+offset_right = 1008.0
+offset_bottom = 100.0
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("3")
+theme_override_styles/hover = ExtResource("6")
+theme_override_styles/pressed = ExtResource("6")
+theme_override_styles/disabled = ExtResource("6")
+theme_override_styles/focus = ExtResource("6")
+script = ExtResource("4")
+
+[node name="day" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -313.0
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_4rlrx")
+theme_override_font_sizes/font_size = 25
+text = "19/01/2023"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -313.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_4rlrx")
+theme_override_font_sizes/font_size = 25
+text = "05:00"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = -1.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_4rlrx")
+theme_override_font_sizes/font_size = 45
+text = "Wellcom to MGF"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="info" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 120.0
+offset_top = -44.0
+offset_right = -240.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 0.392157)
+theme_override_fonts/font = ExtResource("4_4rlrx")
+theme_override_font_sizes/font_size = 25
+text = "Tuy nhiên, bàn thắng muộn đó đồng nghĩa với việc đội bóng của Mikel Arteta vẫn dẫn đầu bảng xếp hạng với 8 điểm cách biệt, trong khi đội bóng của Ten Hag vẫn đứng thứ 3 do kém Man City về hiệu số bàn thắng bại.
+
+Và Man United bây giờ sẽ phải cố gắng ngăn Arsenal tiến một bước quan trọng khác tới danh hiệu vào Chủ nhật mà không có Casemiro, lá bùa hộ mệnh của họ. Nhìn chung, một buổi tối không tồi cho Pháo thủ.
+
+David de Gea
+De Gea có thể không phải là một thủ môn toàn diện. Nhưng nói về khả năng cản phá thì có lẽ anh chẳng thua kém ai.
+
+Ngay trước giờ nghỉ giải lao, Odsonne Edouard tung cú sút mà mọi người ở Selhurst Park nghĩ rằng nó sẽ đi vào lưới."
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="ButtonClose" parent="." instance=ExtResource("7")]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -26.0
+offset_right = -16.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[connection signal="pressed" from="." to="." method="_on_NotifiItem_pressed"]
+[connection signal="pressed" from="ButtonClose" to="." method="_on_ButtonClose_pressed"]

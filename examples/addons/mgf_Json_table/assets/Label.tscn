@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="1"]
+
+[node name="Label" type="Label"]
+offset_right = 77.0
+offset_bottom = 14.0
+custom_fonts/font = ExtResource( 1 )
+text = "Unit"
+valign = 1

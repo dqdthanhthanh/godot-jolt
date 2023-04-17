@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/effekseer/src/EffekseerEmitter.gdns" type="Script" id=1]
+[ext_resource path="res://TestScene/TestVFX.gd" type="Script" id=2]
+[ext_resource path="res://Assets3D/VFX/01_Pierre01/Goal_VFX_test.efkefc" type="Resource" id=3]
+
+[sub_resource type="Sky" id=1]
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 10, 10 )
+
+[node name="Scene" type="Node3D"]
+script = ExtResource( 2 )
+
+[node name="EffekseerEmitter" type="Node3D" parent="."]
+transform = Transform3D( -4.37114e-09, 0, 0.1, 0, 0.1, 0, -0.1, 0, -4.37114e-09, 0, 2.01682, 0 )
+script = ExtResource( 1 )
+effect = ExtResource( 3 )
+autoplay = false
+speed = 0.5
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.42721, 8.87345 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource( 3 )

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets2D/Fonts/UI.tres" type="FontFile" id=1]
+[ext_resource path="res://Assets2D/Theme/btnUIN.tres" type="StyleBox" id=2]
+
+
+[node name="TabBar" type="TabBar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 1 )
+custom_styles/tab_fg = ExtResource( 2 )
+custom_styles/button = ExtResource( 2 )
+custom_styles/tab_disabled = ExtResource( 2 )
+custom_styles/tab_bg = ExtResource( 2 )
+custom_styles/button_pressed = ExtResource( 2 )

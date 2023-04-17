@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck37qpc8tdg58"]
+
+[ext_resource type="Script" path="res://addons/mgf_Json_table/assets/MainUI.gd" id="3"]
+[ext_resource type="Script" path="res://addons/mgf_Json_table/data/Data.gd" id="4"]
+
+[node name="DataCreateTable" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3")
+
+[node name="Data" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="GroupFile" type="HBoxContainer" parent="Data"]
+custom_minimum_size = Vector2(1280, 50)
+layout_mode = 2
+
+[node name="Reload" type="Button" parent="Data/GroupFile"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Reload"
+
+[node name="MaxLoad" type="LineEdit" parent="Data/GroupFile"]
+layout_mode = 2
+text = "12"
+expand_to_text_length = true
+
+[node name="DataPathInput" type="LineEdit" parent="Data/GroupFile"]
+layout_mode = 2
+text = "user://save/baseData.json"
+editable = false
+expand_to_text_length = true
+selecting_enabled = false
+
+[node name="LoadData" type="Button" parent="Data/GroupFile"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "LoadData"
+
+[node name="LoadProject" type="Button" parent="Data/GroupFile"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "LoadProject"
+
+[node name="LoadLocal" type="Button" parent="Data/GroupFile"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "LoadLocal"
+
+[node name="Continue" type="Button" parent="Data/GroupFile"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "Continue"
+
+[node name="Groups" type="HBoxContainer" parent="Data/GroupFile"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="Data"]
+custom_minimum_size = Vector2(1280, 550)
+layout_mode = 2
+
+[node name="GroupBtn" type="HBoxContainer" parent="Data"]
+custom_minimum_size = Vector2(1280, 50)
+layout_mode = 2
+alignment = 1
+
+[node name="FileDialog" type="FileDialog" parent="."]
+position = Vector2i(200, 200)
+size = Vector2i(800, 400)
+access = 1
+show_hidden_files = true
+
+[node name="SaveData" type="Node" parent="."]
+script = ExtResource("4")
+
+[connection signal="pressed" from="Data/GroupFile/Reload" to="." method="_on_Reload_pressed"]
+[connection signal="pressed" from="Data/GroupFile/LoadData" to="." method="_on_GameData_pressed"]
+[connection signal="pressed" from="Data/GroupFile/LoadProject" to="." method="_on_LoadProject_pressed"]
+[connection signal="pressed" from="Data/GroupFile/LoadLocal" to="." method="_on_LoadLocal_pressed"]
+[connection signal="pressed" from="Data/GroupFile/Continue" to="." method="_on_Continue_pressed"]
+[connection signal="tab_selected" from="Data/TabContainer" to="." method="_on_TabContainer_tab_selected"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

@@ -1,0 +1,476 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="PackedScene" uid="uid://bgus0ka15pe6r" path="res://MGF Scene/Setup/ButtonClose.tscn" id="1"]
+[ext_resource type="Script" path="res://MGF Scene/Main Game/PlayerInfo.gd" id="2"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGN.tres" id="2_r5gfd"]
+[ext_resource type="Script" path="res://MGF Scene/Main Game/MatchDetail.gd" id="3"]
+[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="3_kvqth"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="3_leai0"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="4_wcatm"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGO.tres" id="6_5oxwv"]
+[ext_resource type="Texture2D" uid="uid://j3mv2607r0ck" path="res://Assets2D/UI/home-2502.png" id="7"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnOp.tres" id="7_kux41"]
+[ext_resource type="Texture2D" uid="uid://bd2iixuaf8tln" path="res://Assets2D/Logo/CB.png" id="9"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCN.tres" id="11_k2g42"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCP.tres" id="12_qu08q"]
+[ext_resource type="PackedScene" uid="uid://fa34mi3trpw8" path="res://MGF Scene/Season/PlayerStats.tscn" id="13"]
+[ext_resource type="PackedScene" uid="uid://bqxpuye666ns1" path="res://MGF Scene/Setup/Account.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://bwvr45cpbu4ht" path="res://MGF Scene/Main Game/PlayerGoals.tscn" id="16"]
+
+[node name="MatchDetail" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-232, -152)
+script = ExtResource("3")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource("2_r5gfd")
+
+[node name="TabBar" type="TabContainer" parent="."]
+process_mode = 3
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/tab_selected = ExtResource("4_wcatm")
+theme_override_styles/tab_unselected = ExtResource("3_kvqth")
+theme_override_styles/tab_disabled = ExtResource("3_kvqth")
+theme_override_styles/panel = ExtResource("3_kvqth")
+theme_override_styles/tabbar_background = ExtResource("6_5oxwv")
+tab_alignment = 1
+
+[node name="MatchDetail" type="TabBar" parent="TabBar"]
+layout_mode = 2
+
+[node name="MatchInfo" type="Panel" parent="TabBar/MatchDetail"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -255.5
+offset_right = 192.0
+offset_bottom = 368.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("7_kux41")
+
+[node name="PlayerInfo" type="Panel" parent="TabBar/MatchDetail/MatchInfo"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -896.0
+offset_top = -438.0
+offset_right = 896.0
+offset_bottom = 322.0
+theme_override_styles/panel = ExtResource("6_5oxwv")
+script = ExtResource("2")
+
+[node name="PlayerA" type="VBoxContainer" parent="TabBar/MatchDetail/MatchInfo/PlayerInfo"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+offset_left = -2.0
+offset_top = 199.0
+offset_right = 698.0
+offset_bottom = 249.0
+scale = Vector2(0.994612, 1.00315)
+theme_override_constants/separation = -7
+metadata/_edit_group_ = true
+
+[node name="Player" parent="TabBar/MatchDetail/MatchInfo/PlayerInfo/PlayerA" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="PlayerB" type="VBoxContainer" parent="TabBar/MatchDetail/MatchInfo/PlayerInfo"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -700.0
+offset_top = 200.0
+offset_bottom = 250.0
+grow_horizontal = 0
+theme_override_constants/separation = -7
+metadata/_edit_group_ = true
+
+[node name="Player" parent="TabBar/MatchDetail/MatchInfo/PlayerInfo/PlayerB" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="mainLabel" type="HBoxContainer" parent="TabBar/MatchDetail/MatchInfo"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -152.0
+offset_top = 48.0
+offset_right = 146.0
+offset_bottom = 136.0
+metadata/_edit_group_ = true
+
+[node name="logoA" type="TextureRect" parent="TabBar/MatchDetail/MatchInfo/mainLabel"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+texture = ExtResource("9")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="goalA" type="Label" parent="TabBar/MatchDetail/MatchInfo/mainLabel"]
+custom_minimum_size = Vector2(30, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 35
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="-l" type="Label" parent="TabBar/MatchDetail/MatchInfo/mainLabel"]
+visible = false
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabBar/MatchDetail/MatchInfo/mainLabel"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 35
+text = "  -  "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="l-" type="Label" parent="TabBar/MatchDetail/MatchInfo/mainLabel"]
+visible = false
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="goalB" type="Label" parent="TabBar/MatchDetail/MatchInfo/mainLabel"]
+custom_minimum_size = Vector2(30, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 35
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="logoB" type="TextureRect" parent="TabBar/MatchDetail/MatchInfo/mainLabel"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+texture = ExtResource("9")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="VBoxContainer" parent="TabBar/MatchDetail/MatchInfo"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -464.0
+theme_override_constants/separation = 10
+metadata/_edit_group_ = true
+
+[node name="teamBall" type="Label" parent="TabBar/MatchDetail/MatchInfo/Label" groups=["labels"]]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 35
+text = "Ball Control"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="teamShot" type="Label" parent="TabBar/MatchDetail/MatchInfo/Label" groups=["labels"]]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 35
+text = "ShotOn"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="teamMiss" type="Label" parent="TabBar/MatchDetail/MatchInfo/Label" groups=["labels"]]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 35
+text = "Miss"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="teamPass" type="Label" parent="TabBar/MatchDetail/MatchInfo/Label" groups=["labels"]]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 35
+text = "Pass"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="teamBlock" type="Label" parent="TabBar/MatchDetail/MatchInfo/Label" groups=["labels"]]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 35
+text = "Defend"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="teamKeeper" type="Label" parent="TabBar/MatchDetail/MatchInfo/Label" groups=["labels"]]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 35
+text = "Saves"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TeamA" type="VBoxContainer" parent="TabBar/MatchDetail/MatchInfo"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -464.0
+offset_right = -256.0
+theme_override_constants/separation = 10
+metadata/_edit_group_ = true
+
+[node name="ball" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamA" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="shot" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamA" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="miss" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamA" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pass" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamA" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="block" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamA" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="save" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamA" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TeamB" type="VBoxContainer" parent="TabBar/MatchDetail/MatchInfo"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+offset_top = -464.0
+offset_bottom = -48.0
+theme_override_constants/separation = 10
+metadata/_edit_group_ = true
+
+[node name="ball" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamB" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="shot" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamB" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="miss" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamB" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pass" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamB" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="block" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamB" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="save" type="Label" parent="TabBar/MatchDetail/MatchInfo/TeamB" groups=["labels"]]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Menu" type="HBoxContainer" parent="TabBar/MatchDetail"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -375.5
+offset_right = 192.0
+offset_bottom = -253.5
+alignment = 1
+
+[node name="LabelBase" type="Label" parent="TabBar/MatchDetail/Menu"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_leai0")
+theme_override_font_sizes/font_size = 60
+text = "Time 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoalA" type="HBoxContainer" parent="TabBar/MatchDetail"]
+layout_mode = 0
+offset_right = 701.0
+offset_bottom = 122.0
+alignment = 2
+
+[node name="PlayerGoals" parent="TabBar/MatchDetail/GoalA" instance=ExtResource("16")]
+layout_mode = 2
+
+[node name="GoalB" type="HBoxContainer" parent="TabBar/MatchDetail"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -701.0
+offset_bottom = 122.0
+
+[node name="ButtonClose" parent="TabBar/MatchDetail" instance=ExtResource("1")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = 248.5
+offset_right = 48.0
+offset_bottom = 344.5
+
+[node name="ButtonHome" type="Button" parent="TabBar/MatchDetail"]
+visible = false
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = 248.5
+offset_right = 48.0
+offset_bottom = 344.5
+theme_override_styles/normal = ExtResource("11_k2g42")
+theme_override_styles/hover = ExtResource("12_qu08q")
+theme_override_styles/pressed = ExtResource("12_qu08q")
+theme_override_styles/disabled = ExtResource("12_qu08q")
+theme_override_styles/focus = ExtResource("12_qu08q")
+icon = ExtResource("7")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Formation" type="TabBar" parent="TabBar"]
+visible = false
+layout_mode = 2
+
+[node name="Settings" type="TabBar" parent="TabBar"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabBar/Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -40.0
+offset_right = 128.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="ButtonExit" parent="TabBar/Settings/VBoxContainer" instance=ExtResource("1")]
+custom_minimum_size = Vector2(256, 80)
+layout_mode = 2
+text = "Quit Match"
+
+[node name="ButtonExit2" parent="TabBar/Settings/VBoxContainer" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(256, 80)
+layout_mode = 2
+text = "Quit Match"
+
+[node name="ButtonExit3" parent="TabBar/Settings/VBoxContainer" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(256, 80)
+layout_mode = 2
+text = "Quit Match"
+
+[node name="ButtonExit4" parent="TabBar/Settings/VBoxContainer" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(256, 80)
+layout_mode = 2
+text = "Quit Match"
+
+[node name="ButtonExit5" parent="TabBar/Settings/VBoxContainer" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(256, 80)
+layout_mode = 2
+text = "Quit Match"
+
+[node name="ButtonExit6" parent="TabBar/Settings/VBoxContainer" instance=ExtResource("1")]
+visible = false
+custom_minimum_size = Vector2(256, 80)
+layout_mode = 2
+text = "Quit Match"
+
+[node name="ButtonClose" parent="." instance=ExtResource("1")]
+layout_mode = 1
+offset_left = -128.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 128.0
+grow_horizontal = 0
+scale = Vector2(1.00274, 1.0029)
+
+[node name="Account" parent="." instance=ExtResource("15")]
+visible = false
+layout_mode = 1

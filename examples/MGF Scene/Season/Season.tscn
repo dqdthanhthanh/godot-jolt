@@ -1,0 +1,349 @@
+[gd_scene load_steps=24 format=3 uid="uid://b25gcd5p0r363"]
+
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/Account.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://b4fjy2aevfiwl" path="res://MGF Scene/Setup/ButtonBase.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://du3nkd40esve6" path="res://MGF Scene/Setup/BGSetup.tscn" id="3"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGO.tres" id="3_fwlg6"]
+[ext_resource type="PackedScene" uid="uid://kl2dbwn0ckt0" path="res://MGF Scene/Season/SeasonMatch.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cmsyvb5wbfi" path="res://MGF Scene/Setup/HomeButton.tscn" id="5"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnOp.tres" id="7"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Season/MatchInfo.tscn" id="8"]
+[ext_resource type="Texture2D" uid="uid://dm1fyf0ger16e" path="res://Assets2D/UI/iconStats.png" id="9"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="9_ju5ps"]
+[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="9_kfn8v"]
+[ext_resource type="PackedScene" path="res://MGF Scene/ConfigController/TeamShow.tscn" id="10"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="10_gsq13"]
+[ext_resource type="PackedScene" uid="uid://cknlnd6t3iuqn" path="res://MGF Scene/RadarChart/RadarChartStats.tscn" id="11"]
+[ext_resource type="Texture2D" uid="uid://bmsi7bybrfwll" path="res://Assets2D/UI/iconTest.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://da16yrh6273dc" path="res://Assets2D/UI/iconBall.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://cnyefrvfjakcl" path="res://Assets2D/UI/user.png" id="14"]
+[ext_resource type="Script" path="res://MGF Scene/Season/Season.gd" id="15"]
+[ext_resource type="Texture2D" uid="uid://506c0nmvksoh" path="res://Assets2D/UI/iconSettings.png" id="16"]
+[ext_resource type="Texture2D" uid="uid://dpmsiiyp00t02" path="res://Assets2D/UI/iconApply.png" id="17"]
+[ext_resource type="PackedScene" uid="uid://eevcsj25pesi" path="res://MGF Scene/Season/SeasonTab.tscn" id="18"]
+[ext_resource type="Script" path="res://addons/mgf_tools/UIAutoScale.gd" id="21"]
+[ext_resource type="PackedScene" uid="uid://bqutqci0l73xf" path="res://MGF Scene/ConfigController/TeamSelectionManager.tscn" id="29"]
+
+[node name="Season" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15")
+
+[node name="BGSetup" parent="." instance=ExtResource("3")]
+layout_mode = 1
+
+[node name="TeamSelect" type="Control" parent="."]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LabelBase" type="Label" parent="TeamSelect"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 48.0
+offset_right = 204.0
+offset_bottom = 112.0
+theme_override_fonts/font = ExtResource("9_ju5ps")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = ExtResource("3_fwlg6")
+text = "Choose your team"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TeamSM" parent="TeamSelect" instance=ExtResource("29")]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -256.0
+offset_right = 216.0
+offset_bottom = 256.0
+
+[node name="TeamStats" type="Panel" parent="TeamSelect"]
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 224.0
+offset_top = 26.0
+offset_right = 480.0
+offset_bottom = 154.0
+theme_override_styles/panel = ExtResource("9_kfn8v")
+
+[node name="TeamAStats" type="ItemList" parent="TeamSelect/TeamStats"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -52.0
+offset_right = 96.0
+offset_bottom = 52.0
+select_mode = 1
+max_columns = 4
+
+[node name="teamOve" type="Label" parent="TeamSelect/TeamStats/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 8.0
+offset_right = 240.0
+offset_bottom = 47.0
+text = "0"
+
+[node name="teamAtk" type="Label" parent="TeamSelect/TeamStats/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 32.0
+offset_right = 240.0
+offset_bottom = 71.0
+text = "0
+"
+
+[node name="teamMid" type="Label" parent="TeamSelect/TeamStats/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 56.0
+offset_right = 240.0
+offset_bottom = 95.0
+text = "0
+"
+
+[node name="teamDef" type="Label" parent="TeamSelect/TeamStats/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 80.0
+offset_right = 240.0
+offset_bottom = 119.0
+text = "0
+"
+
+[node name="teamOve2" type="Label" parent="TeamSelect/TeamStats/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 184.0
+offset_bottom = 47.0
+text = "AVG"
+
+[node name="teamDef2" type="Label" parent="TeamSelect/TeamStats/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 184.0
+offset_bottom = 71.0
+text = "ATK
+"
+
+[node name="teamMid2" type="Label" parent="TeamSelect/TeamStats/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 56.0
+offset_right = 184.0
+offset_bottom = 116.0
+text = "MID
+
+"
+
+[node name="teamFor2" type="Label" parent="TeamSelect/TeamStats/TeamAStats" groups=["labels"]]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = 184.0
+offset_bottom = 140.0
+text = "DEF
+
+"
+
+[node name="Teamselect1" parent="TeamSelect" instance=ExtResource("10")]
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 256.0
+offset_top = -222.0
+offset_right = 448.0
+offset_bottom = -38.0
+theme_override_styles/normal = ExtResource("9_kfn8v")
+theme_override_styles/hover = ExtResource("10_gsq13")
+theme_override_styles/pressed = ExtResource("10_gsq13")
+theme_override_styles/disabled = ExtResource("10_gsq13")
+theme_override_styles/focus = ExtResource("10_gsq13")
+
+[node name="ButtonTeamApply" parent="TeamSelect" instance=ExtResource("2")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -152.0
+offset_top = -140.0
+offset_right = 146.199
+offset_bottom = -57.2
+theme_override_fonts/font = ExtResource("9_ju5ps")
+theme_override_font_sizes/font_size = 30
+icon = ExtResource("17")
+icon_alignment = 0
+expand_icon = true
+
+[node name="RadarChartStats" parent="TeamSelect" instance=ExtResource("11")]
+layout_mode = 1
+anchors_preset = 4
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 368.0
+offset_top = 52.0
+offset_right = 446.0
+offset_bottom = 127.0
+grow_vertical = 2
+
+[node name="SeasonMain" type="Panel" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 512.0
+offset_top = 24.0
+offset_right = -512.0
+offset_bottom = -20.0
+theme_override_styles/panel = ExtResource("7")
+
+[node name="LabelBase" type="Label" parent="SeasonMain"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -384.0
+offset_right = 384.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("9_ju5ps")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("9_kfn8v")
+text = "SeasonName"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+theme_override_styles/tab_selected = ExtResource("3_fwlg6")
+theme_override_styles/tab_unselected = ExtResource("3_fwlg6")
+theme_override_styles/tab_disabled = ExtResource("3_fwlg6")
+theme_override_styles/panel = ExtResource("3_fwlg6")
+theme_override_styles/tabbar_background = ExtResource("3_fwlg6")
+tabs_visible = false
+
+[node name="SeasonTab" parent="TabContainer" instance=ExtResource("18")]
+layout_mode = 2
+
+[node name="MainBtn" type="Panel" parent="."]
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 152.0
+offset_top = -318.0
+offset_right = 480.0
+offset_bottom = 394.0
+theme_override_styles/panel = ExtResource("7")
+
+[node name="MainBtn" type="VBoxContainer" parent="MainBtn"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 16.0
+theme_override_constants/separation = 10
+script = ExtResource("21")
+_size = 680
+separation = 10
+
+[node name="BtnManager" parent="MainBtn/MainBtn" instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_ju5ps")
+theme_override_font_sizes/font_size = 25
+text = "Manager  "
+icon = ExtResource("14")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnNextMatch" parent="MainBtn/MainBtn" instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_ju5ps")
+theme_override_font_sizes/font_size = 25
+text = "Next Match  "
+icon = ExtResource("13")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnLeague" parent="MainBtn/MainBtn" instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_ju5ps")
+theme_override_font_sizes/font_size = 25
+text = "Players  "
+icon = ExtResource("12")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnMarket" parent="MainBtn/MainBtn" instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_ju5ps")
+theme_override_font_sizes/font_size = 25
+text = "Market  "
+icon = ExtResource("9")
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnSettings" parent="MainBtn/MainBtn" instance=ExtResource("2")]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_ju5ps")
+theme_override_font_sizes/font_size = 25
+text = "Settings  "
+icon = ExtResource("16")
+icon_alignment = 0
+expand_icon = true
+
+[node name="MatchInfo" parent="." instance=ExtResource("8")]
+visible = false
+layout_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Home" parent="." instance=ExtResource("5")]
+layout_mode = 1
+grow_horizontal = 0
+
+[node name="SeasonMatch" parent="." instance=ExtResource("4")]
+visible = false
+layout_mode = 1
+
+[node name="Account" parent="." instance=ExtResource("1")]
+visible = false
+layout_mode = 1
+
+[node name="Disable" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[connection signal="pressed" from="TeamSelect/Teamselect1" to="." method="_on_Teamselect1_pressed"]
+[connection signal="pressed" from="TeamSelect/ButtonTeamApply" to="." method="_on_ButtonTeamApply_pressed"]
+[connection signal="pressed" from="MainBtn/MainBtn/BtnManager" to="." method="_on_BtnManager_pressed"]
+[connection signal="pressed" from="MainBtn/MainBtn/BtnNextMatch" to="." method="_on_BtnNextMatch_pressed"]
+[connection signal="pressed" from="MainBtn/MainBtn/BtnLeague" to="." method="_on_BtnLeague_pressed"]
+[connection signal="pressed" from="MainBtn/MainBtn/BtnMarket" to="." method="_on_BtnMarket_pressed"]
+[connection signal="pressed" from="MainBtn/MainBtn/BtnSettings" to="." method="_on_BtnSettings_pressed"]

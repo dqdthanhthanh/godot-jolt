@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://csk253rpteatb"]
+
+[ext_resource type="Script" path="res://scripts/WorldLight.gd" id="1"]
+
+[sub_resource type="Environment" id="Environment_0hhs8"]
+
+[node name="WorldLight" type="Node3D"]
+script = ExtResource("1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0hhs8")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.855221, 0.397141, -0.332979, -0.15522, 0.416721, 0.895685, 0.494473, 0.817693, -0.294744, 0, 3.42781, 0.0541763)
+shadow_enabled = true
