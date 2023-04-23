@@ -11,23 +11,23 @@
 
 namespace {
 
-constexpr double GDJOLT_SPACE_CONTACT_RECYCLE_RADIUS = 0.01;
-constexpr double GDJOLT_SPACE_CONTACT_MAX_SEPARATION = 0.05;
-constexpr double GDJOLT_SPACE_CONTACT_MAX_ALLOWED_PENETRATION = 0.01;
-constexpr double GDJOLT_SPACE_CONTACT_DEFAULT_BIAS = 0.8;
-constexpr double GDJOLT_SPACE_SLEEP_THRESHOLD_LINEAR = 0.1;
-constexpr double GDJOLT_SPACE_SLEEP_THRESHOLD_ANGULAR = 8.0 * Math_PI / 180;
-constexpr double GDJOLT_SPACE_SOLVER_ITERATIONS = 8;
+constexpr double DEFAULT_CONTACT_RECYCLE_RADIUS = 0.01;
+constexpr double DEFAULT_CONTACT_MAX_SEPARATION = 0.05;
+constexpr double DEFAULT_CONTACT_MAX_ALLOWED_PENETRATION = 0.01;
+constexpr double DEFAULT_CONTACT_DEFAULT_BIAS = 0.8;
+constexpr double DEFAULT_SLEEP_THRESHOLD_LINEAR = 0.1;
+constexpr double DEFAULT_SLEEP_THRESHOLD_ANGULAR = 8.0 * Math_PI / 180;
+constexpr double DEFAULT_SOLVER_ITERATIONS = 8;
 
 } // namespace
 
 JoltSpace3D::JoltSpace3D(JPH::JobSystem* p_job_system)
-	: job_system(p_job_system)
+	: body_accessor(this)
+	, job_system(p_job_system)
 	, temp_allocator(new JoltTempAllocator())
 	, layer_mapper(new JoltLayerMapper())
-	, contact_listener(new JoltContactListener(this))
-	, physics_system(new JPH::PhysicsSystem())
-	, body_accessor(this) {
+	, contact_listener(new JoltContactListener3D(this))
+	, physics_system(new JPH::PhysicsSystem()) {
 	physics_system->Init(
 		(JPH::uint)JoltProjectSettings::get_max_bodies(),
 		0,
@@ -141,28 +141,28 @@ void JoltSpace3D::call_queries() {
 double JoltSpace3D::get_param(PhysicsServer3D::SpaceParameter p_param) const {
 	switch (p_param) {
 		case PhysicsServer3D::SPACE_PARAM_CONTACT_RECYCLE_RADIUS: {
-			return GDJOLT_SPACE_CONTACT_RECYCLE_RADIUS;
+			return DEFAULT_CONTACT_RECYCLE_RADIUS;
 		}
 		case PhysicsServer3D::SPACE_PARAM_CONTACT_MAX_SEPARATION: {
-			return GDJOLT_SPACE_CONTACT_MAX_SEPARATION;
+			return DEFAULT_CONTACT_MAX_SEPARATION;
 		}
 		case PhysicsServer3D::SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION: {
-			return GDJOLT_SPACE_CONTACT_MAX_ALLOWED_PENETRATION;
+			return DEFAULT_CONTACT_MAX_ALLOWED_PENETRATION;
 		}
 		case PhysicsServer3D::SPACE_PARAM_CONTACT_DEFAULT_BIAS: {
-			return GDJOLT_SPACE_CONTACT_DEFAULT_BIAS;
+			return DEFAULT_CONTACT_DEFAULT_BIAS;
 		}
 		case PhysicsServer3D::SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD: {
-			return GDJOLT_SPACE_SLEEP_THRESHOLD_LINEAR;
+			return DEFAULT_SLEEP_THRESHOLD_LINEAR;
 		}
 		case PhysicsServer3D::SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD: {
-			return GDJOLT_SPACE_SLEEP_THRESHOLD_ANGULAR;
+			return DEFAULT_SLEEP_THRESHOLD_ANGULAR;
 		}
 		case PhysicsServer3D::SPACE_PARAM_BODY_TIME_TO_SLEEP: {
 			return JoltProjectSettings::get_sleep_time_threshold();
 		}
 		case PhysicsServer3D::SPACE_PARAM_SOLVER_ITERATIONS: {
-			return GDJOLT_SPACE_SOLVER_ITERATIONS;
+			return DEFAULT_SOLVER_ITERATIONS;
 		}
 		default: {
 			ERR_FAIL_D_MSG(vformat("Unhandled space parameter: '%d'", p_param));
@@ -229,40 +229,49 @@ void JoltSpace3D::set_param(
 	}
 }
 
-JPH::BodyInterface& JoltSpace3D::get_body_iface(bool p_locked) {
+JPH::BodyInterface& JoltSpace3D::get_body_iface([[maybe_unused]] bool p_locked) {
+#ifndef GDJ_CONFIG_DISTRIBUTION
 	if (p_locked && body_accessor.not_acquired()) {
 		return physics_system->GetBodyInterface();
-	} else {
-		return physics_system->GetBodyInterfaceNoLock();
 	}
+#endif // GDJ_CONFIG_DISTRIBUTION
+
+	return physics_system->GetBodyInterfaceNoLock();
 }
 
-const JPH::BodyInterface& JoltSpace3D::get_body_iface(bool p_locked) const {
+const JPH::BodyInterface& JoltSpace3D::get_body_iface([[maybe_unused]] bool p_locked) const {
+#ifndef GDJ_CONFIG_DISTRIBUTION
 	if (p_locked && body_accessor.not_acquired()) {
 		return physics_system->GetBodyInterface();
-	} else {
-		return physics_system->GetBodyInterfaceNoLock();
 	}
+#endif // GDJ_CONFIG_DISTRIBUTION
+
+	return physics_system->GetBodyInterfaceNoLock();
 }
 
-const JPH::BodyLockInterface& JoltSpace3D::get_lock_iface(bool p_locked) const {
+const JPH::BodyLockInterface& JoltSpace3D::get_lock_iface([[maybe_unused]] bool p_locked) const {
+#ifndef GDJ_CONFIG_DISTRIBUTION
 	if (p_locked && body_accessor.not_acquired()) {
 		return physics_system->GetBodyLockInterface();
-	} else {
-		return physics_system->GetBodyLockInterfaceNoLock();
 	}
+#endif // GDJ_CONFIG_DISTRIBUTION
+
+	return physics_system->GetBodyLockInterfaceNoLock();
 }
 
 const JPH::BroadPhaseQuery& JoltSpace3D::get_broad_phase_query() const {
 	return physics_system->GetBroadPhaseQuery();
 }
 
-const JPH::NarrowPhaseQuery& JoltSpace3D::get_narrow_phase_query(bool p_locked) const {
+const JPH::NarrowPhaseQuery& JoltSpace3D::get_narrow_phase_query([[maybe_unused]] bool p_locked
+) const {
+#ifndef GDJ_CONFIG_DISTRIBUTION
 	if (p_locked && body_accessor.not_acquired()) {
 		return physics_system->GetNarrowPhaseQuery();
-	} else {
-		return physics_system->GetNarrowPhaseQueryNoLock();
 	}
+#endif // GDJ_CONFIG_DISTRIBUTION
+
+	return physics_system->GetNarrowPhaseQueryNoLock();
 }
 
 JPH::ObjectLayer JoltSpace3D::map_to_object_layer(
@@ -345,7 +354,7 @@ void JoltSpace3D::remove_joint(JoltJoint3D* p_joint) {
 	remove_joint(p_joint->get_jolt_ref());
 }
 
-#ifdef DEBUG_ENABLED
+#ifdef GDJ_CONFIG_EDITOR
 
 const PackedVector3Array& JoltSpace3D::get_debug_contacts() const {
 	return contact_listener->get_debug_contacts();
@@ -363,7 +372,7 @@ void JoltSpace3D::set_max_debug_contacts(int32_t p_count) {
 	contact_listener->set_max_debug_contacts(p_count);
 }
 
-#endif // DEBUG_ENABLED
+#endif // GDJ_CONFIG_EDITOR
 
 void JoltSpace3D::pre_step(float p_step) {
 	body_accessor.acquire_all(true);

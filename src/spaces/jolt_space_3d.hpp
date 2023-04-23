@@ -4,7 +4,7 @@
 
 class JoltArea3D;
 class JoltCollisionObject3D;
-class JoltContactListener;
+class JoltContactListener3D;
 class JoltJoint3D;
 class JoltLayerMapper;
 class JoltPhysicsDirectSpaceState3D;
@@ -88,7 +88,7 @@ public:
 
 	void remove_joint(JoltJoint3D* p_joint);
 
-#ifdef DEBUG_ENABLED
+#ifdef GDJ_CONFIG_EDITOR
 	const PackedVector3Array& get_debug_contacts() const;
 
 	int32_t get_debug_contact_count() const;
@@ -96,12 +96,14 @@ public:
 	int32_t get_max_debug_contacts() const;
 
 	void set_max_debug_contacts(int32_t p_count);
-#endif // DEBUG_ENABLED
+#endif // GDJ_CONFIG_EDITOR
 
 private:
 	void pre_step(float p_step);
 
 	void post_step(float p_step);
+
+	JoltBodyWriter3D body_accessor;
 
 	RID rid;
 
@@ -111,11 +113,9 @@ private:
 
 	JoltLayerMapper* layer_mapper = nullptr;
 
-	JoltContactListener* contact_listener = nullptr;
+	JoltContactListener3D* contact_listener = nullptr;
 
 	JPH::PhysicsSystem* physics_system = nullptr;
-
-	JoltBodyWriter3D body_accessor;
 
 	JoltPhysicsDirectSpaceState3D* direct_state = nullptr;
 

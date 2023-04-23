@@ -1,49 +1,9 @@
 include_guard()
 
 include(ExternalProject)
+include(GodotJoltUtilities)
 
-function(cmake_args_to_script variable args)
-	set(arg_pattern [[^(.+)=(.*)$]])
-
-	set(script_content "")
-	set(script_line "")
-	set(arg_rest "")
-
-	foreach(element IN LISTS args)
-		if(element MATCHES [[^-D(.*)]])
-			set(arg ${CMAKE_MATCH_1})
-
-			if(NOT script_line STREQUAL "")
-				string(APPEND script_line "${arg_rest}\" CACHE INTERNAL \"\")")
-				string(APPEND script_content "${script_line}\n")
-
-				set(script_line "")
-				set(arg_rest "")
-			endif()
-
-			if(arg MATCHES ${arg_pattern})
-				set(arg_name ${CMAKE_MATCH_1})
-				set(arg_value ${CMAKE_MATCH_2})
-				set(script_line "set(${arg_name} \"${arg_value}")
-			endif()
-		else()
-			string(APPEND arg_rest "\\\;${element}")
-		endif()
-	endforeach()
-
-	if(NOT script_line STREQUAL "")
-		string(APPEND script_line "${arg_rest}\" CACHE INTERNAL \"\")")
-		string(APPEND script_content "${script_line}\n")
-	endif()
-
-	set(${variable} ${script_content} PARENT_SCOPE)
-endfunction()
-
-macro(escape_separator variable output_variable)
-	string(REPLACE ";" $<SEMICOLON> ${output_variable} "${${variable}}")
-endmacro()
-
-function(GodotJoltExternalLibrary_Add library_name library_configs)
+function(gdj_add_external_library library_name library_configs)
 	# Declare our initial arguments
 
 	set(one_value_args
@@ -62,7 +22,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 
 	# Add a `LIBRARY_CONFIG_<CONFIG>` argument for each of the project's configurations
 
-	foreach(project_config IN LISTS GDJOLT_CONFIGURATIONS)
+	foreach(project_config IN LISTS GDJ_CONFIGURATIONS)
 		string(TOUPPER ${project_config} project_config_upper)
 		list(APPEND one_value_args LIBRARY_CONFIG_${project_config_upper})
 	endforeach()
@@ -129,7 +89,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 	# Set up mappings between configurations. For library config `Foo` that maps to project config
 	# `Bar` we get `set(project_config_Foo Bar)` and `set(library_config_Bar Foo)`.
 
-	foreach(project_config IN LISTS GDJOLT_CONFIGURATIONS)
+	foreach(project_config IN LISTS GDJ_CONFIGURATIONS)
 		string(TOUPPER ${project_config} project_config_upper)
 		set(library_config ${arg_LIBRARY_CONFIG_${project_config_upper}})
 		set(library_config_${project_config} ${library_config})
@@ -141,7 +101,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 
 	set(library_config_current "")
 
-	foreach(project_config IN LISTS GDJOLT_CONFIGURATIONS)
+	foreach(project_config IN LISTS GDJ_CONFIGURATIONS)
 		set(condition $<CONFIG:${project_config}>)
 		set(library_config ${library_config_${project_config}})
 		string(APPEND library_config_current $<${condition}:${library_config}>)
@@ -152,7 +112,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 
 	get_property(is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 
-	foreach(project_config IN LISTS GDJOLT_CONFIGURATIONS)
+	foreach(project_config IN LISTS GDJ_CONFIGURATIONS)
 		if(is_multi_config)
 			set(library_config ${library_config_${project_config}})
 			set(output_dir_${project_config} ${binary_dir}/${library_config})
@@ -173,7 +133,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 	# Set up the output names. For library config `Foo` that map to project config `Bar` we get
 	# `set(output_name_Bar ${arg_OUTPUT_NAME_FOO})`.
 
-	foreach(project_config IN LISTS GDJOLT_CONFIGURATIONS)
+	foreach(project_config IN LISTS GDJ_CONFIGURATIONS)
 		set(library_config ${library_config_${project_config}})
 		string(TOUPPER ${library_config} library_config_upper)
 		string(CONCAT output_name_${project_config}
@@ -188,7 +148,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 
 	set(output_name_current "")
 
-	foreach(project_config IN LISTS GDJOLT_CONFIGURATIONS)
+	foreach(project_config IN LISTS GDJ_CONFIGURATIONS)
 		set(condition $<CONFIG:${project_config}>)
 		set(output_name ${output_name_${project_config}})
 		string(APPEND output_name_current $<${condition}:${output_name}>)
@@ -197,7 +157,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 	# Set up the CMake arguments, most of which go through an "initial cache file" in order to defer
 	# evaluation of generator expressions to the external project
 
-	set(use_static_crt $<BOOL:${GDJOLT_STATIC_RUNTIME_LIBRARY}>)
+	set(use_static_crt $<BOOL:${GDJ_STATIC_RUNTIME_LIBRARY}>)
 	set(msvcrt_debug $<$<CONFIG:${library_config_Debug},${library_config_EditorDebug}>:Debug>)
 	set(msvcrt_dll $<$<NOT:${use_static_crt}>:DLL>)
 	set(msvcrt MultiThreaded${msvcrt_debug}${msvcrt_dll})
@@ -223,6 +183,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 		-DCMAKE_POLICY_DEFAULT_CMP0069=NEW # Allows use of INTERPROCEDURAL_OPTIMIZATION
 		-DCMAKE_POLICY_DEFAULT_CMP0091=NEW # Allows use of MSVC_RUNTIME_LIBRARY
 		-DCMAKE_MSVC_RUNTIME_LIBRARY=${msvcrt}
+		-DCMAKE_CXX_VISIBILITY_PRESET=hidden
 		${log_level_arg}
 		${arg_CMAKE_CACHE_ARGS}
 	)
@@ -243,7 +204,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 	endif()
 
 	set(cache_file ${tmp_dir}/${library_name}-cache.cmake)
-	cmake_args_to_script(cache_file_content "${cmake_cache_args}")
+	gdj_args_to_script(cache_file_content "${cmake_cache_args}")
 	file(CONFIGURE OUTPUT ${cache_file} CONTENT ${cache_file_content})
 
 	# We pass CMAKE_BUILD_TYPE through the command-line like normal since we need its generator
@@ -326,8 +287,8 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 
 	# Set up the target properties
 
-	escape_separator(library_configs library_configs_)
-	escape_separator(arg_INCLUDE_DIRECTORIES include_directories_)
+	gdj_escape_separator(library_configs library_configs_)
+	gdj_escape_separator(arg_INCLUDE_DIRECTORIES include_directories_)
 
 	set(target_properties
 		IMPORTED_LINK_INTERFACE_LANGUAGES ${arg_LANGUAGE}
@@ -339,7 +300,7 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 
 	set(compile_definitions ${arg_COMPILE_DEFINITIONS})
 
-	foreach(project_config IN LISTS GDJOLT_CONFIGURATIONS)
+	foreach(project_config IN LISTS GDJ_CONFIGURATIONS)
 		set(library_config ${library_config_${project_config}})
 		string(TOUPPER ${library_config} library_config_upper)
 		set(condition $<CONFIG:${project_config}>)
@@ -356,15 +317,15 @@ function(GodotJoltExternalLibrary_Add library_name library_configs)
 	string(MAKE_C_IDENTIFIER ${library_name} library_name_identifier)
 	string(TOUPPER ${library_name_identifier} library_name_identifier)
 	string(SUBSTRING ${arg_GIT_COMMIT} 0 10 short_commit)
-	list(APPEND compile_definitions GDJOLT_EXTERNAL_${library_name_identifier}=${short_commit})
+	list(APPEND compile_definitions GDJ_EXTERNAL_${library_name_identifier}=${short_commit})
 
-	escape_separator(compile_definitions compile_definitions_)
+	gdj_escape_separator(compile_definitions compile_definitions_)
 	list(APPEND target_properties INTERFACE_COMPILE_DEFINITIONS "${compile_definitions_}")
 
 	# Add the target property that maps library configurations to project configurations. For
 	# project config `Foo` that maps to library config `Bar` we get `MAP_IMPORTED_CONFIG_FOO Bar`.
 
-	foreach(project_config IN LISTS GDJOLT_CONFIGURATIONS)
+	foreach(project_config IN LISTS GDJ_CONFIGURATIONS)
 		string(TOUPPER ${project_config} project_config_upper)
 		set(library_config ${library_config_${project_config}})
 		list(APPEND target_properties MAP_IMPORTED_CONFIG_${project_config_upper} ${library_config})

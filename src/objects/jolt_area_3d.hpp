@@ -36,15 +36,15 @@ class JoltArea3D final : public JoltCollisionObject3D {
 	};
 
 	struct Overlap {
-		ObjectID instance_id;
-
-		RID rid;
-
-		InlineVector<ShapeIndexPair, 1> pending_removed;
+		HashMap<ShapeIDPair, ShapeIndexPair, ShapeIDPair> shape_pairs;
 
 		InlineVector<ShapeIndexPair, 1> pending_added;
 
-		HashMap<ShapeIDPair, ShapeIndexPair, ShapeIDPair> shape_pairs;
+		InlineVector<ShapeIndexPair, 1> pending_removed;
+
+		RID rid;
+
+		ObjectID instance_id;
 	};
 
 	using OverlapsById = HashMap<JPH::BodyID, Overlap, BodyIDHasher>;
@@ -159,22 +159,6 @@ private:
 
 	void create_in_space() override;
 
-	void space_changing(bool p_lock = true) override;
-
-	void body_monitoring_changed();
-
-	void area_monitoring_changed();
-
-	void monitorable_changed(bool p_lock = true);
-
-	void force_bodies_entered();
-
-	void force_bodies_exited(bool p_remove);
-
-	void force_areas_entered();
-
-	void force_areas_exited(bool p_remove);
-
 	void add_shape_pair(
 		Overlap& p_overlap,
 		const JPH::BodyID& p_body_id,
@@ -203,9 +187,31 @@ private:
 
 	void notify_body_exited(const JPH::BodyID& p_body_id, bool p_lock = true);
 
-	bool monitorable = false;
+	void force_bodies_entered();
 
-	bool point_gravity = false;
+	void force_bodies_exited(bool p_remove, bool p_lock = true);
+
+	void force_areas_entered();
+
+	void force_areas_exited(bool p_remove, bool p_lock = true);
+
+	void space_changing(bool p_lock = true) override;
+
+	void body_monitoring_changed();
+
+	void area_monitoring_changed();
+
+	void monitorable_changed(bool p_lock = true);
+
+	OverlapsById bodies_by_id;
+
+	OverlapsById areas_by_id;
+
+	Vector3 gravity_vector = {0, -1, 0};
+
+	Callable body_monitor_callback;
+
+	Callable area_monitor_callback;
 
 	float priority = 0.0f;
 
@@ -223,13 +229,7 @@ private:
 
 	OverrideMode angular_damp_mode = PhysicsServer3D::AREA_SPACE_OVERRIDE_DISABLED;
 
-	Vector3 gravity_vector = {0, -1, 0};
+	bool monitorable = false;
 
-	Callable body_monitor_callback;
-
-	Callable area_monitor_callback;
-
-	OverlapsById bodies_by_id;
-
-	OverlapsById areas_by_id;
+	bool point_gravity = false;
 };

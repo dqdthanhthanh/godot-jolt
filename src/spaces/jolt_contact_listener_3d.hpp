@@ -3,7 +3,7 @@
 class JoltCollisionObject3D;
 class JoltSpace3D;
 
-class JoltContactListener final : public JPH::ContactListener {
+class JoltContactListener3D final : public JPH::ContactListener {
 	using Mutex = std::mutex;
 
 	using MutexLock = std::unique_lock<Mutex>;
@@ -53,7 +53,7 @@ class JoltContactListener final : public JPH::ContactListener {
 	using ManifoldsByShapePair = HashMap<JPH::SubShapeIDPair, Manifold, ShapePairHasher>;
 
 public:
-	explicit JoltContactListener(JoltSpace3D* p_space)
+	explicit JoltContactListener3D(JoltSpace3D* p_space)
 		: space(p_space) { }
 
 	void listen_for(JoltCollisionObject3D* p_object);
@@ -62,7 +62,7 @@ public:
 
 	void post_step();
 
-#ifdef DEBUG_ENABLED
+#ifdef GDJ_CONFIG_EDITOR
 	const PackedVector3Array& get_debug_contacts() const { return debug_contacts; }
 
 	int32_t get_debug_contact_count() const { return debug_contact_count; }
@@ -70,7 +70,7 @@ public:
 	int32_t get_max_debug_contacts() const { return (int32_t)debug_contacts.size(); }
 
 	void set_max_debug_contacts(int32_t p_count) { debug_contacts.resize(p_count); }
-#endif // DEBUG_ENABLED
+#endif // GDJ_CONFIG_EDITOR
 
 private:
 	void OnContactAdded(
@@ -106,17 +106,13 @@ private:
 
 	void flush_area_exits();
 
-#ifdef DEBUG_ENABLED
+#ifdef GDJ_CONFIG_EDITOR
 	void add_debug_contacts(const JPH::ContactManifold& p_manifold);
-#endif // DEBUG_ENABLED
-
-	JoltSpace3D* space = nullptr;
-
-	Mutex write_mutex;
-
-	BodyIDs listening_for;
+#endif // GDJ_CONFIG_EDITOR
 
 	ManifoldsByShapePair manifolds_by_shape_pair;
+
+	BodyIDs listening_for;
 
 	Overlaps area_overlaps;
 
@@ -124,9 +120,13 @@ private:
 
 	Overlaps area_exits;
 
-#ifdef DEBUG_ENABLED
+	Mutex write_mutex;
+
+	JoltSpace3D* space = nullptr;
+
+#ifdef GDJ_CONFIG_EDITOR
 	PackedVector3Array debug_contacts;
 
 	std::atomic<int32_t> debug_contact_count = 0;
-#endif // DEBUG_ENABLED
+#endif // GDJ_CONFIG_EDITOR
 };

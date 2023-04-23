@@ -6,11 +6,11 @@
 
 namespace {
 
-constexpr double GDJOLT_WIND_FORCE_MAGNITUDE = 0.0;
-constexpr double GDJOLT_WIND_ATTENUATION_FACTOR = 0.0;
+constexpr double DEFAULT_WIND_FORCE_MAGNITUDE = 0.0;
+constexpr double DEFAULT_WIND_ATTENUATION_FACTOR = 0.0;
 
-const Vector3 GDJOLT_WIND_SOURCE = {};
-const Vector3 GDJOLT_WIND_DIRECTION = {};
+const Vector3 DEFAULT_WIND_SOURCE = {};
+const Vector3 DEFAULT_WIND_DIRECTION = {};
 
 } // namespace
 
@@ -47,16 +47,16 @@ Variant JoltArea3D::get_param(PhysicsServer3D::AreaParameter p_param) const {
 			return get_priority();
 		}
 		case PhysicsServer3D::AREA_PARAM_WIND_FORCE_MAGNITUDE: {
-			return GDJOLT_WIND_FORCE_MAGNITUDE;
+			return DEFAULT_WIND_FORCE_MAGNITUDE;
 		}
 		case PhysicsServer3D::AREA_PARAM_WIND_SOURCE: {
-			return GDJOLT_WIND_SOURCE;
+			return DEFAULT_WIND_SOURCE;
 		}
 		case PhysicsServer3D::AREA_PARAM_WIND_DIRECTION: {
-			return GDJOLT_WIND_DIRECTION;
+			return DEFAULT_WIND_DIRECTION;
 		}
 		case PhysicsServer3D::AREA_PARAM_WIND_ATTENUATION_FACTOR: {
-			return GDJOLT_WIND_ATTENUATION_FACTOR;
+			return DEFAULT_WIND_ATTENUATION_FACTOR;
 		}
 		default: {
 			ERR_FAIL_D_MSG(vformat("Unhandled area parameter: '%d'", p_param));
@@ -97,7 +97,7 @@ void JoltArea3D::set_param(PhysicsServer3D::AreaParameter p_param, const Variant
 			set_priority(p_value);
 		} break;
 		case PhysicsServer3D::AREA_PARAM_WIND_FORCE_MAGNITUDE: {
-			if (!Math::is_equal_approx((double)p_value, GDJOLT_WIND_FORCE_MAGNITUDE)) {
+			if (!Math::is_equal_approx((double)p_value, DEFAULT_WIND_FORCE_MAGNITUDE)) {
 				WARN_PRINT(
 					"Area wind force magnitude is not supported by Godot Jolt. "
 					"Any such value will be ignored."
@@ -105,7 +105,7 @@ void JoltArea3D::set_param(PhysicsServer3D::AreaParameter p_param, const Variant
 			}
 		} break;
 		case PhysicsServer3D::AREA_PARAM_WIND_SOURCE: {
-			if (!((Vector3)p_value).is_equal_approx(GDJOLT_WIND_SOURCE)) {
+			if (!((Vector3)p_value).is_equal_approx(DEFAULT_WIND_SOURCE)) {
 				WARN_PRINT(
 					"Area wind source is not supported by Godot Jolt. "
 					"Any such value will be ignored."
@@ -113,7 +113,7 @@ void JoltArea3D::set_param(PhysicsServer3D::AreaParameter p_param, const Variant
 			}
 		} break;
 		case PhysicsServer3D::AREA_PARAM_WIND_DIRECTION: {
-			if (!((Vector3)p_value).is_equal_approx(GDJOLT_WIND_DIRECTION)) {
+			if (!((Vector3)p_value).is_equal_approx(DEFAULT_WIND_DIRECTION)) {
 				WARN_PRINT(
 					"Area wind direction is not supported by Godot Jolt. "
 					"Any such value will be ignored."
@@ -121,7 +121,7 @@ void JoltArea3D::set_param(PhysicsServer3D::AreaParameter p_param, const Variant
 			}
 		} break;
 		case PhysicsServer3D::AREA_PARAM_WIND_ATTENUATION_FACTOR: {
-			if (!Math::is_equal_approx((double)p_value, GDJOLT_WIND_ATTENUATION_FACTOR)) {
+			if (!Math::is_equal_approx((double)p_value, DEFAULT_WIND_ATTENUATION_FACTOR)) {
 				WARN_PRINT(
 					"Area wind attenuation is not supported by Godot Jolt. "
 					"Any such value will be ignored."
@@ -257,76 +257,13 @@ void JoltArea3D::call_queries() {
 	flush_events(areas_by_id, area_monitor_callback);
 }
 
-void JoltArea3D::space_changing([[maybe_unused]] bool p_lock) {
-	if (space != nullptr) {
-		// HACK(mihe): Ideally we would rely on our contact listener to report all the exits when we
-		// move between (or out of) spaces, but because our Jolt body is going to be destroyed when
-		// we leave this space the contact listener won't be able to retrieve the corresponding area
-		// and as such cannot report any exits, so we're forced to do it manually instead.
-		force_bodies_exited(true);
-		force_areas_exited(true);
-	}
-}
+void JoltArea3D::create_in_space() {
+	create_begin();
 
-void JoltArea3D::body_monitoring_changed() {
-	if (has_body_monitor_callback()) {
-		force_bodies_entered();
-	} else {
-		force_bodies_exited(false);
-	}
-}
+	jolt_settings->mIsSensor = true;
+	jolt_settings->mUseManifoldReduction = false;
 
-void JoltArea3D::area_monitoring_changed() {
-	if (has_area_monitor_callback()) {
-		force_areas_entered();
-	} else {
-		force_areas_exited(false);
-	}
-}
-
-void JoltArea3D::monitorable_changed(bool p_lock) {
-	update_object_layer(p_lock);
-}
-
-void JoltArea3D::force_bodies_entered() {
-	for (auto& [id, body] : bodies_by_id) {
-		for (const auto& [id_pair, index_pair] : body.shape_pairs) {
-			body.pending_added.push_back(index_pair);
-		}
-	}
-}
-
-void JoltArea3D::force_bodies_exited(bool p_remove) {
-	for (auto& [id, body] : bodies_by_id) {
-		for (const auto& [id_pair, index_pair] : body.shape_pairs) {
-			body.pending_removed.push_back(index_pair);
-		}
-
-		if (p_remove) {
-			body.shape_pairs.clear();
-			notify_body_exited(id);
-		}
-	}
-}
-
-void JoltArea3D::force_areas_entered() {
-	for (auto& [id, area] : areas_by_id) {
-		for (const auto& [id_pair, index_pair] : area.shape_pairs) {
-			area.pending_added.push_back(index_pair);
-		}
-	}
-}
-
-void JoltArea3D::force_areas_exited(bool p_remove) {
-	for (auto& [id, area] : areas_by_id) {
-		for (const auto& [id_pair, index_pair] : area.shape_pairs) {
-			area.pending_removed.push_back(index_pair);
-		}
-
-		if (p_remove) {
-			area.shape_pairs.clear();
-		}
-	}
+	create_end();
 }
 
 void JoltArea3D::add_shape_pair(
@@ -445,11 +382,74 @@ void JoltArea3D::notify_body_exited(const JPH::BodyID& p_body_id, bool p_lock) {
 	body->remove_area(this, false);
 }
 
-void JoltArea3D::create_in_space() {
-	create_begin();
+void JoltArea3D::force_bodies_entered() {
+	for (auto& [id, body] : bodies_by_id) {
+		for (const auto& [id_pair, index_pair] : body.shape_pairs) {
+			body.pending_added.push_back(index_pair);
+		}
+	}
+}
 
-	jolt_settings->mIsSensor = true;
-	jolt_settings->mUseManifoldReduction = false;
+void JoltArea3D::force_bodies_exited(bool p_remove, bool p_lock) {
+	for (auto& [id, body] : bodies_by_id) {
+		for (const auto& [id_pair, index_pair] : body.shape_pairs) {
+			body.pending_removed.push_back(index_pair);
+		}
 
-	create_end();
+		if (p_remove) {
+			body.shape_pairs.clear();
+			notify_body_exited(id, p_lock);
+		}
+	}
+}
+
+void JoltArea3D::force_areas_entered() {
+	for (auto& [id, area] : areas_by_id) {
+		for (const auto& [id_pair, index_pair] : area.shape_pairs) {
+			area.pending_added.push_back(index_pair);
+		}
+	}
+}
+
+void JoltArea3D::force_areas_exited(bool p_remove, [[maybe_unused]] bool p_lock) {
+	for (auto& [id, area] : areas_by_id) {
+		for (const auto& [id_pair, index_pair] : area.shape_pairs) {
+			area.pending_removed.push_back(index_pair);
+		}
+
+		if (p_remove) {
+			area.shape_pairs.clear();
+		}
+	}
+}
+
+void JoltArea3D::space_changing(bool p_lock) {
+	if (space != nullptr) {
+		// HACK(mihe): Ideally we would rely on our contact listener to report all the exits when we
+		// move between (or out of) spaces, but because our Jolt body is going to be destroyed when
+		// we leave this space the contact listener won't be able to retrieve the corresponding area
+		// and as such cannot report any exits, so we're forced to do it manually instead.
+		force_bodies_exited(true, p_lock);
+		force_areas_exited(true, p_lock);
+	}
+}
+
+void JoltArea3D::body_monitoring_changed() {
+	if (has_body_monitor_callback()) {
+		force_bodies_entered();
+	} else {
+		force_bodies_exited(false);
+	}
+}
+
+void JoltArea3D::area_monitoring_changed() {
+	if (has_area_monitor_callback()) {
+		force_areas_entered();
+	} else {
+		force_areas_exited(false);
+	}
+}
+
+void JoltArea3D::monitorable_changed(bool p_lock) {
+	update_object_layer(p_lock);
 }

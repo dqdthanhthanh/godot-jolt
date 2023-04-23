@@ -1,52 +1,10 @@
 include_guard()
 
-set(GDJOLT_CONFIGURATIONS
-	Debug
-	Development
-	Distribution
-	EditorDebug
-	EditorDevelopment
-	EditorDistribution
-)
+macro(gdj_escape_separator variable output_variable)
+	string(REPLACE ";" $<SEMICOLON> ${output_variable} "${${variable}}")
+endmacro()
 
-get_property(is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-
-if(is_multi_config)
-	if(DEFINED CMAKE_BUILD_TYPE)
-		message(FATAL_ERROR "CMAKE_BUILD_TYPE is not compatible with multi-config generators.")
-	endif()
-
-	if(PROJECT_IS_TOP_LEVEL)
-		set(CMAKE_CONFIGURATION_TYPES ${GDJOLT_CONFIGURATIONS} CACHE STRING
-			"Semicolon separated list of supported configuration types."
-			FORCE
-		)
-	endif()
-
-	foreach(config IN LISTS CMAKE_CONFIGURATION_TYPES)
-		if(NOT config IN_LIST GDJOLT_CONFIGURATIONS)
-			message(FATAL_ERROR "Unsupported configuration: '${config}'.")
-		endif()
-	endforeach()
-else()
-	if(DEFINED CMAKE_CONFIGURATION_TYPES)
-		message(FATAL_ERROR "CMAKE_CONFIGURATION_TYPES is not compatible with single-config generators.")
-	endif()
-
-	if(NOT CMAKE_BUILD_TYPE)
-		message(FATAL_ERROR "No build type specified.")
-	endif()
-
-	if(NOT CMAKE_BUILD_TYPE IN_LIST GDJOLT_CONFIGURATIONS)
-		message(FATAL_ERROR "Unsupported build type: '${CMAKE_BUILD_TYPE}'.")
-	endif()
-
-	if(PROJECT_IS_TOP_LEVEL)
-		set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${GDJOLT_CONFIGURATIONS})
-	endif()
-endif()
-
-macro(duplicate_config src dst)
+macro(gdj_duplicate_config src dst)
 	string(TOUPPER ${src} src_upper)
 	string(TOUPPER ${dst} dst_upper)
 
@@ -87,7 +45,7 @@ macro(duplicate_config src dst)
 	endif()
 endmacro()
 
-macro(remove_config name)
+macro(gdj_remove_config name)
 	string(TOUPPER ${name} name_upper)
 
 	unset(CMAKE_CXX_FLAGS_${name_upper} CACHE)
@@ -101,14 +59,39 @@ macro(remove_config name)
 	endif()
 endmacro()
 
-duplicate_config(RelWithDebInfo Development)
-duplicate_config(RelWithDebInfo Distribution)
-duplicate_config(Debug EditorDebug)
-duplicate_config(Development EditorDevelopment)
-duplicate_config(Distribution EditorDistribution)
+function(gdj_args_to_script variable args)
+	set(arg_pattern [[^(.+)=(.*)$]])
 
-if(PROJECT_IS_TOP_LEVEL)
-	remove_config(MinSizeRel)
-	remove_config(Release)
-	remove_config(RelWithDebInfo)
-endif()
+	set(script_content "")
+	set(script_line "")
+	set(arg_rest "")
+
+	foreach(element IN LISTS args)
+		if(element MATCHES [[^-D(.*)]])
+			set(arg ${CMAKE_MATCH_1})
+
+			if(NOT script_line STREQUAL "")
+				string(APPEND script_line "${arg_rest}\" CACHE INTERNAL \"\")")
+				string(APPEND script_content "${script_line}\n")
+
+				set(script_line "")
+				set(arg_rest "")
+			endif()
+
+			if(arg MATCHES ${arg_pattern})
+				set(arg_name ${CMAKE_MATCH_1})
+				set(arg_value ${CMAKE_MATCH_2})
+				set(script_line "set(${arg_name} \"${arg_value}")
+			endif()
+		else()
+			string(APPEND arg_rest "\\\;${element}")
+		endif()
+	endforeach()
+
+	if(NOT script_line STREQUAL "")
+		string(APPEND script_line "${arg_rest}\" CACHE INTERNAL \"\")")
+		string(APPEND script_content "${script_line}\n")
+	endif()
+
+	set(${variable} ${script_content} PARENT_SCOPE)
+endfunction()

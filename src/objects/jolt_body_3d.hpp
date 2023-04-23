@@ -170,7 +170,7 @@ public:
 
 	bool is_ccd_enabled(bool p_lock = true) const;
 
-	void set_ccd_enabled(bool p_enable, bool p_lock = true);
+	void set_ccd_enabled(bool p_enabled, bool p_lock = true);
 
 	float get_mass() const { return mass; }
 
@@ -243,7 +243,7 @@ private:
 
 	void mode_changed(bool p_lock = true);
 
-	void shapes_changed(bool p_lock) override;
+	void shapes_built(bool p_lock) override;
 
 	void space_changing(bool p_lock = true) override;
 
@@ -257,31 +257,13 @@ private:
 
 	void axis_lock_changed(bool p_lock = true);
 
-	PhysicsServer3D::BodyMode mode = PhysicsServer3D::BODY_MODE_RIGID;
-
-	DampMode linear_damp_mode = PhysicsServer3D::BODY_DAMP_MODE_COMBINE;
-
-	DampMode angular_damp_mode = PhysicsServer3D::BODY_DAMP_MODE_COMBINE;
-
-	float mass = 1.0f;
-
-	Vector3 inertia;
-
-	float linear_damp = 0.0f;
-
-	float angular_damp = 0.0f;
-
-	float collision_priority = 1.0f;
-
-	bool custom_center_of_mass = false;
-
-	uint32_t locked_axes = 0;
-
-	int32_t contact_count = 0;
-
 	LocalVector<Contact> contacts;
 
 	LocalVector<JoltArea3D*> areas;
+
+	Variant force_integration_userdata;
+
+	Vector3 inertia;
 
 	Vector3 center_of_mass_custom;
 
@@ -295,9 +277,27 @@ private:
 
 	Callable force_integration_callback;
 
-	Variant force_integration_userdata;
-
 	JoltPhysicsDirectBodyState3D* direct_state = nullptr;
 
 	JPH::Ref<JPH::Constraint> axes_constraint;
+
+	PhysicsServer3D::BodyMode mode = PhysicsServer3D::BODY_MODE_RIGID;
+
+	DampMode linear_damp_mode = PhysicsServer3D::BODY_DAMP_MODE_COMBINE;
+
+	DampMode angular_damp_mode = PhysicsServer3D::BODY_DAMP_MODE_COMBINE;
+
+	float mass = 1.0f;
+
+	float linear_damp = 0.0f;
+
+	float angular_damp = 0.0f;
+
+	float collision_priority = 1.0f;
+
+	int32_t contact_count = 0;
+
+	uint32_t locked_axes = 0;
+
+	bool custom_center_of_mass = false;
 };

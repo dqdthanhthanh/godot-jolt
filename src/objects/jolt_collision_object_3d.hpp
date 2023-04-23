@@ -21,8 +21,6 @@ public:
 
 	JPH::BodyID get_jolt_id() const { return jolt_id; }
 
-	void set_jolt_id(JPH::BodyID p_jolt_id) { jolt_id = p_jolt_id; }
-
 	GodotObject* get_instance() const;
 
 	Object* get_instance_unsafe() const;
@@ -65,7 +63,7 @@ public:
 
 	JPH::ShapeRefC try_build_shape();
 
-	void rebuild_shape(bool p_lock = true);
+	void build_shape(bool p_lock = true);
 
 	const JPH::Shape* get_jolt_shape() const { return jolt_shape; }
 
@@ -112,7 +110,7 @@ public:
 
 	bool is_ray_pickable() const { return ray_pickable; }
 
-	void set_ray_pickable(bool p_enable) { ray_pickable = p_enable; }
+	void set_ray_pickable(bool p_enabled) { ray_pickable = p_enabled; }
 
 	virtual void pre_step(float p_step);
 
@@ -121,6 +119,8 @@ public:
 	virtual bool generates_contacts() const = 0;
 
 protected:
+	friend class JoltShape3D;
+
 	virtual JPH::BroadPhaseLayer get_broad_phase_layer() const = 0;
 
 	JPH::ObjectLayer get_object_layer() const;
@@ -145,11 +145,13 @@ protected:
 
 	void update_object_layer(bool p_lock = true);
 
-	void collision_layer_changed(bool p_lock = true);
+	virtual void collision_layer_changed(bool p_lock = true);
 
-	void collision_mask_changed(bool p_lock = true);
+	virtual void collision_mask_changed(bool p_lock = true);
 
-	virtual void shapes_changed([[maybe_unused]] bool p_lock = true) { }
+	virtual void shapes_changed(bool p_lock = true);
+
+	virtual void shapes_built([[maybe_unused]] bool p_lock = true) { }
 
 	virtual void space_changing([[maybe_unused]] bool p_lock = true) { }
 
@@ -157,11 +159,15 @@ protected:
 
 	virtual void transform_changed([[maybe_unused]] bool p_lock = true) { }
 
+	LocalVector<JoltShapeInstance3D> shapes;
+
+	Vector3 scale = {1.0f, 1.0f, 1.0f};
+
 	RID rid;
 
 	ObjectID instance_id;
 
-	JPH::BodyID jolt_id;
+	JoltSpace3D* space = nullptr;
 
 	JPH::BodyCreationSettings* jolt_settings = new JPH::BodyCreationSettings();
 
@@ -169,15 +175,11 @@ protected:
 
 	JPH::ShapeRefC previous_jolt_shape;
 
-	JoltSpace3D* space = nullptr;
+	JPH::BodyID jolt_id;
 
 	uint32_t collision_layer = 1;
 
 	uint32_t collision_mask = 1;
-
-	Vector3 scale = {1.0f, 1.0f, 1.0f};
-
-	LocalVector<JoltShapeInstance3D> shapes;
 
 	bool ray_pickable = false;
 };

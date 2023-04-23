@@ -32,6 +32,8 @@ public:
 
 	JPH::ShapeRefC try_build();
 
+	void destroy() { jolt_ref = nullptr; }
+
 	const JPH::Shape* get_jolt_ref() const { return jolt_ref; }
 
 	static JPH::ShapeRefC with_scale(const JPH::Shape* p_shape, const Vector3& p_scale);
@@ -66,13 +68,13 @@ public:
 protected:
 	virtual JPH::ShapeRefC build() const = 0;
 
-	virtual void rebuild(bool p_lock = true);
+	virtual void invalidated(bool p_lock = true);
+
+	HashMap<JoltCollisionObject3D*, int32_t> ref_counts_by_owner;
 
 	RID rid;
 
 	JPH::ShapeRefC jolt_ref;
-
-	HashMap<JoltCollisionObject3D*, int32_t> ref_counts_by_owner;
 };
 
 class JoltWorldBoundaryShape3D final : public JoltShape3D {

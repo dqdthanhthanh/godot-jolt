@@ -6,8 +6,8 @@
 
 namespace {
 
-constexpr int64_t GDJOLT_DEBUG_VERTEX_STRIDE = sizeof(Vector3);
-constexpr int64_t GDJOLT_DEBUG_ATTRIBUTE_STRIDE = sizeof(uint32_t);
+constexpr int64_t DEBUG_VERTEX_STRIDE = sizeof(Vector3);
+constexpr int64_t DEBUG_ATTRIBUTE_STRIDE = sizeof(uint32_t);
 
 } // namespace
 
@@ -39,15 +39,15 @@ private:
 	Vertices vertices;
 };
 
-JoltDebugRenderer* JoltDebugRenderer::acquire() {
+JoltDebugRenderer3D* JoltDebugRenderer3D::acquire() {
 	if (ref_count++ == 0) {
-		singleton = new JoltDebugRenderer();
+		singleton = new JoltDebugRenderer3D();
 	}
 
 	return singleton;
 }
 
-void JoltDebugRenderer::release(JoltDebugRenderer*& p_ptr) {
+void JoltDebugRenderer3D::release(JoltDebugRenderer3D*& p_ptr) {
 	if (--ref_count == 0) {
 		delete_safely(singleton);
 	}
@@ -55,7 +55,7 @@ void JoltDebugRenderer::release(JoltDebugRenderer*& p_ptr) {
 	p_ptr = nullptr;
 }
 
-void JoltDebugRenderer::draw(
+void JoltDebugRenderer3D::draw(
 	const JoltSpace3D& p_space,
 	const Camera3D& p_camera,
 	const DrawSettings& p_settings
@@ -95,7 +95,7 @@ void JoltDebugRenderer::draw(
 	}
 }
 
-int32_t JoltDebugRenderer::submit(const RID& p_mesh) {
+int32_t JoltDebugRenderer3D::submit(const RID& p_mesh) {
 	RenderingServer* rendering_server = RenderingServer::get_singleton();
 
 	rendering_server->mesh_clear(p_mesh);
@@ -109,8 +109,8 @@ int32_t JoltDebugRenderer::submit(const RID& p_mesh) {
 	if (triangle_count > 0) {
 		const int64_t vertex_count = (int64_t)triangle_count * 3;
 
-		triangle_vertices.resize(vertex_count * GDJOLT_DEBUG_VERTEX_STRIDE);
-		triangle_attributes.resize(vertex_count * GDJOLT_DEBUG_ATTRIBUTE_STRIDE);
+		triangle_vertices.resize(vertex_count * DEBUG_VERTEX_STRIDE);
+		triangle_attributes.resize(vertex_count * DEBUG_ATTRIBUTE_STRIDE);
 
 		Dictionary triangles_surface_data;
 		triangles_surface_data["format"] = vertex_format;
@@ -132,8 +132,8 @@ int32_t JoltDebugRenderer::submit(const RID& p_mesh) {
 	if (line_count > 0) {
 		const int64_t vertex_count = (int64_t)line_count * 2;
 
-		line_vertices.resize(vertex_count * GDJOLT_DEBUG_VERTEX_STRIDE);
-		line_attributes.resize(vertex_count * GDJOLT_DEBUG_ATTRIBUTE_STRIDE);
+		line_vertices.resize(vertex_count * DEBUG_VERTEX_STRIDE);
+		line_attributes.resize(vertex_count * DEBUG_ATTRIBUTE_STRIDE);
 
 		Dictionary lines_surface_data;
 		lines_surface_data["format"] = vertex_format;
@@ -155,12 +155,12 @@ int32_t JoltDebugRenderer::submit(const RID& p_mesh) {
 	return surface_count;
 }
 
-void JoltDebugRenderer::DrawLine(JPH::Vec3 p_from, JPH::Vec3 p_to, JPH::Color p_color) {
+void JoltDebugRenderer3D::DrawLine(JPH::Vec3 p_from, JPH::Vec3 p_to, JPH::Color p_color) {
 	reserve_lines(1);
 	add_line(to_godot(p_from), to_godot(p_to), to_godot(p_color).to_abgr32());
 }
 
-void JoltDebugRenderer::DrawTriangle(
+void JoltDebugRenderer3D::DrawTriangle(
 	JPH::Vec3 p_vertex1,
 	JPH::Vec3 p_vertex2,
 	JPH::Vec3 p_vertex3,
@@ -176,7 +176,7 @@ void JoltDebugRenderer::DrawTriangle(
 	);
 }
 
-JPH::DebugRenderer::Batch JoltDebugRenderer::CreateTriangleBatch(
+JPH::DebugRenderer::Batch JoltDebugRenderer3D::CreateTriangleBatch(
 	const JPH::DebugRenderer::Triangle* p_triangles,
 	int p_triangle_count
 ) {
@@ -196,7 +196,7 @@ JPH::DebugRenderer::Batch JoltDebugRenderer::CreateTriangleBatch(
 	return triangle_batch;
 }
 
-JPH::DebugRenderer::Batch JoltDebugRenderer::CreateTriangleBatch(
+JPH::DebugRenderer::Batch JoltDebugRenderer3D::CreateTriangleBatch(
 	const JPH::DebugRenderer::Vertex* p_vertices,
 	[[maybe_unused]] int p_vertex_count,
 	const JPH::uint32* p_indices,
@@ -219,7 +219,7 @@ JPH::DebugRenderer::Batch JoltDebugRenderer::CreateTriangleBatch(
 	return triangle_batch;
 }
 
-void JoltDebugRenderer::DrawGeometry(
+void JoltDebugRenderer3D::DrawGeometry(
 	const JPH::Mat44& p_model_matrix,
 	const JPH::AABox& p_world_space_bounds,
 	float p_lod_scale_sq,
@@ -293,7 +293,7 @@ void JoltDebugRenderer::DrawGeometry(
 	}
 }
 
-void JoltDebugRenderer::DrawText3D(
+void JoltDebugRenderer3D::DrawText3D(
 	[[maybe_unused]] const JPH::Vec3 p_position,
 	[[maybe_unused]] const JPH::string_view& p_string,
 	[[maybe_unused]] JPH::Color p_color,
@@ -302,7 +302,7 @@ void JoltDebugRenderer::DrawText3D(
 	ERR_FAIL_NOT_IMPL();
 }
 
-void JoltDebugRenderer::reserve_triangles(int32_t p_extra_capacity) {
+void JoltDebugRenderer3D::reserve_triangles(int32_t p_extra_capacity) {
 	if (triangle_count + p_extra_capacity <= triangle_capacity) {
 		return;
 	}
@@ -310,11 +310,11 @@ void JoltDebugRenderer::reserve_triangles(int32_t p_extra_capacity) {
 	triangle_capacity += p_extra_capacity;
 
 	const int64_t vertex_count = (int64_t)triangle_capacity * 3;
-	triangle_vertices.resize(vertex_count * GDJOLT_DEBUG_VERTEX_STRIDE);
-	triangle_attributes.resize(vertex_count * GDJOLT_DEBUG_ATTRIBUTE_STRIDE);
+	triangle_vertices.resize(vertex_count * DEBUG_VERTEX_STRIDE);
+	triangle_attributes.resize(vertex_count * DEBUG_ATTRIBUTE_STRIDE);
 }
 
-void JoltDebugRenderer::reserve_lines(int32_t p_extra_capacity) {
+void JoltDebugRenderer3D::reserve_lines(int32_t p_extra_capacity) {
 	if (line_count + p_extra_capacity <= line_capacity) {
 		return;
 	}
@@ -322,11 +322,11 @@ void JoltDebugRenderer::reserve_lines(int32_t p_extra_capacity) {
 	line_capacity += p_extra_capacity;
 
 	const int64_t vertex_count = (int64_t)line_capacity * 2;
-	line_vertices.resize(vertex_count * GDJOLT_DEBUG_VERTEX_STRIDE);
-	line_attributes.resize(vertex_count * GDJOLT_DEBUG_ATTRIBUTE_STRIDE);
+	line_vertices.resize(vertex_count * DEBUG_VERTEX_STRIDE);
+	line_attributes.resize(vertex_count * DEBUG_ATTRIBUTE_STRIDE);
 }
 
-void JoltDebugRenderer::add_triangle(
+void JoltDebugRenderer3D::add_triangle(
 	const Vector3& p_vertex1,
 	const Vector3& p_vertex2,
 	const Vector3& p_vertex3,
@@ -352,7 +352,7 @@ void JoltDebugRenderer::add_triangle(
 	triangle_count++;
 }
 
-void JoltDebugRenderer::add_line(
+void JoltDebugRenderer3D::add_line(
 	const Vector3& p_from,
 	const Vector3& p_to,
 	uint32_t p_color_abgr

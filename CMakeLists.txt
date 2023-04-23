@@ -6,7 +6,6 @@ include(GodotJoltPrelude)
 
 project(godot-jolt
 	VERSION 0.1.0
-	DESCRIPTION "Godot Engine extension that integrates Jolt Physics."
 	LANGUAGES CXX
 )
 
@@ -30,41 +29,42 @@ target_link_libraries(godot-jolt
 	godot-jolt::mimalloc
 )
 
+set(is_windows $<STREQUAL:${CMAKE_SYSTEM_NAME},Windows>)
+set(is_linux $<STREQUAL:${CMAKE_SYSTEM_NAME},Linux>)
+set(is_macos $<STREQUAL:${CMAKE_SYSTEM_NAME},Darwin>)
+
+set(is_x86 $<STREQUAL:${GDJ_TARGET_ARCHITECTURES},x86>)
+set(is_x64 $<STREQUAL:${GDJ_TARGET_ARCHITECTURES},x64>)
+
 set(is_editor_config $<CONFIG:EditorDebug,EditorDevelopment,EditorDistribution>)
 set(is_debug_config $<CONFIG:Debug,EditorDebug>)
-set(is_optimized_config $<CONFIG:Development,Distribution,EditorDevelopment,EditorDistribution>)
+set(is_development_config $<CONFIG:Development,EditorDevelopment>)
 set(is_distribution_config $<CONFIG:Distribution,EditorDistribution>)
+set(is_optimized_config $<OR:${is_development_config},${is_distribution_config}>)
 
-if(CMAKE_SYSTEM_NAME STREQUAL Windows)
-	set(suffix_platform -windows)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
-	set(suffix_platform -linux)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Darwin)
-	set(suffix_platform -macos)
-else()
-	message(FATAL_ERROR "Unhandled system name: '${CMAKE_SYSTEM_NAME}'.")
-endif()
+string(CONCAT suffix_platform
+	$<${is_windows}:_windows>
+	$<${is_linux}:_linux>
+	$<${is_macos}:_macos>
+)
 
-if(GDJOLT_TARGET_ARCHITECTURES STREQUAL x86)
-	set(suffix_arch -x86)
-elseif(GDJOLT_TARGET_ARCHITECTURES STREQUAL x64)
-	set(suffix_arch -x64)
-else()
-	set(suffix_arch "")
-endif()
+string(CONCAT suffix_arch
+	$<${is_x86}:-x86>
+	$<${is_x64}:-x64>
+)
 
-set(suffix_editor $<${is_editor_config}:-editor>)
+set(suffix_editor $<${is_editor_config}:_editor>)
 set(suffix ${suffix_platform}${suffix_arch}${suffix_editor})
 
-set(use_static_crt $<BOOL:${GDJOLT_STATIC_RUNTIME_LIBRARY}>)
+set(use_static_crt $<BOOL:${GDJ_STATIC_RUNTIME_LIBRARY}>)
 set(msvcrt_debug $<$<CONFIG:Debug,EditorDebug>:Debug>)
 set(msvcrt_dll $<$<NOT:${use_static_crt}>:DLL>)
 set(msvcrt MultiThreaded${msvcrt_debug}${msvcrt_dll})
 
-set(target_avx512 $<STREQUAL:${GDJOLT_X86_INSTRUCTION_SET},AVX512>)
-set(target_avx2 $<STREQUAL:${GDJOLT_X86_INSTRUCTION_SET},AVX2>)
-set(target_avx $<STREQUAL:${GDJOLT_X86_INSTRUCTION_SET},AVX>)
-set(target_sse2 $<STREQUAL:${GDJOLT_X86_INSTRUCTION_SET},SSE2>)
+set(target_avx512 $<STREQUAL:${GDJ_X86_INSTRUCTION_SET},AVX512>)
+set(target_avx2 $<STREQUAL:${GDJ_X86_INSTRUCTION_SET},AVX2>)
+set(target_avx $<STREQUAL:${GDJ_X86_INSTRUCTION_SET},AVX>)
+set(target_sse2 $<STREQUAL:${GDJ_X86_INSTRUCTION_SET},SSE2>)
 
 set(is_msvc_like $<BOOL:${MSVC}>)
 set(is_msvc_cl $<CXX_COMPILER_ID:MSVC>)
@@ -79,10 +79,11 @@ set_target_properties(godot-jolt PROPERTIES
 	PREFIX ""
 	INCLUDE_DIRECTORIES ${source_dir}
 	MSVC_RUNTIME_LIBRARY ${msvcrt}
-	INTERPROCEDURAL_OPTIMIZATION_DEVELOPMENT ${GDJOLT_INTERPROCEDURAL_OPTIMIZATION}
-	INTERPROCEDURAL_OPTIMIZATION_DISTRIBUTION ${GDJOLT_INTERPROCEDURAL_OPTIMIZATION}
-	INTERPROCEDURAL_OPTIMIZATION_EDITORDEVELOPMENT ${GDJOLT_INTERPROCEDURAL_OPTIMIZATION}
-	INTERPROCEDURAL_OPTIMIZATION_EDITORDISTRIBUTION ${GDJOLT_INTERPROCEDURAL_OPTIMIZATION}
+	CXX_VISIBILITY_PRESET hidden
+	INTERPROCEDURAL_OPTIMIZATION_DEVELOPMENT ${GDJ_INTERPROCEDURAL_OPTIMIZATION}
+	INTERPROCEDURAL_OPTIMIZATION_DISTRIBUTION ${GDJ_INTERPROCEDURAL_OPTIMIZATION}
+	INTERPROCEDURAL_OPTIMIZATION_EDITORDEVELOPMENT ${GDJ_INTERPROCEDURAL_OPTIMIZATION}
+	INTERPROCEDURAL_OPTIMIZATION_EDITORDISTRIBUTION ${GDJ_INTERPROCEDURAL_OPTIMIZATION}
 	FRAMEWORK TRUE
 	MACOSX_FRAMEWORK_IDENTIFIER "org.godotjolt.\${PRODUCT_NAME:rfc1034identifier}"
 	MACOSX_FRAMEWORK_BUNDLE_VERSION ${CMAKE_PROJECT_VERSION}
@@ -95,10 +96,17 @@ target_compile_features(godot-jolt
 )
 
 target_compile_definitions(godot-jolt
+	PRIVATE $<${is_windows}:GDJ_PLATFORM_WINDOWS>
+	PRIVATE $<${is_linux}:GDJ_PLATFORM_LINUX>
+	PRIVATE $<${is_macos}:GDJ_PLATFORM_MACOS>
+	PRIVATE $<${is_debug_config}:GDJ_CONFIG_DEBUG>
+	PRIVATE $<${is_development_config}:GDJ_CONFIG_DEVELOPMENT>
+	PRIVATE $<${is_distribution_config}:GDJ_CONFIG_DISTRIBUTION>
+	PRIVATE $<${is_editor_config}:GDJ_CONFIG_EDITOR>
 	PRIVATE $<IF:${is_debug_config},_DEBUG,NDEBUG>
 )
 
-if(GDJOLT_PRECOMPILE_HEADERS)
+if(GDJ_PRECOMPILE_HEADERS)
 	target_precompile_headers(godot-jolt
 		PRIVATE ${pch_file}
 	)
@@ -143,14 +151,14 @@ if(MSVC)
 		PRIVATE $<${is_distribution_config}:/PDBALTPATH:${pdb_file_name}> # Strip PDB path
 	)
 else()
-	set(use_avx512 $<BOOL:${GDJOLT_USE_AVX512}>)
-	set(use_avx2 $<BOOL:${GDJOLT_USE_AVX2}>)
-	set(use_bmi1 $<BOOL:${GDJOLT_USE_BMI1}>)
-	set(use_fma3 $<BOOL:${GDJOLT_USE_FMA3}>)
-	set(use_f16c $<BOOL:${GDJOLT_USE_F16C}>)
-	set(use_avx $<BOOL:${GDJOLT_USE_AVX}>)
-	set(use_sse4_2 $<BOOL:${GDJOLT_USE_SSE4_2}>)
-	set(use_sse2 $<BOOL:${GDJOLT_USE_SSE2}>)
+	set(use_avx512 $<BOOL:${GDJ_USE_AVX512}>)
+	set(use_avx2 $<BOOL:${GDJ_USE_AVX2}>)
+	set(use_bmi1 $<BOOL:${GDJ_USE_BMI1}>)
+	set(use_fma3 $<BOOL:${GDJ_USE_FMA3}>)
+	set(use_f16c $<BOOL:${GDJ_USE_F16C}>)
+	set(use_avx $<BOOL:${GDJ_USE_AVX}>)
+	set(use_sse4_2 $<BOOL:${GDJ_USE_SSE4_2}>)
+	set(use_sse2 $<BOOL:${GDJ_USE_SSE2}>)
 
 	target_compile_options(godot-jolt
 		PRIVATE -Wall # Enable common warnings
@@ -185,6 +193,63 @@ else()
 	)
 endif()
 
+if(MSVC)
+	set(debug_symbols ${pdb_file})
+elseif(APPLE)
+	if(GDJ_INTERPROCEDURAL_OPTIMIZATION)
+		# HACK(mihe): When compiling with LTO enabled on macOS we need to tell its linker not to
+		# discard the temporary object files that it generates during LTO, otherwise we won't be
+		# able to map the source files when we actually try to debug with these symbols.
+		# https://clang.llvm.org/docs/CommandGuide/clang.html#cmdoption-flto
+		set(lto_path ${CMAKE_CURRENT_BINARY_DIR}/$<CONFIG>/lto/godot-jolt)
+		target_link_options(godot-jolt PRIVATE -Wl,-object_path_lto,${lto_path})
+	endif()
+
+	find_program(DSYMUTIL_EXECUTABLE dsymutil REQUIRED)
+	mark_as_advanced(DSYMUTIL_EXECUTABLE)
+
+	find_program(STRIP_EXECUTABLE strip REQUIRED)
+	mark_as_advanced(STRIP_EXECUTABLE)
+
+	set(dylib_file $<TARGET_FILE:godot-jolt>)
+	set(framework_dir $<TARGET_BUNDLE_DIR:godot-jolt>)
+	set(dsym_dir ${framework_dir}.dSYM)
+
+	set(cmd_copy_symbols ${DSYMUTIL_EXECUTABLE} ${dylib_file} -o ${dsym_dir})
+	set(cmd_strip_symbols ${STRIP_EXECUTABLE} -Sx ${dylib_file})
+
+	add_custom_command(
+		TARGET godot-jolt POST_BUILD
+		COMMAND "$<${is_distribution_config}:${cmd_copy_symbols}>"
+		COMMAND "$<${is_distribution_config}:${cmd_strip_symbols}>"
+		COMMAND_EXPAND_LISTS
+		VERBATIM
+	)
+
+	set(debug_symbols ${dsym_dir})
+else()
+	find_program(OBJCOPY_EXECUTABLE objcopy REQUIRED)
+	mark_as_advanced(OBJCOPY_EXECUTABLE)
+
+	set(so_file $<TARGET_FILE:godot-jolt>)
+	set(debug_file ${so_file}.debug)
+
+	set(cmd_copy_symbols ${OBJCOPY_EXECUTABLE} --only-keep-debug ${so_file} ${debug_file})
+	set(cmd_strip_symbols ${OBJCOPY_EXECUTABLE} --strip-debug --strip-unneeded ${so_file})
+	set(cmd_link_symbols ${OBJCOPY_EXECUTABLE} --add-gnu-debuglink=${debug_file} ${so_file})
+
+	add_custom_command(
+		TARGET godot-jolt POST_BUILD
+		COMMAND "$<${is_distribution_config}:${cmd_copy_symbols}>"
+		COMMAND "$<${is_distribution_config}:${cmd_strip_symbols}>"
+		COMMAND "$<${is_distribution_config}:${cmd_link_symbols}>"
+		COMMAND_EXPAND_LISTS
+		VERBATIM
+	)
+
+	set(debug_symbols ${debug_file})
+endif()
+
 install(
 	TARGETS godot-jolt
 	RUNTIME DESTINATION bin
@@ -192,14 +257,8 @@ install(
 	FRAMEWORK DESTINATION bin
 )
 
-if(MSVC)
-	# Non-distribution configurations will have the (default) PDB absolute paths embedded in them,
-	# so we don't need to copy this file for a debugger to find them, since we're likely developing
-	# locally anyway
-	install(
-		FILES ${pdb_file}
-		CONFIGURATIONS Distribution EditorDistribution
-		DESTINATION bin
-		OPTIONAL
-	)
-endif()
+install(
+	FILES ${debug_symbols}
+	CONFIGURATIONS Distribution EditorDistribution
+	DESTINATION bin
+)
