@@ -1,68 +1,66 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://b1e6gpja1si41"]
 
-[ext_resource path="res://Assets3D/Team/CB/M_VuTru.material" type="Material" id=1]
-[ext_resource path="res://MGF Scene/AssetsScene3D/AimPoint.tscn" type="PackedScene" id=2]
-[ext_resource path="res://MGF Scene/Main Game/PlayerController.gd" type="Script" id=4]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/AimPoint.tscn" id="2"]
+[ext_resource type="Script" path="res://MGF Scene/Main Game/PlayerController.gd" id="4"]
 
-[sub_resource type="PhysicsMaterial" id=1]
+[sub_resource type="PhysicsMaterial" id="1"]
 bounce = 0.3
 
-[sub_resource type="PlaneMesh" id=16]
+[sub_resource type="PlaneMesh" id="16"]
 
-[sub_resource type="BoxShape3D" id=4]
+[sub_resource type="BoxShape3D" id="4"]
 margin = 0.01
-size = Vector3( 0.395, 0.025, 0.355 )
+size = Vector3(0.395, 0.1, 0.355)
 
-[sub_resource type="BoxShape3D" id=5]
+[sub_resource type="BoxShape3D" id="5"]
 margin = 0.01
-size = Vector3( 0.115, 0.025, 0.615 )
+size = Vector3(0.115, 0.1, 0.615)
 
-[sub_resource type="BoxShape3D" id=6]
+[sub_resource type="BoxShape3D" id="6"]
 margin = 0.01
-size = Vector3( 0.11, 0.025, 0.335 )
+size = Vector3(0.11, 0.1, 0.335)
 
-[sub_resource type="BoxShape3D" id=14]
+[sub_resource type="BoxShape3D" id="14"]
 margin = 0.01
-size = Vector3( 0.13, 0.025, 0.155 )
+size = Vector3(0.13, 0.1, 0.155)
 
 [node name="Character" type="RigidBody3D" groups=["units"]]
-mass = 10.0
-physics_material_override = SubResource( 1 )
-continuous_cd = true
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-script = ExtResource( 4 )
+mass = 10.0
+physics_material_override = SubResource("1")
+continuous_cd = true
+script = ExtResource("4")
 playerName = "Vũ Trụ"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D( 1.04012, 0, -0.143718, 0, 5, 0, 0.143718, 0, 1.04012, 0.0029819, 0.01, 0.0329746 )
-mesh = SubResource( 16 )
-material/0 = ExtResource( 1 )
+transform = Transform3D(1.04012, 0, -0.143718, 0, 5, 0, 0.143718, 0, 1.04012, 0.0029819, 0.01, 0.0329746)
+mesh = SubResource("16")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0543816, 0, -0.312756 )
-shape = SubResource( 4 )
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0543816, 0, -0.312756)
+shape = SubResource("4")
 
 [node name="CollisionShape2" type="CollisionShape3D" parent="."]
-transform = Transform3D( 0.885061, 0, -0.465476, 0, 1, 0, 0.465476, 0, 0.885061, -0.47801, 0, 0.355818 )
-shape = SubResource( 5 )
+transform = Transform3D(0.885061, 0, -0.465476, 0, 1, 0, 0.465476, 0, 0.885061, -0.47801, 0, 0.355818)
+shape = SubResource("5")
 
 [node name="CollisionShape3" type="CollisionShape3D" parent="."]
-transform = Transform3D( 0.965786, 0, -0.259342, 0, 1, 0, 0.259342, 0, 0.965786, 0.414606, 0, 0.351688 )
-shape = SubResource( 6 )
+transform = Transform3D(0.965786, 0, -0.259342, 0, 1, 0, 0.259342, 0, 0.965786, 0.414606, 0, 0.351688)
+shape = SubResource("6")
 
 [node name="CollisionShape4" type="CollisionShape3D" parent="."]
-transform = Transform3D( 0.999999, 0, 0.0010297, 0, 1, 0, -0.0010297, 0, 0.999999, 0.130505, 0, -0.696254 )
-shape = SubResource( 14 )
+transform = Transform3D(0.999999, 0, 0.0010297, 0, 1, 0, -0.0010297, 0, 0.999999, 0.130505, 0, -0.696254)
+shape = SubResource("14")
 
-[node name="RightPoint" parent="." instance=ExtResource( 2 )]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.700173, 0, 0.764604 )
+[node name="RightPoint" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.700173, 0, 0.764604)
 
-[node name="PivotPoint" parent="." instance=ExtResource( 2 )]
+[node name="PivotPoint" parent="." instance=ExtResource("2")]
 
-[node name="LeftPoint" parent="." instance=ExtResource( 2 )]
-transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.381035, 0, 0.558323 )
+[node name="LeftPoint" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.381035, 0, 0.558323)
 
-[node name="AimPoint" parent="." instance=ExtResource( 2 )]
-transform = Transform3D( 0.99996, 0, 0.00895342, 0, 1, 0, -0.00895342, 0, 0.99996, -0.0910741, 0, 0.627395 )
+[node name="AimPoint" parent="." instance=ExtResource("2")]
+transform = Transform3D(0.99996, 0, 0.00895342, 0, 1, 0, -0.00895342, 0, 0.99996, -0.0910741, 0, 0.627395)

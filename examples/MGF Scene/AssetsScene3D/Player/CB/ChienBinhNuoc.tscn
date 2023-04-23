@@ -10,19 +10,19 @@ bounce = 0.3
 
 [sub_resource type="BoxShape3D" id="3"]
 margin = 0.01
-size = Vector3(0.428625, 0.025, 0.415091)
+size = Vector3(0.429, 0.1, 0.415)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ru7lh"]
 margin = 0.01
-size = Vector3(0.44, 0.025, 0.175506)
+size = Vector3(0.44, 0.1, 0.176)
 
 [sub_resource type="BoxShape3D" id="6"]
 margin = 0.01
-size = Vector3(0.54, 0.025, 0.144435)
+size = Vector3(0.54, 0.1, 0.144)
 
 [sub_resource type="BoxShape3D" id="5"]
 margin = 0.01
-size = Vector3(0.147103, 0.025, 0.198671)
+size = Vector3(0.147, 0.1, 0.199)
 
 [node name="Character" type="RigidBody3D" groups=["units"]]
 axis_lock_linear_y = true

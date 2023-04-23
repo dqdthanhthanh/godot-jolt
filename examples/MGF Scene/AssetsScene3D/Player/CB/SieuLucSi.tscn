@@ -22,7 +22,7 @@ margin = 0.01
 size = Vector3(0.56938, 0.1, 0.202259)
 
 [sub_resource type="BoxShape3D" id="7"]
-margin = 1.04
+margin = 0.01
 size = Vector3(0.251, 0.1, 0.190483)
 
 [node name="Character" type="RigidBody3D" groups=["units"]]
