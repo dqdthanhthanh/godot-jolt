@@ -58,7 +58,7 @@ height = 0.1
 radial_segments = 8
 rings = 4
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ku2b2"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3hxjg"]
 resource_local_to_scene = true
 friction = 0.2
 rough = true
@@ -246,7 +246,7 @@ transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.000388756, 0)
 collision_mask = 255
 
 [node name="Ball" parent="." instance=ExtResource("2")]
-physics_material_override = SubResource("PhysicsMaterial_ku2b2")
+physics_material_override = SubResource("PhysicsMaterial_3hxjg")
 
 [node name="Arrow" parent="." instance=ExtResource("22")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)

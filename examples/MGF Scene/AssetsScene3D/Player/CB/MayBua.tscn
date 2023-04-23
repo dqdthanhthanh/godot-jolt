@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://rxnh2jitvfy5"]
+[gd_scene load_steps=9 format=3 uid="uid://rxnh2jitvfy5"]
 
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/AimPoint.tscn" id="1"]
 [ext_resource type="Script" path="res://MGF Scene/Main Game/PlayerController.gd" id="3"]
@@ -11,6 +11,10 @@ bounce = 0.3
 [sub_resource type="BoxShape3D" id="4"]
 margin = 0.01
 size = Vector3(0.605, 0.1, 0.55)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y6q1e"]
+margin = 0.01
+size = Vector3(0.525, 0.1, 0.162)
 
 [sub_resource type="BoxShape3D" id="7"]
 margin = 0.01
@@ -40,7 +44,7 @@ shape = SubResource("4")
 
 [node name="CollisionShape2" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.19461, 0, 0.980881, 0, 1, 0, -0.980881, 0, 0.19461, -0.544058, 0, 0.304973)
-shape = SubResource("7")
+shape = SubResource("BoxShape3D_y6q1e")
 
 [node name="CollisionShape3" type="CollisionShape3D" parent="."]
 transform = Transform3D(-0.424705, 0, 0.905332, 0, 1, 0, -0.905332, 0, -0.424705, 0.474833, 0, 0.472687)

@@ -388,6 +388,8 @@ func player_load_physics() -> void:
 	position.y = 0
 	continuous_cd = true
 	axis_lock_linear_y = false
+	axis_lock_angular_x = false
+	axis_lock_angular_z = false
 	RightPoint.hide()
 	LeftPoint.hide()
 	PivotPoint.hide()

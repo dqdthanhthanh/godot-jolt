@@ -1295,10 +1295,7 @@ locale_filter=[0, ["vi_VN"]]
 
 [physics]
 
-common/max_physics_steps_per_frame=24
-3d/physics_engine="JoltPhysics3D"
 common/physics_fps=150
-jolt_3d/simulation/more_deterministic=true
 
 [rendering]
 
