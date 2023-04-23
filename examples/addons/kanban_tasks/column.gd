@@ -8,7 +8,7 @@ var board
 # but upon _ready objects get stored inside (when they where loaded)
 # this behaviour results in the unusability of it before the _ready call
 # this could be changed when/if godot supports parameters for 
-# super.instantiate() like it works with super.new()
+# .instance() like it works with .new()
 var stages: Array
 
 @onready var stage_holder := $VBoxContainer
@@ -20,7 +20,7 @@ func init(board, stages):
 	
 	self.stages = stages
 
-func _ready():
+func _ready() -> void:
 	for s in stages.duplicate():
 		add_stage(board.stages[s], true)
 		stages.erase(s)

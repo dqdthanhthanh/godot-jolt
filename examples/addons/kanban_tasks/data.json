@@ -34,28 +34,36 @@
     {
       "title": "Todo",
       "tasks": [
-        34,
         35,
-        36,
-        41
+        2,
+        95,
+        38,
+        85,
+        94,
+        86,
+        46,
+        103,
+        106,
+        107
       ]
     },
     {
       "title": "Doing",
       "tasks": [
-        38,
-        2,
-        43,
-        52,
-        56,
-        46
+        105,
+        113,
+        114,
+        115,
+        116
       ]
     },
     {
       "title": "Bug",
       "tasks": [
-        58,
-        59
+        59,
+        109,
+        108,
+        93
       ]
     },
     {
@@ -109,7 +117,55 @@
         53,
         55,
         57,
-        60
+        60,
+        61,
+        63,
+        62,
+        65,
+        58,
+        68,
+        43,
+        34,
+        67,
+        36,
+        69,
+        52,
+        72,
+        56,
+        71,
+        64,
+        74,
+        73,
+        77,
+        78,
+        76,
+        79,
+        66,
+        82,
+        81,
+        87,
+        88,
+        80,
+        41,
+        91,
+        90,
+        92,
+        75,
+        98,
+        99,
+        84,
+        100,
+        96,
+        102,
+        104,
+        83,
+        70,
+        101,
+        89,
+        110,
+        111,
+        112,
+        97
       ]
     }
   ],
@@ -417,6 +473,286 @@
     {
       "category": 0,
       "title": "Player accurate shoot",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Shop",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Add Developer Lock Tag Button",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "AccountSystem",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "SettingSystem",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "3D, shadow, graphics",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Guild, tutorial",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Ngược hướng khi chuyền về ",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Stadim, ball effect",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Khoá khi thay người",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Finish frist demo",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Player Stats Performance",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Improve Replay Video",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Optimized Caculate MatchSeason",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Add image demo showcase plaform",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Add text demo introduce plaform",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Add follower features",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Save MatchSeason MainGame",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Game Reward Noti",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Season Save Match Non Player Match = Main Player",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Save formation tactic",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Video demo Guide",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Tách Data",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Frist Video Demo",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "UI team acton: sub, tactic",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Add some league test",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Info match price",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Video dont play on ios",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "UI play video for guide mode",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Đẩy App CHPlay",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Button SFX",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Effect op",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "MainInfo scene",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Select player not smooth",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Click effect magic sound",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Game sever",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Sub change error AI pass",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Change mode in Match Mode not smooth",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Add weather, day night",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "UI weather, day night",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Follower feature",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Field weather effect",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "AI action error clear ball",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "AI refactor new class manager",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Improve quality video guide",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Language Systerm (English,VN)",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Tích hợp google play",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Tích hợp firebase cloud data",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Optimized low android main game 20-30 fps",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Full screen android",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Voice web, android",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Op player text box",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Optimize game size",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Check music license",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Updates player skin",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Frist Impressions improve",
+      "details": ""
+    },
+    {
+      "category": 0,
+      "title": "Fix 3d scale ratio",
       "details": ""
     }
   ]

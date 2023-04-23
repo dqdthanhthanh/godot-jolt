@@ -1,323 +1,98 @@
-[gd_scene load_steps=30 format=3 uid="uid://br37m8eey4be8"]
+[gd_scene load_steps=35 format=3 uid="uid://cgu3ji60tm3s6"]
 
 [ext_resource type="Script" path="res://MGF Scene/Main Game/MainGameUI.gd" id="1"]
-[ext_resource type="PackedScene" path="res://MGF Scene/Main Game/MatchDetail.tscn" id="2"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUITeam.tres" id="2_umx0o"]
-[ext_resource type="Gradient" uid="uid://ddpxipctyrldn" path="res://Assets2D/Theme/GradientPowerBar.tres" id="5"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCN.tres" id="5_daumd"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCP.tres" id="6_rpi6s"]
-[ext_resource type="Texture2D" uid="uid://cqwpytex5f42" path="res://Assets2D/Players/football-player.png" id="7"]
-[ext_resource type="Texture2D" uid="uid://chnt2f3b4bxq7" path="res://Assets2D/Players/CB/T_KiemLua.png" id="8"]
-[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="9_cwbl4"]
-[ext_resource type="StyleBox" uid="uid://dnpw6i8kck6n8" path="res://Assets2D/Theme/btnBarBG.tres" id="9_g4dnr"]
-[ext_resource type="StyleBox" uid="uid://c6gtiv354qm60" path="res://Assets2D/Theme/btnBarFill.tres" id="10_jtsiv"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUITeamCN.tres" id="12_dmbq5"]
-[ext_resource type="Script" path="res://scripts/Button.gd" id="13"]
-[ext_resource type="StyleBox" uid="uid://bxxnlwiuwh54k" path="res://Assets2D/Theme/btnUITeamCP.tres" id="13_sgjb0"]
+[ext_resource type="PackedScene" uid="uid://i6usxc4ww8te" path="res://MGF Scene/Main Game/MatchDetail.tscn" id="2"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCN.tres" id="3"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="4"]
+[ext_resource type="Gradient" path="res://Assets2D/Theme/GradientPowerBar.tres" id="5"]
+[ext_resource type="Texture2D" uid="uid://b5i8y6x1kqdfn" path="res://Assets2D/PlayerIcon/Low/00026-1267103833.png" id="6"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/PlayerStats.tres" id="7"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUITeam.tres" id="9"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUITeamCN.tres" id="10"]
+[ext_resource type="PackedScene" uid="uid://dskfqlx77xcvy" path="res://MGF Scene/Main Game/TeamAction.tscn" id="11"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUITeamCP.tres" id="12"]
+[ext_resource type="Texture2D" uid="uid://tra8ndcv8p68" path="res://Assets2D/TeamLogo/Low/CB.png" id="13"]
 [ext_resource type="Script" path="res://MGF Scene/Main Game/GameSpeed.gd" id="14"]
-[ext_resource type="Texture2D" uid="uid://bd2iixuaf8tln" path="res://Assets2D/Logo/CB.png" id="15"]
-[ext_resource type="PackedScene" path="res://MGF Scene/Main Game/TestMode.tscn" id="18"]
-[ext_resource type="PackedScene" path="res://MGF Scene/Formation/Formation.tscn" id="20"]
-[ext_resource type="Texture2D" uid="uid://d126nb33axa2c" path="res://Assets2D/UI/iconMenu.png" id="21"]
-[ext_resource type="Texture2D" uid="uid://b6edpxpmxt5pr" path="res://Assets2D/UI/iconMovement.png" id="22"]
-[ext_resource type="PackedScene" path="res://MGF Scene/Main Game/VideoPlayer.tscn" id="24"]
-[ext_resource type="Texture2D" uid="uid://bmsi7bybrfwll" path="res://Assets2D/UI/iconTest.png" id="25"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/score_font.tres" id="16"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCP.tres" id="17"]
+[ext_resource type="PackedScene" uid="uid://bs4jigy8rr3ae" path="res://MGF Scene/Formation/Formation.tscn" id="20"]
+[ext_resource type="Texture2D" uid="uid://c31n8qoq1b5qu" path="res://Assets2D/UI/iconMenu.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://gqd7kxq1otk6" path="res://Assets2D/UI/iconMovement.png" id="22"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UILarge.tres" id="23"]
+[ext_resource type="PackedScene" uid="uid://dxthojl7my4wq" path="res://MGF Scene/Main Game/ReplayPlayer.tscn" id="24"]
+[ext_resource type="Texture2D" uid="uid://b6m0p61qkdgy0" path="res://Assets2D/UI/iconTest.png" id="25"]
 [ext_resource type="Script" path="res://MGF Scene/Main Game/ProgressTurn.gd" id="26"]
-[ext_resource type="Texture2D" uid="uid://blfxknufhe437" path="res://Assets2D/UI/iconPlay.png" id="28"]
-[ext_resource type="Texture2D" uid="uid://dddhxpbfm2nts" path="res://Assets2D/UI/IconMovePlay.png" id="29"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUITeamPlayerGoal.tres" id="27"]
+[ext_resource type="Texture2D" uid="uid://ba2hbny8gk5aj" path="res://Assets2D/UI/iconPlay.png" id="28"]
 [ext_resource type="Script" path="res://addons/mgf_tools/ButtonToggle.gd" id="30"]
-[ext_resource type="Texture2D" uid="uid://2i37u48gx0nm" path="res://Assets2D/UI/IconMoveRight.png" id="31"]
-[ext_resource type="Texture2D" uid="uid://bctrlkp7quf7q" path="res://Assets2D/UI/iconNormalForward.png" id="32"]
-
-[sub_resource type="CanvasItemMaterial" id="5"]
-light_mode = 1
+[ext_resource type="Texture2D" uid="uid://db2enp2x7akio" path="res://Assets2D/UI/IconMoveRight.png" id="31"]
+[ext_resource type="Texture2D" uid="uid://605a7mgrfj8j" path="res://Assets2D/UI/iconNormalForward.png" id="32"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Main Game/BlvVoice.tscn" id="33"]
+[ext_resource type="PackedScene" path="res://MGF Scene/MiniMap/MiniMap.tscn" id="34"]
+[ext_resource type="PackedScene" path="res://addons/ACVoice/ACVoicebox.tscn" id="36"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGO.tres" id="37"]
+[ext_resource type="Texture2D" uid="uid://dcf8vhh2mshf8" path="res://Assets2D/UI/iconBall.png" id="38"]
+[ext_resource type="Texture2D" uid="uid://drtj8ibugo33u" path="res://Assets2D/UI/IconCardFoul.png" id="39"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUITeamPlayerFouls.tres" id="41"]
 
 [node name="MainGameUI" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1")
 
-[node name="Debug" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.18125
-anchor_top = 0.0222222
-anchor_right = 0.34375
-anchor_bottom = 0.0888889
-
 [node name="PanelScore" type="Panel" parent="."]
-offset_left = 32.0
-offset_top = 16.0
-offset_right = 238.001
-offset_bottom = 91.0001
-scale = Vector2(1.0017, 1)
-theme_override_styles/panel = ExtResource("2_umx0o")
-metadata/_edit_group_ = true
+offset_left = 64.0
+offset_top = 24.0
+offset_right = 270.001
+offset_bottom = 99.0001
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9")
 
 [node name="Score" type="HBoxContainer" parent="PanelScore"]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme_override_constants/separation = 8
 alignment = 1
 
 [node name="Teamselect1" type="TextureRect" parent="PanelScore/Score"]
 custom_minimum_size = Vector2(64, 54)
 layout_mode = 2
-texture = ExtResource("15")
+mouse_filter = 2
+texture = ExtResource("13")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="teamGoal1" type="Label" parent="PanelScore/Score"]
 process_priority = -5
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("16")
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="space" type="Label" parent="PanelScore/Score"]
 process_priority = -5
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 25
-text = " - "
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_fonts/font = ExtResource("16")
+text = "-"
 
 [node name="teamGoal2" type="Label" parent="PanelScore/Score"]
 process_priority = -5
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("16")
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Teamselect2" type="TextureRect" parent="PanelScore/Score"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-texture = ExtResource("15")
+mouse_filter = 2
+texture = ExtResource("13")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
-[node name="TeamStats" type="Panel" parent="."]
-offset_left = 32.0
-offset_top = 104.0
-offset_right = 238.001
-offset_bottom = 224.0
-theme_override_styles/panel = ExtResource("2_umx0o")
-metadata/_edit_group_ = true
-
-[node name="TeamAStats" type="ItemList" parent="TeamStats"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -52.0
-offset_right = 96.0
-offset_bottom = 52.0
-select_mode = 1
-max_columns = 4
-
-[node name="teamOve" type="Label" parent="TeamStats/TeamAStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.75
-anchor_top = 0.0769231
-anchor_right = 2.5
-anchor_bottom = 0.451923
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="teamAtk" type="Label" parent="TeamStats/TeamAStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.75
-anchor_top = 0.307692
-anchor_right = 2.5
-anchor_bottom = 0.721154
-offset_bottom = -4.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="teamMid" type="Label" parent="TeamStats/TeamAStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.75
-anchor_top = 0.538462
-anchor_right = 2.5
-anchor_bottom = 0.951923
-offset_bottom = -4.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="teamDef" type="Label" parent="TeamStats/TeamAStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.75
-anchor_top = 0.769231
-anchor_right = 2.5
-anchor_bottom = 1.18269
-offset_bottom = -4.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="teamOve2" type="Label" parent="TeamStats/TeamAStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.166667
-anchor_top = 0.0769231
-anchor_right = 1.91667
-anchor_bottom = 0.451923
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "AVG"
-
-[node name="teamDef2" type="Label" parent="TeamStats/TeamAStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.166667
-anchor_top = 0.307692
-anchor_right = 1.91667
-anchor_bottom = 0.721154
-offset_bottom = -4.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "ATK
-"
-
-[node name="teamMid2" type="Label" parent="TeamStats/TeamAStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.166667
-anchor_top = 0.538462
-anchor_right = 1.91667
-anchor_bottom = 1.17308
-offset_bottom = -5.99999
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "MID
-
-"
-
-[node name="teamFor2" type="Label" parent="TeamStats/TeamAStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.166667
-anchor_top = 0.769231
-anchor_right = 1.91667
-anchor_bottom = 1.40385
-offset_bottom = -6.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "DEF
-
-"
-
-[node name="TeamBStats" type="ItemList" parent="TeamStats"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -96.0
-offset_top = -52.0
-offset_bottom = 52.0
-select_mode = 1
-max_columns = 4
-
-[node name="teamOve" type="Label" parent="TeamStats/TeamBStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.166667
-anchor_top = 0.0769231
-anchor_right = 1.91667
-anchor_bottom = 0.451923
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="teamAtk" type="Label" parent="TeamStats/TeamBStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.166667
-anchor_top = 0.307692
-anchor_right = 1.91667
-anchor_bottom = 0.721154
-offset_bottom = -4.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="teamMid" type="Label" parent="TeamStats/TeamBStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.166667
-anchor_top = 0.538462
-anchor_right = 1.91667
-anchor_bottom = 0.951923
-offset_bottom = -4.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="teamDef" type="Label" parent="TeamStats/TeamBStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.166667
-anchor_top = 0.769231
-anchor_right = 1.91667
-anchor_bottom = 1.18269
-offset_bottom = -4.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="teamOve2" type="Label" parent="TeamStats/TeamBStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.583333
-anchor_top = 0.0769231
-anchor_right = 2.33333
-anchor_bottom = 0.490385
-offset_bottom = -4.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "AVG
-"
-
-[node name="teamDef2" type="Label" parent="TeamStats/TeamBStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.583333
-anchor_top = 0.307692
-anchor_right = 2.33333
-anchor_bottom = 0.721154
-offset_bottom = -4.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "ATK
-"
-
-[node name="teamMid2" type="Label" parent="TeamStats/TeamBStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.583333
-anchor_top = 0.538462
-anchor_right = 2.33333
-anchor_bottom = 1.17308
-offset_bottom = -5.99999
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "MID
-
-"
-
-[node name="teamFor2" type="Label" parent="TeamStats/TeamBStats" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.583333
-anchor_top = 0.769231
-anchor_right = 2.33333
-anchor_bottom = 1.34615
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "DEF
-"
+[node name="BlvVoice" parent="." instance=ExtResource("33")]
+offset_left = 336.0
+offset_top = 24.0
+offset_right = 640.0
+offset_bottom = 96.0
 
 [node name="BarInfo" type="Panel" parent="."]
 anchors_preset = 5
@@ -328,30 +103,8 @@ offset_top = 32.0
 offset_right = 192.0
 offset_bottom = 88.0
 scale = Vector2(0.998767, 1)
-theme_override_styles/panel = ExtResource("2_umx0o")
-metadata/_edit_group_ = true
-
-[node name="BtnSpeed" type="Button" parent="BarInfo"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -55.595
-offset_top = -20.0
-offset_right = -15.5953
-offset_bottom = 20.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 20
-theme_override_styles/normal = ExtResource("5_daumd")
-theme_override_styles/hover = ExtResource("6_rpi6s")
-theme_override_styles/pressed = ExtResource("6_rpi6s")
-theme_override_styles/disabled = ExtResource("6_rpi6s")
-theme_override_styles/focus = ExtResource("6_rpi6s")
-icon = ExtResource("32")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("14")
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9")
 
 [node name="ProgressTurn" type="ProgressBar" parent="BarInfo"]
 layout_mode = 0
@@ -363,11 +116,10 @@ offset_left = -79.8617
 offset_top = -12.0
 offset_right = 120.137
 offset_bottom = 12.0
-theme_override_styles/background = ExtResource("9_g4dnr")
-theme_override_styles/fill = ExtResource("10_jtsiv")
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("4")
 step = 0.1
 value = 50.0
-show_percentage = false
 script = ExtResource("26")
 gradient = ExtResource("5")
 
@@ -382,14 +134,38 @@ anchor_bottom = 0.5
 offset_top = -35.0
 offset_right = 112.0
 offset_bottom = 36.0
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="Time" type="Label" parent="BarInfo/Margin"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("4")
 text = "0/90"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="BtnSpeed" type="Button" parent="BarInfo"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -55.595
+offset_top = -20.0
+offset_right = -15.5953
+offset_bottom = 20.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4")
+theme_override_styles/normal = ExtResource("3")
+theme_override_styles/hover = ExtResource("17")
+theme_override_styles/pressed = ExtResource("17")
+theme_override_styles/disabled = ExtResource("3")
+theme_override_styles/focus = ExtResource("3")
+icon = ExtResource("32")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("14")
 
 [node name="PlayerGameStats" type="HBoxContainer" parent="."]
 anchors_preset = 5
@@ -400,12 +176,12 @@ offset_top = 112.0
 offset_right = 208.0
 offset_bottom = 336.0
 alignment = 1
-metadata/_edit_group_ = true
 
 [node name="GoalInfo" type="Panel" parent="PlayerGameStats"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_styles/panel = ExtResource("2_umx0o")
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("27")
 
 [node name="teamTex" type="TextureRect" parent="PlayerGameStats/GoalInfo"]
 modulate = Color(1, 1, 1, 0.156863)
@@ -413,50 +189,104 @@ layout_mode = 0
 anchor_left = 0.0111111
 anchor_right = 0.988889
 anchor_bottom = 0.75
-texture = ExtResource("15")
+mouse_filter = 2
+texture = ExtResource("13")
 expand_mode = 1
-stretch_mode = 5
 
 [node name="playerTex" type="TextureRect" parent="PlayerGameStats/GoalInfo"]
 layout_mode = 0
-anchor_left = 0.208333
-anchor_right = 0.791667
-anchor_bottom = 1.0
-texture = ExtResource("8")
+anchor_left = 0.06
+anchor_top = 0.107143
+anchor_right = 0.94
+anchor_bottom = 0.714286
+mouse_filter = 2
+texture = ExtResource("6")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 6
 
 [node name="goalInfo" type="Label" parent="PlayerGameStats/GoalInfo"]
 layout_mode = 0
 anchor_top = 0.625
 anchor_right = 1.0
 anchor_bottom = 0.892857
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("23")
 text = "Goal Turn 20"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="playerName" type="Label" parent="PlayerGameStats/GoalInfo"]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 0.166667
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("4")
 text = "Kiếm Lứa"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="goalsInfo" type="Label" parent="PlayerGameStats/GoalInfo"]
 layout_mode = 0
 anchor_top = 0.821429
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 20
+theme_override_fonts/font = ExtResource("4")
 text = "Goal Turn 20"
-horizontal_alignment = 1
-vertical_alignment = 1
+
+[node name="PlayerGameFouls" type="HBoxContainer" parent="."]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 112.0
+offset_right = 208.0
+offset_bottom = 336.0
+alignment = 1
+
+[node name="FoulsInfo" type="Panel" parent="PlayerGameFouls"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("41")
+
+[node name="teamTex" type="TextureRect" parent="PlayerGameFouls/FoulsInfo"]
+modulate = Color(1, 1, 1, 0.156863)
+layout_mode = 0
+anchor_left = 0.0111111
+anchor_right = 0.988889
+anchor_bottom = 0.75
+mouse_filter = 2
+texture = ExtResource("13")
+expand_mode = 1
+
+[node name="playerTex" type="TextureRect" parent="PlayerGameFouls/FoulsInfo"]
+layout_mode = 0
+anchor_left = 0.06
+anchor_top = 0.107143
+anchor_right = 0.94
+anchor_bottom = 0.714286
+mouse_filter = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="foulInfo" type="Label" parent="PlayerGameFouls/FoulsInfo"]
+layout_mode = 0
+anchor_top = 0.625
+anchor_right = 1.0
+anchor_bottom = 0.892857
+theme_override_fonts/font = ExtResource("23")
+text = "Yellow Card"
+
+[node name="playerName" type="Label" parent="PlayerGameFouls/FoulsInfo"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.166667
+theme_override_fonts/font = ExtResource("4")
+text = "Kiếm Lứa"
+
+[node name="foulsInfo" type="Label" parent="PlayerGameFouls/FoulsInfo"]
+layout_mode = 0
+anchor_top = 0.821429
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_fonts/font = ExtResource("4")
+text = "Fouls: 2"
 
 [node name="Notification" type="Panel" parent="."]
 anchors_preset = 8
@@ -468,8 +298,8 @@ offset_left = -152.0
 offset_top = -54.0
 offset_right = 152.0
 offset_bottom = 58.0
-theme_override_styles/panel = ExtResource("2_umx0o")
-metadata/_edit_group_ = true
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("9")
 
 [node name="image" type="TextureRect" parent="Notification"]
 layout_mode = 0
@@ -479,9 +309,9 @@ offset_left = 24.0
 offset_top = -46.0
 offset_right = 112.0
 offset_bottom = 42.0
-texture = ExtResource("15")
+mouse_filter = 2
+texture = ExtResource("13")
 expand_mode = 1
-stretch_mode = 5
 
 [node name="text" type="Label" parent="Notification"]
 layout_mode = 0
@@ -493,997 +323,201 @@ offset_left = -192.0
 offset_top = -30.0
 offset_right = -12.0
 offset_bottom = 28.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("23")
 text = "CB Turn"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="PlayerStats" type="ItemList" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-show_behind_parent = true
+[node name="Debug" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -160.0
+offset_top = 104.0
+offset_right = 160.0
+offset_bottom = 159.0
+theme_override_fonts/font = ExtResource("4")
+
+[node name="MiniMap" parent="." instance=ExtResource("34")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -272.0
-offset_top = -252.0
-offset_right = 272.0
-offset_bottom = -48.0
-select_mode = 1
-max_columns = 4
-metadata/_edit_group_ = true
+offset_left = -128.0
+offset_top = -172.0
+offset_right = 128.0
+offset_bottom = -22.0
 
-[node name="TextureRect3" type="Panel" parent="PlayerStats"]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme_override_styles/panel = ExtResource("2_umx0o")
+[node name="TeamAction" parent="MiniMap" instance=ExtResource("11")]
+layout_mode = 2
+isVisible = false
 
-[node name="TexturePlayer0" type="TextureRect" parent="PlayerStats"]
-material = SubResource("5")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -416.0
+[node name="ReplayPlayer" parent="." instance=ExtResource("24")]
+visible = false
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="namePlayer" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 40.0
-offset_right = 296.0
-offset_bottom = 62.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Name"
-
-[node name="playerPosition" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 72.0
-offset_right = 368.0
-offset_bottom = 115.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0
-"
-
-[node name="nameGoals" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 96.0
-offset_right = 368.0
-offset_bottom = 139.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0
-"
-
-[node name="playerAssits" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 120.0
-offset_right = 368.0
-offset_bottom = 163.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0
-"
-
-[node name="playerPasses" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 144.0
-offset_right = 368.0
-offset_bottom = 187.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0
-"
-
-[node name="playerMoves" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 168.0
-offset_right = 368.0
-offset_bottom = 211.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0
-"
-
-[node name="playerPosition2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 72.0
-offset_right = 296.0
-offset_bottom = 115.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Position
-"
-
-[node name="nameGoal2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 96.0
-offset_right = 296.0
-offset_bottom = 139.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Goals
-"
-
-[node name="playerAssit2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 120.0
-offset_right = 296.0
-offset_bottom = 140.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Assits"
-
-[node name="playerPasses2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 144.0
-offset_right = 296.0
-offset_bottom = 164.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Passes"
-
-[node name="playerMoves2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 128.0
-offset_top = 168.0
-offset_right = 296.0
-offset_bottom = 211.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Moves
-"
-
-[node name="playerOverall" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 313.0
-offset_top = 24.0
-offset_right = 481.0
-offset_bottom = 63.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerOverall2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 241.0
-offset_top = 24.0
-offset_right = 409.0
-offset_bottom = 67.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Overall
-"
-
-[node name="playerFinishing" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 312.0
-offset_top = 48.0
-offset_right = 480.0
-offset_bottom = 87.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerFinishing2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 48.0
-offset_right = 408.0
-offset_bottom = 87.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Finishing"
-
-[node name="playerShotPower" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 312.0
-offset_top = 72.0
-offset_right = 480.0
-offset_bottom = 92.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerShotPower2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 72.0
-offset_right = 408.0
-offset_bottom = 92.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "ShPower"
-
-[node name="playerInterception" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 312.0
-offset_top = 96.0
-offset_right = 480.0
-offset_bottom = 116.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerPass" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 312.0
-offset_top = 120.0
-offset_right = 480.0
-offset_bottom = 140.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerSpeed" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 312.0
-offset_top = 144.0
-offset_right = 480.0
-offset_bottom = 164.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerControll" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 312.0
-offset_top = 168.0
-offset_right = 480.0
-offset_bottom = 188.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerInterception2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 96.0
-offset_right = 408.0
-offset_bottom = 116.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Intercep"
-
-[node name="playerPass2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 120.0
-offset_right = 408.0
-offset_bottom = 140.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Pass"
-
-[node name="playerSpeed2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 144.0
-offset_right = 408.0
-offset_bottom = 164.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Speed"
-
-[node name="playerControll2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 168.0
-offset_right = 408.0
-offset_bottom = 188.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Controll"
-
-[node name="playerPotential" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 417.0
-offset_top = 24.0
-offset_right = 585.0
-offset_bottom = 84.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerPotential2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 345.0
-offset_top = 24.0
-offset_right = 513.0
-offset_bottom = 90.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Potential
-
-"
-
-[node name="playerStamina" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 417.0
-offset_top = 48.0
-offset_right = 585.0
-offset_bottom = 68.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerStamina2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 345.0
-offset_top = 48.0
-offset_right = 513.0
-offset_bottom = 68.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Stamina"
-
-[node name="playerPower" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 417.0
-offset_top = 72.0
-offset_right = 585.0
-offset_bottom = 92.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerPower2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 345.0
-offset_top = 72.0
-offset_right = 513.0
-offset_bottom = 92.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Power"
-
-[node name="playerBody" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 417.0
-offset_top = 96.0
-offset_right = 585.0
-offset_bottom = 116.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerBody2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 345.0
-offset_top = 96.0
-offset_right = 513.0
-offset_bottom = 116.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Body"
-
-[node name="playerReflexes" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 417.0
-offset_top = 120.0
-offset_right = 585.0
-offset_bottom = 140.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerReflexes2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 345.0
-offset_top = 120.0
-offset_right = 513.0
-offset_bottom = 140.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Reflexes"
-
-[node name="playerDefend" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 417.0
-offset_top = 144.0
-offset_right = 585.0
-offset_bottom = 164.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerDefend2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 345.0
-offset_top = 144.0
-offset_right = 513.0
-offset_bottom = 164.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Defend"
-
-[node name="playerPenSave" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 416.0
-offset_top = 168.0
-offset_right = 584.0
-offset_bottom = 228.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0"
-
-[node name="playerPenSave2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 344.0
-offset_top = 168.0
-offset_right = 512.0
-offset_bottom = 234.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "PenSave
-
-"
-
-[node name="playerStatGames" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 512.0
-offset_top = 56.0
-offset_right = 680.0
-offset_bottom = 99.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0
-"
-
-[node name="playerStatGoals" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 512.0
-offset_top = 80.0
-offset_right = 680.0
-offset_bottom = 123.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0
-"
-
-[node name="playerStatAssits" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 512.0
-offset_top = 104.0
-offset_right = 680.0
-offset_bottom = 147.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "0
-"
-
-[node name="playerStatGames2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 448.0
-offset_top = 56.0
-offset_right = 616.0
-offset_bottom = 95.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Game"
-
-[node name="playerStatGoals2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 448.0
-offset_top = 80.0
-offset_right = 616.0
-offset_bottom = 123.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Goals
-"
-
-[node name="playerStatAssits2" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 448.0
-offset_top = 104.0
-offset_right = 616.0
-offset_bottom = 124.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "Assits"
-
-[node name="playerState" type="Label" parent="PlayerStats" groups=["labels"]]
-layout_mode = 0
-offset_left = 448.0
-offset_top = 152.0
-offset_right = 616.0
-offset_bottom = 195.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 17
-text = "
-"
-
-[node name="PlayerEdit" type="VBoxContainer" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -288.0
-offset_top = -320.0
-offset_right = 60.0
-offset_bottom = 61.0
-scale = Vector2(0.8, 0.8)
-metadata/_edit_group_ = true
-
-[node name="Finishing" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Finishing"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Finishing"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Finishing"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="ShotPower" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Shot Power"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/ShotPower"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/ShotPower"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Intercept" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Intercept"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Intercept"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Intercept"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Pass" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Pass"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Pass"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Pass"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Speed" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Speed"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Speed"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Speed"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Ball Control" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Ball Control"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Ball Control"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Ball Control"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Stamina" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Stamina"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Stamina"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Stamina"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Power" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Power"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Power"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Power"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Body" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Body"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Body"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Body"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Reflexes" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Reflexes"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Reflexes"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Reflexes"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Defend" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "Defend"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/Defend"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/Defend"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="PenSave" type="Label" parent="PlayerEdit"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "PenSave"
-vertical_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="PlayerEdit/PenSave"]
-layout_mode = 0
-offset_left = 200.0
-offset_right = 339.0
-offset_bottom = 29.0
-min_value = 1.0
-max_value = 99.0
-value = 50.0
-
-[node name="Label" type="Label" parent="PlayerEdit/PenSave"]
-layout_mode = 0
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -198.0
-offset_top = -17.0
-offset_right = -170.0
-offset_bottom = 17.0
-theme_override_fonts/font = ExtResource("9_cwbl4")
-theme_override_font_sizes/font_size = 18
-text = "50"
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="PlayerEdit"]
-custom_minimum_size = Vector2(0.466, 0)
-layout_mode = 2
-theme_override_styles/normal = ExtResource("12_dmbq5")
-theme_override_styles/hover = ExtResource("13_sgjb0")
-theme_override_styles/pressed = ExtResource("13_sgjb0")
-theme_override_styles/disabled = ExtResource("13_sgjb0")
-theme_override_styles/focus = ExtResource("13_sgjb0")
-text = "Apply"
-expand_icon = true
-
-[node name="Panel" type="Panel" parent="PlayerEdit"]
-layout_mode = 2
-
-[node name="VideoStreamPlayer" parent="." instance=ExtResource("24")]
-visible = false
-
-[node name="TestMode" parent="." instance=ExtResource("18")]
-visible = false
 
 [node name="MainBtn" type="HBoxContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -504.0
+offset_left = -734.0
 offset_top = 24.0
 offset_right = -24.0
 offset_bottom = 96.0
-grow_horizontal = 0
+mouse_filter = 2
 theme_override_constants/separation = 30
 alignment = 2
+
+[node name="PlayerStats" type="Button" parent="MainBtn"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("10")
+theme_override_styles/hover = ExtResource("12")
+theme_override_styles/pressed = ExtResource("12")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
+
+[node name="Icon" type="TextureRect" parent="MainBtn/PlayerStats"]
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -36.0
+offset_right = 88.0
+offset_bottom = 36.0
+mouse_filter = 2
+texture = ExtResource("6")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Name" type="Label" parent="MainBtn/PlayerStats"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 56.0
+offset_bottom = -32.0
+theme_override_fonts/font = ExtResource("7")
+text = "Hello"
+clip_text = true
+
+[node name="ID" type="Label" parent="MainBtn/PlayerStats"]
+visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_fonts/font = ExtResource("7")
+text = "0"
+clip_text = true
+
+[node name="Goal" type="Button" parent="MainBtn/PlayerStats"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -32.0
+offset_right = 28.0
+offset_bottom = -8.0
+mouse_filter = 2
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7")
+theme_override_styles/normal = ExtResource("37")
+theme_override_styles/hover = ExtResource("37")
+theme_override_styles/pressed = ExtResource("37")
+theme_override_styles/disabled = ExtResource("37")
+theme_override_styles/focus = ExtResource("37")
+text = "0"
+icon = ExtResource("38")
+clip_text = true
+expand_icon = true
+
+[node name="Foul" type="Button" parent="MainBtn/PlayerStats"]
+modulate = Color(1, 0.843137, 0, 1)
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = -32.0
+offset_right = 84.0
+offset_bottom = -8.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("7")
+theme_override_styles/normal = ExtResource("37")
+theme_override_styles/hover = ExtResource("37")
+theme_override_styles/pressed = ExtResource("37")
+theme_override_styles/disabled = ExtResource("37")
+theme_override_styles/focus = ExtResource("37")
+text = "0"
+icon = ExtResource("39")
+clip_text = true
+expand_icon = true
+
+[node name="ACVoicebox" parent="MainBtn/PlayerStats" instance=ExtResource("36")]
+bus = &"Master"
 
 [node name="BtnTestMode" type="Button" parent="MainBtn"]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 tooltip_text = "TestMode"
-theme_override_styles/normal = ExtResource("12_dmbq5")
-theme_override_styles/hover = ExtResource("13_sgjb0")
-theme_override_styles/pressed = ExtResource("13_sgjb0")
-theme_override_styles/disabled = ExtResource("13_sgjb0")
-theme_override_styles/focus = ExtResource("13_sgjb0")
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4")
+theme_override_styles/normal = ExtResource("10")
+theme_override_styles/hover = ExtResource("12")
+theme_override_styles/pressed = ExtResource("12")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
 toggle_mode = true
 icon = ExtResource("25")
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("13")
 
 [node name="BtnPlayReplay" type="Button" parent="MainBtn"]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 tooltip_text = "Replay"
-theme_override_styles/normal = ExtResource("12_dmbq5")
-theme_override_styles/hover = ExtResource("13_sgjb0")
-theme_override_styles/pressed = ExtResource("13_sgjb0")
-theme_override_styles/disabled = ExtResource("13_sgjb0")
-theme_override_styles/focus = ExtResource("13_sgjb0")
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4")
+theme_override_styles/normal = ExtResource("10")
+theme_override_styles/hover = ExtResource("12")
+theme_override_styles/pressed = ExtResource("12")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
 toggle_mode = true
 icon = ExtResource("28")
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("13")
 
 [node name="BtnChangeMode" type="Button" parent="MainBtn"]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 tooltip_text = "AutoMode"
-theme_override_styles/normal = ExtResource("12_dmbq5")
-theme_override_styles/hover = ExtResource("13_sgjb0")
-theme_override_styles/pressed = ExtResource("13_sgjb0")
-theme_override_styles/disabled = ExtResource("13_sgjb0")
-theme_override_styles/focus = ExtResource("13_sgjb0")
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4")
+theme_override_styles/normal = ExtResource("10")
+theme_override_styles/hover = ExtResource("12")
+theme_override_styles/pressed = ExtResource("12")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("12")
 icon = ExtResource("31")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("30")
-toggleOn = ExtResource("29")
-toggleOff = ExtResource("31")
 
 [node name="BtnCamMode" type="Button" parent="MainBtn"]
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 tooltip_text = "ResetCamera"
-theme_override_styles/normal = ExtResource("12_dmbq5")
-theme_override_styles/hover = ExtResource("13_sgjb0")
-theme_override_styles/pressed = ExtResource("13_sgjb0")
-theme_override_styles/disabled = ExtResource("13_sgjb0")
-theme_override_styles/focus = ExtResource("13_sgjb0")
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4")
+theme_override_styles/normal = ExtResource("10")
+theme_override_styles/hover = ExtResource("12")
+theme_override_styles/pressed = ExtResource("12")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
 icon = ExtResource("22")
 icon_alignment = 1
 expand_icon = true
@@ -1492,41 +526,90 @@ expand_icon = true
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
 tooltip_text = "Menu"
-theme_override_styles/normal = ExtResource("12_dmbq5")
-theme_override_styles/hover = ExtResource("13_sgjb0")
-theme_override_styles/pressed = ExtResource("13_sgjb0")
-theme_override_styles/disabled = ExtResource("13_sgjb0")
-theme_override_styles/focus = ExtResource("13_sgjb0")
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("4")
+theme_override_styles/normal = ExtResource("10")
+theme_override_styles/hover = ExtResource("12")
+theme_override_styles/pressed = ExtResource("12")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
 toggle_mode = true
 icon = ExtResource("21")
 icon_alignment = 1
 expand_icon = true
-script = ExtResource("13")
+
+[node name="GuideMode" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TestMode" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerInfo" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="MatchDetail" parent="." instance=ExtResource("2")]
-offset_top = 850.0
-offset_bottom = 850.0
+visible = false
 
 [node name="Formation" parent="." instance=ExtResource("20")]
 visible = false
 
-[node name="Controller" type="Control" parent="."]
+[node name="PlayerPerformance" type="Control" parent="."]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 240.0
-offset_bottom = 88.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[connection signal="pressed" from="BarInfo/BtnSpeed" to="BarInfo/BtnSpeed" method="_on_BtnSpeed_pressed"]
+[node name="MatchList" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="GameReward" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [connection signal="value_changed" from="BarInfo/ProgressTurn" to="BarInfo/ProgressTurn" method="_on_ProgressTurn_value_changed"]
 [connection signal="timeout" from="BarInfo/ProgressTurn/Timer" to="BarInfo/ProgressTurn" method="_on_Timer_timeout"]
+[connection signal="pressed" from="BarInfo/BtnSpeed" to="BarInfo/BtnSpeed" method="_on_BtnSpeed_pressed"]
+[connection signal="pressed" from="MainBtn/PlayerStats" to="." method="_on_player_info_pressed"]
 [connection signal="pressed" from="MainBtn/BtnTestMode" to="." method="_on_BtnTestMode_pressed"]
 [connection signal="pressed" from="MainBtn/BtnPlayReplay" to="." method="_on_BtnPlayReplay_pressed"]
 [connection signal="pressed" from="MainBtn/BtnChangeMode" to="." method="_on_BtnChangeMode_pressed"]
 [connection signal="pressed" from="MainBtn/BtnCamMode" to="." method="_on_BtnCamMode_pressed"]
 [connection signal="pressed" from="MainBtn/BtnMatchDetail" to="." method="_on_BtnMatchDetail_pressed"]
-[connection signal="pressed" from="Formation/ButtonTeamSelect" to="." method="_on_ButtonTeamSelect_pressed"]
-
-[editable path="Formation"]
-[editable path="Formation/BGSetup"]
-[editable path="Formation/PanelPlayerData"]

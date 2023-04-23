@@ -1,143 +1,126 @@
 extends Control
 
 @onready var team1s
-@onready var teamAStats = $TeamSelect/TeamStats/TeamAStats
-@onready var teamSM = $TeamSelect/TeamSM/ScrollContainer/CenterContainer/GridContainer
-@onready var teamIcon = $TeamSelect/Teamselect1
-@onready var ssMatch = $SeasonMatch
-@onready var mainBtn = $MainBtn
-@onready var disable = $Disable
+@onready var teamAStats: = $TeamSelect/TeamStats/TeamAStats
+@onready var teamSM: = $TeamSelect/TeamSM
+@onready var teamIcon: = $TeamSelect/Teamselect1
+@onready var ssMatch: = $SeasonMatch
+@onready var mainBtn: = $MainBtn
+@onready var disable: = $Disable
 
-@onready var seasonMain = $SeasonMain
-@onready var seasonName = $SeasonMain/LabelBase
-@onready var tabContainer = $TabContainer
-@onready var SeasonTab = preload("res://MGF Scene/Season/SeasonTab.tscn")
-@onready var BtnTab = preload("res://MGF Scene/Season/BtnTab.tscn")
+@onready var seasonMain: = $SeasonMain
+@onready var seasonName: = $SeasonMain/LabelBase
+@onready var SeasonTab: = $SeasonTab
 
+var data = GameData.season_load_data()
 
-func _ready():
-	Settings.set_color(SeasonData.teamA)
+func _ready() -> void:
+	mainBtn.current_tab = SeasonData.TabManager
+	GlobalTheme.set_color(SeasonData.teamA)
 	$MatchInfo.hide()
 	get_set_season_name()
 	Global.MGFMode = Global.Season
 	check_league_data()
+	GameData.player_data_synchronization()
 
-func create_teams_ins():
-	var teamIns = preload("res://MGF Scene/ConfigController/Teamselect.tscn")
-	if teamSM.get_child_count()>0:
-		for unit in teamSM.get_children():
-			unit.queue_free()
+func create_teams_ins() -> void:
+	var teamIns = load("res://MGF Scene/QuickMatch/Teamselect.tscn")
 	
-	var data = GameData.season_load_data()
-	var teamData = data.teams
-	for i in teamData.size():
-		var ins = teamIns.instantiate()
-		ins.teamIcon = i
-		teamSM.add_child(ins)
+	teamSM.create_team_list()
 	
-	for unit in teamSM.get_children():
+	for unit in teamSM.group.get_children():
 		unit.add_to_group("team1")
 	team1s = get_tree().get_nodes_in_group("team1")
 	for team1 in team1s:
-		team1.connect("pressed",Callable(self,"_on_teamSelectButton").bind(team1))
+		team1.connect("pressed", Callable(self, "_on_teamSelectButton").bind(team1.id))
 
-func _on_teamSelectButton(value):
-	SeasonData.teamA = value
-	var data = GameData.season_load_data()
+func _on_teamSelectButton(value) -> void:
+	SeasonData.teamA = int(value)
 	var teamData = data.teams
-	SeasonData.teamA = value.teamIcon
-	teamIcon.icon = load(teamData[value.teamIcon].icon)
-	GameData.load_teamStats_data(teamAStats,value.teamIcon)
-	GameData.return_radarStats_data($TeamSelect/RadarChartStats,value.teamIcon)
-	Settings.set_color(SeasonData.teamA)
+	teamIcon.update_data(teamData[value])
+	GameData.load_teamStats_data(teamAStats,value)
+	GameData.return_radarStats_data($TeamSelect/RadarChartStats,value)
+	GlobalTheme.set_color(SeasonData.teamA)
 
-func _on_ButtonTeamApply_pressed():
+func _on_ButtonTeamApply_pressed() -> void:
+	await get_tree().create_timer(Global.btntime).timeout
 	var time = Time.get_datetime_dict_from_system()
 	var year = time["year"]
 	
-	var base = GameData.get_data(GameData.data_path)
-	base.season.active = 1
-	base.settings.seasons.append(year+base.settings.seasons.size())
-	base.settings.season = base.settings.seasons.size()-1
-	GameData.save_data(GameData.data_path,base)
+	var ssbase = GameData.get_data(GameData.data_path)
+	var base = GameData.get_data(GameData.setting_data_path)
+	ssbase.season.active = true
+	base.seasons.append(year+base.seasons.size())
+	base.season = base.seasons.size()-1
+	GameData.save_data(GameData.data_path,ssbase)
+	GameData.save_data(GameData.setting_data_path,base)
 	
-	var df = GameData.get_data(GameData.default_path)
-	FileData.ss.teams = df.teams
-	FileData.ss.players = df.players
+	var file_data:FileData = FileData.new()
 	
-	GameData.save_data(GameData.season_get_file_path(),FileData.ss)
+	GameData.save_data(GameData.season_get_file_path(),file_data.ss)
 	
 #	print(GameData.season_get_file_path())
 	var data = GameData.season_load_data()
 	var seasonData = data.season
-	seasonData.name = year + base.settings.seasons.size()-1
+	seasonData.name = year + base.seasons.size()-1
 	seasonData.teamA = SeasonData.teamA
 
 	GameData.save_data(GameData.season_get_file_path(),data)
 	
 	var teamName = SeasonData.get_team_select_name()
-	NotiData.create_achi(1,"New Season Achievement","First time playing season mode")
-	NotiData.create_noti("New Season "+ str(seasonData.name),teamName + ": New Season " + str(seasonData.name) + " begin")
-	$Account.notifi_active()
+	Notification.create_achi(1,"New Season Ever Achievement",["First time playing season mode"])
+	Notification.create_noti("New Season "+ str(seasonData.name),[teamName + ": New Season " + str(seasonData.name) + " begin"])
+	Account.notifi_news()
 	SeasonData.TabManager = 0
 	SceneTransition.change_scene_to_file("res://MGF Scene/Season/Season.tscn")
-	Messenger.push_notification(0,"New Season " +str(seasonData.name))
+	Notification.push_noti(2,"New Season " +str(seasonData.name))
 
-func check_league_data():
+func check_league_data() -> void:
 	var data = GameData.get_data(GameData.data_path)
 	var teamData = data.teams
 	var seasonData = data.season
-	if seasonData.active == 1:
+	if seasonData.active == true:
 		$TeamSelect.hide()
 		seasonMain.show()
 		mainBtn.show()
-		tabContainer.show()
+		SeasonTab.show()
 	else:
 		create_teams_ins()
-		teamIcon.icon = load(teamData[int(SeasonData.teamA)].icon)
+		teamIcon.icon = Team.load_team_icon(teamData[int(SeasonData.teamA)].icon)
 		GameData.load_teamStats_data(teamAStats,int(SeasonData.teamA))
 		GameData.return_radarStats_data($TeamSelect/RadarChartStats,int(SeasonData.teamA))
 		$TeamSelect.show()
 		seasonMain.hide()
 		mainBtn.hide()
-		tabContainer.hide()
+		SeasonTab.hide()
 
-func get_set_season_name():
-	var data = GameData.get_data(GameData.data_path)
-	var season = data.settings.season
-	var seasons = data.settings.seasons
+func get_set_season_name() -> void:
+	var data = GameData.get_data(GameData.setting_data_path)
+	var season = data.season
+	var seasons = data.seasons
 	
 	if seasons.size()>0:
 		seasonName.text = str(seasons[season])
-		tabContainer.get_child(0).name = str(seasons[season])
-		tabContainer.get_child(0).current_tab = SeasonData.TabManager
-		tabContainer.get_child(0).load_setup()
+		SeasonTab.load_setup()
 
-func _on_Home_pressed():
-	SceneTransition.change_scene_to_file("res://MGF Scene/UIMenu.tscn")
+func _on_Home_pressed() -> void:
+	await get_tree().create_timer(Global.btntime).timeout
+	SceneTransition.change_scene_to_file("res://MGF Scene/MainMenu.tscn")
 
-func _on_Teamselect1_pressed():
+func _on_Teamselect1_pressed() -> void:
 	FormationData.isDisable = true
 	Global.MGFMode = Global.Season
 	FormationData.teamForm = SeasonData.teamA
-	FormationData.CanFormation = true
 	FormationData.teamFor = 1
 # warning-ignore:return_value_discarded
 	SceneTransition.change_scene_to_file("res://MGF Scene/Formation/Formation.tscn")
 
-func _on_BtnManager_pressed():
-	tabContainer.get_child(0).current_tab = 0
+func _exit_tree():
+	queue_free()
 
-func _on_BtnMarket_pressed():
-	tabContainer.get_child(0).current_tab = 3
-
-func _on_BtnNextMatch_pressed():
-	SeasonData.find_match()
-	tabContainer.get_child(0).nextMatch.load_setup()
-	tabContainer.get_child(0).current_tab = 1
-
-func _on_BtnLeague_pressed():
-	tabContainer.get_child(0).current_tab = 2
-
-func _on_BtnSettings_pressed():
-	tabContainer.get_child(0).current_tab = 4
+func _on_MainBtn_on_tab_select(id):
+	await get_tree().create_timer(Global.btntime).timeout
+	SeasonData.TabManager = id
+	if id == 1:
+		SeasonData.find_match()
+		SeasonTab.nextMatch.load_setup()

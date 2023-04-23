@@ -17,13 +17,13 @@ const edit_label_script := preload("res://addons/kanban_tasks/edit_label/edit_la
 
 var board
 
-var title: String : set = set_title
+var title: String: set = set_title
 
 # currently the array is filled with indexes in the init call
 # but upon _ready objects get stored inside (when they where loaded)
 # this behaviour results in the unusability of it before the _ready call
 # this could be changed when/if godot supports parameters for 
-# super.instantiate() like it works with super.new()
+# .instance() like it works with .new()
 var tasks: Array
 
 signal change()
@@ -42,17 +42,17 @@ func init(board, title, tasks):
 	self.title = title
 	self.tasks = tasks
 
-func _ready():
+func _ready() -> void:
 	label_title.text = title
-	label_title.connect("text_changed",Callable(self,"set_title"))
+	label_title.connect("text_changed", Callable(self, "set_title"))
 	
 	scroll_container.set_drag_forwarding(self)
-	button_new.connect("pressed",Callable(self,"__on_add_button_pressed"))
+	button_new.connect("pressed", Callable(self, "__on_add_button_pressed"))
 	
-	menu_button_new.connect("about_to_popup",Callable(self,"__on_popup_about_to_show"))
-	menu_button_new.get_popup().connect("id_pressed",Callable(self,"__on_category_popup_selected"))
+	menu_button_new.connect("about_to_popup", Callable(self, "__on_popup_about_to_show"))
+	menu_button_new.get_popup().connect("id_pressed", Callable(self, "__on_category_popup_selected"))
 	
-	board.connect("categories_changed",Callable(self,"__update_add_buttons"))
+	board.connect("categories_changed", Callable(self, "__update_add_buttons"))
 	
 	for t in tasks.duplicate():
 		add_task(board.tasks[t], true)
@@ -63,7 +63,7 @@ func _ready():
 	notification(NOTIFICATION_THEME_CHANGED)
 
 #func mouse_exited():
-	#if not Rect2(Vector2(), size).has_point(get_local_mouse_position()):
+	#if not Rect2(Vector2(), rect_size).has_point(get_local_mouse_position()):
 #	update()
 
 func _input(event):
@@ -217,18 +217,18 @@ func _notification(what):
 	match(what):
 		NOTIFICATION_THEME_CHANGED:
 			if is_instance_valid(panel_container):
-				panel_container.add_theme_stylebox_override("panel", get_theme_stylebox("panel", "Tree"))
+				panel_container.add_theme_stylebox_override("panel", get_stylebox("bg", "Tree"))
 			if is_instance_valid(button_new):
 				button_new.icon = get_icon("Add", "EditorIcons")
 			if is_instance_valid(preview_color):
 				preview_color.color = get_color("font_color_fg", "TabBar")
 			if is_instance_valid(menu_button_new):
 				menu_button_new.icon = get_icon("Add", "EditorIcons")
-				menu_button_new.add_theme_stylebox_override("normal", get_theme_stylebox("normal", "Button"))
-				menu_button_new.add_theme_stylebox_override("disabled", get_theme_stylebox("disabled", "Button"))
-				menu_button_new.add_theme_stylebox_override("focus", get_theme_stylebox("focus", "Button"))
-				menu_button_new.add_theme_stylebox_override("pressed", get_theme_stylebox("pressed", "Button"))
-				menu_button_new.add_theme_stylebox_override("hover", get_theme_stylebox("hover", "Button"))
+				menu_button_new.add_theme_stylebox_override("normal", get_stylebox("normal", "Button"))
+				menu_button_new.add_theme_stylebox_override("disabled", get_stylebox("disabled", "Button"))
+				menu_button_new.add_theme_stylebox_override("focus", get_stylebox("focus", "Button"))
+				menu_button_new.add_theme_stylebox_override("pressed", get_stylebox("pressed", "Button"))
+				menu_button_new.add_theme_stylebox_override("hover", get_stylebox("hover", "Button"))
 
 func __on_category_popup_selected(id):
 	new_task(id)

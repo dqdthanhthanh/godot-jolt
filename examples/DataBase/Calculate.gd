@@ -1,8 +1,12 @@
-extends Node
+class_name Calculate
 
-var rng = RandomNumberGenerator.new()
 
-func return_day():
+static func remove_children(obj) -> void:
+	if obj.get_child_count()>0:
+		for child in obj.get_children():
+			child.queue_free()
+
+static func return_day() -> String:
 #	var timeDict = Time.get_datetime_dict_from_system();
 #	var day = str(timeDict.day);
 #	var month = str(timeDict.month);
@@ -12,100 +16,91 @@ func return_day():
 #		day = "0" + day
 #	if month.length() < 2:
 #		month = "0" + month
-	
+#
 #	return day+"/"+month+"/"+year
 	return "20/10/2023"
 
-func return_time():
-#	var unix_time: float = Time.get_unix_time_from_system()
-#	var datetime_dict: Dictionary = Time.get_datetime_dict_from_unix_time(unix_time)
-#
-##	var time = OS.get_time()
-#	var hour = String(datetime_dict.hour)
-#	var minute = String(datetime_dict.minute)
-#	var _second = String(datetime_dict.second)
+static func return_time() -> String:
+#	var time = OS.get_time()
+#	var hour = String(time.hour)
+#	var minute = String(time.minute)
+#	var _second = String(time.second)
 #
 #	if hour.length() < 2:
 #		hour = "0" + hour
 #	if minute.length() < 2:
 #		minute = "0" + minute
-#
+	
 #	return hour+":"+minute
 	return "30"+":"+"00"
 
-func tweenUIy(t,a,b,value):
-	t.interpolate_property(a, "position",
-			a.position, b, value,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	t.start()
-
-func tweenFadeOut(t,a,time):
-	t.interpolate_property(a, "modulate",
-			Color(1, 1, 1, 1), Color(1, 1, 1, 0), time,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	t.start()
-
-func tweenShowOut(t,a,time):
-	t.interpolate_property(a, "modulate",
-			Color(1, 1, 1, 0), Color(1, 1, 1, 1), time,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	t.start()
-
-func tweenValue(t,obj,x):
-	t.interpolate_property(obj, "value",
-			obj.value, x, 2,
-			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	t.start()
-
-## Lay huong tu drag input
-#if event is InputEventSingleScreenDrag:
-#	label.text = str(event.position) + " " + str(event.relative)
-#	print(rad_to_deg(event.relative.angle()))
-
-func timeout(value):
-	await get_tree().create_timer(value).timeout
-
-func timer(obj,value):
+static func timer(obj,value) -> void:
 	obj.wait_time = value
 	obj.start()
 
-func in_range(value,a,b):
+static func in_range(value,a,b):
 	if value >= float(a) and value < float(b):
 		return true
 	else:
 		return false
 
-func vibrate_set():
+static func vibrate_set() -> void:
 	if Global.device_is_mobile():
 		Input.vibrate_handheld(500)
 
-func rand_num(value):
+static func rand_ratio(ratio) -> bool:
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var ss = abs(rng.randf_range(-10, 10))
+	if ss < ratio/10:
+		return true
+	else:
+		return false
+
+static func vector3_convert(vector:Vector3) -> Vector2:
+	return Vector2(vector.x,vector.z)
+
+static func random_in_size(size):
+	randomize()
+	var rand_value = size[randi() % size.size()]
+	return rand_value
+
+static func rand_num_f0(value):
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var number = rng.randf_range(0, value)
+	return number
+
+static func rand_num(value):
+	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var number = rng.randf_range(-value, value)
 	return number
 
-func rand_a_num(a,b):
-	rng.randomize()
-	var number = rng.randf_range(a, b)
-	return number
-
-func rand_int(value):
+static func rand_int(value):
+	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var number = rng.randi_range(-value, value)
 	return number
 
-static func swap(a, b):
+static func rand_a_num(a,b):
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var number = rng.randf_range(a, b)
+	return number
+
+static func swap(a, b) -> void:
 	var tmpA = a
 	var tmpB = b
 	a = tmpB
 	b = tmpA
 
-func return_swap_value(value):
+static func return_swap_value(value):
 	var A = value
 	return A
 
 ## Cac Ham xu ly chi so
-func return_Overall(playerPosition,playerPositionMatch,fI,shP,iT,pA,sP,bC,sT,pO,bO,rF,dF,pE):
+static func return_Overall(playerPosition,playerPositionMatch,fI,shP,iT,pA,sP,bC,sT,pO,bO,rF,dF,pE):
 	var value = playerPositionMatch
 	var playerOverall
 	var statFinishing = float(fI)
@@ -151,7 +146,7 @@ func return_Overall(playerPosition,playerPositionMatch,fI,shP,iT,pA,sP,bC,sT,pO,
 	
 	return playerOverall
 
-func return_Potential(aG,oV):
+static func return_Potential(aG,oV):
 	var playerAge = float(aG)
 	var playerOverall = float(oV)
 	var playerPotential
@@ -203,7 +198,7 @@ func return_Potential(aG,oV):
 	
 	return playerPotential
 
-func stat_color(unit):
+static func stat_color(unit) -> void:
 	var value = float(unit.text)
 	if value >= 100:
 		unit.modulate = Color.AQUA
@@ -217,10 +212,8 @@ func stat_color(unit):
 		unit.modulate = Color.GOLD
 	elif in_range(value,0,60):
 		unit.modulate = Color.RED
-#	else:
-#		unit.modulate = Color.AQUAMARINE
 
-func position_color(unit):
+static func position_color(unit) -> void:
 	var value = str(unit.text)
 	if value == "GK":
 		unit.modulate = Color.CYAN
@@ -233,149 +226,5 @@ func position_color(unit):
 	else:
 		unit.modulate = Color.GOLD
 
-func price_color(unit):
+static func price_color(unit) -> void:
 	unit.modulate = Color.GOLD
-
-
-func player_point_up(id,point):
-#	var pData:String
-	if point > 0:
-		var all = 0
-		var po = 7-float(point)
-		all -= float(po)
-		point = all
-	var data = GameData.season_load_data()
-	var playerData = data.players[int(id)]
-	var playerPos = playerData.Team[1]
-#		pData = str(playerData.Name) + " "
-	var o = playerData.Overall
-	var oD = []
-	for i in o.size():
-		var a = o[i]
-		oD.append(float(a))
-#		pData += str(oD)
-	var nD = []
-	var n = 0
-	for i in o.size():
-#		var O = 100
-		var O = o[0]
-		var g = 22
-		var p = point
-		if p>0:
-			if O < 60:
-				n = remap(O,0,60,20*p,15*p)/g
-			elif O >=60 and O < 80:
-				n = remap(O,60,80,15*p,8*p)/g
-			elif O >=80 and O < 90:
-				n = remap(O,80,100,8*p,5*p)/g
-			elif O >=90 and O < 100:
-				n = remap(O,80,100,5*p,1*p)/g
-			else:
-				n = 0
-		else:
-			if O < 60:
-				n = remap(O,0,60,2*p,3*p)/g
-			elif O >=60 and O < 80:
-				n = remap(O,60,80,3*p,5*p)/g
-			elif O >=80 and O < 90:
-				n = remap(O,60,80,8*p,12*p)/g
-			elif O >=90 and O < 100:
-				n = remap(O,10,100,12*p,15*p)/g
-		n = float("%.2f" % n)
-		n = clamp(n,-10.0,100.0)
-		
-		var a = o[i]
-		
-		if i == 0:
-			a += n
-		## Tinh theo vt
-		if playerPos == "GK":
-			if i == 1:
-				a += n/4
-			elif i == 2:
-				a += n/3
-			elif i == 3:
-				a += n/2
-			elif i == 4:
-				a += n
-		elif playerPos == "CB" or playerPos == "LB" or playerPos == "RB":
-			if i == 1:
-				a += n/4
-			elif i == 2:
-				a += n/2
-			elif i == 3:
-				a += n
-		elif playerPos == "CM":
-			if i == 1:
-				a += n/2
-			elif i == 2:
-				a += n
-			elif i == 3:
-				a += n/4
-		elif playerPos == "RF" or playerPos == "LF":
-			if i == 1:
-				a += n
-			elif i == 2:
-				a += n/2
-			elif i == 3:
-				a += n/4
-		a = clamp(a,0.0,99.0)
-		nD.append(a)
-	data.players[id].Overall = nD
-	
-	## All Stats
-	var S = playerData.Stat
-	var stats = []
-	
-	for i in S.size():
-		if i < 13:
-			var s = S[i]
-			if i == 4 or i == 5 or i == 6 or i == 7:
-				s += n/2
-			elif i == 12:
-				s += n/2
-			## Tinh theo vt
-			if playerPos == "GK":
-				if i == 2 or i == 3:
-					s += n/2
-				elif i == 8 or i == 9:
-					s += n/2
-				elif i == 10 or i == 11:
-					s += n
-			elif playerPos == "CB" or playerPos == "LB" or playerPos == "RB":
-				if i == 0 or i == 1:
-					s += n/4
-				elif i == 2 or i == 3:
-					s += n/2
-				elif i == 8 or i == 9:
-					s += n
-			elif playerPos == "CM":
-				if i == 0 or i == 1:
-					s += n/2
-				elif i == 2 or i == 3:
-					s += n
-				elif i == 8 or i == 9:
-					s += n/2
-			elif playerPos == "RF" or playerPos == "LF":
-				if i == 0 or i == 1:
-					s += n
-				elif i == 2 or i == 3:
-					s += n/2
-				elif i == 8 or i == 9:
-					s += n/4
-			s = clamp(s,0.0,99.0)
-			stats.append(s)
-	data.players[id].Stat = stats
-	
-	GameData.season_save_data(data)
-
-#var playerStats = {
-#	"Finishing": 0,"ShotPower": 1,
-#
-#	"Accurate": 2,"BallControl": 3,
-#
-#	"Stamina": 4,"Speed": 5,"Power": 6,"Body": 7,
-#
-#	"Tackle": 8,"Defend": 9,
-#
-#	"Save": 10,"Reflexes": 11}

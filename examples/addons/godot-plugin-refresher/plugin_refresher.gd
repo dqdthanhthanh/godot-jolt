@@ -6,7 +6,7 @@ signal confirm_refresh_plugin(p_name)
 
 @onready var options = $OptionButton
 
-func _ready():
+func _ready() -> void:
 	$RefreshButton.icon = get_icon("Reload", "EditorIcons")
 
 

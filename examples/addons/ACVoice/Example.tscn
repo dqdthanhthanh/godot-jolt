@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/ACVoice/ExampleConversation.gd" type="Script" id=1]
+[ext_resource path="res://addons/ACVoice/ACVoicebox.tscn" type="PackedScene" id=2]
+
+[node name="Example" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="ACVoicebox" parent="." instance=ExtResource( 2 )]
+bus = "PlayerVoice"
+
+[node name="Label1" type="Label" parent="."]
+offset_left = 23.0
+offset_top = 25.0
+offset_right = 485.0
+offset_bottom = 127.0
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 484.0
+offset_top = 142.0
+offset_right = 1004.0
+offset_bottom = 243.0
+autowrap = true
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 58.0336
+offset_top = 263.085
+offset_right = 431.034
+offset_bottom = 417.085
+autowrap = true
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 548.0
+offset_top = 402.0
+offset_right = 976.0
+offset_bottom = 511.0
+autowrap = true

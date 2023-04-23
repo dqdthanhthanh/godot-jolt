@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Others/TestStadiumShader/bethnal_green_entrance_2k.hdr" type="Texture2D" id=1]
+[ext_resource path="res://Assets3D/StadiumShader/field_mat.tres" type="Material" id=2]
+[ext_resource path="res://Assets3D/StadiumShader/field_mat_op.tres" type="Material" id=3]
+
+[sub_resource type="PlaneMesh" id=8]
+
+[sub_resource type="Sky" id=10]
+panorama = ExtResource( 1 )
+
+[sub_resource type="Environment" id=11]
+background_mode = 2
+background_sky = SubResource( 10 )
+
+[sub_resource type="ViewportTexture" id=12]
+viewport_path = NodePath("SubViewport")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 0.780114, 0.625638, 0, -0.625638, 0.780114, -1.63905, 3.99936, 5.58323 )
+
+[node name="MeshInstance7" type="MeshInstance3D" parent="."]
+transform = Transform3D( 0.915206, -0.402986, 0, 0.402986, 0.915206, 0, 0, 0, 2, -5.91949, 2.07105, -0.129116 )
+mesh = SubResource( 8 )
+material/0 = ExtResource( 3 )
+
+[node name="MeshInstance8" type="MeshInstance3D" parent="."]
+transform = Transform3D( 0.851828, -0.523822, 0, 0.523822, 0.851828, 0, 0, 0, 2, -3.78862, 2.07693, -0.129272 )
+mesh = SubResource( 8 )
+material/0 = ExtResource( 2 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 11 )
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2( 896.5, 130 )
+texture = SubResource( 12 )
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 0.430448, 0.902615, 0, -0.902615, 0.430448, 0, 10, 0 )

@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbtcwmnb1xcgf"]
-
-[ext_resource type="PackedScene" uid="uid://oobfcgfimkvt" path="res://MGF Scene/MainMenu.tscn" id="5"]
-
-[node name="UIMenu" type="Node"]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("5")]

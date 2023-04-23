@@ -9,19 +9,16 @@ extends ScrollContainer
 var card_current_index: int = 0
 var card_x_positions: Array = []
 
-@onready var cardItemIns = preload("res://MGF Scene/SwipeMenu/CardItem.tscn")
-@onready var holdCardItem = $CenterContainer/MarginContainer/HBoxContainer
-@onready var scroll_tween: Tween = get_tree().create_tween()
-@onready var margin_r = $CenterContainer/MarginContainer.get("theme_override_constants/margin_right")
-@onready var card_space = $CenterContainer/MarginContainer/HBoxContainer.get("theme_override_constants/separation")
+@onready var cardItemIns: = preload("res://MGF Scene/SwipeMenu/CardItem.tscn")
+@onready var holdCardItem: = $CenterContainer/MarginContainer/HBoxContainer
+@onready var scroll_tween: Tween = $Tween
+@onready var margin_r: int = $CenterContainer/MarginContainer.get("theme_override_constants/margin_right")
+@onready var card_space: int = $CenterContainer/MarginContainer/HBoxContainer.get("theme_override_constants/separation")
 @onready var card_nodes: Array = $CenterContainer/MarginContainer/HBoxContainer.get_children()
 
-@onready var menu = get_parent().get_parent()
+@onready var menu: = get_parent().get_parent()
 
-func _ready():
-	card_nodes = $CenterContainer/MarginContainer/HBoxContainer.get_children()
-
-func card_item_instance():
+func card_item_instance() -> void:
 	card_nodes = []
 	card_x_positions = []
 	holdCardItem = get_node("CenterContainer/MarginContainer/HBoxContainer")
@@ -29,30 +26,30 @@ func card_item_instance():
 	if holdCardItem.get_child_count() > 0:
 		for unit in holdCardItem.get_children():
 			unit.queue_free()
-	var op
+	var opName
 	var opSize = Global.itemSize
-	var img
+	var opImg
 	if Global.optionSelect == 0:
 		card_current_index = Global.gameModeCur
-		op = Global.gameModeName
-		img = Global.gameModeImg
+		opName = Global.gameModeList
+		opImg = Global.gameModeList
 	else:
 		card_current_index = Global.staCur
-		op = Global.staName
-		img = Global.staImg
+		opName = Global.staList
+		opImg = Global.staList
 	for i in opSize:
 		var cardItem = cardItemIns.instantiate()
 		holdCardItem.add_child(cardItem)
 		cardItem.id = i
-		cardItem.text(str(op[i]))
-		cardItem.img.texture = img[i]
+		cardItem.text(str(opName[i].name))
+		cardItem.img.texture = load(opImg[i].icon)
 		card_nodes.append(cardItem)
 	create()
 
-func create():
+func create() -> void:
 	if holdCardItem.get_child_count() > 0:
 		
-		await get_tree().process_frame
+		await get_tree().idle_frame
 		
 		get_h_scroll_bar().modulate.a = 0
 		
@@ -76,7 +73,7 @@ func _process(delta: float) -> void:
 			var _card_opacity: float = remap(_swipe_current_length, _swipe_length, 0, 0.3, 1)
 			
 			_card_scale = clamp(_card_scale, card_scale, card_current_scale)
-			_card_opacity = clamp(_card_opacity, 1, 1)
+			_card_opacity = clamp(_card_opacity, 0.3, 1)
 			
 			card_nodes[_index].scale = Vector2(_card_scale, _card_scale)
 			card_nodes[_index].modulate.a = _card_opacity
@@ -86,19 +83,35 @@ func _process(delta: float) -> void:
 
 # warning-ignore:shadowed_variable
 func scroll(card_current_index) -> void:
-	var tween:Tween
 	scroll_horizontal = card_x_positions[card_current_index]
-	
-	tween = get_tree().create_tween()
-	tween.tween_property(self,"scroll_horizontal",scroll_horizontal,scroll_duration)
+# warning-ignore:return_value_discarded
+	scroll_tween.interpolate_property(
+		self,
+		"scroll_horizontal",
+		scroll_horizontal,
+		card_x_positions[card_current_index],
+		scroll_duration,
+		Tween.TRANS_BACK,
+		Tween.EASE_OUT)
 	
 	for _index in range(card_nodes.size()):
 		var _card_scale: float = card_current_scale if _index == card_current_index else card_scale
-		
-		tween = get_tree().create_tween()
-		tween.tween_property(card_nodes[_index],"scale",Vector2(_card_scale,_card_scale),scroll_duration)
+# warning-ignore:return_value_discarded
+		scroll_tween.interpolate_property(
+			card_nodes[_index],
+			"scale",
+			card_nodes[_index].scale,
+			Vector2(_card_scale,_card_scale),
+			scroll_duration,
+			Tween.TRANS_QUAD,
+			Tween.EASE_OUT)
+# warning-ignore:return_value_discarded
+	scroll_tween.start()
 
-func _on_Timer_timeout():
+func _on_Timer_timeout() -> void:
 	menu.setGameMode.disabled = false
 	menu.setStadium.disabled = false
 	get_parent().hide()
+
+func _exit_tree():
+	queue_free()

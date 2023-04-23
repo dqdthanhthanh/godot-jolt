@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://gprd4sqydd42"]
+
+[ext_resource type="Material" uid="uid://dr1wjejxpmp26" path="res://Assets2D/Shader/ShaderRadianBar.tres" id="1"]
+
+[node name="RadialBar" type="Panel"]
+material = ExtResource("1")
+offset_right = 40.0
+offset_bottom = 40.0

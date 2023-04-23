@@ -5,5 +5,5 @@
 [node name="Label" type="Label"]
 offset_right = 1281.0
 offset_bottom = 14.0
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "1"

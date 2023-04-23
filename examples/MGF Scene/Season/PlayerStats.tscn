@@ -1,142 +1,198 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="2_5vi0v"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/broadPanel.tres" id="3"]
-[ext_resource type="Script" path="res://MGF Scene/Season/Match.gd" id="6"]
+[ext_resource path="res://Assets2D/Fonts/UINormal.tres" type="FontFile" id=1]
+[ext_resource path="res://Assets2D/PlayerIcon/Low/00075-3614685810.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets2D/Theme/broadPanel.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets2D/UI/IconMaskPlayer.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets3D/Shader/UIMaskShader.tres" type="Shader" id=5]
+[ext_resource path="res://MGF Scene/Season/Match.gd" type="Script" id=6]
+
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 5 )
+shader_param/mask_texture = ExtResource( 4 )
 
 [node name="Player" type="HBoxContainer"]
-custom_minimum_size = Vector2(700, 30)
 offset_right = 576.001
 offset_bottom = 50.0
+custom_minimum_size = Vector2( 700, 30 )
 theme_override_constants/separation = -2
-script = ExtResource("6")
+script = ExtResource( 6 )
 
 [node name="mvp" type="Button" parent="."]
 visible = false
-layout_mode = 2
+offset_right = 12.0
+offset_bottom = 50.0
 disabled = true
 
 [node name="info" type="Button" parent="."]
 visible = false
-layout_mode = 2
+offset_right = 12.0
+offset_bottom = 50.0
 flat = true
 
 [node name="pos" type="Label" parent="."]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_5vi0v")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3")
+offset_right = 50.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 50, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="team" type="Label" parent="."]
-custom_minimum_size = Vector2(66, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_5vi0v")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3")
+offset_left = 48.0
+offset_right = 114.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 66, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "Team"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
-[node name="team" type="TextureRect" parent="team"]
-layout_mode = 0
+[node name="icon" type="TextureRect" parent="team"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 15.0
 offset_top = 7.0
 offset_right = -16.0
 offset_bottom = -8.0
-expand_mode = 1
-stretch_mode = 5
+expand = true
+
+[node name="player" type="Label" parent="."]
+visible = false
+offset_left = 112.0
+offset_right = 189.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 66, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
+text = "Player"
+align = 1
+valign = 1
+
+[node name="icon" type="TextureRect" parent="player"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_right = 27.0
+offset_bottom = 38.0
+texture = ExtResource( 2 )
+expand = true
 
 [node name="name" type="Label" parent="."]
-custom_minimum_size = Vector2(300, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_5vi0v")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3")
+offset_left = 112.0
+offset_right = 412.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 300, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
 text = " Name"
-vertical_alignment = 1
+valign = 1
 
 [node name="goal" type="Label" parent="."]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_5vi0v")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3")
+offset_left = 410.0
+offset_right = 460.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 50, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "G"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="assits" type="Label" parent="."]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_5vi0v")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3")
+offset_left = 458.0
+offset_right = 508.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 50, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="shots" type="Label" parent="."]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_5vi0v")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3")
+offset_left = 506.0
+offset_right = 556.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 50, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "S"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="passes" type="Label" parent="."]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_5vi0v")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3")
+offset_left = 554.0
+offset_right = 604.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 50, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "P"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="blocks" type="Label" parent="."]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_5vi0v")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3")
+offset_left = 602.0
+offset_right = 652.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 50, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "D"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="saves" type="Label" parent="."]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("2_5vi0v")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("3")
+offset_left = 650.0
+offset_right = 700.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 50, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
 text = "S"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+
+[node name="time" type="Label" parent="."]
+visible = false
+offset_left = 698.0
+offset_right = 748.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 50, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
+text = "T"
+align = 1
+valign = 1
+
+[node name="energy" type="Label" parent="."]
+visible = false
+offset_left = 698.0
+offset_right = 748.0
+offset_bottom = 50.0
+custom_minimum_size = Vector2( 50, 50 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 3 )
+text = "E"
+align = 1
+valign = 1
 
 [connection signal="pressed" from="info" to="." method="_on_info_pressed"]

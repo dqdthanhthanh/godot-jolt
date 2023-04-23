@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6edpxpmxt5pr"
-path.etc2="res://.godot/imported/iconMovement.png-71e12f1137d448d43110c2dd476e9973.etc2.ctex"
+uid="uid://gqd7kxq1otk6"
+path="res://.godot/imported/iconMovement.png-71e12f1137d448d43110c2dd476e9973.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets2D/UI/iconMovement.png"
-dest_files=["res://.godot/imported/iconMovement.png-71e12f1137d448d43110c2dd476e9973.etc2.ctex"]
+dest_files=["res://.godot/imported/iconMovement.png-71e12f1137d448d43110c2dd476e9973.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

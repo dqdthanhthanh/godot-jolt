@@ -9,21 +9,23 @@ extends Button
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 # warning-ignore:return_value_discarded
-	connect("pressed",Callable(self,"_on_CardMenu_pressed"))
+	connect("pressed", Callable(self, "_on_CardMenu_pressed"))
 
-func text(value):
+func text(value) -> void:
 	label.text = "[center]" + value + "[/center]"
 
-func _on_CardMenu_pressed():
+func _on_CardMenu_pressed() -> void:
 	swipeMenu.scroll(id)
 	Calculate.timer(swipeMenu.get_node("Timer"),0.3)
 	if Global.optionSelect == 0:
 		Global.gameModeCur = id
-		menu.get_parent().setGameMode.text = Global.gameModeName[id]
+		menu.get_parent().setGameMode.text = Global.gameModeList[id].name
 	else:
 		Global.staCur = id
-		menu.get_parent().setStadium.text = Global.staName[id]
-#		menu.get_parent().setStadium.icon = Global.staImg[id]
+		menu.get_parent().setStadium.text = Global.staList[id].name
+#		menu.get_parent().setStadium.icon = load(Global.staList[id].icon)
 
+func _exit_tree():
+	queue_free()

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/effekseer/src/EffekseerEmitter.gdns" type="Script" id=1]
+[ext_resource path="res://Assets3D/VFX/00_Basic/Simple_SpawnMethod1.efkefc" type="Resource" id=2]
+
+[node name="EffekseerEmitterPlayer" type="Node3D"]
+transform = Transform3D( 0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0, 0.01, 0 )
+script = ExtResource( 1 )
+effect = ExtResource( 2 )
+autoplay = false

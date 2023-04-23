@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MGF Scene/AssetsScene3D/RayCast.gd" type="Script" id=1]
+
+[node name="RayCast3D" type="RayCast3D"]
+enabled = true
+target_position = Vector3( 2, 0, 0 )
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+script = ExtResource( 1 )

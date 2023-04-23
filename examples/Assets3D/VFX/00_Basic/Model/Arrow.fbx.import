@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cars7unjus4kp"
+uid="uid://5povpjl4o5rp"
 path="res://.godot/imported/Arrow.fbx-e240285ec3f01816b6186dc4cf88cf4b.scn"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Arrow.fbx-e240285ec3f01816b6186dc4cf88cf4b.sc
 
 [params]
 
-nodes/root_type="Spatial"
+nodes/root_type="Node3D"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0

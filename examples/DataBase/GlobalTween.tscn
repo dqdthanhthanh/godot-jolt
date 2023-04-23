@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dr7br1x57f3a0"]
-
-[ext_resource type="Script" path="res://DataBase/Tween.gd" id="1_8kna1"]
-
-[node name="GlobalTween" type="Node"]
-process_mode = 3
-script = ExtResource("1_8kna1")

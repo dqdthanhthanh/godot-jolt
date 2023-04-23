@@ -2,12 +2,13 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dafnjy0ji0ybk"
+uid="uid://du4ff5btkgqsf"
 path.etc2="res://.godot/imported/khungthanh_T_Mesh_1.png-efa2eb3d5f8f7920d0910c7df174b4f2.etc2.ctex"
 metadata={
 "imported_formats": ["etc2_astc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 

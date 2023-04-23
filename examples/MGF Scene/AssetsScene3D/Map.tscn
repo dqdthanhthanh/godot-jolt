@@ -1,29 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwhbwmyqudef3"]
+[gd_scene load_steps=9 format=3 uid="uid://dd6ejb48sfpfr"]
 
 [ext_resource type="Material" path="res://Assets3D/Grass/M_line.tres" id="1"]
-[ext_resource type="Script" path="res://MGF Scene/AssetsScene3D/MainGameMap.gd" id="1_xihvr"]
-[ext_resource type="Material" path="res://Assets3D/Grass/M_Field_00.tres" id="2"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_flepf"]
+[ext_resource type="Material" uid="uid://cti2sipd4jun5" path="res://Assets3D/StadiumShader/field_mat_op.tres" id="2"]
+[ext_resource type="Material" uid="uid://cgykdarxy4cel" path="res://Assets3D/Stadium/san.material" id="3"]
 
 [sub_resource type="PlaneMesh" id="1"]
 size = Vector2(6.24, 3)
 
 [sub_resource type="PlaneMesh" id="2"]
-size = Vector2(20, 20)
+size = Vector2(7.2, 4.2)
+
+[sub_resource type="PlaneMesh" id="7"]
+size = Vector2(100, 100)
 
 [sub_resource type="BoxShape3D" id="4"]
-size = Vector3(8.96096, 2, 0.476106)
+size = Vector3(8.96, 2, 0.476)
 
 [sub_resource type="BoxShape3D" id="5"]
-size = Vector3(4.86582, 2, 0.476106)
+size = Vector3(4.866, 2, 0.476)
 
 [node name="Map" type="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.000388756, 0)
-collision_layer = 16
-collision_mask = 3
-physics_material_override = SubResource("PhysicsMaterial_flepf")
-script = ExtResource("1_xihvr")
+collision_layer = 4
+collision_mask = 2
 
 [node name="Map" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
@@ -34,6 +33,11 @@ surface_material_override/0 = ExtResource("1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.051, 0)
 mesh = SubResource("2")
 surface_material_override/0 = ExtResource("2")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.052, 0)
+mesh = SubResource("7")
+surface_material_override/0 = ExtResource("3")
 
 [node name="CollisionShape2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.756)

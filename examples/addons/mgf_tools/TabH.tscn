@@ -1,0 +1,94 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets2D/Theme/btnUIP.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets2D/Fonts/UI.tres" type="FontFile" id=3]
+[ext_resource path="res://Assets2D/Theme/btnUIN.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets2D/UI/iconSettings.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets2D/UI/iconTest.png" type="Texture2D" id=6]
+[ext_resource path="res://Assets2D/UI/IconQuestion.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets2D/Theme/btnOp.tres" type="StyleBox" id=8]
+[ext_resource path="res://addons/mgf_tools/UIHAutoScale.gd" type="Script" id=9]
+[ext_resource path="res://addons/mgf_tools/TabsBtn.gd" type="Script" id=10]
+
+[node name="MainBtn" type="Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -384.0
+offset_top = 8.0
+offset_right = 384.0
+offset_bottom = 120.0
+theme_override_styles/panel = ExtResource( 8 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true
+}
+group = NodePath("group")
+
+[node name="group" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -19.0
+offset_bottom = -16.0
+theme_override_constants/separation = 20
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+debug = true
+size = 735
+separation = 20
+
+[node name="Messenger" type="Button" parent="group"]
+offset_right = 231.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 231, 0 )
+theme_override_fonts/font = ExtResource( 3 )
+theme_override_styles/hover = ExtResource( 2 )
+theme_override_styles/pressed = ExtResource( 2 )
+theme_override_styles/focus = ExtResource( 2 )
+theme_override_styles/disabled = ExtResource( 4 )
+theme_override_styles/normal = ExtResource( 2 )
+text = "Messenger"
+icon = ExtResource( 7 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Achievement" type="Button" parent="group"]
+offset_left = 251.0
+offset_right = 482.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 231, 0 )
+theme_override_fonts/font = ExtResource( 3 )
+theme_override_styles/hover = ExtResource( 2 )
+theme_override_styles/pressed = ExtResource( 2 )
+theme_override_styles/focus = ExtResource( 2 )
+theme_override_styles/disabled = ExtResource( 4 )
+theme_override_styles/normal = ExtResource( 4 )
+text = "Achievement"
+icon = ExtResource( 6 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Setting" type="Button" parent="group"]
+offset_left = 502.0
+offset_right = 733.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 231, 0 )
+theme_override_fonts/font = ExtResource( 3 )
+theme_override_styles/hover = ExtResource( 2 )
+theme_override_styles/pressed = ExtResource( 2 )
+theme_override_styles/focus = ExtResource( 2 )
+theme_override_styles/disabled = ExtResource( 4 )
+theme_override_styles/normal = ExtResource( 4 )
+text = "Setting"
+icon = ExtResource( 5 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": true
+}

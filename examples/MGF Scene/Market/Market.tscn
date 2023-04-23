@@ -1,10 +1,81 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3wj7a2ylbo4c"]
+[gd_scene load_steps=30 format=3 uid="uid://3a2njwlnane2"]
 
-[ext_resource type="PackedScene" uid="uid://cwnic1s8y1ex1" path="res://MGF Scene/Market/PanelPlayerData.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://bqxpuye666ns1" path="res://MGF Scene/Setup/Account.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://n84wsljn0a0o" path="res://MGF Scene/Market/PanelPlayerData.tscn" id="1"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnOp.tres" id="2"]
 [ext_resource type="Script" path="res://MGF Scene/Market/Market.gd" id="3"]
-[ext_resource type="PackedScene" uid="uid://cmsyvb5wbfi" path="res://MGF Scene/Setup/HomeButton.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://du3nkd40esve6" path="res://MGF Scene/Setup/BGSetup.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://sqpoj82ew1hc" path="res://MGF Scene/Setup/HomeButton.tscn" id="4"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UIBig.tres" id="5"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGOBorder.tres" id="6"]
+[ext_resource type="Texture2D" uid="uid://bv0dd5svychy0" path="res://Assets2D/PlayerIcon/High/00031-783966632.png" id="7"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/BGSetup.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://ddkjpxygmigol" path="res://MGF Scene/Market/CardFile.tscn" id="9"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="11"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIN.tres" id="12"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Market/MusicFile.tscn" id="13"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UIOutline.tres" id="14"]
+[ext_resource type="Script" path="res://MGF Scene/Market/MusicPlayer.gd" id="15"]
+[ext_resource type="Theme" uid="uid://doboha45rdjnj" path="res://Assets2D/Fonts/ThemeInfo.tres" id="16"]
+[ext_resource type="Texture2D" uid="uid://6tei33hkviot" path="res://Assets2D/UI/IconMoveLeft.png" id="17"]
+[ext_resource type="Texture2D" uid="uid://db2enp2x7akio" path="res://Assets2D/UI/IconMoveRight.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://bvns3vdx82063" path="res://Assets2D/UI/iconPlay.png" id="19"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="20"]
+[ext_resource type="Texture2D" uid="uid://cr7rkfac06yw" path="res://Assets2D/UI/IconMusic.png" id="21"]
+[ext_resource type="Texture2D" uid="uid://cx1klvewxkrd8" path="res://Assets2D/UI/IconInfo.png" id="22"]
+[ext_resource type="Texture2D" uid="uid://c6rqy5hqd61ko" path="res://Assets2D/UI/user.png" id="23"]
+[ext_resource type="Script" path="res://addons/mgf_tools/UIHAutoScale.gd" id="24"]
+[ext_resource type="Script" path="res://addons/mgf_tools/TabsBtn.gd" id="25"]
+
+[sub_resource type="StyleBoxFlat" id="7"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 47
+corner_radius_top_right = 47
+corner_radius_bottom_right = 47
+corner_radius_bottom_left = 47
+shadow_color = Color(0, 0, 0, 0.117647)
+shadow_size = 30
+
+[sub_resource type="StyleBoxFlat" id="8"]
+bg_color = Color(0.478431, 0.478431, 0.478431, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 47
+corner_radius_top_right = 47
+corner_radius_bottom_right = 47
+corner_radius_bottom_left = 47
+shadow_color = Color(0, 0, 0, 0.117647)
+shadow_size = 30
+
+[sub_resource type="ImageTexture" id="6"]
+
+[sub_resource type="StyleBoxFlat" id="4"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="5"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
 
 [node name="Market" type="Control"]
 layout_mode = 3
@@ -16,14 +87,486 @@ grow_vertical = 2
 script = ExtResource("3")
 
 [node name="BGSetup" parent="." instance=ExtResource("8")]
+anchors_preset = 0
+
+[node name="MainBtn" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -352.0
+offset_top = 8.0
+offset_right = 352.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_styles/panel = ExtResource("2")
+script = ExtResource("25")
+groupPath = NodePath("MainBtn")
+tabPath = NodePath("../Shop")
+
+[node name="MainBtn" type="HBoxContainer" parent="MainBtn"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -14.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+script = ExtResource("24")
+debug = true
+_size = 676
+_separation = 16
+
+[node name="Messenger" type="Button" parent="MainBtn/MainBtn"]
+custom_minimum_size = Vector2(214, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("11")
+theme_override_styles/hover = ExtResource("11")
+theme_override_styles/pressed = ExtResource("11")
+theme_override_styles/disabled = ExtResource("12")
+theme_override_styles/focus = ExtResource("11")
+text = "Player"
+icon = ExtResource("23")
+expand_icon = true
+
+[node name="Achievement" type="Button" parent="MainBtn/MainBtn"]
+custom_minimum_size = Vector2(214, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("12")
+theme_override_styles/hover = ExtResource("11")
+theme_override_styles/pressed = ExtResource("11")
+theme_override_styles/disabled = ExtResource("12")
+theme_override_styles/focus = ExtResource("11")
+text = "Card"
+icon = ExtResource("22")
+expand_icon = true
+
+[node name="Setting" type="Button" parent="MainBtn/MainBtn"]
+custom_minimum_size = Vector2(214, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("20")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("12")
+theme_override_styles/hover = ExtResource("11")
+theme_override_styles/pressed = ExtResource("11")
+theme_override_styles/disabled = ExtResource("12")
+theme_override_styles/focus = ExtResource("11")
+text = "Music"
+icon = ExtResource("21")
+expand_icon = true
+
+[node name="Shop" type="Control" parent="."]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Player" parent="Shop" instance=ExtResource("1")]
+visible = false
 layout_mode = 1
 
-[node name="PanelPlayerData" parent="." instance=ExtResource("1")]
+[node name="BG" parent="Shop/Player" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 770.0
+offset_bottom = 500.0
+metadata/_edit_group_ = true
+
+[node name="Panel" parent="Shop/Player" index="1"]
 layout_mode = 1
+anchors_preset = 8
+offset_left = -352.0
+offset_top = -278.0
+offset_right = 353.0
+offset_bottom = 394.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Text" parent="Shop/Player/Panel" index="0"]
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_right = 200.0
+offset_bottom = 50.0
+
+[node name="Label" parent="Shop/Player/Panel" index="1"]
+layout_mode = 1
+anchors_preset = 10
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_bottom = 64.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" parent="Shop/Player/Panel/Label" index="0"]
+layout_mode = 1
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VScrollBarBXH" parent="Shop/Player/Panel" index="2"]
+layout_mode = 1
+anchors_preset = 15
+offset_left = 24.0
+offset_top = 72.0
+offset_right = -17.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerData" parent="Shop/Player/Panel/VScrollBarBXH/GridContainer" index="0"]
+visible = true
+
+[node name="MainBtn" parent="Shop/Player/Panel" index="3"]
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_bottom = 110.0
+
+[node name="PlayerCard" parent="Shop/Player" index="2"]
+layout_mode = 1
+anchors_preset = 15
+metadata/_edit_group_ = true
+
+[node name="Card" type="Control" parent="Shop"]
+visible = false
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Shop/Card"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -278.0
+offset_right = 704.0
+offset_bottom = 394.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/Card/ScrollContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="CardFile" parent="Shop/Card/ScrollContainer/VBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+
+[node name="CardFile3" parent="Shop/Card/ScrollContainer/VBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+
+[node name="CardFile4" parent="Shop/Card/ScrollContainer/VBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+
+[node name="CardFile5" parent="Shop/Card/ScrollContainer/VBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+
+[node name="CardFile6" parent="Shop/Card/ScrollContainer/VBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+
+[node name="CardFile7" parent="Shop/Card/ScrollContainer/VBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+
+[node name="CardFile8" parent="Shop/Card/ScrollContainer/VBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+
+[node name="CardFile9" parent="Shop/Card/ScrollContainer/VBoxContainer" instance=ExtResource("9")]
+layout_mode = 2
+
+[node name="PlayerCard" type="Panel" parent="Shop/Card"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -768.0
+offset_top = -278.0
+offset_right = -64.0
+offset_bottom = 394.0
+theme_override_styles/panel = ExtResource("6")
+
+[node name="Label" type="Label" parent="Shop/Card/PlayerCard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -592.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("5")
+theme_override_font_sizes/font_size = 50
+text = "Character Skin"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Shop/Card/PlayerCard"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -64.0
+offset_bottom = -544.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 30
+text = "Change player skin in game and in formation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/Card/PlayerCard"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 128.0
+texture = ExtResource("7")
+stretch_mode = 5
+
+[node name="Music" type="Control" parent="Shop"]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="MusicPlayer" type="Panel" parent="Shop/Music"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -768.0
+offset_top = -162.0
+offset_right = -64.0
+offset_bottom = 222.0
+pivot_offset = Vector2(-288, -56)
+theme_override_styles/panel = ExtResource("6")
+script = ExtResource("15")
+
+[node name="Info" type="Panel" parent="Shop/Music/MusicPlayer"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -256.0
+pivot_offset = Vector2(-288, -56)
+theme_override_styles/panel = ExtResource("6")
+
+[node name="Label" type="Label" parent="Shop/Music/MusicPlayer/Info"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_right = -64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 20
+text = "Info: Music that you own will randomly play in the background. Music enhances the experience with the game."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+clip_text = true
+
+[node name="PanelMain" type="Panel" parent="Shop/Music/MusicPlayer"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 256.0
+theme_override_styles/panel = ExtResource("2")
+
+[node name="Label" type="Label" parent="Shop/Music/MusicPlayer/PanelMain"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -128.0
+offset_bottom = -164.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("14")
+theme_override_font_sizes/font_size = 20
+text = "Music"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/Music/MusicPlayer/PanelMain"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 24.0
+offset_bottom = -24.0
+alignment = 1
+
+[node name="ButtonNextLeft" type="Button" parent="Shop/Music/MusicPlayer/PanelMain/HBoxContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+tooltip_text = "Next Music"
+theme = ExtResource("16")
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = SubResource("7")
+theme_override_styles/hover = SubResource("8")
+theme_override_styles/pressed = SubResource("8")
+theme_override_styles/disabled = SubResource("7")
+theme_override_styles/focus = SubResource("7")
+icon = ExtResource("17")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BtnReplayPlay" type="Button" parent="Shop/Music/MusicPlayer/PanelMain/HBoxContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+tooltip_text = "Play"
+theme = ExtResource("16")
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = SubResource("7")
+theme_override_styles/hover = SubResource("8")
+theme_override_styles/pressed = SubResource("8")
+theme_override_styles/disabled = SubResource("7")
+theme_override_styles/focus = SubResource("7")
+toggle_mode = true
+icon = ExtResource("19")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonNextRight" type="Button" parent="Shop/Music/MusicPlayer/PanelMain/HBoxContainer"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+tooltip_text = "Next Music"
+theme = ExtResource("16")
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = SubResource("7")
+theme_override_styles/hover = SubResource("8")
+theme_override_styles/pressed = SubResource("8")
+theme_override_styles/disabled = SubResource("7")
+theme_override_styles/focus = SubResource("7")
+icon = ExtResource("18")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BtnVideoReplaySlider" type="HSlider" parent="Shop/Music/MusicPlayer/PanelMain"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = -32.0
+offset_right = 256.0
+theme_override_icons/grabber = SubResource("6")
+theme_override_icons/grabber_highlight = SubResource("6")
+theme_override_icons/grabber_disabled = SubResource("6")
+theme_override_icons/tick = SubResource("6")
+theme_override_styles/slider = SubResource("4")
+theme_override_styles/grabber_area = SubResource("5")
+theme_override_styles/grabber_area_highlight = SubResource("5")
+step = 0.001
+
+[node name="Timer" type="Timer" parent="Shop/Music/MusicPlayer"]
+autostart = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Shop/Music"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -278.0
+offset_right = 704.0
+offset_bottom = 394.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/Music/ScrollContainer"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="MusicFile" parent="Shop/Music/ScrollContainer/VBoxContainer" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="HBoxContainer" parent="Shop/Music/ScrollContainer/VBoxContainer/MusicFile" index="0"]
+layout_mode = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+
+[node name="Icon" parent="Shop/Music/ScrollContainer/VBoxContainer/MusicFile/HBoxContainer" index="0"]
+layout_mode = 2
+expand_mode = 1
+
+[node name="File" parent="Shop/Music/ScrollContainer/VBoxContainer/MusicFile/HBoxContainer" index="1"]
+layout_mode = 2
+
+[node name="Author" parent="Shop/Music/ScrollContainer/VBoxContainer/MusicFile/HBoxContainer" index="2"]
+layout_mode = 2
+
+[node name="HBoxContainer" parent="Shop/Music/ScrollContainer/VBoxContainer/MusicFile/HBoxContainer" index="3"]
+layout_mode = 2
+
+[node name="Price" parent="Shop/Music/ScrollContainer/VBoxContainer/MusicFile/HBoxContainer/HBoxContainer" index="0"]
+layout_mode = 2
+
+[node name="Icon" parent="Shop/Music/ScrollContainer/VBoxContainer/MusicFile/HBoxContainer/HBoxContainer" index="1"]
+layout_mode = 2
+expand_mode = 1
+
+[node name="Active" parent="Shop/Music/ScrollContainer/VBoxContainer/MusicFile/HBoxContainer" index="4"]
+layout_mode = 2
+expand_mode = 1
+
+[node name="MusicFile2" parent="Shop/Music/ScrollContainer/VBoxContainer" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="MusicFile3" parent="Shop/Music/ScrollContainer/VBoxContainer" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="MusicFile4" parent="Shop/Music/ScrollContainer/VBoxContainer" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="MusicFile5" parent="Shop/Music/ScrollContainer/VBoxContainer" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="MusicFile6" parent="Shop/Music/ScrollContainer/VBoxContainer" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="MusicFile7" parent="Shop/Music/ScrollContainer/VBoxContainer" instance=ExtResource("13")]
+layout_mode = 2
+
+[node name="MusicFile8" parent="Shop/Music/ScrollContainer/VBoxContainer" instance=ExtResource("13")]
+layout_mode = 2
 
 [node name="Home" parent="." instance=ExtResource("4")]
 layout_mode = 1
-grow_horizontal = 0
 
-[node name="Account" parent="." instance=ExtResource("2")]
-layout_mode = 1
+[connection signal="pressed" from="Shop/Music/MusicPlayer/PanelMain/HBoxContainer/ButtonNextLeft" to="Shop/Music/MusicPlayer" method="_on_ButtonNextLeft_pressed"]
+[connection signal="pressed" from="Shop/Music/MusicPlayer/PanelMain/HBoxContainer/BtnReplayPlay" to="Shop/Music/MusicPlayer" method="_on_BtnReplayPlay_pressed"]
+[connection signal="pressed" from="Shop/Music/MusicPlayer/PanelMain/HBoxContainer/ButtonNextRight" to="Shop/Music/MusicPlayer" method="_on_ButtonNextRight_pressed"]
+[connection signal="value_changed" from="Shop/Music/MusicPlayer/PanelMain/BtnVideoReplaySlider" to="Shop/Music/MusicPlayer" method="_on_BtnVideoReplaySlider_value_changed"]
+[connection signal="timeout" from="Shop/Music/MusicPlayer/Timer" to="Shop/Music/MusicPlayer" method="_on_Timer_timeout"]
+
+[editable path="Shop/Player"]
+[editable path="Shop/Card/ScrollContainer/VBoxContainer/CardFile"]
+[editable path="Shop/Music/ScrollContainer/VBoxContainer/MusicFile"]

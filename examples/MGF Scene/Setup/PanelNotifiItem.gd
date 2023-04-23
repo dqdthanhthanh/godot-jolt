@@ -8,5 +8,13 @@ extends Panel
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	pass # Replace with function body.
+
+
+func _on_ButtonClose_pressed():
+	Account.notifi_news()
+	hide()
+
+func _exit_tree():
+	queue_free()

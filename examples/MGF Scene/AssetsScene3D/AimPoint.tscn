@@ -1,9 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://nem26c71te5r"]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource type="Script" path="res://scripts/AimPoint.gd" id="5"]
+[ext_resource path="res://MGF Scene/AssetsScene3D/AimPoint.gd" type="Script" id=5]
 
 [node name="AimPoint" type="Node3D"]
-script = ExtResource("5")
-
-[node name="EffekseerEmitter" type="Node3D" parent="."]
-transform = Transform3D(0.04, 0, 0, 0, -1.74846e-09, -0.04, 0, 0.04, -1.74846e-09, 0, 0.01, 0)
+script = ExtResource( 5 )

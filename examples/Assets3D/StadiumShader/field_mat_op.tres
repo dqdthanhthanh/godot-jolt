@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://cti2sipd4jun5"]
+
+[ext_resource type="Texture2D" uid="uid://ce671rjeto0md" path="res://Assets2D/Stadium/grass_r.jpg" id="1"]
+[ext_resource type="Texture2D" uid="uid://cx66x2lolsg1p" path="res://Assets3D/StadiumShader/streaks512.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c2oq8kj71r7as" path="res://Assets2D/Stadium/grass_n.jpg" id="3"]
+[ext_resource type="Texture2D" uid="uid://djw4k3whmj8wg" path="res://Assets3D/StadiumShader/simple_noise.png" id="4"]
+[ext_resource type="Shader" path="res://Assets3D/StadiumShader/rain-backup.gdshader" id="5"]
+[ext_resource type="Texture2D" uid="uid://djkdyb4jb6quj" path="res://Assets3D/StadiumShader/Snow005_2K_Normal.jpg" id="8"]
+[ext_resource type="Texture2D" uid="uid://bf6ak1svwohnw" path="res://Assets2D/Stadium/grass.jpg" id="9"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("5")
+shader_parameter/rain_amount = 0.0
+shader_parameter/wet_level = 0.0
+shader_parameter/snow_amount = 0.0
+shader_parameter/scale_UV_rain = 2.0
+shader_parameter/scale_UV_snow = 1.0
+shader_parameter/scale_UV_material = 1.0
+shader_parameter/noise_tex = ExtResource("4")
+shader_parameter/streaks_tex = ExtResource("2")
+shader_parameter/Snow_Norm = ExtResource("8")
+shader_parameter/Material_Albedo = ExtResource("9")
+shader_parameter/Material_Norm = ExtResource("3")
+shader_parameter/Material_Rough = ExtResource("1")

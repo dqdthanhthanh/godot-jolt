@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MGF Scene/AssetsScene3D/SoundFx.gd" type="Script" id=2]
+
+
+[node name="SoundFx" type="AudioStreamPlayer"]
+volume_db = -5.0
+script = ExtResource( 2 )

@@ -3,7 +3,7 @@
 [sub_resource type="BoxShape3D" id=9]
 resource_local_to_scene = true
 margin = 0.01
-extents = Vector3( 0.5, 1, 0.8 )
+size = Vector3( 0.5, 1, 0.8 )
 
 [node name="GkA" type="Area3D"]
 collision_layer = 8

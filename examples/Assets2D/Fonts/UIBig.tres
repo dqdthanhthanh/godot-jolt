@@ -3,6 +3,7 @@
 [ext_resource path="res://Assets2D/Fonts/FiraSansFont/FiraSans-Bold.otf" type="FontFile" id=1]
 
 [resource]
-size = 50
-outline_color = Color( 0.329412, 0.498039, 1, 1 )
+size = 55
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )

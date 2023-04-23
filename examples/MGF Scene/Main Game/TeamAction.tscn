@@ -1,0 +1,329 @@
+[gd_scene load_steps=14 format=3 uid="uid://dskfqlx77xcvy"]
+
+[ext_resource type="PackedScene" uid="uid://gprd4sqydd42" path="res://Assets2D/Shader/RadialBar.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://n3gxevec6nba" path="res://Assets2D/UI/iconExit.png" id="2"]
+[ext_resource type="Script" path="res://MGF Scene/Main Game/TeamAction.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://bq0ponx4ifp0u" path="res://Assets2D/UI/iconFormation.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://duwbtlp66vjab" path="res://Assets2D/UI/iconTactic.png" id="5"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UITeamAction.tres" id="6"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUITeamBC.tres" id="7"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCP.tres" id="8"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="9"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCN.tres" id="10"]
+[ext_resource type="Texture2D" uid="uid://b2nknsf8vbu1l" path="res://Assets2D/UI/IconMoveDown.png" id="11"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUITeamAC.tres" id="12"]
+
+[sub_resource type="StyleBoxFlat" id="7"]
+bg_color = Color(0, 0, 0, 0.196078)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+shadow_color = Color(0, 0, 0, 0)
+shadow_size = 30
+
+[node name="Action" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -75.0
+offset_right = 128.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = 37.0
+offset_right = -8.0
+offset_bottom = -33.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("7")
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 37.0
+offset_right = 256.0
+offset_bottom = -33.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("7")
+
+[node name="teamA" type="HBoxContainer" parent="."]
+layout_mode = 0
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = 45.0
+offset_right = -8.0
+offset_bottom = -41.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="foul" type="Panel" parent="teamA"]
+custom_minimum_size = Vector2(66, 64)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("12")
+
+[node name="RadialBar" parent="teamA/foul" instance=ExtResource("1")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="icon" type="TextureRect" parent="teamA/foul"]
+modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="label" type="Label" parent="teamA/foul"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 35
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="tactic" type="Panel" parent="teamA"]
+custom_minimum_size = Vector2(66, 64)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("12")
+
+[node name="RadialBar" parent="teamA/tactic" instance=ExtResource("1")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="icon" type="TextureRect" parent="teamA/tactic"]
+modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="label" type="Label" parent="teamA/tactic"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 35
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sub" type="Panel" parent="teamA"]
+custom_minimum_size = Vector2(66, 64)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("12")
+
+[node name="RadialBar" parent="teamA/sub" instance=ExtResource("1")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="icon" type="TextureRect" parent="teamA/sub"]
+modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="label" type="Label" parent="teamA/sub"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 35
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="teamB" type="HBoxContainer" parent="."]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.03125
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 45.0
+offset_right = 248.0
+offset_bottom = -41.0
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="sub" type="Panel" parent="teamB"]
+custom_minimum_size = Vector2(66, 64)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7")
+
+[node name="RadialBar" parent="teamB/sub" instance=ExtResource("1")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="icon" type="TextureRect" parent="teamB/sub"]
+modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("4")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="label" type="Label" parent="teamB/sub"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 35
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="tactic" type="Panel" parent="teamB"]
+custom_minimum_size = Vector2(66, 64)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7")
+
+[node name="RadialBar" parent="teamB/tactic" instance=ExtResource("1")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="icon" type="TextureRect" parent="teamB/tactic"]
+modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("5")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="label" type="Label" parent="teamB/tactic"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 35
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="foul" type="Panel" parent="teamB"]
+custom_minimum_size = Vector2(66, 64)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("7")
+
+[node name="RadialBar" parent="teamB/foul" instance=ExtResource("1")]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="icon" type="TextureRect" parent="teamB/foul"]
+modulate = Color(1, 1, 1, 0.588235)
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("2")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="label" type="Label" parent="teamB/foul"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("6")
+theme_override_font_sizes/font_size = 35
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnTeamAction" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -23.0
+offset_top = -20.0
+offset_right = 22.0
+offset_bottom = 23.0
+mouse_filter = 1
+theme_override_fonts/font = ExtResource("9")
+theme_override_styles/normal = ExtResource("10")
+theme_override_styles/hover = ExtResource("8")
+theme_override_styles/pressed = ExtResource("8")
+theme_override_styles/disabled = ExtResource("10")
+theme_override_styles/focus = ExtResource("10")
+icon = ExtResource("11")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="BtnTeamAction" to="." method="_on_BtnTeamAction_pressed"]

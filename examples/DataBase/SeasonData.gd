@@ -1,74 +1,104 @@
 extends Node
 
-var teamA = 0
-var teamB = 1
+var teamA:int = 0
+var teamB:int = 1
 
-var TabManager = 0
-var MatchDay = 0
-var MatchID = 0
-var MatchPlay = 0
-var isSkip = false
-var isLoad = false
+var TabManager:int = 0
+var MatchDay:int = 0
+var MatchID:int = 0
+var MatchPlay:int = 0
+var isSkip:bool = false
+var isLoad:bool = false
 
-var playersData
-var teamsData
-var ss = 0
+var ss:int = 0
 
-var allMatch = []
-var allResults = []
-var leagueResults = []
-var playerResults = []
-var matchPlay = []
+var allMatch:Array = []
+var allResults:Array = []
+var leagueResults:Array = []
+var playerResults:Array = []
+var Match:Array = [] ## MatchID, teamA, teamB
 
-func find_match():
+static func check_season_mode() -> bool:
+	var value:bool
+	if Global.MGFMode == Global.Season or Global.MGFMode == Global.SeasonMatch:
+		value = true
+	else:
+		value = false
+	return value
+
+func find_match(type:int = 0) -> void:
 	var data = GameData.season_load_data()
-	leagueResults = data.season.leagueResults
+	leagueResults = data.leagueResults
 	
 	if leagueResults.size() > 0:
-		if leagueResults.size() != 22:
-			MatchDay = leagueResults.size()
+		if type == 0:
+			if leagueResults.size() != 22:
+				MatchDay = leagueResults.size()
+			else:
+				MatchDay = leagueResults.size()-1
 		else:
-			MatchDay = leagueResults.size()-1
+			if leagueResults.size() != 0:
+				MatchDay = leagueResults.size()-1
+			elif leagueResults.size() == 0:
+				MatchDay = 0
 	else:
 		MatchDay = 0
 
-func noti_season_finshing():
+static func season_finshing_noti() -> void:
 	var data = GameData.season_load_data()
-	if data.season.done == 0:
-		var ssName = str(data.season.name)
-		var teamName = SeasonData.get_team_select_name()
-		data.season.done = 1
-		GameData.season_save_data(data)
-		NotiData.create_noti("Season "+ssName+" Finished",teamName+": Finished Season "+ssName)
+	var team = data.teams[get_team_select()]
+	
+	var leagueResults = data.leagueResults
+	if leagueResults.size() >= 22:
+		if data.season.done == false:
+			var ssName = str(data.season.name)
+			var teamName = SeasonData.get_team_select_name()
+			data.season.done = true
+			GameData.season_save_data(data)
+			var labelText = "Season " + ssName + " Finished"
+			var infoText = [teamName+": Finished Season "+ssName + " (" + "Top " + str(team.index) + ")"]
+			Notification.create_achi(2, labelText, infoText)
+			Notification.create_noti(labelText, infoText)
 
-func get_team_select():
+static func get_team_select() -> int:
 	var data = GameData.season_load_data()
 	var seasonData = data.season
 	var team = int(seasonData.teamA)
 	return team
 
-func get_team_select_name():
+static func get_team_index_select() -> int:
 	var data = GameData.season_load_data()
-	var teamName = data.teams[SeasonData.teamA].fullName
+	var seasonData = data.season
+	var team = data.teams[seasonData.teamA].index
+	return team
+
+static func get_team_select_name() -> String:
+	var data = GameData.season_load_data()
+	var teamName:String = str(data.teams[SeasonData.teamA].fullName)
 	return teamName
-	
-func check_season_match_finishing():
+
+func check_season_match_finishing() -> bool:
+	var value:bool
 	var data = GameData.season_load_data()
-	leagueResults = data.season.leagueResults
+	leagueResults = data.leagueResults
 	if leagueResults.size() != SeasonData.MatchDay:
-		return false
+		value = false
 	else:
-		return true
+		value = true
+	return value
 
-func check_season_finishing():
+static func check_season_finishing() -> bool:
+	var check:bool
 	var data = GameData.season_load_data()
-	var check = data.season.done
-	if check == 0:
-		return true
+	var leagueResults = data.leagueResults
+	if leagueResults.size() >= 22:
+		check = true
 	else:
-		return false
+		check = false
+	return check
 
-func check_teams_count():
+static func check_teams_count() -> bool:
+	var value:bool
 	var data = GameData.season_load_data()
 	
 	var checkTeamCount = 0
@@ -76,14 +106,15 @@ func check_teams_count():
 		var id = data.teams[i].Fid
 		if id.size()<7:
 			checkTeamCount += 1
-			Messenger.push_notification(0,data.teams[i].name + " team doesn't have enough 7 people in the squad")
+			Notification.push_noti(0,data.teams[i].name + " team doesn't have enough 7 people in the squad")
 	
 	if checkTeamCount > 0:
-		return false
+		value = false
 	else:
-		return true
+		value = true
+	return value
 
-func check_team_select(id):
+static func check_team_select(id) -> void:
 	var data = GameData.season_load_data()
 	if data.season.teamA == id:
 		FormationData.isDisable = false

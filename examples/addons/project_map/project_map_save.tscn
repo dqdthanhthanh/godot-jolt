@@ -1,0 +1,1739 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://addons/project_map/pm_comment_node.gd" type="Script" id=1]
+[ext_resource path="res://addons/project_map/pm_file_node.gd" type="Script" id=2]
+[ext_resource path="res://addons/project_map/pm_file_node.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/project_map/node_selected.stylebox" type="StyleBox" id=4]
+[ext_resource path="res://addons/project_map/node.stylebox" type="StyleBox" id=5]
+[ext_resource path="res://addons/project_map/pm_comment_node.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/project_map/project_map.gd" type="Script" id=7]
+[ext_resource path="res://addons/project_map/group.stylebox" type="StyleBox" id=8]
+[ext_resource path="res://addons/project_map/group_selected.stylebox" type="StyleBox" id=9]
+[ext_resource path="res://addons/project_map/pm_group_node.tscn" type="PackedScene" id=10]
+[ext_resource path="res://addons/project_map/pm_group_node.gd" type="Script" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.2, 0.231373, 0.309804, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[node name="ProjectMap" type="GraphEdit"]
+visible = false
+offset_right = 1702.0
+offset_bottom = 1457.0
+custom_minimum_size = Vector2( 500, 500 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/bg = SubResource( 1 )
+scroll_offset = Vector2( -1702, -877.077 )
+snap_distance = 32
+zoom = 1.06614
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="GroupNode9" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = -515.571
+offset_top = 24.165
+offset_right = 220.429
+offset_bottom = 600.165
+custom_minimum_size = Vector2( 736, 576 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( -2080, -800 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "MatchMode"
+
+[node name="GroupNode8" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = 1565.53
+offset_top = 24.165
+offset_right = 2365.54
+offset_bottom = 664.165
+custom_minimum_size = Vector2( 800, 640 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( -128, -800 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Formation"
+
+[node name="GroupNode7" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = 507.923
+offset_top = -9.95148
+offset_right = 1275.92
+offset_bottom = 598.049
+custom_minimum_size = Vector2( 768, 608 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( -1120, -832 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Shop"
+
+[node name="GroupNode2" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = 507.923
+offset_top = 1559.41
+offset_right = 1499.92
+offset_bottom = 2199.41
+custom_minimum_size = Vector2( 992, 640 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( -1120, 640 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "MainGameUI"
+
+[node name="GroupNode3" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = 1736.12
+offset_top = 1559.41
+offset_right = 2376.13
+offset_bottom = 2135.41
+custom_minimum_size = Vector2( 640, 576 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( 32, 640 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "MiniMap"
+
+[node name="GroupNode10" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = 1599.65
+offset_top = 842.961
+offset_right = 2463.65
+offset_bottom = 1386.96
+custom_minimum_size = Vector2( 864, 544 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( -96, -32 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Players"
+
+[node name="GroupNode" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = 473.807
+offset_top = 774.728
+offset_right = 1369.82
+offset_bottom = 1414.73
+custom_minimum_size = Vector2( 896, 640 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( -1152, -96 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "MainGame"
+
+[node name="GroupNode11" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = 2623.15
+offset_top = 1559.41
+offset_right = 3135.15
+offset_bottom = 1847.41
+custom_minimum_size = Vector2( 512, 288 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( 864, 640 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Radar Chart"
+
+[node name="CommentNode" type="GraphNode" parent="." instance=ExtResource( 6 )]
+offset_left = -1451.14
+offset_top = -197.464
+offset_right = -904.141
+offset_bottom = 175.536
+custom_minimum_size = Vector2( 495, 355 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = SubResource( 2 )
+theme_override_styles/comment = SubResource( 3 )
+offset = Vector2( -2957.53, -1007.88 )
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+comment_text = "Welcome to Project Map
+
+To start, drag files from the Godot filesystem into this screen to create file nodes. Click on the name to open it.
+
+Drag the icons to move the nodes.
+
+Click \"Add Group\" or \"Add Comment\" and click anywhere to add a group/comment node.
+
+What you are reading is a comment node. Use the bottom-right handle to resize it, it appears when hovering the comment.
+Click on the icon and press delete to delete it."
+comment_rect = Vector2( 495, 355 )
+
+[node name="CommentNode2" type="GraphNode" parent="." instance=ExtResource( 6 )]
+offset_left = -1457.09
+offset_top = 136.25
+offset_right = -1021.09
+offset_bottom = 385.25
+custom_minimum_size = Vector2( 384, 231 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = SubResource( 6 )
+theme_override_styles/comment = SubResource( 7 )
+offset = Vector2( -2963.11, -694.868 )
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+comment_rect = Vector2( 384, 231 )
+
+[node name="GroupNode6" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = -1709.65
+offset_top = 433.563
+offset_right = -813.642
+offset_bottom = 1521.56
+custom_minimum_size = Vector2( 896, 1088 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( -3200, -416 )
+resizable = true
+selected = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Data System"
+
+[node name="GroupNode5" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = -515.571
+offset_top = 774.728
+offset_right = 284.429
+offset_bottom = 1382.73
+custom_minimum_size = Vector2( 800, 608 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( -2080, -96 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "Season"
+
+[node name="GroupNode4" type="GraphNode" parent="." instance=ExtResource( 10 )]
+offset_left = -515.571
+offset_top = 1559.41
+offset_right = -67.5713
+offset_bottom = 1943.41
+custom_minimum_size = Vector2( 448, 384 )
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_styles/comment_focus = ExtResource( 9 )
+theme_override_styles/comment = ExtResource( 8 )
+offset = Vector2( -2080, 640 )
+resizable = true
+comment = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+group_name = "MainUI"
+
+[node name="FileNode" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 576.156
+offset_top = 911.193
+offset_right = 855.166
+offset_bottom = 1027.19
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1056, 32 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/MainGame.tscn"
+resource_type = 1
+icon_class = "Node3D"
+script_path = "res://MGF Scene/MainGame.gd"
+script_name = "MainGame.gd"
+
+[node name="FileNode4" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 1906.7
+offset_top = 1832.34
+offset_right = 2110.71
+offset_bottom = 1889.34
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 192, 896 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/MiniMap/Units.tscn"
+resource_type = 1
+icon_class = "Node3D"
+
+[node name="FileNode5" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 1906.7
+offset_top = 1968.8
+offset_right = 2223.71
+offset_bottom = 2084.8
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 192, 1024 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/MiniMap/unit_minimap.tscn"
+icon_class = "Sprite2D"
+script_path = "res://MGF Scene/unit_minimap.gd"
+script_name = "unit_minimap.gd"
+
+[node name="FileNode6" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 917.321
+offset_top = 911.193
+offset_right = 1138.32
+offset_bottom = 968.193
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -736, 32 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Main Game/Crowd.tscn"
+resource_type = 1
+icon_class = "Node3D"
+
+[node name="FileNode2" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -447.338
+offset_top = 1764.11
+offset_right = -170.339
+offset_bottom = 1880.11
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2016, 832 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/MainMenu.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/MainMenu.gd"
+script_name = "MainMenu.gd"
+
+[node name="FileNode8" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 576.156
+offset_top = 1081.78
+offset_right = 785.156
+offset_bottom = 1138.78
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1056, 192 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Team formation/Team.tscn"
+icon_class = "Node"
+
+[node name="FileNode9" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 542.04
+offset_top = 1661.76
+offset_right = 851.04
+offset_bottom = 1777.76
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1088, 736 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Main Game/MainGameUI.tscn"
+icon_class = "CanvasLayer"
+script_path = "res://MGF Scene/Main Game/MainGameUI.gd"
+script_name = "MainGameUI.gd"
+
+[node name="FileNode3" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 1906.7
+offset_top = 1661.76
+offset_right = 2157.71
+offset_bottom = 1777.76
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 192, 736 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/MiniMap/MiniMap.tscn"
+icon_class = "MarginContainer"
+script_path = "res://MGF Scene/MiniMap.gd"
+script_name = "MiniMap.gd"
+
+[node name="FileNode13" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -481.455
+offset_top = 1081.78
+offset_right = -251.455
+offset_bottom = 1197.78
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2048, 192 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Season/Season.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/Season/Season.gd"
+script_name = "Season.gd"
+
+[node name="FileNode12" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -481.455
+offset_top = 911.193
+offset_right = -203.455
+offset_bottom = 1027.19
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2048, 32 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Season/SeasonTab.tscn"
+icon_class = "TabContainer"
+script_path = "res://MGF Scene/Season/SeasonTab.gd"
+script_name = "SeasonTab.gd"
+
+[node name="FileNode11" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -481.455
+offset_top = 1218.24
+offset_right = -252.455
+offset_bottom = 1334.24
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2048, 320 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Season/BtnTab.tscn"
+icon_class = "Button"
+script_path = "res://MGF Scene/Season/BtnTab.gd"
+script_name = "BtnTab.gd"
+
+[node name="FileNode15" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1232.02
+offset_top = 774.728
+offset_right = -921.011
+offset_bottom = 890.728
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2752, -96 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/GlobalTheme.tscn"
+icon_class = "Node"
+script_path = "res://DataBase/GlobalTheme.gd"
+script_name = "GlobalTheme.gd"
+
+[node name="FileNode16" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1232.02
+offset_top = 979.426
+offset_right = -928.011
+offset_bottom = 1095.43
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2752, 96 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/SoundGlobal.tscn"
+icon_class = "AudioStreamPlayer"
+script_path = "res://DataBase/SoundGlobal.gd"
+script_name = "SoundGlobal.gd"
+
+[node name="FileNode18" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1197.9
+offset_top = 1354.71
+offset_right = -909.904
+offset_bottom = 1470.71
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2720, 448 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/Notification.tscn"
+icon_class = "CanvasLayer"
+script_path = "res://DataBase/Notification.gd"
+script_name = "Notification.gd"
+
+[node name="FileNode21" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1607.3
+offset_top = 911.193
+offset_right = -1371.3
+offset_bottom = 968.193
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -3104, 32 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/Calculate.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode23" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1607.3
+offset_top = 1115.89
+offset_right = -1293.3
+offset_bottom = 1172.89
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -3104, 224 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/FormationData.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode24" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1607.3
+offset_top = 1252.36
+offset_right = -1335.3
+offset_bottom = 1309.36
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -3104, 352 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/SeasonData.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode22" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1607.3
+offset_top = 1013.54
+offset_right = -1385.3
+offset_bottom = 1070.54
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -3104, 128 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/FileData.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode19" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1607.3
+offset_top = 808.844
+offset_right = -1351.3
+offset_bottom = 865.844
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -3104, -64 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/GameData.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode20" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1607.3
+offset_top = 706.495
+offset_right = -1385.3
+offset_bottom = 763.495
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -3104, -160 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/Address.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode14" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -1232.02
+offset_top = 604.145
+offset_right = -990.011
+offset_bottom = 720.146
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2752, -256 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://DataBase/Account.tscn"
+icon_class = "CanvasLayer"
+script_path = "res://DataBase/Account.gd"
+script_name = "Account.gd"
+
+[node name="FileNode30" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -481.455
+offset_top = 160.631
+offset_right = -127.455
+offset_bottom = 276.631
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2048, -672 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/QuickMatch/QuickMatch.tscn"
+icon_class = "Node"
+script_path = "res://MGF Scene/ConfigController/ConfigController.gd"
+script_name = "ConfigController.gd"
+
+[node name="FileNode31" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -481.455
+offset_top = 331.213
+offset_right = -35.4544
+offset_bottom = 388.213
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2048, -512 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/QuickMatch/TeamList.tscn"
+icon_class = "Panel"
+
+[node name="FileNode32" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -481.455
+offset_top = 433.563
+offset_right = -197.455
+offset_bottom = 549.563
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -2048, -416 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/QuickMatch/Teamselect.tscn"
+icon_class = "Button"
+script_path = "res://MGF Scene/ConfigController/Teamselect.gd"
+script_name = "Teamselect.gd"
+
+[node name="FileNode33" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -72.057
+offset_top = 433.563
+offset_right = 207.943
+offset_bottom = 549.563
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1664, -416 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/QuickMatch/TeamShow.tscn"
+icon_class = "Button"
+script_path = "res://MGF Scene/ConfigController/TeamShow.gd"
+script_name = "TeamShow.gd"
+
+[node name="FileNode29" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 1633.77
+offset_top = 501.796
+offset_right = 1987.78
+offset_bottom = 617.796
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -64, -352 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Formation/FormationMatch.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/Formation/FormationMatch.gd"
+script_name = "FormationMatch.gd"
+
+[node name="FileNode28" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 1633.77
+offset_top = 331.213
+offset_right = 1968.78
+offset_bottom = 447.213
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -64, -512 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Formation/FormationSlots.tscn"
+icon_class = "Button"
+script_path = "res://MGF Scene/Formation/FormationSlots.gd"
+script_name = "FormationSlots.gd"
+
+[node name="FileNode27" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 1633.77
+offset_top = 160.631
+offset_right = 1905.78
+offset_bottom = 276.631
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -64, -672 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Formation/Formation.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/Formation/Formation.gd"
+script_name = "Formation.gd"
+
+[node name="FileNode26" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 576.156
+offset_top = 433.563
+offset_right = 964.156
+offset_bottom = 549.563
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1056, -416 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Formation/PlayerPerformance.tscn"
+icon_class = "Panel"
+script_path = "res://MGF Scene/Formation/PlayerPerformance.gd"
+script_name = "PlayerPerformance.gd"
+
+[node name="FileNode25" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 576.156
+offset_top = 262.98
+offset_right = 928.156
+offset_bottom = 378.98
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1056, -576 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Market/PanelPlayerData.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/Formation/PanelPlayerData.gd"
+script_name = "PanelPlayerData.gd"
+
+[node name="FileNode10" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 576.156
+offset_top = 92.3979
+offset_right = 805.156
+offset_bottom = 208.398
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1056, -736 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Market/Market.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/Market/Market.gd"
+script_name = "Market.gd"
+
+[node name="FileNode34" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 542.04
+offset_top = 1866.46
+offset_right = 855.04
+offset_bottom = 1982.46
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1088, 928 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Main Game/GameReward.tscn"
+icon_class = "Popup"
+script_path = "res://MGF Scene/Main Game/GameReward.gd"
+script_name = "GameReward.gd"
+
+[node name="FileNode36" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 542.04
+offset_top = 2037.04
+offset_right = 846.04
+offset_bottom = 2153.05
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1088, 1088 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Main Game/ReplayPlayer.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/Main Game/ReplayPlayer.gd"
+script_name = "ReplayPlayer.gd"
+
+[node name="FileNode37" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 985.554
+offset_top = 1593.52
+offset_right = 1251.55
+offset_bottom = 1709.52
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -672, 672 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Main Game/TestMode.tscn"
+icon_class = "Panel"
+script_path = "res://MGF Scene/Main Game/TestMode.gd"
+script_name = "TestMode.gd"
+
+[node name="FileNode38" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 985.554
+offset_top = 1764.11
+offset_right = 1230.55
+offset_bottom = 1880.11
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -672, 832 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Main Game/BlvVoice.tscn"
+icon_class = "Panel"
+script_path = "res://MGF Scene/Main Game/BlvVoice.gd"
+script_name = "BlvVoice.gd"
+
+[node name="FileNode39" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 985.554
+offset_top = 1900.57
+offset_right = 1274.55
+offset_bottom = 2016.57
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -672, 960 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Main Game/GuideMode.tscn"
+icon_class = "Popup"
+script_path = "res://MGF Scene/Main Game/GuideMode.gd"
+script_name = "GuideMode.gd"
+
+[node name="FileNode40" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 985.554
+offset_top = 2037.04
+offset_right = 1279.55
+offset_bottom = 2153.05
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -672, 1088 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Main Game/MatchDetail.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/Main Game/MatchDetail.gd"
+script_name = "MatchDetail.gd"
+
+[node name="FileNode41" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -37.9406
+offset_top = 160.631
+offset_right = 251.059
+offset_bottom = 217.631
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1632, -672 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/SwipeMenu/SwipeMenu.tscn"
+icon_class = "Panel"
+
+[node name="FileNode44" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 917.321
+offset_top = 1013.54
+offset_right = 1101.32
+offset_bottom = 1129.54
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -736, 128 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/AssetsScene3D/Ball.tscn"
+resource_type = 1
+icon_class = "RigidBody3D"
+script_path = "res://scripts/Ball.gd"
+script_name = "Ball.gd"
+
+[node name="FileNode46" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 576.156
+offset_top = 1252.36
+offset_right = 770.156
+offset_bottom = 1309.36
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1056, 352 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/AssetsScene3D/Map.tscn"
+resource_type = 1
+icon_class = "StaticBody3D"
+
+[node name="FileNode47" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 917.321
+offset_top = 1252.36
+offset_right = 1153.32
+offset_bottom = 1309.36
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -736, 352 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/AssetsScene3D/Ground.tscn"
+resource_type = 1
+icon_class = "StaticBody3D"
+
+[node name="FileNode50" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 576.156
+offset_top = 1354.71
+offset_right = 959.156
+offset_bottom = 1411.71
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1056, 448 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/AssetsScene3D/ViewportContainer.tscn"
+icon_class = "SubViewportContainer"
+
+[node name="FileNode42" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 1702.0
+offset_top = 1013.54
+offset_right = 1944.0
+offset_bottom = 1129.54
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 0, 128 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/AssetsScene3D/TextBox.tscn"
+resource_type = 1
+icon_class = "Node3D"
+script_path = "res://scripts/TextBox.gd"
+script_name = "TextBox.gd"
+
+[node name="FileNode35" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 1872.58
+offset_top = 877.077
+offset_right = 2201.58
+offset_bottom = 934.077
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 160, 0 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Main Game/PlayerController.gd"
+resource_type = 2
+icon_class = "Script"
+
+[node name="FileNode48" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 917.321
+offset_top = 1150.01
+offset_right = 1132.32
+offset_bottom = 1207.01
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -736, 256 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/AssetsScene3D/Arrow.tscn"
+resource_type = 1
+icon_class = "Node3D"
+
+[node name="FileNode49" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 1702.0
+offset_top = 1184.13
+offset_right = 1957.0
+offset_bottom = 1300.13
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 0, 288 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/AssetsScene3D/AimPoint.tscn"
+resource_type = 1
+icon_class = "Node3D"
+script_path = "res://scripts/AimPoint.gd"
+script_name = "AimPoint.gd"
+
+[node name="FileNode45" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 2043.16
+offset_top = 1115.89
+offset_right = 2328.16
+offset_bottom = 1231.89
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 320, 224 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://Assets3D/Shader/MeshSelect.tscn"
+resource_type = 1
+icon_class = "MeshInstance3D"
+script_path = "res://Assets3D/Shader/MeshSelect.gd"
+script_name = "MeshSelect.gd"
+
+[node name="FileNode52" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 2043.16
+offset_top = 1252.36
+offset_right = 2283.16
+offset_bottom = 1368.36
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 320, 352 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://Assets3D/Shader/Shadow.tscn"
+resource_type = 1
+icon_class = "Node3D"
+script_path = "res://Assets3D/Shader/Shadow.gd"
+script_name = "Shadow.gd"
+
+[node name="FileNode51" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 2043.16
+offset_top = 1013.54
+offset_right = 2341.16
+offset_bottom = 1070.54
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 320, 128 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/AssetsScene3D/ProgressBar.tscn"
+icon_class = "ProgressBar"
+
+[node name="FileNode53" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = 2691.38
+offset_top = 1661.76
+offset_right = 3041.38
+offset_bottom = 1777.76
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( 928, 736 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/RadarChart/RadarChartStats.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/RadarChart/RadarChartStats.gd"
+script_name = "RadarChartStats.gd"
+
+[node name="FileNode54" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -3.8241
+offset_top = 808.844
+offset_right = 267.176
+offset_bottom = 924.844
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1600, -64 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Season/MatchInfo.tscn"
+icon_class = "Popup"
+script_path = "res://MGF Scene/Season/MatchInfo.gd"
+script_name = "MatchInfo.gd"
+
+[node name="FileNode55" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -3.8241
+offset_top = 979.426
+offset_right = 259.176
+offset_bottom = 1095.43
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1600, 96 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Season/MatchList.tscn"
+icon_class = "Panel"
+script_path = "res://MGF Scene/Season/MatchList.gd"
+script_name = "MatchList.gd"
+
+[node name="FileNode56" type="GraphNode" parent="." instance=ExtResource( 3 )]
+offset_left = -3.8241
+offset_top = 1150.01
+offset_right = 294.176
+offset_bottom = 1266.01
+scale = Vector2( 1.06614, 1.06614 )
+mouse_filter = 1
+theme_override_constants/port_offset = 0
+theme_override_styles/frame = ExtResource( 5 )
+theme_override_styles/selected_frame = ExtResource( 4 )
+offset = Vector2( -1600, 256 )
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+path = "res://MGF Scene/Season/MatchReady.tscn"
+icon_class = "Control"
+script_path = "res://MGF Scene/Season/MatchReady.gd"
+script_name = "MatchReady.gd"
+
+[connection signal="delete_nodes_request" from="." to="." method="_on_GraphEdit_delete_nodes_request"]

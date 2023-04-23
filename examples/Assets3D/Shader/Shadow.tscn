@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets3D/Shader/PlayerShadowShader.tres" type="Material" id=1]
+[ext_resource path="res://Assets3D/Shader/Shadow.gd" type="Script" id=2]
+
+[sub_resource type="PlaneMesh" id=16]
+
+[node name="Shadow" type="Node3D"]
+script = ExtResource( 2 )
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+material_override = ExtResource( 1 )
+cast_shadow = 0
+mesh = SubResource( 16 )

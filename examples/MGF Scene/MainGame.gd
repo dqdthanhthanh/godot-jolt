@@ -15,50 +15,45 @@ extends Node3D
 @onready var startBall:Marker3D = $BallStart
 
 @onready var UI:CanvasLayer = $UI
+@onready var Replay = UI.ReplayPlayer
 @onready var Cam:Camera3D = $Camera3D
-@onready var Target = $AITest/Target
-@onready var tween:Tween = get_tree().create_tween()
-@onready var SoundBg:AudioStreamPlayer = get_parent().get_node("/root/SoundBg")
-@onready var SFXMove:AudioStreamPlayer = $PlayerMovingSFX
-@onready var SFXShoot:AudioStreamPlayer = $PlayerShootSFX
+@onready var Weather:Node3D = $Weather
+@onready var Target: = $AITest/Target
+@onready var SoundBG:AudioStreamPlayer = $Sounds/SoundBackGround
+@onready var SFXMove:AudioStreamPlayer = $Sounds/PlayerMovingSFX
+@onready var SFXShoot:AudioStreamPlayer = $Sounds/PlayerShootSFX
+@onready var SFXGameWhistle:AudioStreamPlayer = $Sounds/SFXGameWhistle
 
-@onready var TimerGame:Timer = $Timer
-@onready var TimerStop:Timer = $TimerStop
-@onready var TimerSub:Timer = $TimerSub
-@onready var TimerStartGame:Timer = $TimerStartGame
-@onready var TimerNewTurn:Timer = $TimerNewTurn
-@onready var TimerSaveReplay:Timer = $TimerSaveReplay
-@onready var TimerPlayReplay:Timer = $TimerPlayReplay
-@onready var AITimer:Timer = $AITimer
+@onready var TimerGame:Timer = $Timers/Timer
+@onready var TimerStop:Timer = $Timers/TimerStop
+@onready var TimerStartGame:Timer = $Timers/TimerStartGame
+@onready var TimerNewTurn:Timer = $Timers/TimerNewTurn
+@onready var AITimer:Timer = $Timers/AITimer
 
 #@onready var effGame:EffekseerEmitter = $EffekseerEmitter
-#@onready var effGoalA:EffekseerEmitter = $GoalA/EffekseerEmitter
-#@onready var effGoalB:EffekseerEmitter = $GoalB/EffekseerEmitter
 
 # Players Unit
+#get_tree().get_nodes_in_group("units,team1,team2")
 @onready var units:Array = get_tree().get_nodes_in_group("units")
-@onready var teamA:Array = get_tree().get_nodes_in_group("team1")
-@onready var teamB:Array = get_tree().get_nodes_in_group("team2")
+var teamA:Array
+var teamB:Array
+
+# Group chua cau thu
+var teamAGroup
+var teamBGroup
+
+var teamAData:Array = [3,3,3]
+var teamBData:Array = [3,3,3]
+
+var goalCheck:bool = true
+var TeamA_score:int = 0
+var TeamB_score:int = 0
 
 # Global var
 var time:int = 0 ## Luot dau
 var teamSelect:int = 1 ##Set up luot dau doi dieu khien
-var gameRound:int = Global.time[Global.SetTime]
-var timePlus:int = Global.timePlus[Global.SetTime]
-
-# Load doi hinh chien thuat
-var formationMatch:Dictionary = FormationData.formationMatch
-var formationBroad:Dictionary = FormationData.formationBroad
-
-# Fouls
-var teamAFoul:int = 0
-var teamBFoul:int = 0
-const maxFoul:int = 5
-
-# Team Score
-var goalCheck:bool = true
-var TeamA_score:int = 0
-var TeamB_score:int = 0
+var gameRound:int = Global.timeList[Global.timeCur].time
+var timePlus:int = Global.timeList[Global.timeCur].plus
 
 # Selection
 const ray_length:int = 1000
@@ -67,8 +62,6 @@ var selected_player:Array = []
 
 # Check, data
 var timeGoals:Array = []
-var isSaveReplay:bool = true
-var isPlayReplay:bool = false
 var camFollowBall:bool = false
 var camPos:Vector3 = Vector3.ZERO
 
@@ -90,7 +83,7 @@ var AIState:int
 enum {AI_DEF, AI_MID, AI_ATK}
 
 # AI
-var id:int = 0 #Cauthu
+var AI_id#Cauthu
 var gkAReset:int = 0
 var gkBReset:int = 0
 var gkDis:float
@@ -109,143 +102,81 @@ var AIPowerShot:float = 0
 var AIShoot:float = 0
 var AITackle:float = 0
 
-var data:Dictionary
-var teamAName
-var teamBName
-var iconTeamA
-var iconTeamB
-
 # Timmer Value
 var timerValue:String = ""
 # Timmer Change Value
 var timerAI:int = 0
 
-var timePlayReplay:int
-var teamPlayReplay:int
-var replayCount:int = 0
-var replayTurns:int = 0
+var ID:int = 0
+var playerKick:Array = []
+var teamGoal:Array = [0,0]
+var teamGoalC:Array = [0,0]
+var teamBall:Array = [0,0]
+var teamPass:Array = [0,0]
+var teamShot:Array = [0,0]
+var teamMiss:Array = [0,0]
+var teamDef:Array = [0,0]
+var teamSave:Array = [0,0]
 
-# Load cau thu 2 team chuan bi tran dau
-func load_team_data():
-	data = GameData.formation_load_data()
-	teamAName = data.teams[Global.teamID1].name
-	teamBName = data.teams[Global.teamID2].name
-	iconTeamA = load(data.teams[Global.teamID1].icon)
-	iconTeamB = load(data.teams[Global.teamID2].icon)
-
-func load_team_formation_data(value, number):
-	data = GameData.formation_load_data()
-	var teamData = data.teams[value].Fid
-	var playerData
-	var playerPath
-	var playerIns
-	if teamData.size()>0:
-		playerData = teamData[0]
-		playerPath = data.players[playerData].filePath
-		
-		## Tao team group
-		Global.team = number
-		## Tao cau thu
-		for i in teamData.size():
-			playerData = teamData[i]
-			playerPath = data.players[int(playerData)].filePath
-			## Load file cau thu
-			playerIns = load(playerPath).instantiate()
-			## Lay data cho cau thu
-			playerIns.playerID = int(teamData[i])
-			add_child(playerIns)
-
-func create_player_signal():
-	var x = -1
-	for unit in units:
-		if unit.playerPositionMath == "NON":
-			unit.position.x = x
-			unit.position.z = -5
-			x += 0.5
-			unit.player_is_collision(true)
-		
-		if unit.team == 1:
-			unit.add_to_group("team1")
-			
-		elif unit.team == 2:
-			unit.add_to_group("team2")
-			
-		teamA = get_tree().get_nodes_in_group("team1")
-		teamB = get_tree().get_nodes_in_group("team2")
-		
-		unit.find_targets()
-
-func load_stadium():
-	$Map/Field.material_override = Global.fieldMat[Global.staCur]
-
-func load_ball():
-	var ball = preload("res://MGF Scene/AssetsScene3D/Ball.tscn")
-	var ballIns = ball.instantiate()
-	add_child(ballIns)
-	Ball = ballIns
 
 ## Istance 2 team duoc chon vao
 func _init():
 	load_team_formation_data(Global.teamID1,1)
 	load_team_formation_data(Global.teamID2,2)
 
-func signal_connect():
-	$TimerStartGame.connect("timeout",Callable(self,"_on_TimerStartGame_timeout"))
-	$TimerNewTurn.connect("timeout",Callable(self,"_on_TimerNewTurn_timeout"))
-	$TimerStop.connect("timeout",Callable(self,"_on_TimerAllStop_timeout"))
-	$AITimer.connect("timeout",Callable(self,"_on_AITimer_timeout"))
-	$Timer.connect("timeout",Callable(self,"_on_Timer_timeout"))
-	$TimerSub.connect("timeout",Callable(self,"_on_TimerSub_timeout"))
-	
-	GkA.connect("body_entered",Callable(self,"_on_GkA_body_entered"))
-	GkB.connect("body_entered",Callable(self,"_on_GkB_body_entered"))
-	
-	GoalA.connect("body_entered",Callable(self,"_on_GoalA_body_entered"))
-	GoalB.connect("body_entered",Callable(self,"_on_GoalB_body_entered"))
-	
-	KickingBallA.connect("body_entered",Callable(self,"_on_KickingBallA_body_entered"))
-	KickingBallB.connect("body_entered",Callable(self,"_on_KickingBallB_body_entered"))
-	
-	$TimerPlayReplay.connect("timeout",Callable(self,"_on_TimerPlayReplay_timeout"))
-	$TimerSaveReplay.connect("timeout",Callable(self,"_on_TimerSaveReplay_timeout"))
-	UI.videoPlayer.btnClose.connect("pressed",Callable(self,"_on_BtnReplayClose_pressed"))
-	UI.videoPlayer.btnTimeLine.connect("value_changed",Callable(self,"_on_BtnVideoReplaySlider_value_changed"))
-#	UI.videoPlayer.btnNextRight
-#	UI.videoPlayer.btnNextLeft
-	
-	UI.matchDetail.btnHome.connect("pressed",Callable(self,"_on_ButtonHome_pressed"))
-	UI.matchDetail.btnClose.connect("pressed",Callable(self,"_on_ButtonExit_pressed"))
-	UI.matchDetail.btnQuit.connect("pressed",Callable(self,"_on_ButtonExit_pressed"))
+func load_team_formation_data(value, number) -> void:
+	var par = load("res://MGF Scene/MiniMap/Units.tscn").instantiate()
+	add_child(par)
+	if number == 1:
+		teamAGroup = par
+		par.name = "teamA"
+	else:
+		teamBGroup = par
+		par.name = "teamB"
+	var data = GameData.formation_load_data()
+	var teamData = data.teams[value].Fid
+	var playerData
+	var playerPath
+	var playerIns
+	if teamData.size()>0:
+		playerData = teamData[0]
+		playerPath = data.players[playerData].FilePath
+		
+		## Tao team group
+		Global.team = number
+		## Tao cau thu
+		for i in teamData.size():
+			playerData = teamData[i]
+			playerPath = data.players[int(playerData)].FilePath
+			## Load file cau thu
+			playerIns = load(playerPath).instantiate()
+			## Lay data cho cau thu
+			playerIns.playerID = int(teamData[i])
+			playerIns.ID = ID
+			ID += 1
+			
+			par.add_child(playerIns)
+			if number == 1:
+				playerIns.add_to_group("team1")
+			else:
+				playerIns.add_to_group("team2")
 
-func _ready():
-	signal_connect()
-	Global.autoMode = false
-	load_team_data()
-#	time = Global.time[Global.SetTime] - 1
-#	time = 44
-	camPos = Cam.position
+func create_player_signal() -> void:
+	for unit in units:
+		teamA = get_tree().get_nodes_in_group("team1")
+		teamB = get_tree().get_nodes_in_group("team2")
+		unit.find_targets()
+	
 	Arrow.hide()
-	SoundBg.stop()
-	load_game_mode()
-	UI.update_team_stats()
-	create_player_signal()
-	load_stadium()
-	player_set_physics()
-	change_player()
-	pos_reset_players()
-	Calculate.timer(TimerStartGame,1)
-
-## Game Mode:
-func load_game_mode():
-	if Global.MGFMode == Global.Season or Global.MGFMode == Global.SeasonMatch:
-		Global.MatchPlay = SeasonData.MatchPlay
+	if Global.gameModeCur < 2:
+		Global.isFoul = true
+	else:
+		Global.isFoul = false
+	
 	if !Global.device_is_mobile() and Global.gameModeCur == 3:
 		$AITest/Target.position.z = 0
 		$AITest/Target.show()
-	UI.controller.hide()
-	UI.panelStats.visible = false
 	camFollowBall = true
-	Arrow.hide()
 	
 	match Global.gameModeCur:
 		0:#Player vs Player
@@ -258,40 +189,87 @@ func load_game_mode():
 				teamHide = 2
 			else:
 				teamHide = 1
+		
 			for unit in units:
 				if unit.team == teamHide:
 					unit.playerPositionMath = "NON"
-					unit.hide()
 		3:#Test Mode
-			UI.get_node("TestMode").load_test_mode(camFollowBall,startBall,units)
+			UI.test_mode_active()
+	
+	var a = -16.5
+	var team = teamA
+	for i in 2:
+		for unit in team:
+			if unit.playerPositionMath == "NON":
+				unit.position.x = a
+				unit.position.z = 9
+				a -= 2.5
+#				unit.player_is_collision(true)
+		team = teamB
+		a = 16.5
+	
+	await get_tree().create_timer(1).timeout
+	for unit in units:
+		unit.rotation_degrees.y = 0
 
-func _process(delta):
+func signal_connect() -> void:
+	TimerStartGame.connect("timeout", Callable(self, "_on_TimerStartGame_timeout"))
+	TimerNewTurn.connect("timeout", Callable(self, "_on_TimerNewTurn_timeout"))
+	TimerStop.connect("timeout", Callable(self, "_on_TimerAllStop_timeout"))
+	AITimer.connect("timeout", Callable(self, "_on_AITimer_timeout"))
+	TimerGame.connect("timeout", Callable(self, "_on_Timer_timeout"))
+	
+	GkA.connect("body_entered", Callable(self, "_on_GkA_body_entered"))
+	GkB.connect("body_entered", Callable(self, "_on_GkB_body_entered"))
+	
+	GoalA.connect("body_entered", Callable(self, "_on_GoalA_body_entered"))
+	GoalB.connect("body_entered", Callable(self, "_on_GoalB_body_entered"))
+	
+	KickingBallA.connect("body_entered", Callable(self, "_on_KickingBallA_body_entered"))
+	KickingBallB.connect("body_entered", Callable(self, "_on_KickingBallB_body_entered"))
+	
+	UI.MatchDetail.btnHome.connect("pressed", Callable(self, "_on_ButtonHome_pressed"))
+
+## Match Setup
+func _ready() -> void:
+	FormationData.load_team_tactic()
+	UI.update_Times(time)
+	create_player_signal()
+	SoundGlobal.volume_low()
+	signal_connect()
+	Global.autoMode = false
+	player_set_physics()
+	change_player()
+	pos_reset_players(true)
+	Calculate.timer(TimerStartGame,1)
+	UI.talk("Start Game")
+	SFXGameWhistle.play()
+
+func _process(delta) -> void:
 	if !Global.device_is_mobile():
 		target_control_input(delta)
 
-func load_debug_log():
+func load_debug_log() -> void:
 	if get_tree().get_root().has_node("DebugLog"):
 		DebugLog.team = teamSelect
 		DebugLog.state = str(state)
 
 ## Xu ly chuyen luot
-func _on_TimerStartGame_timeout():
+func _on_TimerStartGame_timeout() -> void:
 	pos_reset_hold_ball()
 	change_player()
 	Calculate.timer(TimerStop,3)
 	await get_tree().create_timer(2).timeout
 	isStartGame = true
 
-func _on_TimerNewTurn_timeout():
+func _on_TimerNewTurn_timeout() -> void:
 	Calculate.timer(TimerStop,2)
 	if teamSelect == 1:
 		teamSelect = 2
 	else:
 		teamSelect = 1
 
-func _on_TimerAllStop_timeout():
-	for unit in units:
-		unit.textBox.hide()
+func _on_TimerAllStop_timeout() -> void:
 	change_state(SET_IDLE)
 	pos_all_stop()
 	goalCheck = true
@@ -301,47 +279,92 @@ func _on_TimerAllStop_timeout():
 	change_game()
 
 ## Thay doi team duoc dieu khien
-func change_game():
-	## Bat dau hiep hai
-	if time == gameRound:
-		isStartGame = false
-# warning-ignore:return_value_discarded
-		## Setup hiep 2
-		isGameTime = 2
-		GoalA.position.x = -2.845
-		GoalB.position.x = 2.845
-		GoalA.rotation_degrees.y = -180
-		GoalB.rotation_degrees.y = 0
-		Calculate.vibrate_set()
-		stamina_set(20)
-		teamSelect = 2
-		pos_reset_players()
-		Calculate.timer(TimerStartGame,1)
-		await get_tree().create_timer(3).timeout
-		UI.match_detail_visible(2)
-	## Het gio
-	if time == (gameRound*2) or teamAFoul == maxFoul or teamBFoul == maxFoul:
-		isStartGame = false
-		isGameTime = 3
-		UI.videoPlayer.btnClose.hide()
-		play_replay(0)
-		Calculate.vibrate_set()
-		stamina_set(20)
-		UI.update_Game("FullTime")
-		await get_tree().create_timer(5).timeout
-		UI.match_detail_visible(2)
-		update_noti_match_results()
-		if TeamA_score > TeamB_score:
-			UI.update_team_ui(UI.teamAMat)
-		elif TeamA_score > TeamB_score:
-			UI.update_team_ui(UI.teamBMat)
+func change_game() -> void:
+	if Global.gameModeCur < 2:
+		## Bat dau hiep hai
+		if time == gameRound:
+			FormationData.AI_random_tactical()
+			FormationData.load_team_tactic()
+			SFXGameWhistle.play()
+			isStartGame = false
+			## Setup hiep 2
+			isGameTime = 2
+			GoalA.position.x = -14.225
+			GoalB.position.x = 14.225
+			GoalA.rotation_degrees.y = -180
+			GoalB.rotation_degrees.y = 0
+			Calculate.vibrate_set()
+			teamSelect = 2
+			pos_reset_players()
+			Calculate.timer(TimerStartGame,1)
+			UI.talk("Haft Time")
+			
+			await get_tree().create_timer(3).timeout
+			SoundGlobal.volume_normal()
+			UI.match_detail_visible(2)
+			SFXGameWhistle.play()
+			UI.score_voice()
+		## Het gio
+		if time == (gameRound*2) or teamAData[1] == 0 or teamBData[1] == 0:
+			isStartGame = false
+			isGameTime = 3
+			await get_tree().create_timer(2).timeout
+			
+			for unit in units:
+				unit.player_play_time(time)
+			
+			SFXGameWhistle.play()
+			SoundBG.stop()
+			Calculate.vibrate_set()
+			UI.talk("FullTime")
+			UI.score_voice()
+			SoundGlobal.volume_normal()
+			
+			UI.ReplayPlayer.btnClose.hide()
+			UI.ReplayPlayer.play_replay(0)
+			UI.ui_visible(false)
+			
+			if SeasonData.check_season_mode() == true:
+				UI.season_match_list_active()
+			else:
+				end_game()
 
-func change_team():
+func end_game() -> void:
+	await get_tree().create_timer(5).timeout
+	UI.ui_visible(true)
+	UI.match_detail_visible(2)
+	UI.update_noti_match_results()
+	if TeamA_score > TeamB_score:
+		UI.update_team_ui(UI.teamAMat)
+	elif TeamA_score > TeamB_score:
+		UI.update_team_ui(UI.teamBMat)
+	
+	if SeasonData.check_season_mode() == true:
+		UI.player_performance_active()
+
+func check_team_selected() -> bool:
+	if Global.MatchPlay == teamSelect:
+		return true
+	else:
+		return false
+
+func units_set_up(value:int = 0) -> void:
+	match value:
+		0:
+			units = get_tree().get_nodes_in_group("units")
+		1:
+			units = get_tree().get_nodes_in_group("team1")
+		2:
+			units = get_tree().get_nodes_in_group("team2")
+
+func change_team() -> void:
 	if isStartGame == true:
-		pos_reset_y()
+		units = get_tree().get_nodes_in_group("units")
+		for unit in units:
+			unit.player_play_time(time)
+#		pos_reset_y()
 		AI_gk_check_reset()
-		if Global.gameModeCur != 3:
-			time += 1
+		time += 1
 		shotTime += 1
 		sub_change_start()
 		if Global.gameModeCur == 3:
@@ -353,18 +376,11 @@ func change_team():
 				pos_reset_gk(2)
 			var goal = UI.return_team_goal(1)
 			var shotGoal = "%.1f" % (float(goal)/shotTime * 100.0)
-			if Global.isShootTest and shotTime > 10:
-				UI.update_Notification(null,"Result: " + str(shotGoal) +" %",0)
-				UI.get_node("TestMode").show()
+			if Global.isShootTest and shotTime > 1:
+				UI.update_player_goal_info(selected_units[0],str(shotGoal) +"%/",false)
+#				UI.TestMode.show()
 		
 		UI.update_Times(time)
-		if time == gameRound+1:
-			UI.update_Game("HalfTime")
-		
-		for unit in units:
-			if unit.playerPositionMath != "NON":
-				unit.timeRecovery += 1
-				unit.statsPlayTime += 1
 		
 		if Global.gameModeCur != 3:
 			if teamSelect == 1:
@@ -381,39 +397,57 @@ func change_team():
 		AI_action()
 		
 		notification_change_team()
-
-func change_player():
-	units = get_tree().get_nodes_in_group("units")
-	if Global.isStamina == true:
-		stamina_return()
+	
+	## MatchDetail kiem soat bong
+	teamBall[units[find_player(0)].team-1] += 1
+	
 	for unit in units:
-		selected_units.clear()
 		unit.deselect()
-		unit.textBox.hide()
-		
-		var playerSelect = units[find_player(teamSelect)]
-		playerSelect.select()
-		selected_player.append(playerSelect)
-		selected_units.append(playerSelect)
-		
-		update_player_stats()
+	for unit in selected_units:
+		unit.select()
+		unit.textBox.player_talk()
+
+func change_player(obj = Ball) -> void:
+	units = get_tree().get_nodes_in_group("units")
+	for unit in units:
+		if unit.playerPositionMath != "NON":
+			if teamSelect == 1:
+				if unit.team == 1:
+					unit.SelectMesh.mesh_select(0.4)
+				else:
+					unit.SelectMesh.mesh_select(0)
+			else:
+				if unit.team == 2:
+					unit.SelectMesh.mesh_select(0.4)
+				else:
+					unit.SelectMesh.mesh_select(0)
+			
+			selected_units.clear()
+			
+			var playerSelect = units[find_player(teamSelect,obj)]
+			selected_player.append(playerSelect)
+			selected_units.append(playerSelect)
+			
+			UI.update_player_data(playerSelect)
 
 ## Kiem tra cau thu co giu bong
-func check_ball_on_player():
+func check_ball_on_player() -> bool:
+	var value:bool = false
 	for unit in selected_units:
 		if units[find_player(3)] == unit:
-			return true
+			value = true
 		else:
-			return false
+			value = false
+	return value
 
-func check_ball_on_team():
-	var value
+func check_ball_on_team() -> int:
+	var value:int
 	for unit in units:
 		if units[find_player(3)] == unit:
 			value = unit.team
 	return value
 
-func check_team_has_player(team):
+func check_team_has_player(team) -> bool:
 	if team == 1:
 		units = get_tree().get_nodes_in_group("team1")
 	else:
@@ -427,13 +461,13 @@ func check_team_has_player(team):
 	else:
 		return false
 
-func check_team_player():
+func check_team_player() -> void:
 	if check_team_has_player(1) == false:
 		teamSelect = 2
 	elif check_team_has_player(2) == false:
 		teamSelect = 1
 
-func check_game_has_gk(value):
+func check_game_has_gk(value) -> bool:
 	match value:
 		0:
 			units = get_tree().get_nodes_in_group("units")
@@ -441,51 +475,58 @@ func check_game_has_gk(value):
 			units = get_tree().get_nodes_in_group("team1")
 		2:
 			units = get_tree().get_nodes_in_group("team2")
-	var check = false
+	var check:bool = false
 	for unit in units:
 		if unit.playerPositionMath == "GK":
 			check = true
 	return check
 
-func find_player(value,obj = Ball):
-	var INT_MAX = 99
-	var i = 0
-	var a
-	var least_diff = INT_MAX
+func find_player(value,obj = Ball) -> int:
+	var a:int
+	var ss:Array = []
+	
 	if value == 1:
 		units = get_tree().get_nodes_in_group("team1")
 	elif value == 2:
 		units = get_tree().get_nodes_in_group("team2")
 	else:
 		units = get_tree().get_nodes_in_group("units")
+	
 	for unit in units:
-		i +=1
-		var diff = abs(obj.position.distance_to(unit.position+unit.AIMPOS))
+		var AI_Speed:float
+		if Global.AIState != Global.AI_FIGHT:
+			AI_Speed = unit.turn_speed
+		else:
+			AI_Speed = unit.turn_def
+		var diff = abs(obj.position.distance_to(unit.position+unit.AIMPOS))+AI_Speed
+		if unit.playerPositionMath != "NON":
+			diff -= 10
+		ss.append(diff)
+	
+	for n in ss.size():
+		if ss[n] == ss.min():
+			a = n
+	
+	if units[a].playerPositionMath == "GK":
+		if teamSelect == 1:
+			gkAReset = 0
+		else:
+			gkBReset = 0
+	return a
 
-		if(diff < least_diff):
-			least_diff = diff
-			a = i
-#	if units[a-1].playerPositionMath == "GK":
-#		if teamSelect == 1:
-#			gkAReset = 0
-#		else:
-#			gkBReset = 0
-	return a-1
-
-## Lay du lieu
+## Get unit player
 func get_unit():
 	for unit in selected_units:
 		return unit
 
-# warning-ignore:unused_argument
-func get_unit_gk(value = 0,pos = 0):
+func get_unit_gk(value:int = 0):
 	units = get_tree().get_nodes_in_group("units")
 	for unit in units:
 		if unit.playerPositionMath == "GK":
 			if unit.team == value:
 				return unit
 
-func get_ball_to_target():
+func get_ball_to_target() -> void:
 	for unit in selected_units:
 		if unit.team == 1:
 			playerShotID = unit.playerID
@@ -499,11 +540,10 @@ func get_ball_to_target():
 		ball2Target = Ball.position.distance_to(AI_return_target())
 
 ## Cac ham xu ly vi tri
-func pos_reset_hold_ball():
+func pos_reset_hold_ball() -> void:
 	check_team_player()
 	units = get_tree().get_nodes_in_group("units")
 	if Global.gameModeCur != 3:
-#		print("1WTF")
 		for unit in units:
 			if unit.playerPositionMath != "NON":
 				var pos = Ball.position - units[find_player(teamSelect)].AIMPOS
@@ -517,11 +557,11 @@ func pos_reset_hold_ball():
 				var fixA = unit.FootFixR
 				var fixB = unit.FootFixL
 				if Global.isChange == true:
-					UI.get_node("TestMode").get_player_foot_fix(fixA)
-					UI.get_node("TestMode").get_player_foot_size(unit.FootSizeR*1000)
+					UI.TestMode.get_player_foot_fix(fixA)
+					UI.TestMode.get_player_foot_size(unit.FootSizeR*1000)
 				else:
-					UI.get_node("TestMode").get_player_foot_fix(fixB)
-					UI.get_node("TestMode").get_player_foot_size(-unit.FootSizeL*1000)
+					UI.TestMode.get_player_foot_fix(fixB)
+					UI.TestMode.get_player_foot_size(-unit.FootSizeL*1000)
 
 		if Global.isChange:
 			for unit in units:
@@ -534,44 +574,62 @@ func pos_reset_hold_ball():
 					var pos = Ball.position - units[find_player(2)].AIMPOS
 					GlobalTween.pos_dir(units[find_player(2)],pos)
 
-func pos_reset_players():
+func pos_reset_players(value:bool = false, team:int = 0) -> void:
 	change_state(SET_GAME)
 	GlobalTween.pos(Ball,startBall.position)
 	Ball.linear_velocity = Vector3.ZERO
 	Ball.angular_velocity = Vector3.ZERO
 	if isGameTime == 1:
-		playersPos = formationMatch[FormationData.teamFor1]
-		for unit in teamA:
-			if unit.playerPositionMath != "NON":
-				var pos = playersPos[unit.playerPositionMath]
-				GlobalTween.pos(unit,pos)
-		
-		playersPos = formationMatch[FormationData.teamFor2]
-		for unit in teamB:
-			if unit.playerPositionMath != "NON":
-				var pos = Vector3(-playersPos[unit.playerPositionMath].x,
-				playersPos[unit.playerPositionMath].y,
-				playersPos[unit.playerPositionMath].z)
-				GlobalTween.pos(unit,pos)
+		if team == 0 or team == 1:
+			FormationData.reload_formation(1)
+			playersPos = FormationData.get_formation()[FormationData.teamTac1]
+			for unit in teamA:
+				if unit.playerPositionMath != "NON":
+					var pos = playersPos[unit.playerPositionMath]
+					if value == false:
+						GlobalTween.pos(unit,pos)
+					else:
+						unit.position = pos
+		if team == 0 or team == 2:
+			FormationData.reload_formation(2)
+			playersPos = FormationData.get_formation()[FormationData.teamTac2]
+			for unit in teamB:
+				if unit.playerPositionMath != "NON":
+					var pos = Vector3(-playersPos[unit.playerPositionMath].x,
+					playersPos[unit.playerPositionMath].y,
+					playersPos[unit.playerPositionMath].z)
+					if value == false:
+						GlobalTween.pos(unit,pos)
+					else:
+						unit.position = pos
 	else:
-		playersPos = formationMatch[FormationData.teamFor2]
-		for unit in teamB:
-			if unit.playerPositionMath != "NON":
-				var pos = playersPos[unit.playerPositionMath]
-				GlobalTween.pos(unit,pos)
-		
-		playersPos = formationMatch[FormationData.teamFor1]
-		for unit in teamA:
-			if unit.playerPositionMath != "NON":
-				var pos = Vector3(-playersPos[unit.playerPositionMath].x,
-				playersPos[unit.playerPositionMath].y,
-				playersPos[unit.playerPositionMath].z)
-				GlobalTween.pos(unit,pos)
+		if team == 0 or team == 2:
+			FormationData.reload_formation(2)
+			playersPos = FormationData.get_formation()[FormationData.teamTac2]
+			for unit in teamB:
+				if unit.playerPositionMath != "NON":
+					var pos = playersPos[unit.playerPositionMath]
+					if value == false:
+						GlobalTween.pos(unit,pos)
+					else:
+						unit.position = pos
+			FormationData.reload_formation(1)
+			playersPos = FormationData.get_formation()[FormationData.teamTac1]
+		if team == 0 or team == 1:
+			for unit in teamA:
+				if unit.playerPositionMath != "NON":
+					var pos = Vector3(-playersPos[unit.playerPositionMath].x,
+					playersPos[unit.playerPositionMath].y,
+					playersPos[unit.playerPositionMath].z)
+					if value == false:
+						GlobalTween.pos(unit,pos)
+					else:
+						unit.position = pos
 
-func pos_reset_gk(value):
+func pos_reset_gk(value:int) -> void:
 	if value == 1:
 		gkAReset = 0
-		playersPos = formationMatch[FormationData.teamFor1]
+		playersPos = FormationData.get_formation()[FormationData.teamTac1]
 		for unit in teamA:
 			if unit.playerPositionMath == "GK":
 				if isGameTime == 1:
@@ -589,7 +647,7 @@ func pos_reset_gk(value):
 
 	elif value == 2:
 		gkBReset = 0
-		playersPos = formationMatch[FormationData.teamFor2]
+		playersPos = FormationData.get_formation()[FormationData.teamTac2]
 		for unit in teamB:
 			if unit.playerPositionMath == "GK":
 				if isGameTime == 1:
@@ -606,12 +664,12 @@ func pos_reset_gk(value):
 					unit.angular_velocity = Vector3.ZERO
 	change_player()
 
-func pos_reset_y():
+func pos_reset_y() -> void:
 	if Global.isFixPosY == true:
 		for unit in units:
 			unit.position.y = 0
 
-func pos_all_stop():
+func pos_all_stop() -> void:
 	units =  get_tree().get_nodes_in_group("units")
 	Ball.linear_velocity = Vector3.ZERO
 	Ball.angular_velocity = Vector3.ZERO
@@ -619,126 +677,100 @@ func pos_all_stop():
 		Ball.position = startBall.position
 	for unit in units:
 		selected_units.clear()
-		unit.deselect()
 		if unit.playerPositionMath != "NON" and unit.playerPositionMath != "GK":
-			unit.player_set_stop(tween)
+			unit.player_set_stop()
 			var pos = Ball.position - units[find_player(3)].AIMPOS
 			GlobalTween.pos_dir(units[find_player(3)],pos)
 		if unit.playerPositionMath == "GK":
-			unit.player_set_stop(tween)
+			unit.player_set_stop()
 
 ## Cac ham tinh toan
-func update_powerbar(value):
+func update_powerbar(value) -> void:
 	for unit in selected_units:
+		unit.select()
 		unit.textBox.update_powerbar(value)
 
-func stamina_set(value):
-	units = get_tree().get_nodes_in_group("units")
-	for unit in units:
-		if unit.playerPositionMath != "NON":
-			unit.statEnergy += value
-			if unit.statEnergy > 100:
-				unit.statEnergy = 100
-			unit.player_set_stamina()
-		else:
-			unit.statEnergy += value*1.5
-			if unit.statEnergy > 100:
-				unit.statEnergy = 100
-			unit.player_set_stamina()
-
-func stamina_return():
-	for unit in units:
-		if unit.playerPositionMath != "NON":
-			unit.player_set_stamina()
-
-func player_col_active(value):
+func player_col_active(value) -> void:
 	pass
-#	Ball.set_collision_mask_value(1,value)
+#	Ball.set_collision_mask_value(0,value)
 #	for unit in units:
-#		unit.set_collision_mask_value(1,value)
-#		unit.set_collision_mask_value(2,value)
+#		if unit.playerPositionMath != "NON":
+#			unit.set_collision_mask_value(0,value)
 
 ## Cac che do trong man choi
 # Cac chuc nang trong tung che do choi
-func change_state(new_state):
+func change_state(new_state) -> void:
 	state = new_state
 	load_debug_log()
 	player_col_active(false)
 	match state:
 		SET_GAME:
-			replay_is_save(true)
+			UI.ReplayPlayer.replay_is_save(true)
 			camFollowBall = false
 		SET_IDLE:
-			replay_is_save(true)
+			UI.ReplayPlayer.replay_is_save(true)
 			camFollowBall = false
 			player_col_active(true)
 			AI_set_idle()
 		SET_PLAYER:
-			replay_is_save(false)
+			UI.ReplayPlayer.replay_is_save(false)
 			AI_set_player()
 		SET_AIM:
-			replay_is_save(false)
+			UI.ReplayPlayer.replay_is_save(false)
 			AI_set_aim()
 		SET_ANGLE:
-			replay_is_save(false)
+			UI.ReplayPlayer.replay_is_save(false)
 			AI_set_angle()
 		SET_POWER:
-			replay_is_save(true)
+			UI.ReplayPlayer.replay_is_save(true)
 			get_ball_to_target()
 			AI_set_power()
 		SET_SHOOT:
 			UI.newTurn.isStart = false
-			replay_is_save(true)
+			UI.ReplayPlayer.replay_is_save(true)
 			player_col_active(true)
 			update_powerbar(power)
 			player_set_physics()
-			player_set_stats()
 			player_set_shoot()
 			## NewTurn
 			_on_TimerNewTurn_timeout()
 
 ## Seup AI mode
-func AI_mode():
-	var value = false
+func AI_mode() -> bool:
+	var value:bool = false
 	match Global.gameModeCur:
 		0:#Player vs Player
-			show_pc_input()
+			pass
 		1:#Player vs AI
 			if teamSelect == Global.MatchPlay:
-				show_pc_input()
+				pass
 			else:
 				value = true
-				UI.controller.hide()
 			if Global.autoMode == true:
 				value = true
 		2:#Trainng
 			if teamSelect == Global.MatchPlay:
-				show_pc_input()
+				pass
 			else:
 				value = true
-				UI.controller.hide()
 			if Global.autoMode == true:
 				value = true
 		3:#Test Mode
-			value = true
-			UI.controller.hide()
+			if teamSelect == Global.MatchPlay:
+				pass
+			else:
+				value = true
+			if Global.autoMode == true:
+				value = true
 	return value
 
 ## Tinh toan truoc khi thuc hien hanh dong cho AI
 func AI_return_target():
 	match Global.AIState:
 		0:#AI_PASS
-			if teamSelect == 1:
-				units = get_tree().get_nodes_in_group("team1")
-			else:
-				units = get_tree().get_nodes_in_group("team2")
-			Target = units[id]
+			Target = AI_id
 		1:#AI_CREATE
-			if teamSelect == 1:
-				units = get_tree().get_nodes_in_group("team1")
-			else:
-				units = get_tree().get_nodes_in_group("team2")
-			Target = units[id]
+			Target = AI_id
 		2:#AI_SHOOT
 			Target = get_unit().goal
 		3:#AI_MOVE
@@ -746,22 +778,18 @@ func AI_return_target():
 		4:#AI_FIGHT
 			Target = Ball
 		5:#AI_DEF
-			if teamSelect == 1:
-				units = get_tree().get_nodes_in_group("team2")
-			else:
-				units = get_tree().get_nodes_in_group("team1")
-			Target = units[id]
+			Target = AI_id
 		6:#AI_CELEBRATE
 			Target = Ball
 	if Global.isDebug == true and Global.gameModeCur == 3:
-		$AITest/Area3D.show()
+		$AITest/Target.show()
 		Target = $AITest/Target
 	else:
-		$AITest/Area3D.hide()
+		$AITest/Target.hide()
 	return Target.position
 
-func AI_check_target():
-#	enum {AI_DEF, AI_MID, AI_ATK}
+func AI_check_target() -> void:
+	#enum {AI_DEF, AI_MID, AI_ATK}
 	match AIState:
 		0:#AI_DEF
 			pass
@@ -787,28 +815,26 @@ func AI_check_target():
 		Tan cong: co ball
 			cau thu co bong gan goal:
 				sut bong
-				tao co hoi: chua gan goal, cau thu chi so thap, 
+				tao co hoi: chua gan goal, cau thu chi so thap,
 			cau thu co bong xa goal:
 				sut bong: chi so sut xa toi, gk loi vi tri
 				tao co hoi
 	"""
 
-func AI_action():
-	"""
-	1 Check team
-	2 Check player2goal: max: move2goal min: skip
-	3 Check HoldBall:
-	true:
-		check ball2goal: max: pass,move2goal min: shot
-	false:
-		check ball2goal: max: move2goal move2ball min: move2ball
-	"""
+func AI_action() -> void:
+	# 1 Check team
+	# 2 Check player2goal: max: move2goal min: skip
+	# 3 Check HoldBall:
+	# true:
+	#	check ball2goal: max: pass,move2goal min: shot
+	# false:
+	#	check ball2goal: max: move2goal move2ball min: move2ball
+	
 	if AI_mode() == true:
 		Global.isAIState = true
-		var b2g = 0
-		var p2g = 0
+		var b2g:float = 0
+		var p2g:float = 0
 		var goal
-		
 		## Check Team
 		if teamSelect == 1:
 			goal = GoalA
@@ -819,31 +845,77 @@ func AI_action():
 		b2g = Ball.position.distance_to(goal.position)
 		
 		## Check player2goal
-		#{AI_PASS, AI_CREATE, AI_SHOT, AI_MOVE, AI_FIGHT, AI_GOAL, AI_CELEBRATE}
+		# {AI_PASS 0, AI_CREATE 1, AI_SHOOT 2, AI_MOVE 3, AI_FIGHT 4, AI_GOAL 5, AI_CELEBRATE 6}
 		if Global.gameModeCur != 3:
-			if p2g > 3:
-				Global.AIState = 2
+			if p2g > 12.5:
+				if check_ball_on_player() == true:
+					if teamSelect == 1:
+						change_player(GoalA)
+					else:
+						change_player(GoalB)
+					Global.AIState = Global.AI_MOVE
+					if check_ball_on_player() == true:
+						Global.AIState = Global.AI_SHOOT
+				else:
+					if b2g > 20:
+						Global.AIState = Global.AI_FIGHT
+					else:
+						Global.AIState = Global.AI_MOVE
 			else:
 				if check_ball_on_player() == true:
-					if b2g > 3:
-						Global.AIState = 0
+					if b2g > 15:
+						Global.AIState = Global.AI_PASS
 					else:
-						Global.AIState = 2
+						Global.AIState = Global.AI_SHOOT
 				else:
-					if b2g > 3:
-						Global.AIState = 4
+					if b2g > 15:
+						Global.AIState = Global.AI_FIGHT
 					else:
-						Global.AIState = 4
-		change_player()
+						Global.AIState = Global.AI_FIGHT
+				change_player()
 		change_state_AI()
-		id = Calculate.rand_a_num(4,7)
+		AI_find_target()
+
+func AI_find_target() -> void:
+		var target1:Array = []
+		var target2:Array = []
+		#	var test:Player
+		for i in get_tree().get_nodes_in_group("team1"):
+			if i.playerPositionMath != "NON" and i.playerPositionMath != "GK" and i != get_unit():
+				target1.append(i)
+		for i in get_tree().get_nodes_in_group("team2"):
+			if i.playerPositionMath != "NON" and i.playerPositionMath != "GK" and i != get_unit():
+				target2.append(i)
+		if teamSelect == 1:
+			target1.sort_custom(Callable(self, "sort_player2goal"))
+			target1.pop_back()
+			target1.pop_back()
+			target1.pop_back()
+			AI_id = Calculate.random_in_size(target1)
+		else:
+			target2.sort_custom(Callable(self, "sort_player2goal"))
+			target2.pop_back()
+			target2.pop_back()
+			target2.pop_back()
+			AI_id = Calculate.random_in_size(target2)
+
+func sort_player2goal(a, b):
+	var goal
+	if teamSelect == 1:
+		goal = GoalA
+	else:
+		goal = GoalB
+	a.position.distance_to(goal.position)
+	if a.position.distance_to(goal.position) < b.position.distance_to(goal.position):
+		return true
+	return false
 
 # AIState = {AI_PASS, AI_CREATE, AI_SHOOT, AI_MOVE, AI_FIGHT, AI_DEF, AI_CELEBRATE}
-func change_state_AI():
+func change_state_AI() -> void:
 	match Global.AIState:
 		Global.AI_PASS:
 			for unit in selected_units:
-				unit.POWERCONTROLLER = remap(unit.statShotPower,40,100,2,4)
+				unit.POWERCONTROLLER = remap(unit.statShotPower,40,100,unit.a,unit.d)
 				AIPowerShot = remap(unit.statShotPower,40,100,100,70)
 		Global.AI_CREATE:
 			var tg = AI_return_target().z
@@ -855,7 +927,7 @@ func change_state_AI():
 				ballPos = remap(tg,-1.5,0.3,-1.5,0)
 			
 			var newTarget = Vector3(AI_return_target().x,0,ballPos)
-			Arrow.look_at(newTarget, transform.basis.y)
+			Arrow.look_at(newTarget, Vector3(0,1.01,0))
 			var goalDis
 			if teamSelect == 1:
 				goalDis = AI_return_target().distance_to(GoalA.position)
@@ -884,8 +956,8 @@ func change_state_AI():
 			for unit in selected_units:
 				AIPowerShot = 100
 
-func _on_AITimer_timeout():
-	if isPlayReplay == false and isStartGame == true:
+func _on_AITimer_timeout() -> void:
+	if Replay.isPlayReplay == false and isStartGame == true:
 		match timerAI:
 			0:
 				change_player()
@@ -907,7 +979,7 @@ func _on_AITimer_timeout():
 			5:
 				change_state(SET_IDLE)
 
-func AI_draw_force_line(value:bool=true):
+func AI_draw_force_line(value:bool = true) -> void:
 	if value:
 		var m_pos = Cam.unproject_position(Ball.position)
 		var target = Cam.unproject_position(AI_return_target())
@@ -917,172 +989,156 @@ func AI_draw_force_line(value:bool=true):
 		ClickEffect.drawForceAI.draw_line_force(m_pos,target,50,1.5)
 
 ## Chuyen hanh dong cho AI
-func AI_set_idle():
+func AI_set_idle() -> void:
 	if AI_mode() == true:
-		$AITimer.wait_time = 0.5
+		AITimer.wait_time = 0.5
 		timerAI = 0
-		$AITimer.start()
+		AITimer.start()
 
-func AI_set_player():
+func AI_set_player() -> void:
 	if AI_mode() == true:
-		$AITimer.wait_time = 2
+		AITimer.wait_time = 2
 		timerAI = 1
-		$AITimer.start()
+		AITimer.start()
 
-func AI_set_aim():
+func AI_set_aim() -> void:
 	if AI_mode() == true:
 		change_state(SET_POWER)
-		$AITimer.wait_time = 0.5
+		AITimer.wait_time = 0.5
 		timerAI = 2
-		$AITimer.start()
+		AITimer.start()
 
-func AI_set_angle():
+func AI_set_angle() -> void:
 	if AI_mode() == true:
-		$AITimer.wait_time = 0.5
+		AITimer.wait_time = 0.5
 		timerAI = 3
-		$AITimer.start()
+		AITimer.start()
 
-func AI_set_power():
+func AI_set_power() -> void:
 	if AI_mode() == true:
-		$AITimer.wait_time = 1.5
+		AITimer.wait_time = 1.5
 		timerAI = 4
-		$AITimer.start()
+		AITimer.start()
 
 ## Cac ham thuc hien hanh dong cho AI
-func AI_find_foot():
-#	if AI_mode() == true:
-		for unit in selected_units:
-			if unit.FootUse < 75:
-				if isGameTime == 1:
-					if unit.team == 1:
-						checkFoot = 2
-					else:
-						checkFoot = 1
-				else:
-					if unit.team == 2:
-						checkFoot = 2
-					else:
-						checkFoot = 1
-				if Global.gameModeCur == 3:
-					if unit.team == 1:
-						checkFoot = 2
-					else:
-						checkFoot = 1
-			else:
-				if unit.Foot == 1:
-					checkFoot = 1
-				else:
+func AI_find_foot() -> void:
+	for unit in selected_units:
+		if unit.FootUse < 75:
+			if isGameTime == 1:
+				if unit.team == 1:
 					checkFoot = 2
+				else:
+					checkFoot = 1
+			else:
+				if unit.team == 2:
+					checkFoot = 2
+				else:
+					checkFoot = 1
+			if Global.gameModeCur == 3:
+				if unit.team == 1:
+					checkFoot = 2
+				else:
+					checkFoot = 1
+		else:
+			if unit.Foot == 1:
+				checkFoot = 1
+			else:
+				checkFoot = 2
 
-func AI_player_angle_start_set():
+func AI_player_angle_start_set() -> void:
 	for unit in selected_units:
 		if Global.isAIState:
-			Arrow.look_at(AI_return_target(), transform.basis.y)
+			Arrow.look_at(AI_return_target(), Vector3(0,1.01,0))
 			match Global.AIState:
 				0:
 					var dis = Ball.position.distance_to(AI_return_target())
-					var stats = remap(unit.statAccurate,40,100,5,10)
+					var stats:float = remap(unit.statAccurate,40,100,5,10)
 					AIShootAngle = Calculate.rand_num(dis/stats)
 					var accurate = AI_return_target()
 					accurate.z += AIShootAngle
-					Arrow.look_at(accurate, transform.basis.y)
+					Arrow.look_at(accurate, Vector3(0,1.01,0))
 				2:
-# warning-ignore:shadowed_variable
 					var gkDis:float = 0
 					var gkZ:float = 0
 					if teamSelect == 1:
 						if check_game_has_gk(2):
-							gkDis = get_unit_gk(2,0).position.distance_to(GoalA.position)
-							gkZ = get_unit_gk(2,0).position.z
+							gkDis = get_unit_gk(2).position.distance_to(GoalA.position)
+							gkZ = get_unit_gk(2).position.z
 					else:
 						if check_game_has_gk(1):
-							gkDis = get_unit_gk(1,0).position.distance_to(GoalB.position)
-							gkZ = get_unit_gk(1,0).position.z
+							gkDis = get_unit_gk(1).position.distance_to(GoalB.position)
+							gkZ = get_unit_gk(1).position.z
 					
-					var angle = 0
+					var angle:float = 0
 					if Calculate.rand_num(1)>Calculate.rand_num(1):
-						angle = 0.4
+						angle = 2
 					else:
-						angle = -0.4
-					var rangeAngle = remap(ball2Target,0,5,0.1,0.2)
-					var rangeAngleRan = Calculate.rand_num(rangeAngle)
-					var accuAngle = remap(unit.statAccurate,40,100,0.1,0)
-					var accuAngleRan = Calculate.rand_num(accuAngle)
+						angle = -2
+					var rangeAngle:float = remap(ball2Target,0,25,0.5,1)
+					var rangeAngleRan:float = Calculate.rand_num(rangeAngle)
+					var accuAngle:float = remap(unit.statAccurate,40,100,0.5,0)
+					var accuAngleRan:float = Calculate.rand_num(accuAngle)
 					var accurate = AI_return_target()
 					AIShootAngle = angle + accuAngleRan + rangeAngleRan
 					
-					if gkDis > 0.4:
+					if gkDis > 2.0:
 						AIShootAngle = AIShootAngle/2
-					if gkZ > 0.1:
+					if gkZ > 0.5:
 						AIShootAngle = -abs(AIShootAngle)
-					elif gkZ < -0.1:
+					elif gkZ < -0.5:
 						AIShootAngle = abs(AIShootAngle)
 					
 					accurate.z = AIShootAngle
-					Arrow.look_at(accurate, transform.basis.y)
+					Arrow.look_at(accurate, Vector3(0,1.01,0))
 
-func AI_player_angle_set():
-#	if AI_mode() == true:
-# warning-ignore:shadowed_variable
-		var AIShot
-		var ranShot = 0
-		if check_ball_on_player() == true:
-			for unit in selected_units:
-				var base = 100-(unit.statAccurate+unit.statShotPower)/2
-				AIShot = remap(base,0,100,0,5)
-				if Global.randomShot == true:
-					ranShot = Calculate.rand_num(AIShot) + AIShootAngle
-				else:
-					ranShot += 0
-			
-			for unit in selected_units:
-				var fixA = unit.FootFixR
-				var fixB = unit.FootFixL
-				if Global.gameModeCur == 3:
-					if !Global.isAIState:
-						fixA = Global.footFix
-						fixB = Global.footFix
-				var rot = Vector3.ZERO
-				if isGameTime == 1:
-					if unit.team == 1:
-						if unit.Foot == 1:
-							rot.y = fixA+(Arrow.rotation_degrees.y+90+ranShot)
-						else:
-							rot.y = -fixA+(Arrow.rotation_degrees.y+90+ranShot)
-					elif unit.team == 2:
-						if unit.Foot == 1:
-							rot.y = fixB+(Arrow.rotation_degrees.y-90+ranShot)
-						else:
-							rot.y = -fixB+(Arrow.rotation_degrees.y-90+ranShot)
-				else:
-					if unit.team == 2:
-						if unit.Foot == 1:
-							rot.y = fixA+(Arrow.rotation_degrees.y+90+ranShot)
-						else:
-							rot.y = -fixA+(Arrow.rotation_degrees.y+90+ranShot)
-					elif unit.team == 1:
-						if unit.Foot == 1:
-							rot.y = fixB+(Arrow.rotation_degrees.y-90+ranShot)
-						else:
-							rot.y = -fixB+(Arrow.rotation_degrees.y-90+ranShot)
-				GlobalTween.rot_time(unit,rot,0.2)
+func AI_player_angle_set() -> void:
+	var AIShot:float
+	var ranShot:float = 0
+	if check_ball_on_player() == true:
+		for unit in selected_units:
+			var base = 100-(unit.statAccurate+unit.statShotPower)/2
+			AIShot = remap(base,0,100,0,5)
+			if Global.randomShot == true:
+				ranShot = Calculate.rand_num(AIShot) + AIShootAngle
+			else:
+				ranShot += 0
 
-func AI_player_power_set():
+		for unit in selected_units:
+			var fixA:float = unit.FootFixL
+			var fixB:float = unit.FootFixR
+			if Global.gameModeCur == 3:
+				if !Global.isAIState:
+					fixA = Global.footFix
+					fixB = Global.footFix
+			var rot:Vector3
+			if Arrow.rotation_degrees.y > 0:
+				if unit.Foot == 1:
+					rot.y = fixA+Arrow.rotation_degrees.y-90+ranShot
+				else:
+					rot.y = -fixA+Arrow.rotation_degrees.y-90+ranShot
+			else:
+				if unit.Foot == 1:
+					rot.y = fixB+Arrow.rotation_degrees.y+90+ranShot
+				else:
+					rot.y = -fixB+Arrow.rotation_degrees.y+90+ranShot
+			GlobalTween.rot(unit,rot,0.2)
+
+func AI_player_power_set() -> void:
 	if AI_mode() == true:
 		change_state_AI()
 		for unit in selected_units:
-			var powerShot = AIPowerShot
+			var powerShot:float = AIPowerShot
 			powerShot = clamp(powerShot,0,100)
 			if check_ball_on_player() == true:
-				var powerRange
+				var powerRange:float
 				match Global.AIState:
 					Global.AI_PASS:
-						powerRange = remap(ball2Target,0,4,10,powerShot)
+						powerRange = remap(ball2Target,0,20,10,powerShot)
 						var tar = AI_return_target().distance_to(Ball.position)
-						var so = remap(tar,0,4,10,0) + (100-unit.statShotPower)/2
+						var so = remap(tar,0,20,10,0) + (100-unit.statShotPower)/2
 						powerRange += so
 					Global.AI_SHOOT:
-						powerRange = remap(ball2Target,0,3,50,powerShot)
+						powerRange = remap(ball2Target,0,15,50,powerShot)
 				power = clamp(powerRange,0,powerShot)
 				if Global.gameModeCur == 3:
 					if Global.powerTest>10:
@@ -1090,147 +1146,177 @@ func AI_player_power_set():
 					else:
 						power = clamp(powerRange,0,powerShot)
 			else:
-				power = unit.SHOTPOWX
+				power = 100
 
-func AI_player_shot_pos_set():
-#	if AI_mode() == true:
-		var Foot2Ball #Khoang cach giua chan den bong
-		for unit in selected_units:
-			## Xet chan sut
-			AI_find_foot()
-			## Xet vi tri chuan
-			if Global.gameModeCur != 3:
-				if isGameTime == 1:
-					if unit.team == 1:
-						Foot2Ball = unit.FootSizeR
-					else:
-						Foot2Ball = -unit.FootSizeL
-				else:
-					if unit.team == 1:
-						Foot2Ball = unit.FootSizeL
-					else:
-						Foot2Ball = -unit.FootSizeR
+func AI_player_shot_pos_set() -> void:
+	var Foot2Ball:float = 0
+	var pos:Vector3
+	for unit in selected_units:
+		## Xet chan sut
+		AI_find_foot()
+		
+		## Tim vi tri sut bong
+		if check_ball_on_player() == true:
+			if checkFoot == 1:
+				pos = unit.RightPoint.global_transform.origin
 			else:
-				Foot2Ball = Global.footSize/1000
-			## Tim vi tri sut bong
-			if check_ball_on_player() == true:
-#				$DebugPoint.show()
-				var pos = Vector3.ZERO
-				if checkFoot == 1:
-					pos = unit.RightPoint.global_transform.origin
+				pos = unit.LeftPoint.global_transform.origin
+			
+			var fix:Vector3 = Vector3(unit.position.x - pos.x,0,unit.position.z - pos.z)
+			var aimPoint:Vector3 #Vi tri diem sut bong can tim
+			var goalPoint:Vector3 #Vi tri khung thanh can tim
+			var Ball2Goal:float #Khoang cach bong den goal, de tim aimpoit: diem sut bong
+			
+			## Xet vi tri chuan
+			if Arrow.rotation_degrees.y > 0:
+				Foot2Ball = unit.FootSizeL
+			else:
+				Foot2Ball = unit.FootSizeR
+			
+			if AI_mode() == true:
+				if Global.isAIState:
+					goalPoint = AI_return_target()
+					Ball2Goal = Ball.position.distance_to(goalPoint)
+			else:
+				if isGameTime < 2:
+					if Arrow.rotation_degrees.y < 0:
+						goalPoint = GoalA.position
+					else:
+						goalPoint = GoalB.position
 				else:
-					pos = unit.LeftPoint.global_transform.origin
-				
-				var fix = Vector3(unit.position.x - pos.x,0,unit.position.z - pos.z)
-				var aimPoint = Vector3() #Vi tri diem sut bong can tim
-				var goalPoint = Vector3() #Vi tri khung thanh can tim
-				var Ball2Goal #Khoang cach bong den goal, de tim aimpoit: diem sut bong
-				
-				if unit.team == 1:
-					goalPoint = GoalA.position
-					Foot2Ball = Foot2Ball
-				else:
-					goalPoint = GoalB.position
-					Foot2Ball = -Foot2Ball
+					if Arrow.rotation_degrees.y > 0:
+						goalPoint = GoalA.position
+					else:
+						goalPoint = GoalB.position
 				Ball2Goal = Ball.position.distance_to(goalPoint)
-				
-				if AI_mode() == true:
-					if Global.isAIState:
-						if Target.position.distance_to(GoalA.position)<checkRange:
-							Foot2Ball = unit.FootSizeR
-						else:
-							Foot2Ball = unit.FootSizeL
-						goalPoint = AI_return_target()
-						Ball2Goal = Ball.position.distance_to(goalPoint)
-				
-				aimPoint = lerp(goalPoint, Ball.position, 1 + remap(Foot2Ball,0,Ball2Goal,0,1))
-				var po = aimPoint+fix
-				GlobalTween.pos_time(unit,po,0.5)
+			
+			if Global.gameModeCur == 3:
+				Foot2Ball = Global.footSize/1000
+			aimPoint = lerp(goalPoint, Ball.position, 1 + remap(Foot2Ball,0,Ball2Goal,0,5))
+			var po:Vector3 = aimPoint+fix
+			GlobalTween.pos_time(unit,po,0.5)
 
 ## Xu ly Ai cua thu mon
-func _on_GkA_body_entered(body):
-	if body == Ball and teamSelect == 2 and isPlayReplay == false:
-		AI_gk_move(2)
+func _on_GkA_body_entered(body) -> void:
+	if body == Ball and Replay.isPlayReplay == false:
+		teamSave[1] += 1
+		if teamSelect == 2:
+			AI_gk_move(2)
+			## MatchDetail sut bong
+			if playerKick.size()>0:
+				teamShot[0] += 1
+				units[playerKick[0]].matchShots += 1
+		else:
+			if ball2Target < 20:
+				AI_gk_move(2,false)
 
-func _on_GkB_body_entered(body):
-	if body == Ball and teamSelect == 1 and isPlayReplay == false:
-		AI_gk_move(1)
+func _on_GkB_body_entered(body) -> void:
+	if body == Ball and Replay.isPlayReplay == false:
+		teamSave[0] += 1
+		if teamSelect == 1:
+			AI_gk_move(1)
+			## MatchDetail sut bong
+			if playerKick.size()>0:
+				teamShot[1] += 1
+				units[playerKick[0]].matchShots += 1
+		else:
+			if ball2Target < 20:
+				AI_gk_move(1,false)
 
-func AI_gk_move(GKteam):
-	AI_gk_defend_stats(GKteam)
-	AI_gk_move_stats(GKteam)
+func AI_gk_move(GKteam:int, value:bool = true) -> void:
+	AI_gk_defend_stats(GKteam,value)
+	AI_gk_move_stats(GKteam,value)
 
-func AI_gk_move_stats(GKteam):
+# warning-ignore:unused_argument
+func AI_gk_save_pos(ball,arrow,goal) -> float:
+	var fix = gkBall.z/(gkDis)
+	var result:float = (gkDis * tan(deg_to_rad(arrow))) - ball.z
+	result = clamp(result,-3.5,3.5) - fix*3.0
+	return -result
+
+func AI_gk_move_stats(GKteam:int, value:bool = true) -> void:
 	var pos:Vector3 = Vector3.ZERO
+	var result:float
 	pos.z = gkSave
-#	pos.x = 0
+	if value == false:
+		var fix:float = gkBall.z/(gkDis)
+		result = (gkDis * tan(deg_to_rad(gkArrow))) + gkBall.z
+		result = clamp(result,-3,3) + fix*3.0
+		pos.z = result
 	for unit in units:
-		if unit.playerPositionMath == "GK" and unit.team == GKteam:
-			pos.x = unit.position.x
-			var ballRangeGK = Ball.position.distance_to(unit.position+unit.AIMPOS)
-			if ballRangeGK > 0.2:
-				var GKDis = remap(gkDis,0,5,0,0.2)
-				var save = remap(unit.statReflexes,40,100,0.2,0.7) + GKDis
-# warning-ignore:shadowed_variable
-				var dis =  abs(unit.position.z-pos.z)/5
-				var time = remap(unit.statReflexes,40,100,0.2,0) + dis - GKDis
-				time = clamp(time,0.0,1.0)
-#				prints(gkDis,dis,time)
-				pos.z = pos.z * save
-				var s = unit.statSave/200+0.2
-				pos.z = clamp(pos.z,-s,s)
-#				print(save," ",Ball.position.z," ",pos.z)
-				GlobalTween.pos_time(unit,pos,time)
+		if unit.team == GKteam:
+			if unit.playerPositionMath == "GK":
+				pos.x = unit.position.x
+				var statsRef:float = (unit.statReflexes+unit.statEnergy)/2.0
+				var statsSav:float = (unit.statSave+unit.statEnergy)/2.0
+				var ballRangeGK = Ball.position.distance_to(unit.position+unit.AIMPOS)
+				if ballRangeGK > 0.5:
+					var GKDis:float = remap(gkDis,0,25,0,1)
+					var save:float = remap(statsRef,40,100,1,3.5) + GKDis
+					var dis:float =  abs(unit.position.z-pos.z)/5
+					var time:float = remap(statsRef,40,100,0.1,0) + dis - GKDis
+					time = clamp(time,0.0,1.0)
+					pos.z = pos.z * save
+					var s:float = statsSav/200+1.0
+					pos.z = clamp(pos.z,-s,s)
+					if value == false:
+						if result > 0:
+							pos.z = abs(pos.z)
+						else:
+							pos.z = -abs(pos.z)
+					GlobalTween.pos_time(unit,pos,time)
+					unit.matchSaves += 1
+			elif (unit.playerPositionMath == "CB"
+			or unit.playerPositionMath == "RB"
+			or unit.playerPositionMath == "LB"
+			or unit.playerPositionMath == "CM"):
+				unit.matchBlocks += 1
 
-func AI_gk_defend_stats(GKteam):
+func AI_gk_defend_stats(GKteam:int, value:bool = true) -> void:
 	for unit in units:
 		if unit.playerPositionMath == "GK" and unit.team == GKteam:
 			if unit.playerID != playerShotID:
+				unit.save_gk = remap((unit.statSave+unit.statEnergy)/2.0,40,100,2,12)
 				#Bong vs Goal
 				gkGoalDis = unit.position.distance_to(gkGoal.position)
-				var bDis = remap(gkDis,0,5,0.3,2.5)
-				bDis = clamp(bDis,0.3,2.5)
+				var bDis:float = remap(gkDis,0,25,1.5,12.5)
+				bDis = clamp(bDis,1.5,12.5)
 				#GK vs Goal
-				var gDis = remap(gkGoalDis,0.3,2,1,5)
-				gDis = clamp(gDis,1,5)
+				var gDis:float = remap(gkGoalDis,1.5,10,5,25)
+				if value == false:
+					gDis = remap(gkGoalDis,1.5,10,15,5)
+				gDis = clamp(gDis,5,25)
 				#Tinh def GK
 				unit.playerDefend = ((unit.save_gk - AIShoot) * bDis)/gDis
 				unit.playerDefend = clamp(unit.playerDefend,1,16)
 				unit.player_defend_set()
 
-# warning-ignore:unused_argument
-func AI_gk_save_pos(ball,arrow,goal):
-	var fix = gkBall.z/(gkDis)
-	var result = (gkDis * tan(deg_to_rad(arrow))) - ball.z
-	result = clamp(result,-0.6,0.6) - fix
-	return -result
-
-func AI_gk_check_reset():
+func AI_gk_check_reset() -> void:
 	if check_game_has_gk(1) == true:
-		var gkADis = get_unit_gk(1).position.distance_to(GoalB.position)
-		if gkADis > 0.2 or  gkADis < 0.19:
+		var gkADis:float = get_unit_gk(1).position.distance_to(GoalB.position)
+		if gkADis > 1 or  gkADis < 0.9:
 			gkAReset += 1
 			if gkAReset > 2:
 				pos_reset_gk(1)
+	
 	if check_game_has_gk(2) == true:
-		var gkBDis = get_unit_gk(2).position.distance_to(GoalA.position)
-		if gkBDis > 0.2 or  gkBDis < 0.19:
+		var gkBDis:float = get_unit_gk(2).position.distance_to(GoalA.position)
+		if gkBDis > 1 or  gkBDis < 0.9:
 			gkBReset += 1
 			if gkBReset > 2:
 				pos_reset_gk(2)
 
 ## Notification whenn change team
-func notification_change_team():
+func notification_change_team() -> void:
 	if teamSelect == 1:
-		UI.update_Notification(iconTeamA, teamAName + " Turn")
+		UI.update_Notification(teamA[0].teamData.icon, teamA[0].teamData.fullName)
 	elif teamSelect == 2:
-		UI.update_Notification(iconTeamB, teamBName + " Turn")
+		UI.update_Notification(teamB[0].teamData.icon, teamB[0].teamData.fullName)
 
 ## Cac ham xu ly thong so cau thu
-func player_set_physics():
+func player_set_physics() -> void:
 	## Lay player tackle
 	for unit in selected_units:
-#		prints("shot",unit.physic_shot)
 		if check_ball_on_player() == false:
 			AITackle = unit.friction_tackle
 			AIShoot = 0
@@ -1259,7 +1345,7 @@ func player_set_physics():
 		unit.linear_damp = unit.linear_base
 		unit.angular_damp = unit.angular_base
 		unit.POWERCONTROLLER = 3
-		unit.mass = 10
+		unit.mass = unit.mass_def
 		AITackle = unit.friction_tackle
 		unit.playerDefend = 1
 		unit.player_defend_set()
@@ -1271,7 +1357,8 @@ func player_set_physics():
 			unit.physics_material_override.friction = unit.friction_shot
 			unit.physics_material_override.bounce = unit.bounce_shot
 
-func player_set_shoot():
+func player_set_shoot() -> void:
+	player_set_stats()
 	isStartTurn = false
 #	Ball.effTrail.play()
 	player_set_gk_save()
@@ -1281,63 +1368,72 @@ func player_set_shoot():
 #			unit.playerVfx.speed = 0.3
 #			unit.playerVfx.play()
 			if check_ball_on_player() == true:
+				playerKick = []
+				playerKick.append(unit.ID)
+				unit.playerColor.a = 0.6
+				Ball.ball_effect_trail(unit.playerColor)
 				if checkFoot == 1:
 					unit.direction = unit.RightPoint.global_transform.origin-unit.position
-	#				unit.direction = unit.RightPoint.position
 				else:
 					unit.direction = unit.LeftPoint.global_transform.origin-unit.position
-	#				unit.direction = unit.LeftPoint.position
 				SFXMove.play()
 				SFXShoot.play()
+				UI.talk(unit.playerData.Name + " pass(shoot)" + ".",false)
 				unit.shoot(Ball,true,Arrow.rotation.y, power, unit.direction)
+				if AI_mode() == false and Global.isGuide == true:
+					UI.Guide.check_guide(0)
+					UI.Guide.check_guide(2)
 			else:
+				UI.talk(unit.playerData.Name + " move(takle)" + ".",false)
 				SFXMove.play()
 				unit.shoot(Ball,false,Arrow.rotation.y, power, unit.direction)
+				if AI_mode() == false and Global.isGuide == true:
+#					UI.Guide.check_guide(4)
+					UI.Guide.check_guide(3)
 
-func player_set_stats():
+func player_set_stats() -> void:
 	units = get_tree().get_nodes_in_group("units")
-	## Tinh chi so matchdetail
+	## MatchDetail
 	for unit in units:
 		unit.canGoal = false
 	for unit in selected_units:
 		if check_ball_on_player() == true:
+			## MatchDetail pass shoot
 			unit.canGoal = true
-	if check_ball_on_player() == true:
-		for unit in selected_units:
-			unit.gamePasses += 1
+			unit.matchPasses += 1
+			teamPass[teamSelect-1] += 1
 			unit.canAssit = time
-	else:
-		for unit in selected_units:
-			unit.gameMoves += 1
+		else:
+			## MatchDetail def
+			playerKick = []
+			unit.matchMoves += 1
+			teamDef[teamSelect-1] += 1
 
-func player_set_goals(value):
-	timeGoals.append(Ball.replay_data.pos.size())
-	var teamData = data.teams
+func player_set_stats_goal(value:int) -> void:
+	timeGoals.append([Ball.replay_data.pos.size(),time,selected_units[0]])
 	## Goal
 	for unit in units:
-		if unit.canGoal == true and unit.team == value:
-			unit.statGoals += 1
-			unit.gameGoals += 1
-			unit.timeGoals.append(time)
-			UI.update_player_goal_info(unit.playerName,unit.texturePlayerPath,4,"Goal",load(teamData[int(unit.playerTeam)].icon),unit.gameGoals)
-	
-	#print("Own Goal")
-		elif unit.canGoal == true and unit.team != value:
-			unit.statOwnGoals -= 1
-			UI.update_player_goal_info(unit.playerName,unit.texturePlayerPath,4,"OwnGoal",load(teamData[int(unit.playerTeam)].icon),unit.gameGoals)
+#		if unit.playerPositionMath != "GK":
+			if unit.canGoal == true and unit.team == value:
+				unit.matchGoals += 1
+				unit.timeGoals.append(time)
+				UI.update_player_goal_info(unit,"Goal")
+		#print("Own Goal")
+			elif unit.canGoal == true and unit.team != value:
+				unit.matchOwnGoals += 1
+				UI.update_player_goal_info(unit,"OwnGoal")
 	
 	##Assits
 	for unit in units:
 		if unit.canAssit == (time - 2) and unit.team == value:
-			unit.statAssits += 1
-			unit.gameAssits += 1
+			unit.matchAssits += 1
 	
 	##Mistakes
 		elif unit.canAssit == (time - 1) and unit.team != value:
 			if time > 1 or time > gameRound + timePlus + 1:
-				unit.statMistakes -= 1
+				unit.matchMistakes += 1
 
-func player_set_gk_save():
+func player_set_gk_save() -> void:
 	if isGameTime == 1:
 		if teamSelect == 1:
 			gkGoal = GoalA
@@ -1357,31 +1453,31 @@ func player_set_gk_save():
 	gkSave = AI_gk_save_pos(gkBall,gkArrow,gkGoal)
 
 ## Cac ham xu ly tin hieu delay
-func _on_Timer_timeout():
+func _on_Timer_timeout() -> void:
 	units = get_tree().get_nodes_in_group("units")
 	match timerValue:
 		"GoalA":
 			change_state(SET_GAME)
-			player_set_goals(1)
 			set_goal_col(false)
 			pos_reset_players()
-			Calculate.timer(TimerStartGame,1)
+			Calculate.timer(TimerStartGame,3)
 			timerValue = ""
-			if Global.gameModeCur == 1:
-				await get_tree().create_timer(3).timeout
-				play_quick_replay()
-				replayTurns = 100
+#			if Global.gameModeCur < 2 and time != gameRound:
+			if Global.gameModeCur < 2:
+				await get_tree().create_timer(4).timeout
+				Replay.play_quick_replay()
+				Replay.replayTurns = 100
 		"GoalB":
 			change_state(SET_GAME)
-			player_set_goals(2)
 			set_goal_col(false)
 			pos_reset_players()
-			Calculate.timer(TimerStartGame,1)
+			Calculate.timer(TimerStartGame,3)
 			timerValue = ""
-			if Global.gameModeCur == 1:
-				await get_tree().create_timer(3).timeout
-				play_quick_replay()
-				replayTurns = 100
+#			if Global.gameModeCur < 2 and time != gameRound:
+			if Global.gameModeCur < 2:
+				await get_tree().create_timer(4).timeout
+				Replay.play_quick_replay()
+				Replay.replayTurns = 100
 		"KickA":
 			pos_reset_gk(1)
 			pos_reset_gk(2)
@@ -1402,30 +1498,37 @@ func _on_Timer_timeout():
 			isStartGame = true
 
 ## Cac ham xu ly ban thang
-func _on_GoalA_body_entered(body):
-	if goalCheck == true and isPlayReplay == false:
+func _on_GoalA_body_entered(body) -> void:
+	if goalCheck == true and Replay.isPlayReplay == false:
 		if body == Ball:
+			player_set_stats_goal(1)
+			GoalA.NetSound.play()
 			TimerGame.wait_time = 1
 			timerValue = "GoalA"
 			TimerGame.start()
 			isStartGame = false
-			NotiData.create_achi(2,"Frist Goal Achievement", "Your first goal in MGF")
+			Notification.create_achi(6,"Frist Goal Achievement", ["Your first goal in MGF"])
 			goalCheck = false
 			Calculate.vibrate_set()
 			Cam.apply_random_shake()
-#			if !Global.device_is_mobile():
-#				effGoalA.play()
 			set_goal_col(true)
 			TeamA_score += 1
+			teamGoal[0] += 1
+			teamGoalC[1] += 1
 			if teamSelect == 1:
 				teamSelect = 2
 #			if !Global.device_is_mobile():
 #				effGame.play()
 			UI.update_Team_GoalA(TeamA_score)
+			if Global.isGuide == true:
+#				UI.Guide.check_guide(5)
+				UI.Guide.check_guide(4)
 
-func _on_GoalB_body_entered(body):
-	if goalCheck == true and isPlayReplay == false:
+func _on_GoalB_body_entered(body) -> void:
+	GoalB.NetSound.play()
+	if goalCheck == true and Replay.isPlayReplay == false:
 		if body == Ball:
+			player_set_stats_goal(2)
 			TimerGame.wait_time = 1
 			timerValue = "GoalB"
 			TimerGame.start()
@@ -1433,17 +1536,17 @@ func _on_GoalB_body_entered(body):
 			goalCheck = false
 			Calculate.vibrate_set()
 			Cam.apply_random_shake()
-#			if !Global.device_is_mobile():
-#				effGoalB.play()
 			set_goal_col(true)
 			TeamB_score += 1
+			teamGoal[1] += 1
+			teamGoalC[0] += 1
 			if teamSelect == 2:
 				teamSelect = 1
 #			if !Global.device_is_mobile():
 #				effGame.play()
 			UI.update_Team_GoalB(TeamB_score)
 
-func set_goal_col(value:bool = false):
+func set_goal_col(value:bool = false) -> void:
 	$GoalA/CollisionShape3D.disabled = value
 	$GoalB/CollisionShape3D.disabled = value
 	$GoalA/KickingBall/CollisionShape3D.disabled = value
@@ -1452,277 +1555,62 @@ func set_goal_col(value:bool = false):
 	$GoalB/KickingBall/CollisionShape2.disabled = value
 
 ## Cac ham xu ly khi bong di ra ngoai
-func _on_KickingBallA_body_entered(body):
-	if body == Ball and isPlayReplay == false:
+func _on_KickingBallA_body_entered(body) -> void:
+	if body == Ball and Replay.isPlayReplay == false:
 		isStartGame = false
 		set_goal_col(true)
 		timerValue = "KickA"
 		TimerGame.start()
 
-func _on_KickingBallB_body_entered(body):
-	if body == Ball and isPlayReplay == false:
+func _on_KickingBallB_body_entered(body) -> void:
+	if body == Ball and Replay.isPlayReplay == false:
 		isStartGame = false
 		set_goal_col(true)
 		timerValue = "KickB"
 		TimerGame.start()
 
-## Cac update player unit stats
-func _on_BtnPlayerDetail_pressed():
-	if UI.playerStats.visible == true:
-		UI.playerStats.visible = false
-		UI.teamStats.visible = false
-	else:
-		update_player_stats()
-		UI.playerStats.visible = true
-		UI.teamStats.visible = true
-
-func update_player_stats():
-	if UI.playerStats.visible == true:
-		update_player_change_stats_on_ready()
-		for unit in selected_units:
-			UI.update_player_data(unit)
-
-func update_player_change_stats_on_ready():
-	if UI.playerEdit.visible == true:
-		for unit in selected_units:
-			UI.panelStats.get_node("Finishing/HSlider").value = unit.statFinishing
-			UI.panelStats.get_node("Finishing/Label").text = str(unit.statFinishing)
-			
-			UI.panelStats.get_node("ShotPower/HSlider").value = unit.statShotPower
-			UI.panelStats.get_node("ShotPower/Label").text = str(unit.statShotPower)
-
-			UI.panelStats.get_node("Intercept/HSlider").value = unit.statTackle
-			UI.panelStats.get_node("Intercept/Label").text = str(unit.statTackle)
-
-			UI.panelStats.get_node("Pass/HSlider").value = unit.statAccurate
-			UI.panelStats.get_node("Pass/Label").text = str(unit.statAccurate)
-
-			UI.panelStats.get_node("Speed/HSlider").value = unit.statSpeed
-			UI.panelStats.get_node("Speed/Label").text = str(unit.statSpeed)
-
-			UI.panelStats.get_node("Ball Control/HSlider").value = unit.statBallControl
-			UI.panelStats.get_node("Ball Control/Label").text = str(unit.statBallControl)
-
-			UI.panelStats.get_node("Stamina/HSlider").value = unit.statStamina
-			UI.panelStats.get_node("Stamina/Label").text = str(unit.statStamina)
-
-			UI.panelStats.get_node("Power/HSlider").value = unit.statPower
-			UI.panelStats.get_node("Power/Label").text = str(unit.statPower)
-
-			UI.panelStats.get_node("Body/HSlider").value = unit.statBody
-			UI.panelStats.get_node("Body/Label").text = str(unit.statBody)
-
-			UI.panelStats.get_node("Reflexes/HSlider").value = unit.statReflexes
-			UI.panelStats.get_node("Reflexes/Label").text = str(unit.statReflexes)
-
-			UI.panelStats.get_node("Defend/HSlider").value = unit.statDefend
-			UI.panelStats.get_node("Defend/Label").text = str(unit.statDefend)
-
-			UI.panelStats.get_node("PenSave/HSlider").value = unit.statSave
-			UI.panelStats.get_node("PenSave/Label").text = str(unit.statSave)
-
-func update_player_change_stats():
-	for unit in selected_units:
-		unit.statFinishing = UI.panelStats.get_node("Finishing/HSlider").value
-		UI.panelStats.get_node("Finishing/Label").text = str(unit.statFinishing)
-		
-		unit.statShotPower = UI.panelStats.get_node("ShotPower/HSlider").value
-		UI.panelStats.get_node("ShotPower/Label").text = str(unit.statShotPower)
-
-		unit.statIntercep = UI.panelStats.get_node("Intercept/HSlider").value
-		UI.panelStats.get_node("Intercept/Label").text = str(unit.statIntercep)
-
-		unit.statAccurate = UI.panelStats.get_node("Pass/HSlider").value
-		UI.panelStats.get_node("Pass/Label").text = str(unit.statAccurate)
-
-		unit.statSpeed = UI.panelStats.get_node("Speed/HSlider").value
-		UI.panelStats.get_node("Speed/Label").text = str(unit.statSpeed)
-
-		unit.statBallControl = UI.panelStats.get_node("Ball Control/HSlider").value
-		UI.panelStats.get_node("Ball Control/Label").text = str(unit.statBallControl)
-
-		unit.statStamina = UI.panelStats.get_node("Stamina/HSlider").value
-		UI.panelStats.get_node("Stamina/Label").text = str(unit.statStamina)
-
-		unit.statPower = UI.panelStats.get_node("Power/HSlider").value
-		UI.panelStats.get_node("Power/Label").text = str(unit.statPower)
-
-		unit.statBody = UI.panelStats.get_node("Body/HSlider").value
-		UI.panelStats.get_node("Body/Label").text = str(unit.statBody)
-
-		unit.statReflexes = UI.panelStats.get_node("Reflexes/HSlider").value
-		UI.panelStats.get_node("Reflexes/Label").text = str(unit.statReflexes)
-
-		unit.statDefend = UI.panelStats.get_node("Defend/HSlider").value
-		UI.panelStats.get_node("Defend/Label").text = str(unit.statDefend)
-
-		unit.statSave = UI.panelStats.get_node("PenSave/HSlider").value
-		UI.panelStats.get_node("PenSave/Label").text = str(unit.statSave)
-
 ## Cac che do dieu khien
 func _input(event):
+	select_unit_input(event)
 	cam_touch_inut(event)
 	
-	if AI_mode() == false and isStartGame == true and UI.newTurn.check_turn() == true:
-		if isStartTurn == true:
-			select_unit_input(event)
-			player_swipe_shot_input(event)
-	
-	if Input.is_action_just_pressed("ui_right"):
-		play_quick_replay()
-	
-	if Input.is_action_just_pressed("ui_down"):
-		play_replay(0)
-
-func play_quick_replay():
-	var frameMax = Ball.replay_data.pos.size()*1.0
-	var frame = 0
-	var ratio = 0
-	if frameMax >= 300:
-		frame = frameMax - 300
-	ratio = frame/frameMax*100.0
-	play_replay(ratio)
-
-func play_replay(value):
-	if isPlayReplay == false:
-		UI.videoPlayer.set_up()
-		timePlayReplay = time
-		teamPlayReplay = teamSelect
-		replayTurns = UI.newTurn.value
-		
-		replayCount = conver_frame_value(value)
-		
-		isPlayReplay = true
-		UI.videoPlayer.show()
-		
-		Ball.baseTransform = Ball.transform
-		units = get_tree().get_nodes_in_group("units")
-		for unit in units:
-			unit.baseTransform = unit.transform
-		for unit in units:
-			selected_units.clear()
-			unit.deselect()
-			unit.textBox.hide()
-
-func _on_TimerPlayReplay_timeout():
-	if UI.videoPlayer.btnPlay_pressed == true:
-		if isPlayReplay == true:
-			player_col_active(false)
-			var posData = Ball.replay_data
-			var size = posData.pos.size()-1
-			UI.videoPlayer.replayTime.value += 100.0/size
-			if isGameTime == 3:
-				if UI.videoPlayer.replayTime.value == 100:
-					conver_frame_value(0)
-
-func replay_stop():
-		isPlayReplay = false
-		replayCount = 0
-		Ball.transform = Ball.baseTransform
-		for unit in units:
-			unit.transform = unit.baseTransform
-		player_col_active(true)
-		isSaveReplay = true
-		UI.videoPlayer.replayTime.value = 0
-		UI.videoPlayer.hide()
-		change_state(SET_PLAYER)
-		time -= 1
-		if teamPlayReplay == 1:
-			teamSelect = 1
-		else:
-			teamSelect = 2
-		_on_TimerAllStop_timeout()
-		UI.newTurn.value = replayTurns
-
-func _on_TimerSaveReplay_timeout():
-	if isSaveReplay == true and isGameTime != 3:
-		Ball.replay_data.pos.append(Ball.position)
-		Ball.replay_data.rot.append(Ball.rotation_degrees.y)
-		units = get_tree().get_nodes_in_group("units")
-		for unit in units:
-			if unit.playerPositionMath != "NON":
-				unit.replay_data.id = unit.playerID
-				unit.replay_data.pos.append(unit.position)
-				unit.replay_data.rot.append(unit.rotation_degrees.y)
-
-func replay_is_save(value):
-	if isPlayReplay == true or get_tree().paused == true or isGameTime == 3:
-		isSaveReplay = false
-	else:
-		isSaveReplay = value
-
-# warning-ignore:unused_argument
-func _on_BtnVideoReplaySlider_value_changed(value_changed):
-	if isPlayReplay == true:
-		replayCount = conver_frame_value(UI.videoPlayer.replayTime.value)
-		player_col_active(false)
-		var posData = Ball.replay_data
-		var size = posData.pos.size()-1
-		Ball.position = posData.pos[replayCount]
-		Ball.rotation_degrees.y = posData.rot[replayCount]
-		units = get_tree().get_nodes_in_group("units")
-		for unit in units:
-			if unit.playerPositionMath != "NON":
-				var pdata = unit.replay_data
-				if replayCount < pdata.pos.size()-1:
-					unit.position = pdata.pos[replayCount]
-					unit.rotation_degrees.y = pdata.rot[replayCount]
-	if value_changed == 100 and isGameTime != 3:
-		replay_stop()
-
-func conver_frame_value(value):
-	UI.videoPlayer.replayTime.value = value
-	var replayData = Ball.replay_data
-	var size = replayData.pos.size()-1
-	var fix = round(remap(value,0,100,0,size))
-	fix = clamp(fix,0,size)
-	return fix
-
-func save_replay():
-	var path = "user://save/dataMatch.json"
-	var allData = []
-	var ballData = []
-	var playerData = []
-	for unit in units:
-		if unit.playerPositionMath != "NON":
-			var pdata = unit.replay_data
-			playerData.append(pdata)
-	ballData.append(Ball.replay_data)
-	allData.append(ballData)
-	allData.append(playerData)
-	GameData.save_data(path,allData)
-
-func _on_BtnReplayClose_pressed():
-# warning-ignore:standalone_expression
-	UI.videoPlayer.btnPlay_pressed = true
-	replay_stop()
+	if (AI_mode() == false and 
+	Replay.isPlayReplay == false and 
+	isStartGame == true and 
+	UI.newTurn.check_turn() == true and
+	isStartTurn == true):
+		player_swipe_shoot_input(event)
 
 ## Cac ham cam ung
-func player_swipe_shot_input(event):
+func player_swipe_shoot_input(event) -> void:
 	if event is InputEventSingleScreenSwipe:
 		UI.newTurn.isStart = false
 		isStartTurn = false
 		power = 0
 		player_set_physics()
 		
-		var relative = event.relative.length()
+		var relative:float = event.relative.length()
 		power = remap(relative,0,600,0,100)
 		power = clamp(power,0,100)
 		var angle = -rad_to_deg(event.relative.angle())-90
 		
 		if check_ball_on_player() == true:
 			for unit in selected_units:
-				var stats = remap(unit.statAccurate,40,100,10,0)
+				var stats:float = remap(unit.statAccurate,40,100,10,0)
 				stats = clamp(stats,0,20)
-				var powerAccurate = remap(power,70,100,0,5)
+				var powerAccurate:float = remap(power,70,100,0,5)
 				powerAccurate = clamp(powerAccurate,0,10)
-				var accurate = stats + powerAccurate
+				var accurate:float = stats + powerAccurate
 				accurate = clamp(accurate,0,20)
 				AIShootAngle = Calculate.rand_num(accurate)
 		else:
 			AIShootAngle = 0
+		
+		if angle < -180:
+			angle = abs(360+angle)
+		
 		Arrow.rotation_degrees.y = angle + AIShootAngle
-
+		
 		change_state(SET_ANGLE)
 		AI_player_angle_set()
 		await get_tree().create_timer(0.5).timeout
@@ -1734,19 +1622,19 @@ func player_swipe_shot_input(event):
 		
 		change_state(SET_SHOOT)
 
-func cam_touch_inut(event):
+func cam_touch_inut(event) -> void:
 	if event is InputEventScreenPinch:
 		var zoom = event.relative
-		var delta = 0.01
-		var lm = 2.5
+		var delta:float = 0.025
+		var lm:float = 10
 		if ((Cam.position.y > camPos.y - lm) and (Cam.position.y < camPos.y + lm)):
 			Cam.position.y -= zoom*delta
 		else:
 			Cam.position.y = camPos.y
 	elif event is InputEventMultiScreenDrag:
 		var pos = event.relative
-		var delta = 0.01
-		var lm = 2
+		var delta:float = 0.025
+		var lm:float = 10
 		if ((Cam.position.x >camPos.x -lm) and (Cam.position.x <camPos.x+lm)):
 			Cam.position.x += pos.x*delta
 		else:
@@ -1757,10 +1645,10 @@ func cam_touch_inut(event):
 			Cam.position.z = camPos.z
 
 ## Cac ham xu ly di chuyen
-func target_control_input(delta):
+func target_control_input(delta) -> void:
 	if Global.isAIState:
-		var speedPlayer = 1 * delta
-		var unit = $AITest/Target
+		var speedPlayer:float = 1 * delta
+		var unit: = $AITest/Target
 		
 		## Di chuyen len xuong
 		if Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_down"):
@@ -1778,7 +1666,6 @@ func target_control_input(delta):
 			unit.position.x += speedPlayer
 		## Xoay
 		if Input.is_action_pressed("cam_zoom_in") and Input.is_action_pressed("cam_zoom_out"):
-			print("cam_zoom_out")
 			unit.rotation_degrees.y = unit.rotation_degrees.y
 		elif Input.is_action_just_released("cam_zoom_in"):
 			unit.rotation_degrees.y += speedPlayer
@@ -1786,37 +1673,45 @@ func target_control_input(delta):
 			unit.rotation_degrees.y -= speedPlayer
 
 ##  Cac ham tinh toan chon cau thu
-func select_unit_input(event):
-	if AI_mode() == false:
-		match state:
-			SET_PLAYER:
-				if event is InputEventSingleScreenTap:
-					var m_pos = get_viewport().get_mouse_position()
-					unit_select(m_pos)
+func select_unit_input(event) -> void:
+	if event is InputEventSingleScreenTap:
+		var m_pos: = get_viewport().get_mouse_position()
+		unit_under_mouse_get(m_pos,false)
+		if Global.isGuide == true:
+			UI.Guide.check_guide(1)
+	if AI_mode() == false and state == SET_PLAYER and UI.newTurn.check_turn() == true:
+		if event is InputEventSingleScreenTap:
+			var m_pos: = get_viewport().get_mouse_position()
+			unit_select(m_pos)
 
-func unit_select(m_pos):
-	var new_selected_units = []
-	var u = unit_under_mouse_get(m_pos)
+func unit_select(m_pos) -> void:
+	var new_selected_units: = []
+	var u = await unit_under_mouse_get(m_pos)
 	if u != null:
 		new_selected_units.append(u)
 	if new_selected_units.size() != 0:
 		for unit in selected_units:
 			unit.deselect()
-			unit.textBox.hide()
 		for unit in new_selected_units:
 			unit.select()
-#			AI_find_foot()
-			unit.textBox.powerBar.value = 100
 		selected_units = new_selected_units
 
-func unit_under_mouse_get(m_pos):
-	var result = unit_raycast_from_mouse(m_pos, 3)
-	## Fix Ball Select
-	if result and result.collider.team != 11:
+func unit_under_mouse_get(m_pos:Vector2,value:bool = true):
+	var result = unit_raycast_from_mouse(m_pos, 1)
+	if result != {}:
 		if isStartGame == true:
-			if result.collider.team == teamSelect:
-				if result.collider.playerPositionMath != "NON":
-					return result.collider
+			if value == true:
+				if result.collider.team == teamSelect:
+					if result.collider.playerPositionMath != "NON":
+						return result.collider
+			else:
+				result.collider.SelectMesh.mesh_select(0.8)
+				await get_tree().create_timer(1).timeout
+				result.collider.SelectMesh.mesh_select(0)
+				if result.collider.team == teamSelect:
+					result.collider.SelectMesh.mesh_select(0.25)
+				UI.update_player_data(result.collider)
+				return result.collider
 		else:
 			return result.collider
 
@@ -1833,19 +1728,13 @@ func unit_raycast_from_mouse(m_pos, collision_mask):
 	return space_state.intersect_ray(params)
 
 ## Dieu khin khac
-func cam_follow_ball():
+func cam_follow_ball() -> void:
 	if camFollowBall == true:
 		if Ball.linear_velocity.length() > 1.0:
 			Cam.position.x = Ball.transform.origin.x
 			Cam.position.z = Ball.transform.origin.z
 
-func show_pc_input():
-	if Global.device_is_mobile():
-		UI.controller.hide()
-	else:
-		UI.controller.show()
-
-func arrow_pos(value:bool=false,obj = ""):
+func arrow_pos(value:bool = false,obj = "") -> void:
 	for unit in selected_units:
 		if check_ball_on_player() == true:
 			if value == false:
@@ -1858,141 +1747,78 @@ func arrow_pos(value:bool=false,obj = ""):
 			Arrow.position.x = unit.position.x
 			Arrow.position.z = unit.position.z
 
-func _on_Button_pressed():
-#	isActive = !isActive
-#	if isActive == true:
-#		UI.panelGameSpeed.get_node("HSlider").value = 0
-#	else:
-#		UI.panelGameSpeed.get_node("HSlider").value = 1.5
-#		update_player_change_stats()
-#		for unit in selected_units:
-#			unit.return_Overall()
-#			unit.return_Potential()
-	pass
-
-## Cac ham xu ly tran dau ket thuc
-func save_match_data(value:bool = true):
-	get_parent().get_node("/root/SoundBg").play()
-	get_tree().paused = false
-	Engine.time_scale = 1
-	var ssData = GameData.season_load_data()
-	var leagueResults = ssData.season.leagueResults
-	var playerResults = ssData.season.playerResults
-#	print(leagueResults[SeasonData.MatchDay-1][SeasonData.MatchID])
-	var stats = leagueResults[SeasonData.MatchDay-1][SeasonData.MatchID]
-	var players = playerResults[SeasonData.MatchDay-1][SeasonData.MatchID]
-	
-	if value == true:
-		stats[6][0] = int(TeamA_score)
-		stats[6][1] = int(TeamB_score)
-	else:
-		for i in players.size():
-#			prints("team",players[i])
-			for j in players[i].size():
-#				prints("players",players[i][j])
-				for n in players[i][j].size():
-					if n > 0:
-						players[i][j][n] = 0
-		for i in stats.size():
-			stats[i] = [0,0]
-		if Global.MatchPlay == 1:
-			stats[6][0] = 0
-			stats[6][1] = 3
+func _on_ButtonHome_pressed() -> void:
+	if SeasonData.check_season_mode() == true:
+		if isGameTime == 3 or Global.check_match_mode() == false:
+			Notification.push_noti(1,"Exit Match")
+			Notification.btnYes.connect("pressed", Callable(self, "finish_match"))
+			Notification.btnNo.connect("pressed", Callable(self, "noti_disconnect"))
 		else:
-			stats[6][0] = 3
-			stats[6][1] = 0
-	GameData.season_save_data(ssData)
-
-func save_player_data():
-	if (Global.gameModeCur == 0
-	or Global.gameModeCur == 1):
-		units = get_tree().get_nodes_in_group("units")
-		for unit in units:
-			unit.save_player_data()
-
-func quit_match_go_home():
-	Messenger.btnYes.disconnect("pressed",Callable(self,"quit_match_go_home"))
-	if Global.MGFMode != Global.Season:
-		leave_match()
+			Notification.push_noti(1,"Exit lose match and lost reward")
+			Notification.btnYes.connect("pressed", Callable(self, "quit_match"))
+			Notification.btnNo.connect("pressed", Callable(self, "noti_disconnect"))
 	else:
-		finish_match()
+		Notification.push_noti(1,"Exit Match")
+		Notification.btnYes.connect("pressed", Callable(self, "leave_match"))
+		Notification.btnNo.connect("pressed", Callable(self, "noti_disconnect"))
+	
 	FormationData.CanFormation = false
 
-func _on_ButtonHome_pressed():
-	Messenger.push_notification(1,"Exit and Finish match")
-	Messenger.btnYes.connect("pressed",Callable(self,"quit_match_go_home"))
+func noti_disconnect() -> void:
+	Notification.btnNo.disconnect("pressed", Callable(self, "noti_disconnect"))
+	if Notification.btnYes.is_connected("pressed", Callable(self, "leave_match")):
+		Notification.btnYes.disconnect("pressed", Callable(self, "leave_match"))
+	if Notification.btnYes.is_connected("pressed", Callable(self, "quit_match")):
+		Notification.btnYes.disconnect("pressed", Callable(self, "quit_match"))
+	if Notification.btnYes.is_connected("pressed", Callable(self, "finish_match")):
+		Notification.btnYes.disconnect("pressed", Callable(self, "finish_match"))
 
-func _on_ButtonExit_pressed():
-	if Global.MGFMode != Global.Season:
-		Messenger.push_notification(1,"Exit and Finish match")
-		Messenger.btnYes.connect("pressed",Callable(self,"leave_match"))
-	else:
-		Messenger.push_notification(1,"Exit ?, you will lose the match")
-		Messenger.btnYes.connect("pressed",Callable(self,"quit_match"))
-	FormationData.CanFormation = false
-
-func leave_match():
-	Messenger.btnYes.disconnect("pressed",Callable(self,"leave_match"))
-	get_parent().get_node("/root/SoundBg").play()
-	get_tree().paused = false
-	Engine.time_scale = 1
-	var settingsData = GameData.formation_load_data().settings.gameMode
+func leave_match() -> void:
+	if Notification.btnYes.is_connected("pressed", Callable(self, "leave_match")):
+		Notification.btnYes.disconnect("pressed", Callable(self, "leave_match"))
+	SoundGlobal.UI.show()
+	SoundGlobal.volume_normal()
+	var settingsData = GameData.get_data(GameData.setting_data_path).gameMode
 	timeOutMode = settingsData
 	# warning-ignore:return_value_discarded
-	SceneTransition.change_scene_to_file("res://MGF Scene/ConfigController/ConfigController.tscn")
+	SceneTransition.change_scene_to_file("res://MGF Scene/QuickMatch/QuickMatch.tscn")
 
-func quit_match():
-	save_match_data(false)
-	await get_tree().create_timer(0.1).timeout
-	# warning-ignore:return_value_discarded
-	SceneTransition.change_scene_to_file("res://MGF Scene/Season/Season.tscn")
-	Messenger.btnYes.disconnect("pressed",Callable(self,"quit_match"))
+func quit_match() -> void:
+	if Global.gameModeCur == 1:
+		Global.isQuit = true
+		UI.season_match_list_active()
+		if Notification.btnYes.is_connected("pressed", Callable(self, "quit_match")):
+			Notification.btnYes.disconnect("pressed", Callable(self, "quit_match"))
+	else:
+		SceneTransition.change_scene_to_file("res://MGF Scene/Season/Season.tscn")
+		SeasonData.TabManager = 0
 
-func finish_match():
-	save_match_data(true)
-	await get_tree().create_timer(0.1).timeout
-	# warning-ignore:return_value_discarded
-	SceneTransition.change_scene_to_file("res://MGF Scene/Season/Season.tscn")
+func finish_match() -> void:
+	if Global.gameModeCur == 1:
+		await get_tree().create_timer(0).timeout
+		# warning-ignore:return_value_discarded
+		SceneTransition.change_scene_to_file("res://MGF Scene/Season/Season.tscn")
+		if Notification.btnYes.is_connected("pressed", Callable(self, "finish_match")):
+			Notification.btnYes.disconnect("pressed", Callable(self, "finish_match"))
+	else:
+		SceneTransition.change_scene_to_file("res://MGF Scene/Season/Season.tscn")
+		SeasonData.TabManager = 0
 
-func update_noti_match_results():
-	if Global.MGFMode != Global.Season and Global.MGFMode != Global.SeasonMatch:
-		var teamData = data.teams
-		var _teamA = teamData[Global.teamID1].name + " "
-		var _teamB =  " " + teamData[Global.teamID2].name
-		var text:String
-		if teamAFoul == maxFoul:
-			text = _teamA + str(TeamA_score) + ' - ' + str(TeamB_score) + _teamB
-			NotiData.create_noti("Loose Match",text)
-			NotiData.create_achi(6,"Frist Loose Achievement", text)
-		elif teamBFoul == maxFoul:
-			text = _teamA + str(TeamA_score) + ' - ' + str(TeamB_score) + _teamB
-			NotiData.create_noti("Win Match",text)
-			NotiData.create_achi(4,"Frist Win Achievement", text)
-		else:
-			if TeamA_score > TeamB_score:
-				text = _teamA + str(TeamA_score) + ' - ' + str(TeamB_score) + _teamB
-				NotiData.create_noti("Win Match",text)
-				NotiData.create_achi(4,"Frist Win Achievement", text)
-			elif TeamA_score == TeamB_score:
-				text = _teamA + str(TeamA_score) + ' - ' + str(TeamB_score) + _teamB
-				NotiData.create_noti("Draw Match",text)
-				NotiData.create_achi(5,"Frist Draw Achievement", text)
-			else:
-				text = _teamA + str(TeamA_score) + ' - ' + str(TeamB_score) + _teamB
-				NotiData.create_noti("Loose Match",text)
-				NotiData.create_achi(6,"Frist Loose Achievement", text)
-		
-		NotiData.create_achi(3,"Frist Match Achievement", text)
-
-## Thay doi cau thu, chien thuat
-func _on_TimerSub_timeout():
+func _exit_tree():
+	Global.weather_setup()
+	FormationData.AI_random_tactical()
 	FormationData.isSub = false
-	print("SubDone")
+	queue_free()
+	Engine.time_scale = 1.0
+	get_tree().paused = false
 
-func sub_change():
+func sub_change() -> void:
+	var data = GameData.formation_load_data()
+	var playerData = data.players
 	units = get_tree().get_nodes_in_group("units")
+	
 	## Lay tat ca vi tri player
-	var position = []
+	var position: = []
 	for i in FormationData.teamMain1.size():
 		var main =  FormationData.teamMain1[i]
 		for unit in units:
@@ -2010,14 +1836,123 @@ func sub_change():
 			unit.show()
 			if unit.playerID == sub:
 				unit.playerPositionMath = posPlay
-#				if sub != main:
+				## Cau thu ra ngoai
+				unit.SelectMesh.mesh_select(0)
 				GlobalTween.pos_dir(unit,position[i])
 				unit.position.y = 0
-				unit.player_set_stop(tween)
-				print(unit.playerName," ",unit.playerPositionMath)
+				unit.player_set_stop()
+				
+				if unit.playerID in FormationData.teamOut1 and FormationData.teamOut1.size()>0:
+					playerData[unit.playerID].isSub[0] = false
+					GameData.formation_save_data(data)
+	
+	## Ket thuc thay nguoi
 	FormationData.isSub = false
+	for unit in teamA:
+		if playerData[unit.playerID].isSub[0] == false:
+			unit.playerPositionMath = "NON"
 
-func sub_change_start():
-	if FormationData.isSub == true and (time == FormationData.timeSub + 1):
-		Calculate.timer(TimerSub,1)
+func sub_change_start() -> void:
+#	print("Pos    ",FormationData.teamPos1)
+#	print("Base   ",FormationData.teamMain1)
+#	print("Change ",FormationData.teamSub1)
+#	print("Player in is ",FormationData.teamIn1)
+#	print("Player out is ",FormationData.teamOut1)
+	var checkSub:int
+	var checkTac:int
+	if Global.MatchPlay == 1:
+		checkSub = teamAData[0]
+		checkTac = teamAData[2]
+	else:
+		checkSub = teamBData[0]
+		checkTac = teamBData[2]
+	
+	if FormationData.teamOut1.size()>0 and checkSub > 0:
+		if FormationData.isSub == true:
+			if Global.gameModeCur != 2:
+				var timeOut = remap((time-FormationData.timeSub),1,4,100,0)
+				UI.TeamAction.update_action(Global.MatchPlay,0,timeOut)
+		
+		if FormationData.isSub == true and Global.gameModeCur == 2:
+			sub_change()
+			pos_reset_players(true,1)
+		elif FormationData.isSub == true and (time == FormationData.timeSub + 4):
+			sub_change()
+			if Global.MatchPlay == 1:
+				teamAData[0] -= FormationData.teamOut1.size()
+				UI.TeamAction.update_team_action(self,1)
+			else:
+				teamBData[0] -= FormationData.teamOut1.size()
+				UI.TeamAction.update_team_action(self,2)
+			UI.TeamAction.update_action(Global.MatchPlay,0,0)
+	
+	if FormationData.isTac == true and checkTac > 0:
+		if Global.gameModeCur != 2:
+			var timeOut = remap((time-FormationData.timeTac),1,4,100,0)
+			UI.TeamAction.update_action(Global.MatchPlay,2,timeOut)
+		if Global.gameModeCur == 2:
+			FormationData.isTac = false
+		elif time == FormationData.timeTac + 4:
+			FormationData.isTac = false
+			if Global.MatchPlay == 1:
+				
+				teamAData[2] -= 1
+				UI.TeamAction.update_team_action(self,1)
+			else:
+				teamBData[2] -= 1
+				UI.TeamAction.update_team_action(self,2)
+			UI.TeamAction.update_action(Global.MatchPlay,2,0)
+			pos_reset_tactic(false,Global.MatchPlay)
 
+func pos_reset_tactic(value:bool = false, team:int = 0) -> void:
+	change_state(SET_GAME)
+	if isGameTime == 1:
+		if team == 0 or team == 1:
+			FormationData.reload_formation(1)
+			playersPos = FormationData.get_formation()[FormationData.teamTac1]
+			for unit in teamA:
+				if unit.playerPositionMath != "NON":
+					if units[find_player(3)] != unit:
+						var pos = playersPos[unit.playerPositionMath]
+						if value == false:
+							GlobalTween.pos(unit,pos)
+						else:
+							unit.position = pos
+		if team == 0 or team == 2:
+			FormationData.reload_formation(2)
+			playersPos = FormationData.get_formation()[FormationData.teamTac2]
+			for unit in teamB:
+				if unit.playerPositionMath != "NON":
+					if units[find_player(3)] != unit:
+						var pos = Vector3(-playersPos[unit.playerPositionMath].x,
+						playersPos[unit.playerPositionMath].y,
+						playersPos[unit.playerPositionMath].z)
+						if value == false:
+							GlobalTween.pos(unit,pos)
+						else:
+							unit.position = pos
+	else:
+		if team == 0 or team == 2:
+			FormationData.reload_formation(2)
+			playersPos = FormationData.get_formation()[FormationData.teamTac2]
+			for unit in teamB:
+				if unit.playerPositionMath != "NON":
+					if units[find_player(3)] != unit:
+						var pos = playersPos[unit.playerPositionMath]
+						if value == false:
+							GlobalTween.pos(unit,pos)
+						else:
+							unit.position = pos
+			FormationData.reload_formation(1)
+			playersPos = FormationData.get_formation()[FormationData.teamTac1]
+		if team == 0 or team == 1:
+			for unit in teamA:
+				if unit.playerPositionMath != "NON":
+					if units[find_player(3)] != unit:
+						var pos = Vector3(-playersPos[unit.playerPositionMath].x,
+						playersPos[unit.playerPositionMath].y,
+						playersPos[unit.playerPositionMath].z)
+						if value == false:
+							GlobalTween.pos(unit,pos)
+						else:
+							unit.position = pos

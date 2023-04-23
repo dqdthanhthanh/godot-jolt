@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://mulglpnumw85"]
+
+[ext_resource type="Texture2D" uid="uid://bqqilncq3sg78" path="res://Assets2D/UI/IconCircle.png" id="1"]
+[ext_resource type="Script" path="res://MGF Scene/MiniMap/unit_minimap.gd" id="2"]
+
+[node name="unit" type="Sprite2D" groups=["obj"]]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(128, 75)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1")
+script = ExtResource("2")

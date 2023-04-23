@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d126nb33axa2c"
-path.etc2="res://.godot/imported/iconMenu.png-e29db9c04cddb79846b4bb01701fba81.etc2.ctex"
+uid="uid://c31n8qoq1b5qu"
+path="res://.godot/imported/iconMenu.png-e29db9c04cddb79846b4bb01701fba81.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets2D/UI/iconMenu.png"
-dest_files=["res://.godot/imported/iconMenu.png-e29db9c04cddb79846b4bb01701fba81.etc2.ctex"]
+dest_files=["res://.godot/imported/iconMenu.png-e29db9c04cddb79846b4bb01701fba81.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=1
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

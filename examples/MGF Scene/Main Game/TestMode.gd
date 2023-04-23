@@ -2,21 +2,21 @@ extends Panel
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	load_test_mode_ui()
 
 func load_test_mode_ui():
 	if Global.gameModeCur == 3:
 		show()
 		load_test_mode_settings()
-		get_parent().get_node("MainBtn/BtnTestMode").show()
+		get_parent().get_parent().get_node("MainBtn/BtnTestMode").show()
 	else:
 		hide()
-		get_parent().get_node("MainBtn/BtnTestMode").hide()
+		get_parent().get_parent().get_node("MainBtn/BtnTestMode").hide()
 
 func load_test_mode(_isCam,startBall,units):
 	_isCam = true
-	get_parent().get_node("PlayerStats").show()
+	get_parent().get_parent().playerStats.show()
 	startBall.position.x = Global.BallStart.x
 	startBall.position.z = Global.BallStart.z
 	for unit in units:
@@ -36,7 +36,7 @@ func load_test_mode(_isCam,startBall,units):
 
 func load_test_mode_fix(_isCam,startBall,units):
 	_isCam = true
-	get_parent().get_node("PlayerStats").show()
+	get_parent().get_parent().playerStats.show()
 	startBall.position.x = Global.BallStart.x
 	startBall.position.z = Global.BallStart.z
 	for unit in units:
@@ -52,7 +52,6 @@ func _on_ButtonClose_pressed():
 
 func _on_ButtonApply_pressed():
 	Global.gameModeCur = 3
-	Global.maxS = float($GKS/max.text)
 	
 	SceneTransition.change_scene_to_file("res://MGF Scene/MainGame.tscn")
 
@@ -65,7 +64,7 @@ func load_player_team(team):
 		for i in teamData.size():
 			var id = teamData[i]
 			var player = playerData[id].Name
-	#		var playerIcon = load(playerData[id].texturePath)
+	#		var playerIcon = Player.load_icon(playerData[id].Icon)
 	#		$TeamA/OptionAPlay.add_icon_item(playerIcon,player)
 			$TeamA/OptionAPlay.add_item(player)
 	if team == 2:
@@ -123,7 +122,7 @@ func load_test_mode_settings():
 	
 	$Power/max.text = str(Global.powerTest)
 	
-	$BallStart/ChangeGoal.button_pressed = Global.isChange
+	$ChangeGoal.button_pressed = Global.isChange
 	$ShootTest.button_pressed = Global.isShootTest
 	$Power/CheckButton.button_pressed = Global.randomShot
 	$Foot/FootAngle.text = str(Global.footAngle)
@@ -139,16 +138,16 @@ func get_player_foot_fix(fix):
 	$Foot/FootFix.text = str(fix)
 
 func _on_OptionAPlay_item_selected(index):
-	Global.TeamAPlay = Global.Pos[index]
+	Global.TeamAPlay = Global.Pos[index].name
 
 func _on_OptionAPos_item_selected(index):
-	Global.TeamAPos = Global.Pos[index]
+	Global.TeamAPos = Global.Pos[index].name
 
 func _on_OptionBPlay_item_selected(index):
-	Global.TeamBPlay = Global.Pos[index]
+	Global.TeamBPlay = Global.Pos[index].name
 
 func _on_OptionBPos_item_selected(index):
-	Global.TeamBPos = Global.Pos[index]
+	Global.TeamBPos = Global.Pos[index].name
 
 func _on_FootSize_text_changed(new_text):
 	Global.footSize = float(new_text)
@@ -235,6 +234,9 @@ func _on_CreatPlayer_item_selected(index):
 	var players = data.players
 	var ins = load(players[index].filePath).instantiate()
 	ins.add_to_group("team1")
-	get_parent().get_parent().call_deferred("add_child", ins)
+	get_parent().get_parent().get_parent().call_deferred("add_child", ins)
 	ins.name = players[index].Name
 	ins.position.y = 0.1
+
+func _exit_tree():
+	queue_free()

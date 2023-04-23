@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blfxknufhe437"
-path.etc2="res://.godot/imported/iconPlay.png-6cb6f72681c9eeef9ea914e17cd57539.etc2.ctex"
+uid="uid://ba2hbny8gk5aj"
+path="res://.godot/imported/iconPlay.png-6cb6f72681c9eeef9ea914e17cd57539.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets2D/UI/iconPlay.png"
-dest_files=["res://.godot/imported/iconPlay.png-6cb6f72681c9eeef9ea914e17cd57539.etc2.ctex"]
+dest_files=["res://.godot/imported/iconPlay.png-6cb6f72681c9eeef9ea914e17cd57539.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

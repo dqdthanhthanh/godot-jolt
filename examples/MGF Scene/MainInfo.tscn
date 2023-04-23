@@ -1,0 +1,372 @@
+[gd_scene load_steps=27 format=3 uid="uid://cumt8g8hf6law"]
+
+[ext_resource type="PackedScene" path="res://addons/ACVoice/ACVoicebox.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/BGSetup.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://sqpoj82ew1hc" path="res://MGF Scene/Setup/HomeButton.tscn" id="3"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/Line_V_L.tres" id="4"]
+[ext_resource type="Texture2D" uid="uid://dddftghrkf2vw" path="res://Assets2D/InfoLogo/twitter.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://ln6xxa6qsyry" path="res://Assets2D/InfoLogo/facebook.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bhx64wt8xpop7" path="res://Assets2D/InfoLogo/youtube.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://43htm8dsyxpv" path="res://Assets2D/InfoLogo/itch.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://cmn8qndvewf11" path="res://Assets2D/InfoLogo/gotm.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://cc3sh5wlvt3rb" path="res://Assets2D/AppLogo/mgf_logo_info.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://dcmv507fpnr2f" path="res://Assets2D/InfoLogo/linus.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://dpd6q4n7is64e" path="res://Assets2D/InfoLogo/windows.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://di83pxluf74q8" path="res://Assets2D/InfoLogo/apple.png" id="13"]
+[ext_resource type="Texture2D" uid="uid://dexnuxejah44m" path="res://Assets2D/InfoLogo/macos.png" id="14"]
+[ext_resource type="Texture2D" uid="uid://d1lajtg0be18h" path="res://Assets2D/InfoLogo/android.png" id="15"]
+[ext_resource type="Script" path="res://MGF Scene/MainInfo.gd" id="16"]
+[ext_resource type="Theme" uid="uid://doboha45rdjnj" path="res://Assets2D/Fonts/ThemeInfo.tres" id="17"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUICP.tres" id="18"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="19"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="20"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIN.tres" id="21"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUICN.tres" id="22"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UIOutline.tres" id="23"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/Line_H_B.tres" id="24"]
+[ext_resource type="Texture2D" uid="uid://b6m0p61qkdgy0" path="res://Assets2D/UI/iconTest.png" id="25"]
+[ext_resource type="Texture2D" uid="uid://h5ja7ifnnnc7" path="res://Assets2D/UI/IconQuestion.png" id="26"]
+
+[node name="MainInfo" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("16")
+
+[node name="BGSetup" parent="." instance=ExtResource("2")]
+anchors_preset = 0
+
+[node name="Home" parent="." instance=ExtResource("3")]
+layout_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -463.0
+offset_top = -365.0
+offset_right = 463.0
+offset_bottom = 365.0
+theme_override_constants/separation = 20
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+texture = ExtResource("10")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 3
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("23")
+theme_override_fonts/bold_font = ExtResource("23")
+theme_override_fonts/italics_font = ExtResource("23")
+theme_override_fonts/bold_italics_font = ExtResource("23")
+theme_override_fonts/mono_font = ExtResource("23")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 25
+theme_override_font_sizes/italics_font_size = 25
+theme_override_font_sizes/bold_italics_font_size = 25
+theme_override_font_sizes/mono_font_size = 25
+theme_override_styles/focus = ExtResource("20")
+theme_override_styles/normal = ExtResource("21")
+text = "Magic FootBall World - Football Fantasy Turnbase Game.
+Hope you like it and please follow for news and new updates!!!
+Your feedback is invaluable! Thanks!!!"
+
+[node name="Social" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("21")
+
+[node name="Group" type="HBoxContainer" parent="VBoxContainer/Social"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = -44.0
+offset_right = 520.0
+offset_bottom = 44.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Tile" type="Label" parent="VBoxContainer/Social/Group"]
+custom_minimum_size = Vector2(300, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("23")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("4")
+text = "Social Network"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="HBoxContainer" parent="VBoxContainer/Social/Group"]
+custom_minimum_size = Vector2(500, 88)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("17")
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Btn" type="Button" parent="VBoxContainer/Social/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("5")
+expand_icon = true
+
+[node name="Btn2" type="Button" parent="VBoxContainer/Social/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("6")
+expand_icon = true
+
+[node name="Btn3" type="Button" parent="VBoxContainer/Social/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("7")
+expand_icon = true
+
+[node name="Btn4" type="Button" parent="VBoxContainer/Social/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("8")
+expand_icon = true
+
+[node name="Btn5" type="Button" parent="VBoxContainer/Social/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("9")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Download" type="Panel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("21")
+
+[node name="Group" type="HBoxContainer" parent="VBoxContainer/Download"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -520.0
+offset_top = -44.0
+offset_right = 520.0
+offset_bottom = 44.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Tile" type="Label" parent="VBoxContainer/Download/Group"]
+custom_minimum_size = Vector2(300, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 3
+theme_override_fonts/font = ExtResource("23")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = ExtResource("4")
+text = "Download App"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Icon" type="HBoxContainer" parent="VBoxContainer/Download/Group"]
+custom_minimum_size = Vector2(500, 88)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("17")
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Btn" type="Button" parent="VBoxContainer/Download/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("12")
+expand_icon = true
+
+[node name="Btn2" type="Button" parent="VBoxContainer/Download/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("11")
+expand_icon = true
+
+[node name="Btn3" type="Button" parent="VBoxContainer/Download/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("14")
+expand_icon = true
+
+[node name="Btn4" type="Button" parent="VBoxContainer/Download/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+disabled = true
+icon = ExtResource("13")
+expand_icon = true
+
+[node name="Btn5" type="Button" parent="VBoxContainer/Download/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("15")
+icon_alignment = 1
+expand_icon = true
+
+[node name="FeedBack" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 280.0
+offset_top = 2.0
+offset_right = 408.0
+offset_bottom = 362.0
+theme_override_styles/panel = ExtResource("21")
+
+[node name="Tile" type="Label" parent="FeedBack"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 96.0
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("23")
+theme_override_styles/normal = ExtResource("24")
+text = "FeedBack"
+
+[node name="Group" type="VBoxContainer" parent="FeedBack"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = 96.0
+offset_right = 44.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Icon" type="VBoxContainer" parent="FeedBack/Group"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("17")
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Btn" type="Button" parent="FeedBack/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("26")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Btn2" type="Button" parent="FeedBack/Group/Icon"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+theme = ExtResource("17")
+theme_override_fonts/font = ExtResource("19")
+theme_override_styles/normal = ExtResource("22")
+theme_override_styles/hover = ExtResource("18")
+theme_override_styles/pressed = ExtResource("18")
+theme_override_styles/disabled = ExtResource("22")
+theme_override_styles/focus = ExtResource("18")
+icon = ExtResource("25")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ACVoicebox" parent="." instance=ExtResource("1")]
+volume_db = -80.0
+bus = &"MatchVoice"

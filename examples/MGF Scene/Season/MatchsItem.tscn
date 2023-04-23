@@ -1,0 +1,178 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets2D/TeamLogo/High/CB.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets2D/Theme/broadPanel.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets2D/Fonts/UI.tres" type="FontFile" id=3]
+[ext_resource path="res://Assets2D/Fonts/UINormal.tres" type="FontFile" id=4]
+[ext_resource path="res://Assets2D/Theme/btnUIBGOPBorder.tres" type="StyleBox" id=5]
+[ext_resource path="res://MGF Scene/Season/Match.gd" type="Script" id=6]
+[ext_resource path="res://Assets2D/Theme/btnUIBGO.tres" type="StyleBox" id=7]
+[ext_resource path="res://Assets2D/Theme/broadBorderWhite.tres" type="StyleBox" id=8]
+[ext_resource path="res://Assets2D/Theme/btnOpNO.tres" type="StyleBox" id=9]
+
+
+[node name="Match" type="Control"]
+offset_right = 728.0
+offset_bottom = 72.0
+custom_minimum_size = Vector2( 288, 72 )
+script = ExtResource( 6 )
+
+[node name="bgMain" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource( 2 )
+
+[node name="bg" type="Panel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource( 5 )
+
+[node name="Main" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="id" type="Label" parent="Main"]
+offset_left = 1.0
+offset_top = 20.0
+offset_right = 41.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 40, 0 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="-" type="Label" parent="Main"]
+offset_left = 45.0
+offset_top = 20.0
+offset_right = 75.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 30, 0 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 3 )
+align = 1
+valign = 1
+
+[node name="teamA" type="TextureRect" parent="Main"]
+offset_left = 79.0
+offset_right = 159.0
+offset_bottom = 72.0
+custom_minimum_size = Vector2( 80, 0 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="bg" type="Button" parent="Main/teamA"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/hover = ExtResource( 9 )
+theme_override_styles/pressed = ExtResource( 9 )
+theme_override_styles/focus = ExtResource( 9 )
+theme_override_styles/disabled = ExtResource( 9 )
+theme_override_styles/normal = ExtResource( 9 )
+disabled = true
+
+[node name="nameA" type="Label" parent="Main"]
+offset_left = 163.0
+offset_top = 20.0
+offset_right = 313.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 150, 0 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
+text = "Warrior"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="goalA" type="Label" parent="Main"]
+offset_left = 317.0
+offset_top = 20.0
+offset_right = 367.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 50, 0 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
+align = 1
+valign = 1
+
+[node name="vs" type="Label" parent="Main"]
+offset_left = 371.0
+offset_top = 20.0
+offset_right = 401.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 30, 0 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
+text = "-"
+align = 1
+valign = 1
+
+[node name="goalB" type="Label" parent="Main"]
+offset_left = 405.0
+offset_top = 20.0
+offset_right = 455.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 50, 0 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
+align = 1
+valign = 1
+
+[node name="nameB" type="Label" parent="Main"]
+offset_left = 459.0
+offset_top = 20.0
+offset_right = 609.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 150, 0 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
+text = "Warrior"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="teamB" type="TextureRect" parent="Main"]
+offset_left = 613.0
+offset_right = 693.0
+offset_bottom = 72.0
+custom_minimum_size = Vector2( 80, 0 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="bg" type="Button" parent="Main/teamB"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/hover = ExtResource( 9 )
+theme_override_styles/pressed = ExtResource( 9 )
+theme_override_styles/focus = ExtResource( 9 )
+theme_override_styles/disabled = ExtResource( 9 )
+theme_override_styles/normal = ExtResource( 9 )
+disabled = true
+
+[node name="-2" type="Label" parent="Main"]
+offset_left = 697.0
+offset_top = 20.0
+offset_right = 727.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 30, 0 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 3 )
+align = 1
+valign = 1
+
+[node name="info" type="Button" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+theme_override_styles/hover = ExtResource( 8 )
+theme_override_styles/pressed = ExtResource( 8 )
+theme_override_styles/focus = ExtResource( 8 )
+theme_override_styles/disabled = ExtResource( 7 )
+theme_override_styles/normal = ExtResource( 7 )
+
+[connection signal="pressed" from="info" to="." method="_on_info_pressed"]

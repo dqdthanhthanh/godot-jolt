@@ -10,10 +10,10 @@ custom_minimum_size = Vector2( 200, 200 )
 focus_mode = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/offset_right = 0
-custom_constants/offset_top = 0
-custom_constants/offset_left = 0
-custom_constants/offset_bottom = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_bottom = 0
 script = ExtResource( 1 )
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -29,13 +29,13 @@ offset_top = 7.0
 offset_right = 293.0
 offset_bottom = 193.0
 mouse_filter = 2
-custom_constants/separation = 5
+theme_override_constants/separation = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
 offset_right = 286.0
 offset_bottom = 20.0
 mouse_filter = 2
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="Title" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer"]
 offset_right = 274.0
@@ -73,7 +73,7 @@ offset_top = 25.0
 offset_right = 286.0
 offset_bottom = 25.0
 mouse_filter = 2
-custom_constants/separation = 0
+theme_override_constants/separation = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer"]
 offset_top = 30.0
@@ -90,10 +90,10 @@ offset_right = 286.0
 offset_bottom = 10.0
 mouse_filter = 2
 size_flags_horizontal = 3
-custom_constants/offset_right = 5
-custom_constants/offset_top = 5
-custom_constants/offset_left = 5
-custom_constants/offset_bottom = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="TaskHolder" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 offset_left = 5.0
@@ -102,7 +102,7 @@ offset_right = 281.0
 offset_bottom = 5.0
 mouse_filter = 2
 size_flags_horizontal = 3
-custom_constants/separation = 5
+theme_override_constants/separation = 5
 
 [node name="PreviewHolder" type="Control" parent="PanelContainer/VBoxContainer/ScrollContainer/MarginContainer"]
 offset_left = 5.0

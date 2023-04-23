@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://0s5nwq0l36j4"
+uid="uid://dybmuxy6q81ho"
 path="res://.godot/imported/khungthanh.glb-4799d70a73015127d4824abf24ccae99.scn"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/khungthanh.glb-4799d70a73015127d4824abf24ccae
 
 [params]
 
-nodes/root_type="Spatial"
+nodes/root_type="Node3D"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -28,5 +28,16 @@ animation/fps=15
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"M_COT": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Goal/M_COT.material"
+},
+"M_LUOI": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Goal/M_LUOI.material"
+}
+}
+}
 gltf/embedded_image_handling=1

@@ -1,0 +1,37 @@
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://gu4nyc8l7ykw"]
+
+[ext_resource type="Texture2D" uid="uid://bdp1mqonmcdub" path="res://Assets3D/StadiumShader/ripples.png" id="1"]
+[ext_resource type="Shader" path="res://Assets3D/StadiumShader/rain_stadium.gdshader" id="2"]
+[ext_resource type="Texture2D" uid="uid://dl2w4r5p4xkdw" path="res://Others/TestStadiumShader/PavingStones090_2K_Roughness.jpg" id="3"]
+[ext_resource type="Texture2D" uid="uid://d2levj84ryxrn" path="res://Others/TestStadiumShader/PavingStones090_2K_Normal.jpg" id="4"]
+[ext_resource type="Texture2D" uid="uid://45gtwkdswc2i" path="res://Others/TestStadiumShader/PavingStones090_2K_Color.jpg" id="5"]
+[ext_resource type="Texture2D" uid="uid://cx66x2lolsg1p" path="res://Assets3D/StadiumShader/streaks512.png" id="6"]
+
+[sub_resource type="FastNoiseLite" id="1"]
+
+[sub_resource type="NoiseTexture2D" id="2"]
+noise = SubResource("1")
+
+[resource]
+render_priority = 0
+shader = ExtResource("2")
+shader_parameter/scale_UV_material = 1.0
+shader_parameter/scale_UV_rain = 0.2
+shader_parameter/cam_heightmap_world_position = null
+shader_parameter/cam_heightmap_size = null
+shader_parameter/rain = null
+shader_parameter/wet_level = 0.0
+shader_parameter/water_metallnes = 0.0
+shader_parameter/dry_angle = -0.1
+shader_parameter/puddles_noise = null
+shader_parameter/streaks_length = 0.5
+shader_parameter/streaks_angle = 0.8
+shader_parameter/snow_amount = 0.656
+shader_parameter/without_snow_angle = 0.3
+shader_parameter/snow_brightness = null
+shader_parameter/Material_Albedo = ExtResource("5")
+shader_parameter/Material_Norm = ExtResource("4")
+shader_parameter/Material_Rough = ExtResource("3")
+shader_parameter/noise_tex = SubResource("2")
+shader_parameter/ripples_tex = ExtResource("1")
+shader_parameter/streaks_tex = ExtResource("6")

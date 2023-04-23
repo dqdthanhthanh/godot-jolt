@@ -1,0 +1,503 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Assets2D/Fonts/UIMatch.tres" type="FontFile" id=1]
+[ext_resource path="res://MGF Scene/QuickMatch/TeamShow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://MGF Scene/Setup/ButtonBase.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MGF Scene/Main Game/WeatherUI.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets2D/UI/iconExit.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets2D/UI/iconBall.png" type="Texture2D" id=6]
+[ext_resource path="res://MGF Scene/Season/MatchReady.gd" type="Script" id=7]
+[ext_resource path="res://Assets2D/Fonts/ThemeInfo.tres" type="Theme" id=8]
+[ext_resource path="res://MGF Scene/Formation/FormationMatch.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets2D/Fonts/UINormal.tres" type="FontFile" id=10]
+[ext_resource path="res://Assets2D/Theme/btnUIN.tres" type="StyleBox" id=11]
+[ext_resource path="res://Assets2D/Fonts/UI.tres" type="FontFile" id=12]
+[ext_resource path="res://Assets2D/Theme/btnRedCP.tres" type="StyleBox" id=13]
+[ext_resource path="res://Assets2D/Theme/btnRedCN.tres" type="StyleBox" id=14]
+[ext_resource path="res://Assets2D/Theme/btnUICN.tres" type="StyleBox" id=15]
+[ext_resource path="res://Assets2D/UI/IconHome.png" type="Texture2D" id=17]
+
+[node name="MatchReady" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+pivot_offset = Vector2( -336, 336 )
+script = ExtResource( 7 )
+
+[node name="BG" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="UI" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Round" type="Control" parent="UI"]
+offset_top = 44.0
+offset_right = 1792.0
+offset_bottom = 129.0
+custom_minimum_size = Vector2( 0, 85 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Round" type="Label" parent="UI/Round"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -42.5
+offset_right = 160.0
+offset_bottom = 42.5
+custom_minimum_size = Vector2( 320, 85 )
+theme = ExtResource( 8 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 11 )
+text = "Round"
+align = 1
+valign = 1
+
+[node name="Main" type="Control" parent="UI"]
+offset_top = 133.0
+offset_right = 1792.0
+offset_bottom = 783.0
+custom_minimum_size = Vector2( 0, 650 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="FormationMatch" parent="UI/Main" instance=ExtResource( 9 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+offset_left = -896.0
+offset_top = -790.0
+offset_right = 896.0
+offset_bottom = 38.0
+custom_minimum_size = Vector2( 0, 828 )
+
+[node name="TeamName" type="Control" parent="UI/Main"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -314.0
+offset_right = 216.0
+offset_bottom = -250.0
+custom_minimum_size = Vector2( 30, 50 )
+
+[node name="A" type="Label" parent="UI/Main/TeamName"]
+offset_top = -8.0
+offset_right = 192.0
+offset_bottom = 56.0
+custom_minimum_size = Vector2( 30, 50 )
+theme_override_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="B" type="Label" parent="UI/Main/TeamName"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -192.0
+offset_top = -8.0
+offset_bottom = 56.0
+custom_minimum_size = Vector2( 30, 50 )
+theme_override_fonts/font = ExtResource( 1 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="SetHomeAway" type="Button" parent="UI/Main/TeamName"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = 200.0
+offset_right = 118.0
+offset_bottom = 264.0
+custom_minimum_size = Vector2( 230, 52 )
+pivot_offset = Vector2( -424, -72 )
+theme_override_fonts/font = ExtResource( 12 )
+theme_override_styles/hover = ExtResource( 15 )
+theme_override_styles/pressed = ExtResource( 15 )
+theme_override_styles/focus = ExtResource( 15 )
+theme_override_styles/disabled = ExtResource( 15 )
+theme_override_styles/normal = ExtResource( 15 )
+text = "Play Home"
+icon = ExtResource( 17 )
+expand_icon = true
+
+[node name="SetTeamRandom" type="Button" parent="UI/Main/TeamName"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = 64.0
+offset_right = 32.0
+offset_bottom = 128.0
+custom_minimum_size = Vector2( 50, 50 )
+pivot_offset = Vector2( -424, -72 )
+theme_override_fonts/font = ExtResource( 12 )
+theme_override_styles/hover = ExtResource( 15 )
+theme_override_styles/pressed = ExtResource( 15 )
+theme_override_styles/focus = ExtResource( 15 )
+theme_override_styles/disabled = ExtResource( 15 )
+theme_override_styles/normal = ExtResource( 15 )
+text = "VS"
+
+[node name="Teamselect1" parent="UI/Main" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -250.0
+offset_right = -56.0
+offset_bottom = -122.0
+theme_override_styles/focus = ExtResource( 11 )
+theme_override_styles/disabled = ExtResource( 11 )
+theme_override_styles/normal = ExtResource( 11 )
+
+[node name="Star" parent="UI/Main/Teamselect1" index="0"]
+visible = false
+offset_bottom = -120.0
+
+[node name="Teamselect2" parent="UI/Main" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 56.0
+offset_top = -250.0
+offset_right = 192.0
+offset_bottom = -122.0
+theme_override_styles/focus = ExtResource( 11 )
+theme_override_styles/disabled = ExtResource( 11 )
+theme_override_styles/normal = ExtResource( 11 )
+teamSelect = "teamID2"
+
+[node name="Star" parent="UI/Main/Teamselect2" index="0"]
+visible = false
+offset_bottom = -120.0
+
+[node name="TeamStats" type="HBoxContainer" parent="UI/Main"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = 30.0
+offset_right = 192.0
+offset_bottom = 190.0
+alignment = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="TeamStats" type="Panel" parent="UI/Main/TeamStats"]
+offset_left = 2.0
+offset_right = 382.0
+offset_bottom = 160.0
+custom_minimum_size = Vector2( 380, 150 )
+theme_override_styles/panel = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TeamAStats" type="ItemList" parent="UI/Main/TeamStats/TeamStats"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -75.0
+offset_right = 130.0
+offset_bottom = 77.0
+theme_override_constants/v_separation = 0
+theme_override_constants/line_separation = 0
+theme_override_constants/icon_margin = 0
+theme_override_constants/h_separation = 0
+select_mode = 1
+max_columns = 4
+
+[node name="teamOve" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamAStats" groups=["labels"]]
+anchor_left = 0.75
+anchor_top = 0.0769231
+anchor_right = 2.5
+anchor_bottom = 0.451923
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = -4.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "0"
+
+[node name="teamAtk" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamAStats" groups=["labels"]]
+anchor_left = 0.75
+anchor_top = 0.307692
+anchor_right = 2.5
+anchor_bottom = 0.721154
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 5.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "0
+"
+
+[node name="teamMid" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamAStats" groups=["labels"]]
+anchor_left = 0.75
+anchor_top = 0.538462
+anchor_right = 2.5
+anchor_bottom = 0.951923
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 5.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "0
+"
+
+[node name="teamDef" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamAStats" groups=["labels"]]
+anchor_left = 0.75
+anchor_top = 0.769231
+anchor_right = 2.5
+anchor_bottom = 1.18269
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 5.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "0
+"
+
+[node name="teamOve2" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamAStats" groups=["labels"]]
+anchor_left = 0.166667
+anchor_top = 0.0769231
+anchor_right = 1.91667
+anchor_bottom = 0.451923
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = -4.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "AVG"
+
+[node name="teamDef2" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamAStats" groups=["labels"]]
+anchor_left = 0.166667
+anchor_top = 0.307692
+anchor_right = 1.91667
+anchor_bottom = 0.721154
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 5.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "ATK
+"
+
+[node name="teamMid2" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamAStats" groups=["labels"]]
+anchor_left = 0.166667
+anchor_top = 0.538462
+anchor_right = 1.91667
+anchor_bottom = 1.17308
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 10.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "MID
+
+"
+
+[node name="teamFor2" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamAStats" groups=["labels"]]
+anchor_left = 0.166667
+anchor_top = 0.769231
+anchor_right = 1.91667
+anchor_bottom = 1.40385
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 10.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "DEF
+
+"
+
+[node name="TeamBStats" type="ItemList" parent="UI/Main/TeamStats/TeamStats"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -75.0
+offset_bottom = 77.0
+theme_override_constants/v_separation = 0
+theme_override_constants/line_separation = 0
+theme_override_constants/icon_margin = 0
+theme_override_constants/h_separation = 0
+select_mode = 1
+max_columns = 4
+
+[node name="teamOve" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamBStats" groups=["labels"]]
+anchor_left = 0.166667
+anchor_top = 0.0769231
+anchor_right = 1.91667
+anchor_bottom = 0.451923
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = -4.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "0"
+
+[node name="teamAtk" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamBStats" groups=["labels"]]
+anchor_left = 0.166667
+anchor_top = 0.307692
+anchor_right = 1.91667
+anchor_bottom = 0.721154
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 5.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "0
+"
+
+[node name="teamMid" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamBStats" groups=["labels"]]
+anchor_left = 0.166667
+anchor_top = 0.538462
+anchor_right = 1.91667
+anchor_bottom = 0.951923
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 5.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "0
+"
+
+[node name="teamDef" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamBStats" groups=["labels"]]
+anchor_left = 0.166667
+anchor_top = 0.769231
+anchor_right = 1.91667
+anchor_bottom = 1.18269
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 5.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "0
+"
+
+[node name="teamOve2" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamBStats" groups=["labels"]]
+anchor_left = 0.583333
+anchor_top = 0.0769231
+anchor_right = 2.33333
+anchor_bottom = 0.490385
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 5.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "AVG
+"
+
+[node name="teamDef2" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamBStats" groups=["labels"]]
+anchor_left = 0.583333
+anchor_top = 0.307692
+anchor_right = 2.33333
+anchor_bottom = 0.721154
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 5.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "ATK
+"
+
+[node name="teamMid2" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamBStats" groups=["labels"]]
+anchor_left = 0.583333
+anchor_top = 0.538462
+anchor_right = 2.33333
+anchor_bottom = 1.17308
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = 10.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "MID
+
+"
+
+[node name="teamFor2" type="Label" parent="UI/Main/TeamStats/TeamStats/TeamBStats" groups=["labels"]]
+anchor_left = 0.583333
+anchor_top = 0.769231
+anchor_right = 2.33333
+anchor_bottom = 1.34615
+offset_left = -4.0
+offset_top = -4.5
+offset_right = -4.0
+offset_bottom = -4.5
+theme_override_fonts/font = ExtResource( 10 )
+text = "DEF
+"
+
+[node name="WeatherUI" parent="UI/Main" instance=ExtResource( 4 )]
+visible = false
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -311.0
+offset_right = 192.0
+offset_bottom = -31.0
+
+[node name="ButtonStatGame" parent="UI/Main" instance=ExtResource( 3 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = 222.0
+offset_right = 192.0
+offset_bottom = 334.0
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/focus = ExtResource( 11 )
+text = "Start Match"
+icon = ExtResource( 6 )
+icon_alignment = 0
+expand_icon = true
+
+[node name="Home" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource( 12 )
+theme_override_styles/hover = ExtResource( 13 )
+theme_override_styles/pressed = ExtResource( 13 )
+theme_override_styles/focus = ExtResource( 14 )
+theme_override_styles/disabled = ExtResource( 14 )
+theme_override_styles/normal = ExtResource( 14 )
+icon = ExtResource( 5 )
+icon_alignment = 1
+expand_icon = true
+
+[node name="Disable" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[connection signal="pressed" from="UI/Main/Teamselect1" to="." method="_on_Teamselect1_pressed"]
+[connection signal="pressed" from="UI/Main/Teamselect2" to="." method="_on_Teamselect2_pressed"]
+[connection signal="pressed" from="UI/Main/ButtonStatGame" to="." method="_on_ButtonStatGame_pressed"]
+[connection signal="pressed" from="Home" to="." method="_on_Home_pressed"]
+
+[editable path="UI/Main/Teamselect1"]
+[editable path="UI/Main/Teamselect2"]

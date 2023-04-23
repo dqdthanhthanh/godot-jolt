@@ -1,24 +1,24 @@
 extends CanvasLayer
 
 
-var team = 10
+var team:int = 10
 var state = "Start"
 
-var stats = []
+var stats:Array = []
 
-func _ready():
-	if !OS.has_feature("editor"):
+func _ready() -> void:
+	if Global.isDebug == false:
 		queue_free()
 
-func add_stat(stat_name, object, stat_ref, is_method):
+func add_stat(stat_name, object, stat_ref, is_method) -> void:
 	stats.append([stat_name, object, stat_ref, is_method])
 
-func _process(delta):
+func _process(delta) -> void:
 #	if OS.has_feature("editor"):
 	if Global.isDebug == true:
 		var label_text = ""
 		
-		label_text += str("team",": " ,str(team))
+		label_text += str("mode",": " ,str(Global.MGFMode))
 		label_text += "\n"
 		
 		var fps = Engine.get_frames_per_second()
@@ -44,3 +44,6 @@ func _process(delta):
 		$Label.text = label_text
 	else:
 		$Label.text = ""
+
+func _exit_tree():
+	queue_free()

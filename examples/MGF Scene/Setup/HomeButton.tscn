@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cmsyvb5wbfi"]
+[gd_scene load_steps=6 format=3 uid="uid://sqpoj82ew1hc"]
 
-[ext_resource type="Texture2D" uid="uid://j3mv2607r0ck" path="res://Assets2D/UI/home-2502.png" id="1"]
-[ext_resource type="Script" path="res://scripts/Button.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://hnevhnj5dbp5" path="res://Assets2D/UI/IconHome.png" id="1"]
+[ext_resource type="Script" path="res://MGF Scene/AssetsScene3D/Button.gd" id="2"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="3"]
 [ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCN.tres" id="4"]
 [ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCP.tres" id="5"]
 
@@ -13,14 +14,16 @@ offset_left = -128.0
 offset_top = 32.0
 offset_right = -32.0
 offset_bottom = 128.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3")
 theme_override_styles/normal = ExtResource("4")
 theme_override_styles/hover = ExtResource("5")
 theme_override_styles/pressed = ExtResource("5")
-theme_override_styles/disabled = ExtResource("5")
-theme_override_styles/focus = ExtResource("5")
+theme_override_styles/disabled = ExtResource("4")
+theme_override_styles/focus = ExtResource("4")
 icon = ExtResource("1")
 icon_alignment = 1
 expand_icon = true
 script = ExtResource("2")
 
-[connection signal="pressed" from="." to="." method="_on_home_pressed"]
+[connection signal="pressed" from="." to="." method="_on_Home_pressed"]

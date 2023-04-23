@@ -4,15 +4,15 @@
 
 [sub_resource type="BoxShape3D" id=2]
 margin = 0.01
-extents = Vector3( 0.155, 0.131721, 0.015 )
+size = Vector3( 0.155, 0.131721, 0.015 )
 
 [sub_resource type="BoxShape3D" id=3]
 margin = 0.01
-extents = Vector3( 0.32465, 0.129962, 0.494608 )
+size = Vector3( 0.32465, 0.129962, 0.494608 )
 
 [sub_resource type="BoxShape3D" id=5]
 margin = 0.01
-extents = Vector3( 0.155, 0.0140703, 0.496417 )
+size = Vector3( 0.155, 0.0140703, 0.496417 )
 
 [node name="GoalStatic" type="StaticBody3D"]
 collision_layer = 8

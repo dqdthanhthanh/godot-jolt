@@ -1,58 +1,94 @@
-[gd_scene load_steps=10 format=3 uid="uid://dacewxp7wga7r"]
+[gd_scene load_steps=10 format=3 uid="uid://b51p6gbqfoffq"]
 
-[ext_resource type="Material" uid="uid://ds8a71mx7b8u5" path="res://Assets3D/Goal/M_Ball.tres" id="2"]
+[ext_resource type="PhysicsMaterial" path="res://Assets3D/Goal/Ball3DPhysic.tres" id="1"]
+[ext_resource type="Material" uid="uid://82a8ebhrlk4g" path="res://Assets3D/Goal/M_Ball.tres" id="2"]
 [ext_resource type="ArrayMesh" path="res://Assets3D/Goal/SM_ball.tres" id="3"]
-[ext_resource type="Script" path="res://scripts/Ball.gd" id="4"]
-[ext_resource type="PackedScene" path="res://MGF Scene/ConfigController/SoundFx.tscn" id="7"]
-[ext_resource type="Material" uid="uid://xnqvhta8rc4r" path="res://Assets3D/Goal/matBall.tres" id="7_3srmx"]
-[ext_resource type="AudioStream" uid="uid://da5im0d6l88u6" path="res://Sounds/SoundFX/Sound_ShootBall1.mp3" id="8"]
+[ext_resource type="Script" path="res://MGF Scene/AssetsScene3D/Ball.gd" id="4"]
+[ext_resource type="Material" uid="uid://bg4f6pwnuhy01" path="res://Assets3D/Goal/M_BallDebug.tres" id="6"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/SoundFx.tscn" id="7"]
+[ext_resource type="AudioStream" uid="uid://djw2reeybr5tu" path="res://Sounds/SoundFX/Sound_ShootBall1.mp3" id="8"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_oyxil"]
-resource_local_to_scene = true
-friction = 0.2
-rough = true
-bounce = 0.2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_wsm3b"]
-size = Vector3(0.075, 0.01, 0.075)
+[sub_resource type="BoxShape3D" id="BoxShape3D_wb8fh"]
+size = Vector3(0.235, 0.05, 0.235)
 
 [sub_resource type="CylinderMesh" id="3"]
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.01
 
-[node name="Ball" type="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
-collision_layer = 15
-collision_mask = 63
+[node name="Ball" type="RigidBody3D" groups=["ball"]]
+collision_layer = 2
+collision_mask = 255
+axis_lock_angular_x = true
+axis_lock_angular_z = true
 mass = 5.0
-physics_material_override = SubResource("PhysicsMaterial_oyxil")
+physics_material_override = ExtResource("1")
+continuous_cd = true
+max_contacts_reported = 1
+contact_monitor = true
 script = ExtResource("4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0, 0, 0)
+transform = Transform3D(5.5, 0, 0, 0, 5, 0, 0, 0, 5.5, 0, 0, 0)
+visible = false
 material_override = ExtResource("2")
 mesh = ExtResource("3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
-shape = SubResource("BoxShape3D_wsm3b")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.984808, -2.82922e-16, 0.173648, 3.48787e-16, 1, -3.48787e-16, -0.173648, 4.04054e-16, 0.984808, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.939693, -2.0846e-16, 0.34202, 3.48787e-16, 1, -3.48787e-16, -0.34202, 4.47045e-16, 0.939693, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.866025, -1.27665e-16, 0.5, 3.48787e-16, 1, -3.48787e-16, -0.5, 4.76452e-16, 0.866025, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.766044, -4.29904e-17, 0.642788, 3.48787e-16, 1, -3.48787e-16, -0.642788, 4.91382e-16, 0.766044, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.642788, 4.29904e-17, 0.766044, 3.48787e-16, 1, -3.48787e-16, -0.766044, 4.91382e-16, 0.642788, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
+
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 1.27665e-16, 0.866025, 3.48787e-16, 1, -3.48787e-16, -0.866025, 4.76452e-16, 0.5, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
+
+[node name="CollisionShape3D8" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.34202, 2.0846e-16, 0.939692, 3.48787e-16, 1, -3.48787e-16, -0.939692, 4.47045e-16, 0.34202, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
+
+[node name="CollisionShape3D9" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.173648, 2.82922e-16, 0.984808, 3.48787e-16, 1, -3.48787e-16, -0.984807, 4.04054e-16, 0.173648, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
+
+[node name="CollisionShape3D10" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 3.48787e-16, 1, 3.48787e-16, 1, -3.48787e-16, -1, 3.48787e-16, -4.37114e-08, 0, 0.0255629, 0)
+shape = SubResource("BoxShape3D_wb8fh")
 
 [node name="SoundFx" parent="." instance=ExtResource("7")]
 stream = ExtResource("8")
-autoplay = false
+bus = &"GameSFX"
 
 [node name="EffekseerEmitter" type="Node3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="EffekseerEmitterTrail" type="Node3D" parent="."]
-transform = Transform3D(0.015, 0, 0, 0, 0.001, 0, 0, 0, 0.015, 0, 0, 0)
+transform = Transform3D(0.075, 0, 0, 0, 0.005, 0, 0, 0, 0.075, 0, 0, 0)
 
 [node name="DebugPoint" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="DebugPoint"]
-transform = Transform3D(1.2, 0, 0, 0, 1, 0, 0, 0, 1.2, 0, 0, 0)
+transform = Transform3D(6, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0)
 mesh = SubResource("3")
-surface_material_override/0 = ExtResource("7_3srmx")
+surface_material_override/0 = ExtResource("6")
 
 [connection signal="body_shape_entered" from="." to="." method="_on_Ball_body_shape_entered"]

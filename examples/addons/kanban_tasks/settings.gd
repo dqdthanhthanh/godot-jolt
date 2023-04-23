@@ -26,11 +26,11 @@ class StageEntry extends Control:
 	var button: Button
 	var cent
 	
-	func _init(p_board,p_stage):
+	func _init(p_board, p_stage):
 		board = p_board
 		managed_stage = p_stage
 	
-	func _ready():
+	func _ready() -> void:
 		button = Button.new()
 		button.set_anchors_preset(Control.PRESET_WIDE)
 		button.tooltip_text = managed_stage.title
@@ -48,10 +48,10 @@ class StageEntry extends Control:
 		var plus := TextureRect.new()
 		plus.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		cent.add_child(plus)
-		button.connect("pressed",Callable(self,"__on_delete"))
+		button.connect("pressed", Callable(self, "__on_delete"))
 		
-		board.connect("columns_changed",Callable(self,"__on_stages_changed"))
-		board.connect("stages_changed",Callable(self,"__on_stages_changed"))
+		board.connect("columns_changed", Callable(self, "__on_stages_changed"))
+		board.connect("stages_changed", Callable(self, "__on_stages_changed"))
 		
 		__on_stages_changed()
 	
@@ -66,9 +66,9 @@ class StageEntry extends Control:
 			NOTIFICATION_THEME_CHANGED:
 				if is_instance_valid(cent):
 					cent.get_child(0).texture = get_icon('Remove', 'EditorIcons')
-					button.add_theme_stylebox_override('normal', get_theme_stylebox('panel', 'TabContainer'))
-					button.add_theme_stylebox_override('hover', get_theme_stylebox('read_only', 'LineEdit'))
-					button.add_theme_stylebox_override('pressed', get_theme_stylebox('read_only', 'LineEdit'))
+					button.add_theme_stylebox_override('normal', get_stylebox('panel', 'TabContainer'))
+					button.add_theme_stylebox_override('hover', get_stylebox('read_only', 'LineEdit'))
+					button.add_theme_stylebox_override('pressed', get_stylebox('read_only', 'LineEdit'))
 
 
 class ColumnEntry extends VBoxContainer:
@@ -82,11 +82,11 @@ class ColumnEntry extends VBoxContainer:
 	var confirm_empty: ConfirmationDialog
 	var confirm_empty_check: CheckBox
 	
-	func _init(p_board,p_column):
+	func _init(p_board, p_column):
 		board = p_board
 		managed_column = p_column
 	
-	func _ready():
+	func _ready() -> void:
 		confirm_not_empty = $"../../../../../../../../ConfirmNotEmpty"
 		confirm_not_empty_select = $"../../../../../../../../ConfirmNotEmpty/VBoxContainer/OptionButton"
 		confirm_empty = $"../../../../../../../../ConfirmEmpty"
@@ -102,7 +102,7 @@ class ColumnEntry extends VBoxContainer:
 		add.add_child(cent)
 		add.focus_mode = Control.FOCUS_NONE
 		
-		add.connect("pressed",Callable(self,"__on_add_stage"))
+		add.connect("pressed", Callable(self, "__on_add_stage"))
 		
 		var plus := TextureRect.new()
 		plus.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -117,9 +117,9 @@ class ColumnEntry extends VBoxContainer:
 	func remove_stage(stage):
 		if len(stage.managed_stage.tasks) == 0:
 			if confirm_empty_check.pressed:
-				if confirm_empty.is_connected("confirmed",Callable(self,"__on_remove_stage_confirmed")):
-					confirm_empty.disconnect("confirmed",Callable(self,"__on_remove_stage_confirmed"))
-				confirm_empty.connect("confirmed",Callable(self,"__on_remove_stage_confirmed").bind(stage),CONNECT_ONE_SHOT)
+				if confirm_empty.is_connected("confirmed", Callable(self, "__on_remove_stage_confirmed")):
+					confirm_empty.disconnect("confirmed", Callable(self, "__on_remove_stage_confirmed"))
+				confirm_empty.connect("confirmed", Callable(self, "__on_remove_stage_confirmed").bind(stage), CONNECT_ONE_SHOT)
 				confirm_empty.popup_centered()
 			else:
 				__on_remove_stage_confirmed(stage)
@@ -129,9 +129,9 @@ class ColumnEntry extends VBoxContainer:
 				if i != stage.managed_stage:
 					confirm_not_empty_select.add_item(i.title, board.stage_index(i))
 			
-			if confirm_not_empty.is_connected("confirmed",Callable(self,"__on_move_tasks_confirmed")):
-				confirm_not_empty.disconnect("confirmed",Callable(self,"__on_move_tasks_confirmed"))
-			confirm_not_empty.connect("confirmed",Callable(self,"__on_move_tasks_confirmed").bind(stage),CONNECT_ONE_SHOT)
+			if confirm_not_empty.is_connected("confirmed", Callable(self, "__on_move_tasks_confirmed")):
+				confirm_not_empty.disconnect("confirmed", Callable(self, "__on_move_tasks_confirmed"))
+			confirm_not_empty.connect("confirmed", Callable(self, "__on_move_tasks_confirmed").bind(stage), CONNECT_ONE_SHOT)
 			
 			confirm_not_empty.popup_centered()
 	
@@ -163,9 +163,9 @@ class ColumnEntry extends VBoxContainer:
 			NOTIFICATION_THEME_CHANGED:
 				if is_instance_valid(add):
 					add.get_child(0).get_child(0).texture = get_icon('Add', 'EditorIcons')
-					add.add_theme_stylebox_override('normal', get_theme_stylebox('panel', 'TabContainer'))
-					add.add_theme_stylebox_override('hover', get_theme_stylebox('read_only', 'LineEdit'))
-					add.add_theme_stylebox_override('pressed', get_theme_stylebox('read_only', 'LineEdit'))
+					add.add_theme_stylebox_override('normal', get_stylebox('panel', 'TabContainer'))
+					add.add_theme_stylebox_override('hover', get_stylebox('read_only', 'LineEdit'))
+					add.add_theme_stylebox_override('pressed', get_stylebox('read_only', 'LineEdit'))
 
 
 class CategoryEntry extends HBoxContainer:
@@ -176,31 +176,31 @@ class CategoryEntry extends HBoxContainer:
 	var board
 	var focus_box: StyleBoxFlat
 	
-	func _init(p_board,p_category):
+	func _init(p_board, p_category):
 		board = p_board
 		managed_category = p_category
 	
-	func _ready():
+	func _ready() -> void:
 		set_h_size_flags(SIZE_EXPAND_FILL)
 		focus_mode = FOCUS_ALL
 		
 		title = EditLabel.new()
 		title.set_h_size_flags(SIZE_EXPAND_FILL)
 		title.text = managed_category.title
-		title.connect("text_changed",Callable(managed_category,"set_title"))
+		title.connect("text_changed", Callable(managed_category, "set_title"))
 		add_child(title)
 		
 		color_picker = ColorPickerButton.new()
 		color_picker.custom_minimum_size.x = 100
 		color_picker.edit_alpha = false
 		color_picker.color = managed_category.color
-		color_picker.connect("color_changed",Callable(managed_category,"set_color"))
+		color_picker.connect("color_changed", Callable(managed_category, "set_color"))
 		color_picker.focus_mode = Control.FOCUS_NONE
 		color_picker.flat = true
 		add_child(color_picker)
 		
 		delete = Button.new()
-		delete.connect("pressed",Callable(self,"__on_delete"))
+		delete.connect("pressed", Callable(self, "__on_delete"))
 		delete.focus_mode = FOCUS_NONE
 		delete.flat = true
 		add_child(delete)
@@ -208,12 +208,12 @@ class CategoryEntry extends HBoxContainer:
 		focus_box = StyleBoxFlat.new()
 		focus_box.bg_color = Color(1, 1, 1, 0.1)
 		
-		board.connect("categories_changed",Callable(self,"__on_categories_changed"))
+		board.connect("categories_changed", Callable(self, "__on_categories_changed"))
 		
 		__on_categories_changed()
 	
 	func _exit_tree():
-		board.disconnect("categories_changed",Callable(self,"__on_categories_changed"))
+		board.disconnect("categories_changed", Callable(self, "__on_categories_changed"))
 	
 	func _unhandled_key_input(event):
 		if not board.can_handle_shortcut(self):
@@ -247,15 +247,15 @@ class CategoryEntry extends HBoxContainer:
 			queue_free()
 		
 
-func _ready():
-	category_add.connect("pressed",Callable(self,"__on_add_category"))
-	column_add.connect("pressed",Callable(self,"__on_add_column"))
-	board.connect("stages_changed",Callable(self,"__on_stages_changed"))
-	board.connect("columns_changed",Callable(self,"__on_stages_changed"))
-	board.connect("changed",Callable(self,"__on_settings_changed"))
+func _ready() -> void:
+	category_add.connect("pressed", Callable(self, "__on_add_category"))
+	column_add.connect("pressed", Callable(self, "__on_add_column"))
+	board.connect("stages_changed", Callable(self, "__on_stages_changed"))
+	board.connect("columns_changed", Callable(self, "__on_stages_changed"))
+	board.connect("changed", Callable(self, "__on_settings_changed"))
 	
 	show_details_check_box.button_pressed = board.show_details_preview
-	show_details_check_box.connect('pressed',Callable(self,'__on_change_show_details'))
+	show_details_check_box.connect('pressed', Callable(self, '__on_change_show_details'))
 	
 	column_add.focus_mode = Control.FOCUS_NONE
 	
@@ -282,18 +282,18 @@ func _notification(what):
 	match(what):
 		NOTIFICATION_THEME_CHANGED:
 			if is_instance_valid(category_container):
-				category_container.add_theme_stylebox_override('panel', get_theme_stylebox('panel', 'Tree'))
+				category_container.add_theme_stylebox_override('panel', get_stylebox('bg', 'Tree'))
 			if is_instance_valid(category_add):
 				category_add.icon = get_icon('Add', 'EditorIcons')
 			if is_instance_valid(stages_container):
-				stages_container.add_theme_stylebox_override('panel', get_theme_stylebox('panel', 'Tree'))
+				stages_container.add_theme_stylebox_override('panel', get_stylebox('bg', 'Tree'))
 			if is_instance_valid(general_container):
-				general_container.add_theme_stylebox_override('panel', get_theme_stylebox('panel', 'Tree'))
+				general_container.add_theme_stylebox_override('panel', get_stylebox('bg', 'Tree'))
 			if is_instance_valid(column_add):
 				column_add.get_child(0).get_child(0).texture = get_icon('Add', 'EditorIcons')
-				column_add.add_theme_stylebox_override('normal', get_theme_stylebox('panel', 'TabContainer'))
-				column_add.add_theme_stylebox_override('hover', get_theme_stylebox('read_only', 'LineEdit'))
-				column_add.add_theme_stylebox_override('pressed', get_theme_stylebox('read_only', 'LineEdit'))
+				column_add.add_theme_stylebox_override('normal', get_stylebox('panel', 'TabContainer'))
+				column_add.add_theme_stylebox_override('hover', get_stylebox('read_only', 'LineEdit'))
+				column_add.add_theme_stylebox_override('pressed', get_stylebox('read_only', 'LineEdit'))
 			if is_instance_valid(warning_sign):
 				warning_sign.icon = get_icon('NodeWarning', 'EditorIcons')
 
@@ -308,13 +308,13 @@ func __on_add_column(column = null):
 		board.column_holder.add_child(column)
 	
 	var ent = ColumnEntry.new(board, column)
-	column.connect("change",Callable(self,"__on_stages_changed"))
-	column.connect("tree_exiting",Callable(self,"__on_column_remove").bind(column))
+	column.connect("change", Callable(self, "__on_stages_changed"))
+	column.connect("tree_exiting", Callable(self, "__on_column_remove").bind(column))
 	column_holder.add_child(ent)
 	column_holder.move_child(ent, column_holder.get_child_count()-2)
 
 func __on_column_remove(column):
-	column.disconnect("change",Callable(self,"__on_stages_changed"))
+	column.disconnect("change", Callable(self, "__on_stages_changed"))
 
 func __on_add_category():
 	var randomizer = RandomNumberGenerator.new()

@@ -1,0 +1,341 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://MGF Scene/Main Game/GameReward.gd" type="Script" id=1]
+[ext_resource path="res://Assets2D/Theme/btnUIBGNBlack.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets2D/Theme/btnUIN.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets2D/Theme/btnRedP.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets2D/Fonts/UIMatch.tres" type="FontFile" id=6]
+[ext_resource path="res://Assets2D/UI/iconBall.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets2D/UI/IconCoin.png" type="Texture2D" id=8]
+[ext_resource path="res://Assets2D/UI/iconApply.png" type="Texture2D" id=9]
+[ext_resource path="res://Assets2D/Fonts/UIBig.tres" type="FontFile" id=10]
+[ext_resource path="res://Assets2D/UI/iconStar.png" type="Texture2D" id=11]
+[ext_resource path="res://Assets2D/Theme/btnRedN.tres" type="StyleBox" id=12]
+[ext_resource path="res://Assets2D/UI/IconFans.png" type="Texture2D" id=13]
+
+[node name="GameReward" type="Popup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="BG" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource( 2 )
+
+[node name="main" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.0
+offset_top = -217.0
+offset_right = 352.0
+offset_bottom = 217.0
+theme_override_styles/panel = ExtResource( 3 )
+
+[node name="info" type="Label" parent="main"]
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -352.0
+offset_right = 352.0
+offset_bottom = 73.0
+theme_override_fonts/font = ExtResource( 10 )
+theme_override_styles/normal = ExtResource( 3 )
+text = "Reward"
+align = 1
+valign = 1
+
+[node name="ButtonClose" type="Button" parent="main"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -95.0
+theme_override_styles/hover = ExtResource( 4 )
+theme_override_styles/pressed = ExtResource( 4 )
+theme_override_styles/focus = ExtResource( 4 )
+theme_override_styles/disabled = ExtResource( 12 )
+theme_override_styles/normal = ExtResource( 12 )
+
+[node name="VBoxContainer" type="HBoxContainer" parent="main"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -431.0
+mouse_filter = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="icon" type="VBoxContainer" parent="main/VBoxContainer"]
+offset_left = 180.0
+offset_right = 244.0
+offset_bottom = 431.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="+" type="TextureRect" parent="main/VBoxContainer/icon"]
+offset_top = 23.0
+offset_right = 64.0
+offset_bottom = 87.0
+custom_minimum_size = Vector2( 64, 64 )
+mouse_filter = 2
+expand = true
+stretch_mode = 6
+
+[node name="top" type="TextureRect" parent="main/VBoxContainer/icon"]
+visible = false
+offset_top = 23.0
+offset_right = 64.0
+offset_bottom = 87.0
+custom_minimum_size = Vector2( 64, 64 )
+mouse_filter = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="match" type="TextureRect" parent="main/VBoxContainer/icon"]
+offset_top = 87.0
+offset_right = 64.0
+offset_bottom = 151.0
+custom_minimum_size = Vector2( 64, 64 )
+mouse_filter = 2
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 6
+
+[node name="gold" type="TextureRect" parent="main/VBoxContainer/icon"]
+offset_top = 151.0
+offset_right = 64.0
+offset_bottom = 215.0
+custom_minimum_size = Vector2( 64, 64 )
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="fan" type="TextureRect" parent="main/VBoxContainer/icon"]
+offset_top = 215.0
+offset_right = 64.0
+offset_bottom = 279.0
+custom_minimum_size = Vector2( 64, 64 )
+mouse_filter = 2
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="-" type="TextureRect" parent="main/VBoxContainer/icon"]
+offset_top = 279.0
+offset_right = 64.0
+offset_bottom = 343.0
+custom_minimum_size = Vector2( 64, 64 )
+mouse_filter = 2
+expand = true
+stretch_mode = 6
+
+[node name="all" type="TextureRect" parent="main/VBoxContainer/icon"]
+offset_top = 343.0
+offset_right = 64.0
+offset_bottom = 407.0
+custom_minimum_size = Vector2( 64, 64 )
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="label" type="VBoxContainer" parent="main/VBoxContainer"]
+offset_left = 264.0
+offset_right = 352.0
+offset_bottom = 431.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="+" type="Label" parent="main/VBoxContainer/label"]
+offset_top = 23.0
+offset_right = 88.0
+offset_bottom = 87.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+valign = 1
+
+[node name="top" type="Label" parent="main/VBoxContainer/label"]
+visible = false
+offset_top = 23.0
+offset_right = 88.0
+offset_bottom = 87.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "Top"
+valign = 1
+
+[node name="match" type="Label" parent="main/VBoxContainer/label"]
+offset_top = 87.0
+offset_right = 88.0
+offset_bottom = 151.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "Match"
+valign = 1
+
+[node name="gold" type="Label" parent="main/VBoxContainer/label"]
+offset_top = 151.0
+offset_right = 88.0
+offset_bottom = 215.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "Gold"
+valign = 1
+
+[node name="fan" type="Label" parent="main/VBoxContainer/label"]
+offset_top = 215.0
+offset_right = 88.0
+offset_bottom = 279.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "Fan"
+valign = 1
+
+[node name="-" type="Label" parent="main/VBoxContainer/label"]
+offset_top = 279.0
+offset_right = 88.0
+offset_bottom = 343.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+valign = 1
+
+[node name="all" type="Label" parent="main/VBoxContainer/label"]
+offset_top = 343.0
+offset_right = 88.0
+offset_bottom = 407.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "Result"
+valign = 1
+
+[node name="info" type="VBoxContainer" parent="main/VBoxContainer"]
+offset_left = 372.0
+offset_right = 524.0
+offset_bottom = 431.0
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="+" type="Label" parent="main/VBoxContainer/info"]
+offset_top = 23.0
+offset_right = 152.0
+offset_bottom = 87.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+align = 1
+valign = 1
+
+[node name="top" type="Label" parent="main/VBoxContainer/info"]
+visible = false
+offset_top = 14.0
+offset_right = 99.0
+offset_bottom = 78.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="match" type="Label" parent="main/VBoxContainer/info"]
+offset_top = 87.0
+offset_right = 152.0
+offset_bottom = 151.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "Win 2-1"
+align = 1
+valign = 1
+
+[node name="gold" type="HBoxContainer" parent="main/VBoxContainer/info"]
+offset_top = 151.0
+offset_right = 152.0
+offset_bottom = 215.0
+mouse_filter = 2
+alignment = 1
+
+[node name="info" type="Label" parent="main/VBoxContainer/info/gold"]
+offset_right = 84.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "+1000"
+align = 1
+valign = 1
+
+[node name="icon" type="TextureRect" parent="main/VBoxContainer/info/gold"]
+offset_left = 88.0
+offset_right = 152.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 64, 0 )
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[node name="fan" type="HBoxContainer" parent="main/VBoxContainer/info"]
+offset_top = 215.0
+offset_right = 152.0
+offset_bottom = 279.0
+mouse_filter = 2
+alignment = 1
+
+[node name="info" type="Label" parent="main/VBoxContainer/info/fan"]
+offset_right = 84.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "+1000"
+align = 1
+valign = 1
+
+[node name="icon" type="TextureRect" parent="main/VBoxContainer/info/fan"]
+offset_left = 88.0
+offset_right = 152.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 64, 0 )
+mouse_filter = 2
+texture = ExtResource( 13 )
+expand = true
+stretch_mode = 6
+
+[node name="-" type="Label" parent="main/VBoxContainer/info"]
+offset_top = 279.0
+offset_right = 152.0
+offset_bottom = 343.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+align = 1
+valign = 1
+
+[node name="all" type="HBoxContainer" parent="main/VBoxContainer/info"]
+offset_top = 343.0
+offset_right = 152.0
+offset_bottom = 407.0
+mouse_filter = 2
+alignment = 1
+
+[node name="info" type="Label" parent="main/VBoxContainer/info/all"]
+offset_right = 84.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 6 )
+text = "+1000"
+align = 1
+valign = 1
+
+[node name="icon" type="TextureRect" parent="main/VBoxContainer/info/all"]
+offset_left = 88.0
+offset_right = 152.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 64, 0 )
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+
+[connection signal="pressed" from="main/ButtonClose" to="." method="_on_ButtonClose_pressed"]

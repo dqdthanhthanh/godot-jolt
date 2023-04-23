@@ -1,105 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://oobfcgfimkvt"]
+[gd_scene load_steps=12 format=3 uid="uid://o8dtp20a4kwn"]
 
-[ext_resource type="PackedScene" path="res://MGF Scene/Setup/Account.tscn" id="3"]
-[ext_resource type="FontFile" uid="uid://cgnpaaq1ihcyh" path="res://addons/mgf_Json_table/assets/FiraSans-Medium.otf" id="3_28yc7"]
-[ext_resource type="Script" path="res://MGF Scene/MGFBT.gd" id="4"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UIBig.tres" id="2"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://b6x20hd07t2nr" path="res://Assets2D/UI/IconInfo.png" id="4"]
 [ext_resource type="Script" path="res://MGF Scene/MainMenu.gd" id="5"]
-[ext_resource type="PackedScene" uid="uid://du3nkd40esve6" path="res://MGF Scene/Setup/BGSetup.tscn" id="6"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="7"]
-[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="8"]
-
-[sub_resource type="FontFile" id="FontFile_nbt2t"]
-subpixel_positioning = 0
-msdf_pixel_range = 14
-msdf_size = 128
-fallbacks = Array[Font]([ExtResource("3_28yc7")])
-face_index = null
-embolden = null
-transform = null
-cache/0/50/0/ascent = 0.0
-cache/0/50/0/descent = 0.0
-cache/0/50/0/underline_position = 0.0
-cache/0/50/0/underline_thickness = 0.0
-cache/0/50/0/scale = 1.0
-cache/0/50/0/kerning_overrides/50/0 = Vector2(0, 0)
-cache/0/50/0/kerning_overrides/35/0 = Vector2(0, 0)
-cache/0/50/0/kerning_overrides/20/0 = Vector2(0, 0)
-cache/0/50/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/50/0/kerning_overrides/15/0 = Vector2(0, 0)
-cache/0/50/0/kerning_overrides/25/0 = Vector2(0, 0)
-cache/0/50/0/kerning_overrides/100/0 = Vector2(0, 0)
-cache/0/35/0/ascent = 0.0
-cache/0/35/0/descent = 0.0
-cache/0/35/0/underline_position = 0.0
-cache/0/35/0/underline_thickness = 0.0
-cache/0/35/0/scale = 1.0
-cache/0/35/0/kerning_overrides/50/0 = Vector2(0, 0)
-cache/0/35/0/kerning_overrides/35/0 = Vector2(0, 0)
-cache/0/35/0/kerning_overrides/20/0 = Vector2(0, 0)
-cache/0/35/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/35/0/kerning_overrides/15/0 = Vector2(0, 0)
-cache/0/35/0/kerning_overrides/25/0 = Vector2(0, 0)
-cache/0/35/0/kerning_overrides/100/0 = Vector2(0, 0)
-cache/0/20/0/ascent = 0.0
-cache/0/20/0/descent = 0.0
-cache/0/20/0/underline_position = 0.0
-cache/0/20/0/underline_thickness = 0.0
-cache/0/20/0/scale = 1.0
-cache/0/20/0/kerning_overrides/50/0 = Vector2(0, 0)
-cache/0/20/0/kerning_overrides/35/0 = Vector2(0, 0)
-cache/0/20/0/kerning_overrides/20/0 = Vector2(0, 0)
-cache/0/20/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/20/0/kerning_overrides/15/0 = Vector2(0, 0)
-cache/0/20/0/kerning_overrides/25/0 = Vector2(0, 0)
-cache/0/20/0/kerning_overrides/100/0 = Vector2(0, 0)
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/50/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/35/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/20/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/15/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/25/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/100/0 = Vector2(0, 0)
-cache/0/15/0/ascent = 0.0
-cache/0/15/0/descent = 0.0
-cache/0/15/0/underline_position = 0.0
-cache/0/15/0/underline_thickness = 0.0
-cache/0/15/0/scale = 1.0
-cache/0/15/0/kerning_overrides/50/0 = Vector2(0, 0)
-cache/0/15/0/kerning_overrides/35/0 = Vector2(0, 0)
-cache/0/15/0/kerning_overrides/20/0 = Vector2(0, 0)
-cache/0/15/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/15/0/kerning_overrides/15/0 = Vector2(0, 0)
-cache/0/15/0/kerning_overrides/25/0 = Vector2(0, 0)
-cache/0/15/0/kerning_overrides/100/0 = Vector2(0, 0)
-cache/0/25/0/ascent = 0.0
-cache/0/25/0/descent = 0.0
-cache/0/25/0/underline_position = 0.0
-cache/0/25/0/underline_thickness = 0.0
-cache/0/25/0/scale = 1.0
-cache/0/25/0/kerning_overrides/50/0 = Vector2(0, 0)
-cache/0/25/0/kerning_overrides/35/0 = Vector2(0, 0)
-cache/0/25/0/kerning_overrides/20/0 = Vector2(0, 0)
-cache/0/25/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/25/0/kerning_overrides/15/0 = Vector2(0, 0)
-cache/0/25/0/kerning_overrides/25/0 = Vector2(0, 0)
-cache/0/25/0/kerning_overrides/100/0 = Vector2(0, 0)
-cache/0/100/0/ascent = 0.0
-cache/0/100/0/descent = 0.0
-cache/0/100/0/underline_position = 0.0
-cache/0/100/0/underline_thickness = 0.0
-cache/0/100/0/scale = 1.0
-cache/0/100/0/kerning_overrides/50/0 = Vector2(0, 0)
-cache/0/100/0/kerning_overrides/35/0 = Vector2(0, 0)
-cache/0/100/0/kerning_overrides/20/0 = Vector2(0, 0)
-cache/0/100/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/100/0/kerning_overrides/15/0 = Vector2(0, 0)
-cache/0/100/0/kerning_overrides/25/0 = Vector2(0, 0)
-cache/0/100/0/kerning_overrides/100/0 = Vector2(0, 0)
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/BGSetup.tscn" id="6"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIN.tres" id="7"]
+[ext_resource type="Texture2D" uid="uid://y2nxn2i5m11y" path="res://Assets2D/UI/IconVoice.png" id="8"]
+[ext_resource type="PackedScene" uid="uid://lduoq0yrud42" path="res://addons/mgf_tools/ButtonInfo.tscn" id="10"]
+[ext_resource type="Texture2D" uid="uid://bk5mt48qm4nfy" path="res://Assets2D/UI/IconSeason.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://dcf8vhh2mshf8" path="res://Assets2D/UI/iconBall.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://gwsuxq3khfns" path="res://Assets2D/UI/IconShop.png" id="14"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -111,22 +22,24 @@ grow_vertical = 2
 script = ExtResource("5")
 
 [node name="BGSetup" parent="." instance=ExtResource("6")]
-layout_mode = 1
+anchors_preset = 0
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
 anchor_right = 1.0
 offset_bottom = 152.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = SubResource("FontFile_nbt2t")
-theme_override_font_sizes/font_size = 50
-text = "Magic FootBall World3D"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 55
+text = "Magic FootBall World"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 1
-anchors_preset = 8
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -135,118 +48,78 @@ offset_left = -600.0
 offset_top = -254.0
 offset_right = 600.0
 offset_bottom = 326.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/h_separation = 60
 theme_override_constants/v_separation = 60
 columns = 3
 
-[node name="Button3" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(360, 260)
+[node name="ButtonInfo" parent="GridContainer" instance=ExtResource("10")]
 layout_mode = 2
-theme_override_fonts/font = SubResource("FontFile_nbt2t")
-theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = ExtResource("8")
-theme_override_styles/hover = ExtResource("7")
-theme_override_styles/pressed = ExtResource("7")
-theme_override_styles/disabled = ExtResource("7")
-theme_override_styles/focus = ExtResource("7")
-text = "Career"
+disabled = true
+label_text = "Career"
+info_text = "Coming Soon..."
+is_lock = true
+is_info_btn = false
 
-[node name="Button2" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(360, 260)
+[node name="ButtonInfo2" parent="GridContainer" instance=ExtResource("10")]
 layout_mode = 2
-theme_override_fonts/font = SubResource("FontFile_nbt2t")
-theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = ExtResource("8")
-theme_override_styles/hover = ExtResource("7")
-theme_override_styles/pressed = ExtResource("7")
-theme_override_styles/disabled = ExtResource("7")
-theme_override_styles/focus = ExtResource("7")
-text = "Season"
+label_text = "Season"
+info_text = "Manager Team To Victory"
+icon_texture = ExtResource("11")
+is_info_btn = false
 
-[node name="Button" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(360, 260)
+[node name="ButtonInfo3" parent="GridContainer" instance=ExtResource("10")]
 layout_mode = 2
-theme_override_fonts/font = SubResource("FontFile_nbt2t")
-theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = ExtResource("8")
-theme_override_styles/hover = ExtResource("7")
-theme_override_styles/pressed = ExtResource("7")
-theme_override_styles/disabled = ExtResource("7")
-theme_override_styles/focus = ExtResource("7")
-text = "Training"
+label_text = "Quick Match"
+info_text = "Play Quick Match"
+icon_texture = ExtResource("12")
+is_info_btn = false
 
-[node name="Button4" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(360, 260)
+[node name="ButtonInfo4" parent="GridContainer" instance=ExtResource("10")]
 layout_mode = 2
-theme_override_fonts/font = SubResource("FontFile_nbt2t")
-theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = ExtResource("8")
-theme_override_styles/hover = ExtResource("7")
-theme_override_styles/pressed = ExtResource("7")
-theme_override_styles/disabled = ExtResource("7")
-theme_override_styles/focus = ExtResource("7")
-text = "Rank"
+disabled = true
+label_text = "Rank"
+info_text = "Coming Soon..."
+icon_texture = ExtResource("12")
+is_lock = true
+is_info_btn = false
 
-[node name="Button5" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(360, 260)
+[node name="ButtonInfo5" parent="GridContainer" instance=ExtResource("10")]
 layout_mode = 2
-theme_override_fonts/font = SubResource("FontFile_nbt2t")
-theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = ExtResource("8")
-theme_override_styles/hover = ExtResource("7")
-theme_override_styles/pressed = ExtResource("7")
-theme_override_styles/disabled = ExtResource("7")
-theme_override_styles/focus = ExtResource("7")
-text = "Shop"
+label_text = "Shop"
+info_text = "Unlock Items"
+icon_texture = ExtResource("14")
+is_info_btn = false
 
-[node name="Button6" type="Button" parent="GridContainer"]
-custom_minimum_size = Vector2(360, 260)
+[node name="ButtonInfo6" parent="GridContainer" instance=ExtResource("10")]
 layout_mode = 2
-theme_override_fonts/font = SubResource("FontFile_nbt2t")
-theme_override_font_sizes/font_size = 35
-theme_override_styles/normal = ExtResource("8")
-theme_override_styles/hover = ExtResource("7")
-theme_override_styles/pressed = ExtResource("7")
-theme_override_styles/disabled = ExtResource("7")
-theme_override_styles/focus = ExtResource("7")
-text = "Setting"
+label_text = "Info"
+info_text = "Game Info"
+icon_texture = ExtResource("4")
+is_info_btn = false
 
 [node name="PanelTop" type="Control" parent="."]
 anchors_preset = 0
 anchor_right = 1.0
 offset_bottom = 128.0
 
-[node name="PanelBottom" type="Control" parent="."]
-anchors_preset = 0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -80.0
-
-[node name="ver" type="Label" parent="PanelBottom"]
-layout_mode = 1
-anchors_preset = 3
+[node name="ButtonVoiceTest" type="Button" parent="."]
+visible = false
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -304.0
-offset_top = -84.0
-offset_right = -47.0
-offset_bottom = -35.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(1, 1.00792)
-theme_override_font_sizes/font_size = 25
-text = "Ver 1.0.0 "
-horizontal_alignment = 2
-vertical_alignment = 1
+offset_left = -240.0
+offset_top = -92.0
+offset_right = -169.0
+offset_bottom = -28.0
+theme_override_styles/normal = ExtResource("7")
+theme_override_styles/hover = ExtResource("3")
+theme_override_styles/pressed = ExtResource("3")
+theme_override_styles/disabled = ExtResource("7")
+theme_override_styles/focus = ExtResource("3")
+icon = ExtResource("8")
+icon_alignment = 1
+expand_icon = true
 
-[node name="Account" parent="." instance=ExtResource("3")]
-visible = false
-layout_mode = 1
-
-[node name="MGFBT" type="Node" parent="."]
-script = ExtResource("4")
+[connection signal="pressed" from="ButtonVoiceTest" to="." method="_on_ButtonVoiceTest_pressed"]

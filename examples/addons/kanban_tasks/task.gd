@@ -16,15 +16,15 @@ var style_box_panel: StyleBoxFlat
 
 var board
 
-var title: String : set = set_title
-var details: String : set = set_details
+var title: String: set = set_title
+var details: String: set = set_details
 var category : set = set_category
 
 func set_category(val):
 	if is_instance_valid(category):
-		category.disconnect("changed",Callable(self,"update"))
+		category.disconnect("changed", Callable(self, "update"))
 	category = val
-	category.connect("changed",Callable(self,"update"))
+	category.connect("changed", Callable(self, "update"))
 	update()
 
 func copy():
@@ -92,8 +92,8 @@ func __simplify_string(string: String) -> String:
 func show_details():
 	var d = board.get_details_dialog()
 	d.show_popup(title, details, category)
-	d.connect("change",Callable(self,"details_changed"))
-	d.connect("popup_hide",Callable(self,"details_hidden").bind(),CONNECT_ONE_SHOT)
+	d.connect("change", Callable(self, "details_changed"))
+	d.connect("popup_hide", Callable(self, "details_hidden").bind(), CONNECT_ONE_SHOT)
 
 func details_changed():
 	var d = board.get_details_dialog()
@@ -104,24 +104,24 @@ func details_changed():
 
 func details_hidden():
 	var d = board.get_details_dialog()
-	d.disconnect("change",Callable(self,"details_changed"))
+	d.disconnect("change", Callable(self, "details_changed"))
 
 func edit_label_entered():
 	grab_focus()
 
-func _ready():
+func _ready() -> void:
 	title_label.text = title
-	title_label.connect("text_changed",Callable(self,"set_title"))
-	title_label.connect("text_submitted",Callable(self,"edit_label_entered"))
+	title_label.connect("text_changed", Callable(self, "set_title"))
+	title_label.connect("text_submitted", Callable(self, "edit_label_entered"))
 	
 	details_label.visible = board.show_details_preview and not details.strip_edges().is_empty()
 	details_label.text = details
 	
-	edit_button.connect("pressed",Callable(self,"show_details"))
+	edit_button.connect("pressed", Callable(self, "show_details"))
 	
-	board.connect("changed",Callable(self,"__on_settings_changed"))
+	board.connect("changed", Callable(self, "__on_settings_changed"))
 	
-	context_menu.connect("id_pressed",Callable(self,"action"))
+	context_menu.connect("id_pressed", Callable(self, "action"))
 	
 	style_box_focus = StyleBoxFlat.new()
 	style_box_focus.set_border_width_all(1)
@@ -234,7 +234,7 @@ func _notification(what):
 	match(what):
 		NOTIFICATION_THEME_CHANGED:
 			if panel_container:
-				var tab_panel = get_theme_stylebox("panel", "TabContainer")
+				var tab_panel = get_stylebox("panel", "TabContainer")
 				if tab_panel is StyleBoxFlat:
 					style_box_panel.bg_color = tab_panel.bg_color
 					style_box_panel.draw_center = true

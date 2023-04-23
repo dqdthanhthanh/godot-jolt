@@ -36,7 +36,7 @@ func play(params: Dictionary):
 	player.play()
 	
 	playbacks.append({ "handle": params.handle, "tag": params.tag, "player": weakref(player) })
-	player.connect("finished",Callable(self,"_player_finished").bind(params.handle));
+	player.connect("finished", Callable(self, "_player_finished").bind(params.handle));
 
 func _player_finished(handle):
 	for playback in playbacks:

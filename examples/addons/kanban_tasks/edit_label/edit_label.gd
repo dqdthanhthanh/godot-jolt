@@ -7,7 +7,7 @@ var edit: LineEdit
 var label: Label
 var old_focus: Control = null
 
-@export var text: String = "" : get = get_text, set = set_text
+@export var text: String = "": get = get_text, set = set_text
 
 @export var default_intention: INTENTION := INTENTION.ADDITION
 @export var double_click := true
@@ -31,7 +31,7 @@ func update_content(val=null):
 	if edit:
 		edit.text = text
 
-func _ready():
+func _ready() -> void:
 	self.alignment = BoxContainer.ALIGNMENT_CENTER
 	self.mouse_filter = Control.MOUSE_FILTER_PASS
 	
@@ -44,15 +44,15 @@ func _ready():
 	label.autowrap = true
 	label.max_lines_visible = 2
 	
-	label.connect("gui_input",Callable(self,"label_input"))
+	label.connect("gui_input", Callable(self, "label_input"))
 	add_child(label)
 	
 	edit = LineEdit.new()
 	edit.visible = false
 	edit.size_flags_horizontal = SIZE_EXPAND_FILL
 	edit.size_flags_vertical = SIZE_FILL
-	edit.connect("text_submitted",Callable(self,"edit_text_entered"))
-	edit.connect("gui_input",Callable(self,"edit_input"))
+	edit.connect("text_submitted", Callable(self, "edit_text_entered"))
+	edit.connect("gui_input", Callable(self, "edit_input"))
 	add_child(edit)
 	
 	update_content()

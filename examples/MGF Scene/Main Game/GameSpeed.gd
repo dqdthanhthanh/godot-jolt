@@ -1,35 +1,32 @@
 extends Node
 
+@onready var currSpeed:int = 1
 
-#onready var gsdSlider = $HSlider
-#onready var gsdValue = $Label
-@onready var currSpeed = 1
+var speedMode: = [1.5,2.0,2.0]
 
-@export var toggleFast:Texture2D = preload("res://Assets2D/UI/iconFastForward.png")
-@export var toggleNormal:Texture2D = preload("res://Assets2D/UI/iconNormalForward.png")
-
-var speedMode = {
-	1 : 1.5,
-	2 : 2.0
-}
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	var getSpeedData = GameData.return_game_speed_data()
-	Engine.time_scale = float(getSpeedData)
+	Engine.time_scale = speedMode[int(getSpeedData)]
 	currSpeed = int(getSpeedData)
 	toggle_icon()
 
-func _on_BtnSpeed_pressed():
-	currSpeed += 1
-	if currSpeed > speedMode.size():
-		currSpeed = 1
-	Engine.time_scale = speedMode[currSpeed]
-	GameData.save_game_speed(speedMode[currSpeed])
+func _on_BtnSpeed_pressed() -> void:
+	if currSpeed == 0:
+		currSpeed += 1
+	else:
+		currSpeed = 0
+	Engine.time_scale = speedMode[int(currSpeed)]
+	GameData.save_game_speed(int(currSpeed))
 	toggle_icon()
 
-func toggle_icon():
-	if currSpeed == 1:
+func toggle_icon() -> void:
+	var toggleFast:Texture2D = load("res://Assets2D/UI/iconFastForward.png")
+	var toggleNormal:Texture2D = load("res://Assets2D/UI/iconNormalForward.png")
+	
+	if currSpeed == 0:
 		self.icon = toggleNormal
 	else:
 		self.icon = toggleFast
+
+func _exit_tree():
+	queue_free()

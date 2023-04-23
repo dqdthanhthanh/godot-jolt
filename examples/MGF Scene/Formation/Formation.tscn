@@ -1,25 +1,108 @@
-[gd_scene load_steps=21 format=3]
+[gd_scene load_steps=41 format=3 uid="uid://bs4jigy8rr3ae"]
 
-[ext_resource type="PackedScene" uid="uid://du3nkd40esve6" path="res://MGF Scene/Setup/BGSetup.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://dngiivihjf64c" path="res://MGF Scene/Formation/FormationSlots.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://cwnic1s8y1ex1" path="res://MGF Scene/Market/PanelPlayerData.tscn" id="3"]
-[ext_resource type="Theme" uid="uid://58mjttbtmdiu" path="res://Assets2D/Fonts/ThemeTestMode.tres" id="4"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="5_5jswh"]
-[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="5_07ui0"]
-[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="5_g4oxn"]
-[ext_resource type="PackedScene" uid="uid://cknlnd6t3iuqn" path="res://MGF Scene/RadarChart/RadarChartStats.tscn" id="8"]
-[ext_resource type="Script" path="res://MGF Scene/Formation/FormationGroup.gd" id="9"]
-[ext_resource type="Texture2D" uid="uid://cr2rw5ucq8m4r" path="res://Assets2D/Logo/QD.png" id="10"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUINO.tres" id="10_7qpu2"]
-[ext_resource type="Texture2D" uid="uid://b1s48jmdlwd2q" path="res://Assets2D/Players/VT/T_ThanUng.png" id="11"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCN.tres" id="11_3x73h"]
-[ext_resource type="Script" path="res://scripts/Button.gd" id="12"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCP.tres" id="12_x4jim"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/BGSetup.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bqocvcchoyr7" path="res://MGF Scene/Formation/FormationSlots.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://n84wsljn0a0o" path="res://MGF Scene/Market/PanelPlayerData.tscn" id="3"]
+[ext_resource type="Theme" uid="uid://doboha45rdjnj" path="res://Assets2D/Fonts/ThemeInfo.tres" id="4"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="5"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UIOutline.tres" id="6"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/broadBorderWhite.tres" id="7"]
+[ext_resource type="PackedScene" path="res://MGF Scene/RadarChart/RadarChartStats.tscn" id="8"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUICP.tres" id="9"]
+[ext_resource type="Texture2D" uid="uid://drmun3e7bidtc" path="res://Assets2D/TeamLogo/High/QD.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://b5i8y6x1kqdfn" path="res://Assets2D/PlayerIcon/Low/00026-1267103833.png" id="11"]
+[ext_resource type="Texture2D" uid="uid://ngai4ubmag6v" path="res://Assets2D/UI/iconApply.png" id="12"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIN.tres" id="13"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="14"]
 [ext_resource type="Script" path="res://MGF Scene/Formation/Finance.gd" id="15"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGOBorder.tres" id="15_ghxig"]
-[ext_resource type="Texture2D" uid="uid://j3mv2607r0ck" path="res://Assets2D/UI/home-2502.png" id="18"]
-[ext_resource type="PackedScene" uid="uid://bqxpuye666ns1" path="res://MGF Scene/Setup/Account.tscn" id="19"]
+[ext_resource type="FontFile" uid="uid://digsjq1ccbknq" path="res://Assets2D/Fonts/FiraSansFont/FiraSans-Medium.otf" id="16"]
+[ext_resource type="PackedScene" uid="uid://bab7ekr4d1far" path="res://MGF Scene/Market/PlayerCard.tscn" id="17"]
+[ext_resource type="Texture2D" uid="uid://bbki8texicggy" path="res://Assets2D/UI/IconHome.png" id="18"]
+[ext_resource type="Texture2D" uid="uid://dsaexb4sit4y3" path="res://Assets2D/UI/IconFiveStar.png" id="19"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUICN.tres" id="20"]
 [ext_resource type="Script" path="res://MGF Scene/Formation/Formation.gd" id="21"]
+[ext_resource type="Texture2D" uid="uid://8507igigahbd" path="res://Assets2D/UI/Soccer_Field_Transparant.png" id="22"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGO.tres" id="23"]
+[ext_resource type="Texture2D" uid="uid://cg0tgmid1fxhi" path="res://Assets2D/UI/iconStats.png" id="24"]
+[ext_resource type="Texture2D" uid="uid://bq0ponx4ifp0u" path="res://Assets2D/UI/iconFormation.png" id="25"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGOP.tres" id="26"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UILarge.tres" id="27"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGNBlack.tres" id="28"]
+[ext_resource type="Script" path="res://MGF Scene/Formation/InsOptionsBtn.gd" id="29"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCN.tres" id="30"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/BtnOptionsIns.tscn" id="31"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCP.tres" id="32"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/ButtonClose.tscn" id="33"]
+
+[sub_resource type="ImageTexture" id="15"]
+
+[sub_resource type="StyleBoxFlat" id="16"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="17"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="StyleBoxFlat" id="9"]
+bg_color = Color(0, 0, 0, 0)
+shadow_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="12"]
+bg_color = Color(1, 1, 1, 0.0392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_color = Color(0, 0, 0, 0)
+shadow_size = 30
+
+[sub_resource type="FontFile" id="13"]
+fallbacks = Array[Font]([ExtResource("16")])
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="14"]
+bg_color = Color(0, 0, 0, 0.392157)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.117647)
+shadow_size = 30
 
 [node name="Formation" type="Control"]
 process_mode = 3
@@ -32,32 +115,84 @@ grow_vertical = 2
 script = ExtResource("21")
 
 [node name="BGSetup" parent="." instance=ExtResource("1")]
-layout_mode = 1
+anchors_preset = 0
 
-[node name="BackGroundMain" parent="BGSetup" index="1"]
-visible = true
+[node name="UI" type="Control" parent="."]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="PanelR" parent="BGSetup/BackGroundMain" index="0"]
-anchor_left = 0.75
-offset_left = 0.0
+[node name="BackGroundMain" type="Control" parent="UI"]
+modulate = Color(1, 1, 1, 0.784314)
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="PanelL" parent="BGSetup/BackGroundMain" index="1"]
-offset_right = 448.0
-
-[node name="PanelT" parent="BGSetup/BackGroundMain" index="2"]
+[node name="PanelR" type="Panel" parent="UI/BackGroundMain"]
 visible = false
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+theme_override_styles/panel = ExtResource("28")
 
-[node name="PanelD" parent="BGSetup/BackGroundMain" index="3"]
+[node name="PanelL" type="Panel" parent="UI/BackGroundMain"]
+layout_mode = 0
+anchor_right = 0.25
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource("28")
+
+[node name="Panel" type="Panel" parent="UI"]
 visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1624.0
+theme_override_styles/panel = ExtResource("7")
+
+[node name="Panel2" type="Panel" parent="UI"]
+layout_mode = 0
+anchor_left = 0.09375
+anchor_top = 0.0193237
+anchor_right = 0.241071
+anchor_bottom = 0.985507
+theme_override_styles/panel = ExtResource("7")
+
+[node name="Label" type="Label" parent="UI/Panel2"]
+layout_mode = 0
+anchor_right = 1.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("6")
+text = "Substitution"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel3" type="Panel" parent="UI"]
+visible = false
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1344.0
+theme_override_styles/panel = ExtResource("7")
+
+[node name="Line" type="TextureRect" parent="UI"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 536.0
+offset_top = 40.0
+offset_right = -504.0
+offset_bottom = -47.0
+texture = ExtResource("22")
+expand_mode = 1
 
 [node name="GroupSlots" type="Control" parent="."]
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource("9")
 
 [node name="slot1" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.5
@@ -71,7 +206,6 @@ offset_bottom = 352.0
 pos = "GK"
 
 [node name="slot2" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.5
@@ -86,7 +220,6 @@ uid = 1
 pos = "CB"
 
 [node name="slot3" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.5
@@ -101,7 +234,6 @@ uid = 2
 pos = "LB"
 
 [node name="slot4" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.5
@@ -116,7 +248,6 @@ uid = 3
 pos = "RB"
 
 [node name="slot5" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.5
@@ -131,7 +262,6 @@ uid = 4
 pos = "CM"
 
 [node name="slot6" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.5
@@ -146,7 +276,6 @@ uid = 5
 pos = "LF"
 
 [node name="slot7" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
 anchor_left = 0.5
@@ -161,12 +290,12 @@ uid = 6
 pos = "RF"
 
 [node name="slot8" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
-anchor_top = 0.5
-anchor_right = 0.0
-anchor_bottom = 0.5
+anchor_left = 0.0133928
+anchor_top = 0.548309
+anchor_right = 0.0133929
+anchor_bottom = 0.548309
 offset_left = 184.0
 offset_top = -374.0
 offset_right = 334.0
@@ -174,12 +303,12 @@ offset_bottom = -224.0
 uid = 7
 
 [node name="slot9" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
-anchor_top = 0.5
-anchor_right = 0.0
-anchor_bottom = 0.5
+anchor_left = 0.0133929
+anchor_top = 0.538647
+anchor_right = 0.0133929
+anchor_bottom = 0.538647
 offset_left = 184.0
 offset_top = -182.0
 offset_right = 334.0
@@ -187,12 +316,12 @@ offset_bottom = -32.0
 uid = 8
 
 [node name="slot10" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
-anchor_top = 0.5
-anchor_right = 0.0
-anchor_bottom = 0.502
+anchor_left = 0.0133928
+anchor_top = 0.533816
+anchor_right = 0.0133929
+anchor_bottom = 0.535816
 offset_left = 184.0
 offset_top = 10.0
 offset_right = 334.0
@@ -200,989 +329,652 @@ offset_bottom = 160.0
 uid = 9
 
 [node name="slot11" parent="GroupSlots" instance=ExtResource("2")]
-custom_minimum_size = Vector2(150, 150)
 layout_mode = 0
 anchors_preset = 0
-anchor_top = 0.5
-anchor_right = 0.0
-anchor_bottom = 0.502
+anchor_left = 0.0133928
+anchor_top = 0.528986
+anchor_right = 0.0133929
+anchor_bottom = 0.530985
 offset_left = 184.0
 offset_top = 202.0
 offset_right = 334.0
 offset_bottom = 352.0
 uid = 10
 
-[node name="ItemList" type="Button" parent="."]
-layout_mode = 0
+[node name="Options" type="Control" parent="."]
+anchors_preset = 0
 anchor_left = 0.75
+anchor_top = 0.589372
 anchor_right = 1.0
-anchor_bottom = 0.425121
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("5_07ui0")
-theme_override_styles/hover = ExtResource("5_5jswh")
-theme_override_styles/pressed = ExtResource("5_5jswh")
-theme_override_styles/disabled = ExtResource("5_5jswh")
-theme_override_styles/focus = ExtResource("5_5jswh")
+anchor_bottom = 0.995169
 
-[node name="RadarChartStats" parent="ItemList" instance=ExtResource("8")]
-layout_mode = 1
-anchor_left = 0.0892857
-anchor_top = 0.681818
-anchor_right = 0.263393
-anchor_bottom = 0.914773
-
-[node name="texturePlayer" type="TextureRect" parent="ItemList"]
-layout_mode = 0
-anchor_left = 0.0290179
-anchor_right = 0.314732
-anchor_bottom = 0.630682
-texture = ExtResource("11")
-expand_mode = 1
-stretch_mode = 6
-
-[node name="Popular" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_top = 0.0227273
-anchor_right = 0.34375
-anchor_bottom = 0.113153
-offset_left = -4.86374e-05
-offset_right = -4.57764e-05
-theme_override_colors/font_color = Color(1, 0.682353, 0.152941, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "##########"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Overall" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.125
-anchor_top = 0.0227273
-anchor_right = 0.225
-anchor_bottom = 0.112669
-offset_left = -5.34058e-05
-offset_right = -5.34058e-05
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 20
-text = "90"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Transfer" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.0178571
-anchor_top = 0.446022
-anchor_right = 0.317857
-anchor_bottom = 0.504532
-offset_left = 2.47955e-05
-offset_right = 3.05176e-05
-offset_bottom = 1.87257
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "10"
-horizontal_alignment = 1
-
-[node name="Wage" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.0178571
-anchor_top = 0.519886
-anchor_right = 0.317857
-anchor_bottom = 0.578396
-offset_left = 2.47955e-05
-offset_right = 3.05176e-05
-offset_bottom = 1.87256
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "10"
-horizontal_alignment = 1
-
-[node name="namePlayer" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.0227273
-anchor_right = 0.864286
-anchor_bottom = 0.0812379
-offset_bottom = 1.87235
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Name"
-
-[node name="nameTeam" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.514286
-anchor_top = 0.0865571
-anchor_right = 1.03929
-anchor_bottom = 0.145068
-offset_bottom = 1.87235
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-
-[node name="nameTeam2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.0865571
-anchor_right = 0.864286
-anchor_bottom = 0.145068
-offset_bottom = 4.87235
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Team"
-
-[node name="playerPosition2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.164242
-anchor_right = 0.864286
-anchor_bottom = 0.279593
-offset_left = -6.10352e-05
-offset_right = -6.10352e-05
-offset_bottom = 3.31928
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Form
-"
-
-[node name="playerStatGames2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.227515
-anchor_right = 0.864286
-anchor_bottom = 0.331238
-offset_left = -6.10352e-05
-offset_right = -6.10352e-05
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Game"
-
-[node name="playerStatGoals2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.291345
-anchor_right = 0.864286
-anchor_bottom = 0.404074
-offset_left = -6.10352e-05
-offset_right = -6.10352e-05
-offset_bottom = 3.31929
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Goals
-"
-
-[node name="playerStatAssits2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.355174
-anchor_right = 0.864286
-anchor_bottom = 0.40764
-offset_left = -6.10352e-05
-offset_right = -6.10352e-05
-offset_bottom = 1.53168
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Assits"
-
-[node name="playerPosition" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.164773
-anchor_right = 1.06786
-anchor_bottom = 0.288845
-offset_bottom = 3.31928
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="playerStatGames" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.228046
-anchor_right = 1.04286
-anchor_bottom = 0.340775
-offset_bottom = 3.31929
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="playerStatGoals" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.291876
-anchor_right = 1.04286
-anchor_bottom = 0.404605
-offset_bottom = 3.31929
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="playerStatAssits" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.355705
-anchor_right = 1.04286
-anchor_bottom = 0.468435
-offset_bottom = 3.31894
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="Passes" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.164773
-anchor_right = 1.13214
-anchor_bottom = 0.268496
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Shots"
-
-[node name="Moves" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.228046
-anchor_right = 1.13214
-anchor_bottom = 0.331769
-offset_left = 3.05176e-05
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Passes"
-
-[node name="OwnGoals" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.291876
-anchor_right = 1.13214
-anchor_bottom = 0.395599
-offset_left = 3.05176e-05
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Defend"
-
-[node name="Mistakes" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.355705
-anchor_right = 1.13214
-anchor_bottom = 0.408172
-offset_left = 3.05176e-05
-offset_bottom = 1.53168
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Saves"
-
-[node name="playerPasses" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.164773
-anchor_right = 1.06071
-anchor_bottom = 0.288845
-offset_bottom = 3.31928
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="playerMoves" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.227273
-anchor_right = 1.31071
-anchor_bottom = 0.340002
-offset_bottom = 3.31929
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="playerOwnGoals" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.291103
-anchor_right = 1.31071
-anchor_bottom = 0.403832
-offset_bottom = 3.31929
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="playerMistakes" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.354932
-anchor_right = 1.31071
-anchor_bottom = 0.467662
-offset_bottom = 3.31894
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0
-"
-
-[node name="playerOverall2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.443311
-anchor_right = 0.864286
-anchor_bottom = 0.558662
-offset_bottom = 3.31927
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Overall
-"
-
-[node name="playerFinishing2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.513079
-anchor_right = 0.864286
-anchor_bottom = 0.616803
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Finishing"
-
-[node name="playerShotPower2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.582846
-anchor_right = 0.864286
-anchor_bottom = 0.636533
-offset_top = 1.52588e-05
-offset_bottom = 1.53169
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "ShPower"
-
-[node name="playerAccurate2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.652614
-anchor_right = 0.864286
-anchor_bottom = 0.7063
-offset_left = -6.10352e-05
-offset_right = -6.10352e-05
-offset_bottom = 1.53204
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Accurate"
-
-[node name="playerSpeed2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.722381
-anchor_right = 0.864286
-anchor_bottom = 0.776067
-offset_left = -6.10352e-05
-offset_right = -6.10352e-05
-offset_bottom = 1.53204
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Speed"
-
-[node name="playerControll2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.792149
-anchor_right = 0.864286
-anchor_bottom = 0.845836
-offset_bottom = 1.53168
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Ball Ctr"
-
-[node name="playerStamina2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.861916
-anchor_right = 0.864286
-anchor_bottom = 0.915602
-offset_left = -6.10352e-05
-offset_right = -6.10352e-05
-offset_bottom = 16.9844
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Stamina"
-
-[node name="playerEnergy2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.339286
-anchor_top = 0.931683
-anchor_right = 0.864286
-anchor_bottom = 1.1087
-offset_left = -6.10352e-05
-offset_right = -6.10352e-05
-offset_bottom = 5.10583
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Energy
-
-"
-
-[node name="playerOverall" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.446023
-anchor_right = 1.04287
-anchor_bottom = 0.549746
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerFinishing" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.515791
-anchor_right = 1.04286
-anchor_bottom = 0.619515
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerShotPower" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.585558
-anchor_right = 1.04286
-anchor_bottom = 0.639245
-offset_top = 1.52588e-05
-offset_bottom = 18.0398
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerAccurate" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.655326
-anchor_right = 1.04286
-anchor_bottom = 0.709012
-offset_bottom = 1.53204
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerSpeed" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.725093
-anchor_right = 1.04286
-anchor_bottom = 0.778779
-offset_bottom = 1.53204
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerControll" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.794861
-anchor_right = 1.04286
-anchor_bottom = 0.848548
-offset_bottom = 1.53168
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerStamina" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.864628
-anchor_right = 1.04286
-anchor_bottom = 0.918314
-offset_bottom = 16.9844
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerEnergy" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.517857
-anchor_top = 0.934395
-anchor_right = 1.04286
-anchor_bottom = 1.09397
-offset_bottom = -3.05176e-05
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerPotential2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.443182
-anchor_right = 1.13214
-anchor_bottom = 0.620199
-offset_left = -3.05176e-05
-offset_right = -6.10352e-05
-offset_bottom = 5.1062
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Potential
-
-"
-
-[node name="playerPower2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.51295
-anchor_right = 1.13214
-anchor_bottom = 0.566636
-offset_left = -3.05176e-05
-offset_right = -6.10352e-05
-offset_bottom = 1.53206
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Power"
-
-[node name="playerBody2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.582717
-anchor_right = 1.13214
-anchor_bottom = 0.636404
-offset_left = -3.05176e-05
-offset_right = -6.10352e-05
-offset_bottom = 1.53168
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Body"
-
-[node name="playerInterception2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.652485
-anchor_right = 1.13214
-anchor_bottom = 0.706171
-offset_left = -3.05176e-05
-offset_top = -1.52588e-05
-offset_right = -6.10352e-05
-offset_bottom = 1.53201
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Intercep"
-
-[node name="playerDefend2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.722252
-anchor_right = 1.13214
-anchor_bottom = 0.775938
-offset_left = -3.05176e-05
-offset_right = -6.10352e-05
-offset_bottom = 1.53204
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Defend"
-
-[node name="playerReflexes2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.79202
-anchor_right = 1.13214
-anchor_bottom = 0.845707
-offset_left = -3.05176e-05
-offset_right = -6.10352e-05
-offset_bottom = 1.53165
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Reflexes"
-
-[node name="playerPenSave2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.861787
-anchor_right = 1.13213
-anchor_bottom = 1.0388
-offset_left = -3.05176e-05
-offset_bottom = 5.10587
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "Save
-
-"
-
-[node name="playerInjuryRate2" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.607143
-anchor_top = 0.931555
-anchor_right = 1.13214
-anchor_bottom = 1.10857
-offset_left = -3.05176e-05
-offset_right = -6.10352e-05
-offset_bottom = 5.10583
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "InjuryR
-
-"
-
-[node name="playerPotential" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.446023
-anchor_right = 1.31071
-anchor_bottom = 0.605598
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerPower" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.515791
-anchor_right = 1.31071
-anchor_bottom = 0.569477
-offset_bottom = 1.53206
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerBody" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.585558
-anchor_right = 1.31071
-anchor_bottom = 0.639245
-offset_bottom = 1.53168
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerInterception" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.655326
-anchor_right = 1.31071
-anchor_bottom = 0.709012
-offset_top = -1.52588e-05
-offset_bottom = 1.53201
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerDefend" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.725093
-anchor_right = 1.31071
-anchor_bottom = 0.778779
-offset_bottom = 1.53204
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerReflexes" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.794861
-anchor_right = 1.31071
-anchor_bottom = 0.848548
-offset_bottom = 1.53165
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerPenSave" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.864628
-anchor_right = 1.3107
-anchor_bottom = 1.0242
-offset_bottom = -3.05176e-05
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="playerInjuryRate" type="Label" parent="ItemList" groups=["labels"]]
-layout_mode = 0
-anchor_left = 0.785714
-anchor_top = 0.934396
-anchor_right = 1.31071
-anchor_bottom = 1.09397
-offset_bottom = -3.05176e-05
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 18
-text = "0"
-
-[node name="Finance" type="Button" parent="."]
-layout_mode = 0
-anchor_left = 0.75
-anchor_top = 0.502415
-anchor_right = 1.0
-anchor_bottom = 0.603865
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = ExtResource("5_07ui0")
-theme_override_styles/hover = ExtResource("5_5jswh")
-theme_override_styles/pressed = ExtResource("5_5jswh")
-theme_override_styles/disabled = ExtResource("5_5jswh")
-theme_override_styles/focus = ExtResource("5_5jswh")
-script = ExtResource("15")
-
-[node name="texturePlayer" type="TextureRect" parent="Finance"]
-layout_mode = 0
-offset_right = 192.0
-offset_bottom = 84.0
-texture = ExtResource("10")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="TransferAll" type="Label" parent="Finance" groups=["labels"]]
+[node name="Finance" type="Button" parent="Options"]
+visible = false
 layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -96.0
-offset_right = 96.0
-offset_bottom = 42.0
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 25
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = -224.0
+offset_right = 224.0
+offset_bottom = 104.0
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = ExtResource("13")
+theme_override_styles/hover = ExtResource("14")
+theme_override_styles/pressed = ExtResource("14")
+theme_override_styles/disabled = ExtResource("13")
+theme_override_styles/focus = ExtResource("14")
+icon = ExtResource("24")
+expand_icon = true
+script = ExtResource("15")
 
-[node name="WageAll" type="Label" parent="Finance" groups=["labels"]]
+[node name="TransferAll" type="Label" parent="Options/Finance" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_right = 144.0
+offset_bottom = 64.0
+theme_override_fonts/font = ExtResource("5")
+text = "0"
+
+[node name="WageAll" type="Label" parent="Options/Finance" groups=["labels"]]
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -96.0
-offset_top = -42.0
-offset_right = 96.0
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 25
+offset_left = -48.0
+offset_top = -64.0
+offset_right = 144.0
+theme_override_fonts/font = ExtResource("5")
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Options" type="Control" parent="."]
-anchors_preset = 0
-anchor_left = 0.75
-anchor_top = 0.608696
-anchor_right = 1.0
-anchor_bottom = 0.961353
-
-[node name="OptionButtonSetFormation" type="OptionButton" parent="Options"]
+[node name="OptionSetFormation" type="Button" parent="Options"]
 custom_minimum_size = Vector2(320, 80)
 layout_mode = 0
-anchor_top = 0.219178
-anchor_right = 1.0
-anchor_bottom = 0.493151
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -224.0
+offset_right = 224.0
+offset_bottom = 105.0
+mouse_filter = 1
 theme = ExtResource("4")
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = ExtResource("5_5jswh")
-theme_override_styles/normal = ExtResource("5_07ui0")
-theme_override_styles/hover = ExtResource("5_5jswh")
-theme_override_styles/pressed = ExtResource("5_5jswh")
-theme_override_styles/disabled = ExtResource("5_5jswh")
-alignment = 1
+theme_override_fonts/font = ExtResource("27")
+theme_override_styles/normal = ExtResource("13")
+theme_override_styles/hover = ExtResource("14")
+theme_override_styles/pressed = ExtResource("14")
+theme_override_styles/disabled = ExtResource("13")
+theme_override_styles/focus = ExtResource("14")
+text = "3-1-2"
+icon = ExtResource("25")
 expand_icon = true
-item_count = 5
-selected = 0
-popup/item_0/text = "3-1-2"
-popup/item_0/id = 0
-popup/item_1/text = "3-2-1"
-popup/item_1/id = 1
-popup/item_2/text = "2-2-2"
-popup/item_2/id = 2
-popup/item_3/text = "1-3-2"
-popup/item_3/id = 3
-popup/item_4/text = "0-3-3"
-popup/item_4/id = 4
 
-[node name="OptionButtonSetTatical" type="OptionButton" parent="Options"]
+[node name="OptionV" type="Button" parent="Options"]
 custom_minimum_size = Vector2(320, 80)
 layout_mode = 0
-anchor_top = 0.712329
-anchor_right = 1.0
-anchor_bottom = 0.986301
-theme = ExtResource("4")
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/focus = ExtResource("5_5jswh")
-theme_override_styles/normal = ExtResource("5_07ui0")
-theme_override_styles/hover = ExtResource("5_5jswh")
-theme_override_styles/pressed = ExtResource("5_5jswh")
-theme_override_styles/disabled = ExtResource("5_5jswh")
-alignment = 1
-expand_icon = true
-item_count = 5
-selected = 0
-popup/item_0/text = "Attack"
-popup/item_0/id = 0
-popup/item_1/text = "Blance"
-popup/item_1/id = 1
-popup/item_2/text = "Defend"
-popup/item_2/id = 2
-popup/item_3/text = "Mid"
-popup/item_3/id = 3
-popup/item_4/text = "HaftSpace"
-popup/item_4/id = 4
-
-[node name="LabelFinance" type="Label" parent="."]
-layout_mode = 0
-anchor_left = 0.75
-anchor_top = 0.425121
-anchor_right = 1.0
-anchor_bottom = 0.502415
-offset_bottom = -3.05176e-05
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 30
-text = "Finance"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelFormation" type="Label" parent="."]
-layout_mode = 0
-anchor_left = 0.75
-anchor_top = 0.608696
-anchor_right = 1.0
-anchor_bottom = 0.68599
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 30
-text = "Formation"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelTatical" type="Label" parent="."]
-layout_mode = 0
-anchor_left = 0.75
-anchor_top = 0.782609
-anchor_right = 1.0
-anchor_bottom = 0.859903
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 30
-text = "Tatical"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Stats" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 136.0
-offset_top = 218.0
-offset_right = 272.0
-offset_bottom = 338.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 1.00412)
-theme_override_styles/panel = ExtResource("10_7qpu2")
+offset_left = -224.0
+offset_top = -63.0
+offset_right = 224.0
+offset_bottom = 53.0
+mouse_filter = 1
+theme = ExtResource("4")
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = ExtResource("13")
+theme_override_styles/hover = ExtResource("13")
+theme_override_styles/pressed = ExtResource("13")
+theme_override_styles/disabled = ExtResource("13")
+theme_override_styles/focus = ExtResource("13")
+expand_icon = true
+
+[node name="label" type="Label" parent="Options/OptionV"]
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -32.0
+offset_right = 128.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("5")
+text = "Attack"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnV" type="HSlider" parent="Options/OptionV"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -13.0
+offset_right = -32.0
+offset_bottom = 19.0
+theme_override_icons/grabber = SubResource("15")
+theme_override_icons/grabber_highlight = SubResource("15")
+theme_override_icons/grabber_disabled = SubResource("15")
+theme_override_icons/tick = SubResource("15")
+theme_override_styles/slider = SubResource("16")
+theme_override_styles/grabber_area = SubResource("17")
+theme_override_styles/grabber_area_highlight = SubResource("17")
+value = 50.0
+
+[node name="OptionH" type="Button" parent="Options"]
+custom_minimum_size = Vector2(320, 80)
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -224.0
+offset_top = -115.0
+offset_right = 224.0
+offset_bottom = 6.10352e-05
+mouse_filter = 1
+theme = ExtResource("4")
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = ExtResource("13")
+theme_override_styles/hover = ExtResource("13")
+theme_override_styles/pressed = ExtResource("13")
+theme_override_styles/disabled = ExtResource("13")
+theme_override_styles/focus = ExtResource("13")
+expand_icon = true
+
+[node name="label" type="Label" parent="Options/OptionH"]
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -32.0
+offset_right = 128.0
+offset_bottom = 32.0
+theme_override_fonts/font = ExtResource("5")
+text = "Width"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BtnH" type="HSlider" parent="Options/OptionH"]
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -312.0
+offset_top = -16.5
+offset_right = -32.0
+offset_bottom = 15.5
+theme_override_icons/grabber = SubResource("15")
+theme_override_icons/grabber_highlight = SubResource("15")
+theme_override_icons/grabber_disabled = SubResource("15")
+theme_override_icons/tick = SubResource("15")
+theme_override_styles/slider = SubResource("16")
+theme_override_styles/grabber_area = SubResource("17")
+theme_override_styles/grabber_area_highlight = SubResource("17")
+value = 50.0
+
+[node name="Stats" type="Panel" parent="."]
+layout_mode = 0
+anchor_left = 0.75
+anchor_right = 1.0
+anchor_bottom = 0.183575
+theme_override_styles/panel = ExtResource("13")
+
+[node name="BtnTeamIcon" type="Button" parent="Stats"]
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -52.0
+offset_right = 128.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = ExtResource("20")
+theme_override_styles/hover = ExtResource("9")
+theme_override_styles/pressed = ExtResource("9")
+theme_override_styles/disabled = ExtResource("20")
+theme_override_styles/focus = ExtResource("9")
+icon = ExtResource("10")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Label" type="Label" parent="Stats"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 8.0
-offset_right = 62.0
-offset_bottom = 33.0
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 22
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -56.0
+offset_right = -18.0
+offset_bottom = -25.0
+theme_override_fonts/font = ExtResource("5")
 text = "ATK"
 
 [node name="Label2" type="Label" parent="Stats"]
 layout_mode = 0
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 16.0
-offset_top = -12.0
-offset_right = 62.0
-offset_bottom = 13.0
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 22
+offset_left = -64.0
+offset_top = -16.0
+offset_right = -18.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("5")
 text = "MID"
 
 [node name="Label3" type="Label" parent="Stats"]
 layout_mode = 0
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -32.0
-offset_right = 62.0
-offset_bottom = -7.0
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 22
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = 24.0
+offset_right = -18.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("5")
 text = "DEF"
 
 [node name="ATK" type="Label" parent="Stats"]
 layout_mode = 0
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -56.0
-offset_top = 8.0
-offset_right = -10.0
-offset_bottom = 33.0
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 22
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -56.0
+offset_right = 70.0
+offset_bottom = -25.0
+theme_override_fonts/font = ExtResource("5")
 text = "0"
 
 [node name="MID" type="Label" parent="Stats"]
 layout_mode = 0
-anchor_left = 1.0
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -56.0
-offset_top = -12.0
-offset_right = -10.0
-offset_bottom = 13.0
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 22
+offset_left = 24.0
+offset_top = -16.0
+offset_right = 70.0
+offset_bottom = 15.0
+theme_override_fonts/font = ExtResource("5")
 text = "0"
 
 [node name="DEF" type="Label" parent="Stats"]
 layout_mode = 0
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -56.0
-offset_top = -32.0
-offset_right = -10.0
-offset_bottom = -7.0
-theme_override_fonts/font = ExtResource("5_g4oxn")
-theme_override_font_sizes/font_size = 22
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 70.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("5")
 text = "0"
-
-[node name="PanelPlayerData" parent="." instance=ExtResource("3")]
-visible = false
-layout_mode = 1
 
 [node name="Disable" type="Panel" parent="."]
 visible = false
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_styles/panel = ExtResource("15_ghxig")
+theme_override_styles/panel = SubResource("9")
 
-[node name="ButtonTeamSelect" type="Button" parent="."]
+[node name="PlayerBaseInfo" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 164.0
-offset_right = 128.0
-offset_bottom = 260.0
-theme_override_styles/normal = ExtResource("11_3x73h")
-theme_override_styles/hover = ExtResource("12_x4jim")
-theme_override_styles/pressed = ExtResource("12_x4jim")
-theme_override_styles/disabled = ExtResource("12_x4jim")
-theme_override_styles/focus = ExtResource("12_x4jim")
-icon = ExtResource("18")
-icon_alignment = 1
-expand_icon = true
-script = ExtResource("12")
+anchor_left = 0.75
+anchor_top = 0.183575
+anchor_right = 1.0
+anchor_bottom = 0.586957
+theme_override_styles/panel = ExtResource("13")
 
-[node name="Account" parent="." instance=ExtResource("19")]
+[node name="Panel" type="Panel" parent="PlayerBaseInfo"]
+layout_mode = 0
+anchor_right = 0.464286
+anchor_bottom = 0.999999
+theme_override_styles/panel = SubResource("12")
+
+[node name="Texture2D" type="TextureRect" parent="PlayerBaseInfo/Panel"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("11")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Popular" type="TextureProgressBar" parent="PlayerBaseInfo/Panel"]
+custom_minimum_size = Vector2(100, 32)
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -56.0
+offset_top = 8.0
+offset_right = 56.0
+offset_bottom = 40.0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("19")
+
+[node name="Overall" type="Label" parent="PlayerBaseInfo/Panel"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("6")
+text = "90"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="PlayerBaseInfo/Panel"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 88.0
+offset_bottom = -16.0
+theme_override_fonts/font = ExtResource("6")
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pos" type="Label" parent="PlayerBaseInfo/Panel"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -103.999
+offset_right = 32.0
+offset_bottom = -66.9995
+theme_override_fonts/font = ExtResource("6")
+text = "CM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelStats" type="Panel" parent="PlayerBaseInfo"]
+layout_mode = 0
+anchor_left = 0.464286
+anchor_right = 1.0
+anchor_bottom = 0.497006
+theme_override_styles/panel = SubResource("12")
+
+[node name="Overall" type="Label" parent="PlayerBaseInfo/PanelStats" groups=["labels"]]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_right = 72.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("6")
+text = "Player Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelGames" type="VBoxContainer" parent="PlayerBaseInfo/PanelStats"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = -170.0
+offset_bottom = -24.0
+
+[node name="Label0" type="Label" parent="PlayerBaseInfo/PanelStats/LabelGames"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "Point"
+
+[node name="Label1" type="Label" parent="PlayerBaseInfo/PanelStats/LabelGames"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "Games"
+
+[node name="Label2" type="Label" parent="PlayerBaseInfo/PanelStats/LabelGames"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "Goals"
+
+[node name="Label3" type="Label" parent="PlayerBaseInfo/PanelStats/LabelGames"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "Assits"
+
+[node name="Games" type="VBoxContainer" parent="PlayerBaseInfo/PanelStats"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 72.0
+offset_top = 48.0
+offset_right = -136.0
+offset_bottom = -24.0
+
+[node name="Label0" type="Label" parent="PlayerBaseInfo/PanelStats/Games"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "0"
+
+[node name="Label1" type="Label" parent="PlayerBaseInfo/PanelStats/Games"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "0"
+
+[node name="Label2" type="Label" parent="PlayerBaseInfo/PanelStats/Games"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "0"
+
+[node name="Label3" type="Label" parent="PlayerBaseInfo/PanelStats/Games"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "0"
+
+[node name="LabelStats" type="VBoxContainer" parent="PlayerBaseInfo/PanelStats"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 120.0
+offset_top = 48.0
+offset_right = -44.0
+offset_bottom = -24.0
+
+[node name="Label4" type="Label" parent="PlayerBaseInfo/PanelStats/LabelStats"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "Shots"
+
+[node name="Label5" type="Label" parent="PlayerBaseInfo/PanelStats/LabelStats"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "Passes"
+
+[node name="Label7" type="Label" parent="PlayerBaseInfo/PanelStats/LabelStats"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "Defends"
+
+[node name="Label9" type="Label" parent="PlayerBaseInfo/PanelStats/LabelStats"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "Saves"
+
+[node name="Stats" type="VBoxContainer" parent="PlayerBaseInfo/PanelStats"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 200.0
+offset_top = 48.0
+offset_right = -8.0
+offset_bottom = -24.0
+
+[node name="Label4" type="Label" parent="PlayerBaseInfo/PanelStats/Stats"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "0"
+
+[node name="Label5" type="Label" parent="PlayerBaseInfo/PanelStats/Stats"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "0"
+
+[node name="Label7" type="Label" parent="PlayerBaseInfo/PanelStats/Stats"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "0"
+
+[node name="Label9" type="Label" parent="PlayerBaseInfo/PanelStats/Stats"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+theme_override_fonts/font = SubResource("13")
+text = "0"
+
+[node name="RadarChartStats" parent="PlayerBaseInfo" instance=ExtResource("8")]
+anchors_preset = 0
+anchor_left = 0.625
+anchor_top = 0.613636
+anchor_right = 0.851339
+anchor_bottom = 0.916477
+offset_right = -23.4
+offset_bottom = -24.6
+scale = Vector2(1.3, 1.3)
+
+[node name="PlayerInfo" type="Button" parent="PlayerBaseInfo"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/normal = ExtResource("23")
+theme_override_styles/hover = ExtResource("26")
+theme_override_styles/pressed = ExtResource("26")
+theme_override_styles/disabled = ExtResource("23")
+theme_override_styles/focus = ExtResource("26")
+
+[node name="InsOptionsBtn" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+anchor_left = 0.75
+anchor_top = 0.183575
+anchor_right = 1.0
+anchor_bottom = 0.997585
+theme_override_styles/panel = SubResource("14")
+script = ExtResource("29")
+
+[node name="Label" type="Button" parent="InsOptionsBtn"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 14.0
+offset_right = 208.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = ExtResource("13")
+theme_override_styles/hover = ExtResource("14")
+theme_override_styles/pressed = ExtResource("14")
+theme_override_styles/disabled = ExtResource("13")
+theme_override_styles/focus = ExtResource("14")
+text = "Name"
+
+[node name="ButtonClose" parent="InsOptionsBtn/Label" instance=ExtResource("33")]
+layout_mode = 0
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 0.0
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -32.0
+offset_right = 72.0
+offset_bottom = 32.0
+icon_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InsOptionsBtn"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 108.0
+offset_right = -8.0
+offset_bottom = -19.0002
+
+[node name="MainBtn" type="VBoxContainer" parent="InsOptionsBtn/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="BtnOptionsIns" parent="InsOptionsBtn/ScrollContainer/MainBtn" instance=ExtResource("31")]
+layout_mode = 2
+
+[node name="PanelPlayerData" parent="." instance=ExtResource("3")]
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="ItemList" to="GroupSlots" method="_on_ItemList_pressed"]
-[connection signal="item_selected" from="Options/OptionButtonSetFormation" to="GroupSlots" method="_on_OptionButtonSetFormation_item_selected"]
-[connection signal="pressed" from="ButtonTeamSelect" to="GroupSlots" method="_on_ButtonTeamSelect_pressed"]
+[node name="PlayerCard" parent="." instance=ExtResource("17")]
+visible = false
+layout_mode = 1
 
-[editable path="BGSetup"]
+[node name="BtnHome" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = ExtResource("30")
+theme_override_styles/hover = ExtResource("32")
+theme_override_styles/pressed = ExtResource("32")
+theme_override_styles/disabled = ExtResource("30")
+theme_override_styles/focus = ExtResource("32")
+icon = ExtResource("18")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BtnClose" type="Button" parent="."]
+visible = false
+layout_mode = 0
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("5")
+theme_override_styles/normal = ExtResource("30")
+theme_override_styles/hover = ExtResource("32")
+theme_override_styles/pressed = ExtResource("32")
+theme_override_styles/disabled = ExtResource("30")
+theme_override_styles/focus = ExtResource("32")
+icon = ExtResource("12")
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="Options/OptionSetFormation" to="." method="_on_OptionSetFormation_pressed"]
+[connection signal="drag_ended" from="Options/OptionV/BtnV" to="." method="_on_BtnV_drag_ended"]
+[connection signal="drag_ended" from="Options/OptionH/BtnH" to="." method="_on_BtnH_drag_ended"]
+[connection signal="pressed" from="PlayerBaseInfo/PlayerInfo" to="." method="_on_PlayerInfo_pressed"]
+[connection signal="pressed" from="InsOptionsBtn/Label" to="InsOptionsBtn" method="_on_ButtonClose_pressed"]
+[connection signal="pressed" from="InsOptionsBtn/Label/ButtonClose" to="InsOptionsBtn" method="_on_ButtonClose_pressed"]
+[connection signal="pressed" from="BtnHome" to="." method="_on_BtnHome_pressed"]
+[connection signal="pressed" from="BtnClose" to="." method="_on_BtnClose_pressed"]

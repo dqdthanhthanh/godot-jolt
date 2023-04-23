@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pce1iwo4iew2"
-path.etc2="res://.godot/imported/iconExit.png-cb1337b5a9711de9bb8f9eb8836f3f93.etc2.ctex"
+uid="uid://n3gxevec6nba"
+path="res://.godot/imported/iconExit.png-cb1337b5a9711de9bb8f9eb8836f3f93.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets2D/UI/iconExit.png"
-dest_files=["res://.godot/imported/iconExit.png-cb1337b5a9711de9bb8f9eb8836f3f93.etc2.ctex"]
+dest_files=["res://.godot/imported/iconExit.png-cb1337b5a9711de9bb8f9eb8836f3f93.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

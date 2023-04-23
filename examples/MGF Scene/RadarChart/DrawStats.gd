@@ -2,10 +2,10 @@
 extends Node2D
 
 
-@onready var data = get_parent().get_parent()
-@onready var base = get_parent().get_node("Base")
+@onready var data: = get_parent().get_parent()
+@onready var base: = get_parent().get_node("Base")
 
-func _ready():
+func _ready() -> void:
 	queue_redraw()
 
 func _draw():
@@ -17,8 +17,8 @@ func _draw():
 	var stats = data.stats
 	
 	for i in par:
-		get_child(i).position = lerp(Vector2.ZERO,base.get_child(i).position,stats[i]/108.0)
-	get_child(par).position = lerp(Vector2.ZERO,base.get_child(par).position,stats[par]/108.0)
+		get_child(i).position = lerp(Vector2.ZERO,base.get_child(i).position,remap(stats[i],30,100,0,100)/108.0)
+	get_child(par).position = lerp(Vector2.ZERO,base.get_child(par).position,remap(stats[par],30,100,0,100)/108.0)
 	
 	for i in get_child_count():
 		poly.append(get_child(i).position)
@@ -32,4 +32,6 @@ func _draw():
 	draw_polyline(poly,color,thick,true)
 	
 #	for i in 7:
-#		draw_circle(get_child(i).position,15.0,Color.RED)
+#		draw_circle(get_child(i).position,15.0,Color.red)
+func _exit_tree():
+	queue_free()

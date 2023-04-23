@@ -1,113 +1,252 @@
-[gd_scene load_steps=22 format=3 uid="uid://cn77jnm7okavr"]
+[gd_scene load_steps=30 format=3 uid="uid://cbpa46mlfvxt1"]
 
-[ext_resource type="PackedScene" uid="uid://bf7eksdvckbk4" path="res://Assets3D/Stadium/stadium.glb" id="1"]
-[ext_resource type="PackedScene" uid="uid://dacewxp7wga7r" path="res://MGF Scene/AssetsScene3D/Ball.tscn" id="2"]
-[ext_resource type="AudioStream" uid="uid://da5im0d6l88u6" path="res://Sounds/SoundFX/Sound_ShootBall1.mp3" id="3"]
-[ext_resource type="Script" path="res://scripts/WorldLight.gd" id="4_mcr0c"]
-[ext_resource type="AudioStream" uid="uid://bsltb7mtpuw6p" path="res://Sounds/SoundFX/Crow1.mp3" id="10"]
-[ext_resource type="AudioStream" uid="uid://v7ucaxllpliy" path="res://Sounds/SoundFX/Sound_PlayerMoving.mp3" id="12"]
-[ext_resource type="PackedScene" uid="uid://hbixbcpcmfr7" path="res://MGF Scene/AITest/AITest.tscn" id="15"]
-[ext_resource type="PackedScene" uid="uid://br37m8eey4be8" path="res://MGF Scene/Main Game/MainGameUI.tscn" id="17"]
-[ext_resource type="PackedScene" uid="uid://2x25o04wj462" path="res://MGF Scene/AssetsScene3D/Ground.tscn" id="21"]
+[ext_resource type="PackedScene" uid="uid://duggify7mxkx3" path="res://Assets3D/Stadium/stadium.glb" id="1"]
+[ext_resource type="PackedScene" uid="uid://b51p6gbqfoffq" path="res://MGF Scene/AssetsScene3D/Ball.tscn" id="2"]
+[ext_resource type="AudioStream" uid="uid://djw2reeybr5tu" path="res://Sounds/SoundFX/Sound_ShootBall1.mp3" id="3"]
+[ext_resource type="Script" path="res://MGF Scene/Main Game/Stadium.gd" id="4"]
+[ext_resource type="Script" path="res://MGF Scene/Main Game/Crowd.gd" id="5"]
+[ext_resource type="AudioStream" uid="uid://qws6t65s1bkn" path="res://Sounds/SoundFX/8d82b5_Soccer_Whistle_Sound_Effect.mp3" id="6"]
+[ext_resource type="Script" path="res://MGF Scene/AssetsScene3D/Weather.gd" id="7"]
+[ext_resource type="AudioStream" uid="uid://d0xyqmipj4iwk" path="res://Sounds/SoundFX/Crow1.mp3" id="10"]
+[ext_resource type="AudioStream" uid="uid://tbovglga5obh" path="res://Sounds/SoundFX/Sound_PlayerMoving.mp3" id="12"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Flag3D.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AITest/AITest.tscn" id="15"]
+[ext_resource type="PackedScene" uid="uid://cgu3ji60tm3s6" path="res://MGF Scene/Main Game/MainGameUI.tscn" id="17"]
+[ext_resource type="PackedScene" uid="uid://cuqboi3brpduh" path="res://MGF Scene/AssetsScene3D/Ground.tscn" id="21"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Arrow.tscn" id="22"]
-[ext_resource type="PackedScene" uid="uid://bwhbwmyqudef3" path="res://MGF Scene/AssetsScene3D/Map.tscn" id="23"]
-[ext_resource type="PackedScene" uid="uid://b4ptqc4d4gle6" path="res://MGF Scene/AssetsScene3D/Goal.tscn" id="24"]
+[ext_resource type="PackedScene" uid="uid://dd6ejb48sfpfr" path="res://MGF Scene/AssetsScene3D/Map.tscn" id="23"]
+[ext_resource type="PackedScene" uid="uid://djh5epbvwr37f" path="res://MGF Scene/AssetsScene3D/Goal.tscn" id="24"]
 [ext_resource type="Script" path="res://MGF Scene/MainGame.gd" id="25"]
-[ext_resource type="Script" path="res://scripts/screen_shake.gd" id="27"]
-[ext_resource type="PackedScene" path="res://MGF Scene/ConfigController/SoundFx.tscn" id="33"]
+[ext_resource type="Script" path="res://MGF Scene/AssetsScene3D/screen_shake.gd" id="27"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Setup/SoundFx.tscn" id="33"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5p0yd"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m4xpm"]
 
-[sub_resource type="Sky" id="Sky_tvqb2"]
-sky_material = SubResource("ProceduralSkyMaterial_5p0yd")
+[sub_resource type="Sky" id="10"]
+sky_material = SubResource("ProceduralSkyMaterial_m4xpm")
+radiance_size = 0
 
-[sub_resource type="Environment" id="Environment_2r3q2"]
+[sub_resource type="Environment" id="11"]
 background_mode = 2
-sky = SubResource("Sky_tvqb2")
-reflected_light_source = 1
-tonemap_mode = 2
-ssr_enabled = true
+sky = SubResource("10")
 ssao_enabled = true
 ssil_enabled = true
 glow_enabled = true
+glow_bloom = 0.2
 adjustment_enabled = true
+adjustment_contrast = 1.3
+adjustment_saturation = 1.2
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_35phc"]
+[sub_resource type="StandardMaterial3D" id="13"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.117647)
+
+[sub_resource type="BoxMesh" id="16"]
+material = SubResource("13")
+size = Vector3(0.04, 0.4, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="15"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.392157)
+
+[sub_resource type="SphereMesh" id="14"]
+material = SubResource("15")
+radius = 0.05
+height = 0.1
+radial_segments = 8
+rings = 4
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wmyb1"]
 resource_local_to_scene = true
 friction = 0.2
 rough = true
 bounce = 0.2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_vwh0c"]
-size = Vector3(7.11118, 2, 0.1)
+[sub_resource type="BoxShape3D" id="31"]
+size = Vector3(36, 10, 0.5)
 
-[sub_resource type="BoxShape3D" id="4"]
-size = Vector3(7.07066, 0.4, 3)
+[sub_resource type="BoxShape3D" id="32"]
+size = Vector3(40, 2, 20)
 
 [node name="MainGame" type="Node3D"]
 script = ExtResource("25")
 
 [node name="UI" parent="." instance=ExtResource("17")]
+layer = 3
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timers" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="Timers"]
 one_shot = true
 
-[node name="TimerStop" type="Timer" parent="."]
+[node name="TimerStop" type="Timer" parent="Timers"]
 one_shot = true
 
-[node name="TimerNewTurn" type="Timer" parent="."]
+[node name="TimerNewTurn" type="Timer" parent="Timers"]
 one_shot = true
 
-[node name="TimerSub" type="Timer" parent="."]
+[node name="TimerStartGame" type="Timer" parent="Timers"]
 one_shot = true
 
-[node name="TimerStartGame" type="Timer" parent="."]
-one_shot = true
-
-[node name="TimerSaveReplay" type="Timer" parent="."]
+[node name="TimerSaveReplay" type="Timer" parent="Timers"]
 wait_time = 0.05
 autostart = true
 
-[node name="TimerPlayReplay" type="Timer" parent="."]
+[node name="TimerPlayReplay" type="Timer" parent="Timers"]
 wait_time = 0.05
 autostart = true
 
-[node name="AITimer" type="Timer" parent="."]
+[node name="AITimer" type="Timer" parent="Timers"]
 one_shot = true
+
+[node name="Sounds" type="Node" parent="."]
+
+[node name="SoundBackGround" parent="Sounds" instance=ExtResource("33")]
+stream = ExtResource("10")
+volume_db = -10.0
+autoplay = true
+bus = &"GameSFX"
+
+[node name="PlayerMovingSFX" parent="Sounds" instance=ExtResource("33")]
+stream = ExtResource("12")
+bus = &"GameSFX"
+
+[node name="PlayerShootSFX" parent="Sounds" instance=ExtResource("33")]
+stream = ExtResource("3")
+bus = &"GameSFX"
+
+[node name="SFXGameWhistle" parent="Sounds" instance=ExtResource("33")]
+stream = ExtResource("6")
+volume_db = 0.0
+bus = &"GameSFX"
+
+[node name="Stadium" type="Node3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+script = ExtResource("4")
+
+[node name="stadium" parent="Stadium" instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.055, 0.1)
+
+[node name="Flag3D" parent="Stadium/stadium" instance=ExtResource("13")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -2.84808, 0.00551916, -1.50496)
+
+[node name="Flag3D2" parent="Stadium/stadium" instance=ExtResource("13")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -2.848, 0.006, 1.32711)
+
+[node name="Flag3D3" parent="Stadium/stadium" instance=ExtResource("13")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 2.848, 0.006, -1.505)
+
+[node name="Flag3D4" parent="Stadium/stadium" instance=ExtResource("13")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 2.848, 0.006, 1.327)
+
+[node name="Crowds1" type="Node3D" parent="Stadium"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, -0.573577, 0, 0.573577, 0.819152, -3.04821, 0.13, -2.06668)
+script = ExtResource("5")
+
+[node name="Crowds2" type="Node3D" parent="Stadium"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, -0.573577, 0, 0.573577, 0.819152, 0.322081, 0.13, -2.06668)
+script = ExtResource("5")
+
+[node name="Crowds3" type="Node3D" parent="Stadium"]
+transform = Transform3D(-1, -8.66076e-08, -1.23689e-07, 0, 0.819152, -0.573577, 1.50996e-07, -0.573577, -0.819152, -0.855345, 0.13, 2.25146)
+script = ExtResource("5")
+row = 12
+
+[node name="Crowds4" type="Node3D" parent="Stadium"]
+transform = Transform3D(-1, -8.66076e-08, -1.23689e-07, 0, 0.819152, -0.573577, 1.50996e-07, -0.573577, -0.819152, 3.04475, 0.13, 2.25146)
+script = ExtResource("5")
+row = 12
+
+[node name="Crowds5" type="Node3D" parent="Stadium"]
+transform = Transform3D(-4.37114e-08, -0.573577, -0.819152, 0, 0.819152, -0.573577, 1, -2.50718e-08, -3.58063e-08, 3.8, 0.08, -1.40507)
+script = ExtResource("5")
+row = 7
+collum = 4
+
+[node name="Crowds6" type="Node3D" parent="Stadium"]
+transform = Transform3D(-4.37114e-08, -0.573577, -0.819152, 0, 0.819152, -0.573577, 1, -2.50718e-08, -3.58063e-08, 3.8, 0.08, 0.404368)
+script = ExtResource("5")
+row = 7
+collum = 4
+
+[node name="Crowds7" type="Node3D" parent="Stadium"]
+transform = Transform3D(-4.37114e-08, 0.573577, 0.819152, 0, 0.819152, -0.573577, -1, -2.50718e-08, -3.58063e-08, -3.8, 0.08, -0.23038)
+script = ExtResource("5")
+row = 7
+collum = 4
+
+[node name="Crowds8" type="Node3D" parent="Stadium"]
+transform = Transform3D(-4.37114e-08, 0.573577, 0.819152, 0, 0.819152, -0.573577, -1, -2.50718e-08, -3.58063e-08, -3.8, 0.08, 1.60833)
+script = ExtResource("5")
+row = 7
+collum = 4
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 20, -0.1)
 current = true
 fov = 50.0
 size = 3.6
 script = ExtResource("27")
 
-[node name="WorldLight" type="Node3D" parent="."]
-script = ExtResource("4_mcr0c")
+[node name="Weather" type="Node3D" parent="."]
+script = ExtResource("7")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="WorldLight"]
-environment = SubResource("Environment_2r3q2")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Weather"]
+environment = SubResource("11")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldLight"]
-transform = Transform3D(-0.855221, 0.397141, -0.332979, -0.15522, 0.416721, 0.895685, 0.494473, 0.817693, -0.294744, 0, 3.42781, 0.0541763)
-light_energy = 0.8
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Weather"]
+transform = Transform3D(-0.839509, 0.427147, -0.335812, -0.149932, 0.411934, 0.898794, 0.52225, 0.804895, -0.281779, 0, 10, 0)
+light_energy = 0.85
 shadow_enabled = true
-directional_shadow_blend_splits = true
+directional_shadow_mode = 0
 
-[node name="stadium" parent="." instance=ExtResource("1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, -0.1)
+[node name="Lights" type="Node3D" parent="Weather"]
+visible = false
+
+[node name="OmniLight2" type="OmniLight3D" parent="Weather/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 10, 2.08165e-12)
+light_energy = 10.0
+light_specular = 1.0
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="OmniLight3" type="OmniLight3D" parent="Weather/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 10, 2.08165e-12)
+light_energy = 10.0
+light_specular = 1.0
+shadow_enabled = true
+omni_range = 30.0
+
+[node name="RainCPUParticles" type="CPUParticles3D" parent="Weather"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+visible = false
+emitting = false
+lifetime = 0.5
+mesh = SubResource("16")
+emission_shape = 3
+emission_box_extents = Vector3(30, 5, 20)
+
+[node name="SnowCPUParticles" type="CPUParticles3D" parent="Weather"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 5, 2.08165e-12)
+emitting = false
+lifetime = 2.5
+mesh = SubResource("14")
+emission_shape = 3
+emission_box_extents = Vector3(50, 5, 30)
+gravity = Vector3(0, -1, 0)
 
 [node name="Map" parent="." instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015, 0, 0.006)
-collision_layer = 255
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.1, 0, 0)
 collision_mask = 255
 
 [node name="Ground" parent="." instance=ExtResource("21")]
-collision_layer = 255
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.000388756, 0)
 collision_mask = 255
 
 [node name="Ball" parent="." instance=ExtResource("2")]
-physics_material_override = SubResource("PhysicsMaterial_35phc")
+physics_material_override = SubResource("PhysicsMaterial_wmyb1")
 
 [node name="Arrow" parent="." instance=ExtResource("22")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
@@ -115,10 +254,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
 [node name="BallStart" type="Marker3D" parent="."]
 
 [node name="GoalA" parent="." instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82575, -0.05, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 14.1764, -0.2, 0)
 
 [node name="GoalB" parent="." instance=ExtResource("24")]
-transform = Transform3D(-1, 0, -3.89414e-07, 0, 1, 0, 3.89414e-07, 0, -1, -2.826, -0.05, 0)
+transform = Transform3D(-5, 0, -1.94707e-06, 0, 5, 0, 1.94707e-06, 0, -5, -14.112, -0.2, 0)
 
 [node name="PosGameSignal" type="Node3D" parent="."]
 
@@ -127,32 +266,15 @@ collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PosGameSignal/OutBall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.485)
-shape = SubResource("BoxShape3D_vwh0c")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.425)
+shape = SubResource("31")
 
 [node name="CollisionShape2" type="CollisionShape3D" parent="PosGameSignal/OutBall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.485)
-shape = SubResource("BoxShape3D_vwh0c")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.425)
+shape = SubResource("31")
 
 [node name="CollisionShape3" type="CollisionShape3D" parent="PosGameSignal/OutBall"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("4")
-
-[node name="SoundBackGround" parent="." instance=ExtResource("33")]
-stream = ExtResource("10")
-volume_db = -25.0
-
-[node name="PlayerMovingSFX" parent="." instance=ExtResource("33")]
-stream = ExtResource("12")
-volume_db = -5.0
-autoplay = false
-
-[node name="PlayerShootSFX" parent="." instance=ExtResource("33")]
-stream = ExtResource("3")
-volume_db = -5.0
-autoplay = false
-
-[node name="EffekseerEmitter" type="Node3D" parent="."]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.3, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("32")
 
 [node name="AITest" parent="." instance=ExtResource("15")]

@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://Assets3D/Shader/fly_shader.tres" type="Shader" id=2]
+
+[resource]
+shader = ExtResource( 2 )
+shader_param/speed = 2.0
+shader_param/frequency_y = 5.0
+shader_param/frequency_x = 2.5
+shader_param/frequency_z = 2.5
+shader_param/amplitude_y = 0.1
+shader_param/amplitude_x = 0.1
+shader_param/amplitude_z = 0.1
+shader_param/inclination = -0.04

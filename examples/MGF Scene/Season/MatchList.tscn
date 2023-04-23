@@ -1,0 +1,214 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://Assets2D/UI/IconMoveLeft.png" type="Texture2D" id=1]
+[ext_resource path="res://MGF Scene/Season/MatchInfo.tscn" type="PackedScene" id=2]
+[ext_resource path="res://MGF Scene/Setup/ButtonBase.tscn" type="PackedScene" id=3]
+[ext_resource path="res://MGF Scene/Season/MatchList.gd" type="Script" id=4]
+[ext_resource path="res://Assets2D/Theme/btnOp.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets2D/Theme/btnUICP.tres" type="StyleBox" id=6]
+[ext_resource path="res://Assets2D/UI/iconBall.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets2D/Fonts/UILarge.tres" type="FontFile" id=8]
+[ext_resource path="res://Assets2D/Fonts/UI.tres" type="FontFile" id=9]
+[ext_resource path="res://Assets2D/Theme/btnUIN.tres" type="StyleBox" id=10]
+[ext_resource path="res://Assets2D/Theme/btnUICN.tres" type="StyleBox" id=11]
+[ext_resource path="res://MGF Scene/Season/MatchsItem.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Assets2D/UI/IconMoveRight.png" type="Texture2D" id=13]
+[ext_resource path="res://Assets2D/Theme/btnUIBGNBlack.tres" type="StyleBox" id=14]
+[ext_resource path="res://Assets2D/UI/IconHome.png" type="Texture2D" id=15]
+[ext_resource path="res://Assets2D/Theme/btnRedCP.tres" type="StyleBox" id=16]
+[ext_resource path="res://Assets2D/Theme/btnRedCN.tres" type="StyleBox" id=17]
+[ext_resource path="res://Assets2D/UI/iconExit.png" type="Texture2D" id=18]
+[ext_resource path="res://Assets2D/Theme/btnUIBGO.tres" type="StyleBox" id=19]
+[ext_resource path="res://Assets2D/Theme/btnUIBGOBorder.tres" type="StyleBox" id=20]
+[ext_resource path="res://MGF Scene/Main Game/SeasonReward.tscn" type="PackedScene" id=21]
+
+[node name="MatchList" type="Panel"]
+process_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource( 14 )
+script = ExtResource( 4 )
+
+[node name="TabBtns" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -356.0
+offset_right = 384.0
+offset_bottom = 356.0
+theme_override_styles/panel = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabBtns"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -12.0
+theme_override_constants/separation = 20
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LabelBase" type="Label" parent="TabBtns/VBoxContainer"]
+offset_right = 736.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 0, 80 )
+theme_override_fonts/font = ExtResource( 8 )
+theme_override_styles/normal = ExtResource( 10 )
+text = "Round 1"
+align = 1
+valign = 1
+
+[node name="BtnSkipMatch" parent="TabBtns/VBoxContainer/LabelBase" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_minimum_size = Vector2( 0, 80 )
+theme_override_fonts/font = ExtResource( 8 )
+theme_override_styles/hover = ExtResource( 20 )
+theme_override_styles/pressed = ExtResource( 20 )
+theme_override_styles/focus = ExtResource( 20 )
+theme_override_styles/disabled = ExtResource( 19 )
+theme_override_styles/normal = ExtResource( 19 )
+text = ""
+icon_alignment = 0
+expand_icon = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabBtns/VBoxContainer"]
+offset_top = 100.0
+offset_right = 736.0
+offset_bottom = 172.0
+theme_override_constants/separation = 9
+
+[node name="Match" parent="TabBtns/VBoxContainer/VBoxContainer" instance=ExtResource( 12 )]
+offset_right = 736.0
+
+[node name="GoMatch" parent="TabBtns/VBoxContainer" instance=ExtResource( 3 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 192.0
+offset_right = 736.0
+offset_bottom = 272.0
+custom_minimum_size = Vector2( 0, 80 )
+theme_override_fonts/font = ExtResource( 8 )
+text = "Ready"
+icon = ExtResource( 7 )
+icon_alignment = 0
+expand_icon = true
+
+[node name="BtnExit" parent="TabBtns/VBoxContainer" instance=ExtResource( 3 )]
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 292.0
+offset_right = 736.0
+offset_bottom = 372.0
+custom_minimum_size = Vector2( 0, 80 )
+theme_override_fonts/font = ExtResource( 8 )
+text = "Exit"
+icon = ExtResource( 15 )
+icon_alignment = 0
+expand_icon = true
+
+[node name="NextLeft" parent="TabBtns/VBoxContainer" instance=ExtResource( 3 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1328.0
+offset_top = -62.5
+offset_right = -1202.0
+offset_bottom = 25.5
+custom_minimum_size = Vector2( 0, 80 )
+theme_override_fonts/font = ExtResource( 8 )
+text = "<"
+
+[node name="NextRight" parent="TabBtns/VBoxContainer" instance=ExtResource( 3 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -688.0
+offset_top = -62.5
+offset_right = -562.0
+offset_bottom = 25.5
+custom_minimum_size = Vector2( 0, 80 )
+theme_override_fonts/font = ExtResource( 8 )
+text = ">"
+
+[node name="BtnRoundLeft" type="Button" parent="TabBtns"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 24.0
+offset_top = -332.0
+offset_right = 87.0
+offset_bottom = -268.0
+theme_override_fonts/font = ExtResource( 9 )
+theme_override_styles/hover = ExtResource( 6 )
+theme_override_styles/pressed = ExtResource( 6 )
+theme_override_styles/focus = ExtResource( 6 )
+theme_override_styles/disabled = ExtResource( 11 )
+theme_override_styles/normal = ExtResource( 11 )
+icon = ExtResource( 1 )
+icon_alignment = 1
+expand_icon = true
+
+[node name="BtnRoundRight" type="Button" parent="TabBtns"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -332.0
+offset_right = -25.0
+offset_bottom = -268.0
+theme_override_fonts/font = ExtResource( 9 )
+theme_override_styles/hover = ExtResource( 6 )
+theme_override_styles/pressed = ExtResource( 6 )
+theme_override_styles/focus = ExtResource( 6 )
+theme_override_styles/disabled = ExtResource( 11 )
+theme_override_styles/normal = ExtResource( 11 )
+icon = ExtResource( 13 )
+icon_alignment = 1
+expand_icon = true
+
+[node name="MatchInfo" parent="." instance=ExtResource( 2 )]
+
+[node name="BtnClose" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 32.0
+offset_right = -32.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource( 9 )
+theme_override_styles/hover = ExtResource( 16 )
+theme_override_styles/pressed = ExtResource( 16 )
+theme_override_styles/focus = ExtResource( 17 )
+theme_override_styles/disabled = ExtResource( 17 )
+theme_override_styles/normal = ExtResource( 17 )
+icon = ExtResource( 18 )
+icon_alignment = 1
+expand_icon = true
+
+[node name="SeasonReward" parent="." instance=ExtResource( 21 )]
+
+[connection signal="pressed" from="TabBtns/VBoxContainer/LabelBase/BtnSkipMatch" to="." method="_on_BtnSkipMatch_pressed"]
+[connection signal="pressed" from="TabBtns/VBoxContainer/GoMatch" to="." method="_on_GoMatch_pressed"]
+[connection signal="pressed" from="TabBtns/VBoxContainer/BtnExit" to="." method="_on_BtnExit_pressed"]
+[connection signal="pressed" from="TabBtns/BtnRoundLeft" to="." method="_on_BtnRoundLeft_pressed"]
+[connection signal="pressed" from="TabBtns/BtnRoundRight" to="." method="_on_BtnRoundRight_pressed"]
+[connection signal="pressed" from="BtnClose" to="." method="_on_BtnClose_pressed"]

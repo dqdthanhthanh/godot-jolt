@@ -1,0 +1,91 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets2D/Theme/btnBlackOp.tres" type="StyleBox" id=1]
+[ext_resource path="res://MGF Scene/Formation/PlayerPerformance.gd" type="Script" id=2]
+[ext_resource path="res://Assets2D/Theme/btnRedCN.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets2D/Theme/btnUIBGNBlack.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets2D/Theme/btnRedCP.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets2D/Theme/btnUIN.tres" type="StyleBox" id=7]
+[ext_resource path="res://MGF Scene/Market/PlayerData.tscn" type="PackedScene" id=8]
+[ext_resource path="res://MGF Scene/Market/PlayerCard.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets2D/Fonts/UI.tres" type="FontFile" id=11]
+
+[node name="PlayerPerformance" type="Panel"]
+process_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource( 4 )
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.5
+offset_top = -380.0
+offset_right = 352.5
+offset_bottom = 380.0
+theme_override_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Panel" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_bottom = -696.0
+theme_override_styles/panel = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Text" type="Label" parent="Panel/Label"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_minimum_size = Vector2( 200, 50 )
+theme_override_fonts/font = ExtResource( 11 )
+text = "Player Stats Performance"
+align = 1
+valign = 1
+
+[node name="ClosePanel" type="Button" parent="Panel/Label"]
+offset_left = 652.0
+offset_right = 716.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 64, 64 )
+theme_override_fonts/font = ExtResource( 11 )
+theme_override_styles/hover = ExtResource( 5 )
+theme_override_styles/pressed = ExtResource( 5 )
+theme_override_styles/focus = ExtResource( 5 )
+theme_override_styles/disabled = ExtResource( 3 )
+theme_override_styles/normal = ExtResource( 3 )
+text = "X"
+
+[node name="VScrollBarBXH" type="ScrollContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 80.0
+offset_right = -16.0
+offset_bottom = -16.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="GridContainer" type="GridContainer" parent="Panel/VScrollBarBXH"]
+mouse_filter = 2
+columns = 3
+
+[node name="Panel" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource( 8 )]
+visible = false
+offset_bottom = 216.0
+
+[node name="PlayerCard" parent="." instance=ExtResource( 9 )]
+visible = false
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="Panel/Label/ClosePanel" to="." method="_on_ClosePanel_pressed"]
+[connection signal="tween_all_completed" from="Tween" to="." method="_on_Tween_tween_all_completed"]

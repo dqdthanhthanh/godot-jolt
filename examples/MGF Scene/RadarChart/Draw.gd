@@ -1,10 +1,9 @@
 @tool
 extends Node2D
 
-@onready var data = get_parent().get_parent()
-@onready var labelIns = preload("res://MGF Scene/RadarChart/LabelStats.tscn")
+@onready var data: = get_parent().get_parent()
 
-func _ready():
+func _ready() -> void:
 	queue_redraw()
 
 func _draw():
@@ -26,17 +25,20 @@ func _draw():
 	
 	## ve cac duong cheo
 	for i in 4:
-		draw_line(get_child(i).position,get_child(i+4).position,color,thick)
+		draw_line(get_child(i).position, get_child(i+4).position, color, thick)
 	
 	create_label()
 
-func create_label():
+func create_label() -> void:
 	if get_parent().get_node("Label").get_child_count()>0:
 		for unit in get_parent().get_node("Label").get_children():
 			unit.queue_free()
 	
 	for i in 8:
-		var ins = labelIns.instantiate()
+		var ins = load("res://MGF Scene/RadarChart/LabelStats.tscn").instantiate()
 		get_parent().get_node("Label").call_deferred("add_child", ins)
 		ins.position = lerp(Vector2.ZERO,get_child(i).position,data.labelPos)
 		ins.get_node("Label").text = data.labels[i]
+
+func _exit_tree():
+	queue_free()

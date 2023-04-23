@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://cwnic1s8y1ex1"]
+[gd_scene load_steps=13 format=3 uid="uid://n84wsljn0a0o"]
 
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGOBorder.tres" id="1"]
 [ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGNBlack.tres" id="2"]
 [ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCN.tres" id="3"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRBlackOp.tres" id="3_lixjl"]
 [ext_resource type="Script" path="res://MGF Scene/Formation/PanelPlayerData.gd" id="4"]
 [ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedCP.tres" id="5"]
 [ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIP.tres" id="6"]
-[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="7"]
-[ext_resource type="PackedScene" uid="uid://dewv5bv65hsac" path="res://MGF Scene/Market/PlayerData.tscn" id="8"]
-[ext_resource type="Texture2D" uid="uid://pce1iwo4iew2" path="res://Assets2D/UI/iconExit.png" id="9_3apjb"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIN.tres" id="7"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Market/PlayerData.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://MGF Scene/Market/PlayerCard.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://fdfb0wv1y7h" path="res://Assets2D/UI/iconExit.png" id="9_nvcny"]
+[ext_resource type="PackedScene" path="res://addons/mgf_tools/TabHIns.tscn" id="10"]
 [ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="11"]
 
 [node name="PanelPlayerData" type="Control"]
@@ -18,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("4")
 
 [node name="BG" type="Panel" parent="."]
@@ -38,7 +41,7 @@ offset_left = -352.5
 offset_top = -336.0
 offset_right = 352.5
 offset_bottom = 336.0
-theme_override_styles/panel = ExtResource("3_lixjl")
+theme_override_styles/panel = ExtResource("1")
 
 [node name="Text" type="Label" parent="Panel"]
 visible = false
@@ -49,6 +52,8 @@ anchor_bottom = 1.0
 offset_left = 17.0
 offset_right = -16.0
 offset_bottom = -608.0
+theme_override_fonts/font = ExtResource("11")
+theme_override_styles/normal = ExtResource("7")
 text = "Add player"
 
 [node name="Label" type="Panel" parent="Panel"]
@@ -63,18 +68,17 @@ theme_override_styles/panel = ExtResource("7")
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_constants/separation = 8
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="ButtonSort" type="Button" parent="Panel/Label/HBoxContainer"]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("6")
 theme_override_styles/pressed = ExtResource("6")
-theme_override_styles/disabled = ExtResource("6")
+theme_override_styles/disabled = ExtResource("7")
 theme_override_styles/focus = ExtResource("6")
 text = "Sort"
 
@@ -82,11 +86,10 @@ text = "Sort"
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("6")
 theme_override_styles/pressed = ExtResource("6")
-theme_override_styles/disabled = ExtResource("6")
+theme_override_styles/disabled = ExtResource("7")
 theme_override_styles/focus = ExtResource("6")
 text = "ALL"
 
@@ -94,11 +97,10 @@ text = "ALL"
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("6")
 theme_override_styles/pressed = ExtResource("6")
-theme_override_styles/disabled = ExtResource("6")
+theme_override_styles/disabled = ExtResource("7")
 theme_override_styles/focus = ExtResource("6")
 text = "ATK"
 
@@ -106,11 +108,10 @@ text = "ATK"
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("6")
 theme_override_styles/pressed = ExtResource("6")
-theme_override_styles/disabled = ExtResource("6")
+theme_override_styles/disabled = ExtResource("7")
 theme_override_styles/focus = ExtResource("6")
 text = "MID"
 
@@ -118,11 +119,10 @@ text = "MID"
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("6")
 theme_override_styles/pressed = ExtResource("6")
-theme_override_styles/disabled = ExtResource("6")
+theme_override_styles/disabled = ExtResource("7")
 theme_override_styles/focus = ExtResource("6")
 text = "DEF"
 
@@ -130,11 +130,10 @@ text = "DEF"
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("6")
 theme_override_styles/pressed = ExtResource("6")
-theme_override_styles/disabled = ExtResource("6")
+theme_override_styles/disabled = ExtResource("7")
 theme_override_styles/focus = ExtResource("6")
 text = "GK"
 
@@ -142,18 +141,16 @@ text = "GK"
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/hover = ExtResource("6")
 theme_override_styles/pressed = ExtResource("6")
-theme_override_styles/disabled = ExtResource("6")
+theme_override_styles/disabled = ExtResource("7")
 theme_override_styles/focus = ExtResource("6")
 text = "CLB"
 
 [node name="OvInput" type="LineEdit" parent="Panel/Label/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/focus = ExtResource("6")
 theme_override_styles/read_only = ExtResource("6")
@@ -163,7 +160,6 @@ alignment = 1
 [node name="CLBInput" type="LineEdit" parent="Panel/Label/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("7")
 theme_override_styles/focus = ExtResource("6")
 theme_override_styles/read_only = ExtResource("6")
@@ -174,13 +170,13 @@ alignment = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("11")
-theme_override_font_sizes/font_size = 25
 theme_override_styles/normal = ExtResource("3")
 theme_override_styles/hover = ExtResource("5")
 theme_override_styles/pressed = ExtResource("5")
-theme_override_styles/disabled = ExtResource("5")
+theme_override_styles/disabled = ExtResource("3")
 theme_override_styles/focus = ExtResource("5")
-icon = ExtResource("9_3apjb")
+icon = ExtResource("9_nvcny")
+icon_alignment = 1
 expand_icon = true
 
 [node name="VScrollBarBXH" type="ScrollContainer" parent="Panel"]
@@ -190,48 +186,32 @@ anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = 80.0
 offset_right = -16.0
-offset_bottom = -16.0
+offset_bottom = -14.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/VScrollBarBXH"]
 layout_mode = 2
 mouse_filter = 2
 columns = 3
 
-[node name="Panel" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
+[node name="PlayerData" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
+visible = false
 layout_mode = 2
 
-[node name="Panel2" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
+[node name="MainBtn" parent="Panel" instance=ExtResource("10")]
+visible = false
+layout_mode = 0
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.0
+offset_top = -110.0
+offset_right = 0.0
+offset_bottom = 0.0
 
-[node name="Panel3" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
-
-[node name="Panel4" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
-
-[node name="Panel5" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
-
-[node name="Panel6" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
-
-[node name="Panel7" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
-
-[node name="Panel8" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
-
-[node name="Panel9" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
-
-[node name="Panel10" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
-
-[node name="Panel11" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
-
-[node name="Panel12" parent="Panel/VScrollBarBXH/GridContainer" instance=ExtResource("8")]
-layout_mode = 2
+[node name="PlayerCard" parent="." instance=ExtResource("9")]
+visible = false
+anchors_preset = 0
 
 [connection signal="pressed" from="Panel/Label/HBoxContainer/ButtonSort" to="." method="_on_ButtonSort_pressed"]
 [connection signal="pressed" from="Panel/Label/HBoxContainer/ButtonAll" to="." method="_on_ButtonAll_pressed"]

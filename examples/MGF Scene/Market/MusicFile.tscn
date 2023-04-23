@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets2D/UI/IconMusic.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets2D/UI/iconApplyNon.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets2D/Fonts/UI.tres" type="FontFile" id=3]
+[ext_resource path="res://Assets2D/Theme/btnUIP.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets2D/Theme/btnUIN.tres" type="StyleBox" id=5]
+[ext_resource path="res://Assets2D/UI/IconCoin.png" type="Texture2D" id=6]
+
+[node name="MusicFile" type="Button"]
+offset_right = 687.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 0, 80 )
+mouse_filter = 1
+theme_override_fonts/font = ExtResource( 3 )
+theme_override_styles/hover = ExtResource( 4 )
+theme_override_styles/pressed = ExtResource( 4 )
+theme_override_styles/focus = ExtResource( 4 )
+theme_override_styles/disabled = ExtResource( 5 )
+theme_override_styles/normal = ExtResource( 5 )
+icon_alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+offset_right = 80.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 80, 0 )
+texture = ExtResource( 1 )
+expand = true
+
+[node name="File" type="Label" parent="HBoxContainer"]
+offset_left = 84.0
+offset_top = 24.0
+offset_right = 284.0
+offset_bottom = 55.0
+custom_minimum_size = Vector2( 200, 0 )
+theme_override_fonts/font = ExtResource( 3 )
+text = "File"
+valign = 1
+autowrap = true
+
+[node name="Author" type="Label" parent="HBoxContainer"]
+offset_left = 288.0
+offset_top = 24.0
+offset_right = 438.0
+offset_bottom = 55.0
+custom_minimum_size = Vector2( 150, 0 )
+theme_override_fonts/font = ExtResource( 3 )
+text = "Author"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+offset_left = 442.0
+offset_right = 602.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 160, 0 )
+alignment = 1
+
+[node name="Price" type="Label" parent="HBoxContainer/HBoxContainer"]
+offset_left = 26.0
+offset_top = 24.0
+offset_right = 79.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource( 3 )
+text = "1000"
+align = 1
+valign = 1
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/HBoxContainer"]
+offset_left = 83.0
+offset_right = 133.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 50, 50 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
+
+[node name="Active" type="TextureRect" parent="HBoxContainer"]
+offset_left = 606.0
+offset_right = 686.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 80, 0 )
+texture = ExtResource( 2 )
+expand = true

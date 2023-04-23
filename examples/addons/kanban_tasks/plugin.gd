@@ -30,5 +30,5 @@ func _get_plugin_name():
 	return "Tasks"
 
 func _get_plugin_icon():
-	# Must return some kind of Texture2D for the icon.
+	# Must return some kind of Texture for the icon.
 	return get_editor_interface().get_base_control().get_icon("MultiEdit", "EditorIcons")

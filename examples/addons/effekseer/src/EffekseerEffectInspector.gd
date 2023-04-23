@@ -20,18 +20,18 @@ func _enter_tree():
 	if editor:
 		view_mode = editor.get_editor_settings().get_setting("effekseer/preview_mode") as int
 	
-	$Previewer.connect("gui_input",Callable(self,"_previewer_gui_input"))
-	$OpenEditorButton.connect("pressed",Callable(self,"_open_button_pressed"))
-	$Controller/PlayButton.connect("pressed",Callable(self,"_play_button_pressed"))
-	$Controller/StopButton.connect("pressed",Callable(self,"_stop_button_pressed"))
+	$Previewer.connect("gui_input", Callable(self, "_previewer_gui_input"))
+	$OpenEditorButton.connect("pressed", Callable(self, "_open_button_pressed"))
+	$Controller/PlayButton.connect("pressed", Callable(self, "_play_button_pressed"))
+	$Controller/StopButton.connect("pressed", Callable(self, "_stop_button_pressed"))
 	for i in range(4):
-		$Triggers.get_child(i).connect("pressed",Callable(self,"_trigger_button_pressed").bind(i))
+		$Triggers.get_child(i).connect("pressed", Callable(self, "_trigger_button_pressed").bind(i))
 
 func _exit_tree():
 	if editor:
 		editor.get_editor_settings().set_setting("effekseer/preview_mode", view_mode)
 
-func _ready():
+func _ready() -> void:
 	preview3d.visible = view_mode == 0
 	preview2d.visible = view_mode == 1	
 	_setup_option_menu()
@@ -182,7 +182,7 @@ func _update_camera_2d():
 func _setup_option_menu():
 	popup_menu = $Controller/OptionsButton.get_popup()
 	popup_menu.clear()
-	popup_menu.connect("id_pressed",Callable(self,"_menu_pressed"))
+	popup_menu.connect("id_pressed", Callable(self, "_menu_pressed"))
 	popup_menu.add_item("Reset Camera3D", 0)
 	popup_menu.add_separator()
 	
@@ -192,7 +192,7 @@ func _setup_option_menu():
 	view_menu.add_radio_check_item("2D", 1)
 	view_menu.set_item_checked(0, view_mode == 0)
 	view_menu.set_item_checked(1, view_mode == 1)
-	view_menu.connect("id_pressed",Callable(self,"_view_mode_changed"))
+	view_menu.connect("id_pressed", Callable(self, "_view_mode_changed"))
 	popup_menu.add_submenu_item("View Mode", "View Mode")
 	popup_menu.add_child(view_menu)
 

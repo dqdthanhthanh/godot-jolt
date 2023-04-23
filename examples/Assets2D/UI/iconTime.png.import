@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd3hk5a4s5ncw"
-path.etc2="res://.godot/imported/iconTime.png-772c3e5e23e1954e0116aa9b89d1eb10.etc2.ctex"
+uid="uid://djrdf3ktv5iih"
+path="res://.godot/imported/iconTime.png-772c3e5e23e1954e0116aa9b89d1eb10.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets2D/UI/iconTime.png"
-dest_files=["res://.godot/imported/iconTime.png-772c3e5e23e1954e0116aa9b89d1eb10.etc2.ctex"]
+dest_files=["res://.godot/imported/iconTime.png-772c3e5e23e1954e0116aa9b89d1eb10.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

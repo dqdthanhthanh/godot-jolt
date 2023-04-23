@@ -1,345 +1,451 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource type="Texture2D" uid="uid://bd2iixuaf8tln" path="res://Assets2D/Logo/CB.png" id="2"]
-[ext_resource type="StyleBox" uid="uid://bugyfau5s5ky3" path="res://Assets2D/Theme/btnUIN.tres" id="4"]
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIBGNBlack.tres" id="5"]
-[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="6_xcadj"]
-[ext_resource type="PackedScene" uid="uid://bgus0ka15pe6r" path="res://MGF Scene/Setup/ButtonClose.tscn" id="7"]
-[ext_resource type="PackedScene" uid="uid://d3xvmgf3jr0r8" path="res://MGF Scene/Season/Player.tscn" id="8"]
+[ext_resource path="res://Assets2D/Fonts/UILarge.tres" type="FontFile" id=1]
+[ext_resource path="res://Assets2D/TeamLogo/High/CB.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets2D/Fonts/FiraSansFont/FiraSans-Medium.otf" type="FontFile" id=3]
+[ext_resource path="res://Assets2D/Theme/btnUIN.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets2D/Theme/btnUIBGNBlack.tres" type="StyleBox" id=5]
+[ext_resource path="res://MGF Scene/Season/MatchInfo.gd" type="Script" id=6]
+[ext_resource path="res://MGF Scene/Setup/ButtonClose.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets2D/Fonts/UIMatch.tres" type="FontFile" id=9]
+[ext_resource path="res://MGF Scene/Season/PlayerStats.tscn" type="PackedScene" id=10]
+[ext_resource path="res://MGF Scene/Main Game/PlayerInfo.gd" type="Script" id=11]
 
-[node name="MatchInfo" type="Panel"]
-anchors_preset = 15
+
+[sub_resource type="FontFile" id=3]
+size = 40
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[node name="MatchInfo" type="Popup"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme_override_styles/panel = ExtResource("5")
+mouse_filter = 2
+script = ExtResource( 6 )
+
+[node name="Bg" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_styles/panel = ExtResource( 5 )
 
 [node name="PlayerInfo" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -768.0
-offset_top = -284.0
-offset_right = 768.0
-offset_bottom = 284.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = ExtResource("4")
+offset_left = -832.0
+offset_top = -278.0
+offset_right = 832.0
+offset_bottom = 274.0
+theme_override_styles/panel = ExtResource( 4 )
+script = ExtResource( 11 )
 
-[node name="PlayerA" type="VBoxContainer" parent="PlayerInfo"]
-unique_name_in_owner = true
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-offset_left = -7.0
-offset_top = 127.0
-offset_right = 577.0
-offset_bottom = 327.0
-theme_override_constants/separation = -2
-metadata/_edit_group_ = true
+[node name="PlayerA" type="ScrollContainer" parent="PlayerInfo"]
+offset_top = 56.0
+offset_right = 640.0
+offset_bottom = 584.0
 
-[node name="Player" parent="PlayerInfo/PlayerA" instance=ExtResource("8")]
-layout_mode = 2
+[node name="Player" type="VBoxContainer" parent="PlayerInfo/PlayerA"]
+self_modulate = Color( 1, 1, 1, 0 )
+offset_right = 700.0
+offset_bottom = 50.0
+theme_override_constants/separation = -7
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Player2" parent="PlayerInfo/PlayerA" instance=ExtResource("8")]
-layout_mode = 2
+[node name="Player" parent="PlayerInfo/PlayerA/Player" instance=ExtResource( 10 )]
+offset_right = 700.0
 
-[node name="PlayerB" type="VBoxContainer" parent="PlayerInfo"]
-unique_name_in_owner = true
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 1
+[node name="PlayerB" type="ScrollContainer" parent="PlayerInfo"]
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -584.0
-offset_top = 126.0
-offset_bottom = 350.0
-grow_horizontal = 0
-theme_override_constants/separation = -2
-metadata/_edit_group_ = true
+offset_left = -640.0
+offset_top = 56.0
+offset_bottom = 576.0
 
-[node name="Player" parent="PlayerInfo/PlayerB" instance=ExtResource("8")]
-layout_mode = 2
-size_flags_horizontal = 8
+[node name="Player" type="VBoxContainer" parent="PlayerInfo/PlayerB"]
+self_modulate = Color( 1, 1, 1, 0 )
+offset_right = 700.0
+offset_bottom = 50.0
+theme_override_constants/separation = -7
+alignment = 2
+__meta__ = {
+"_edit_group_": true
+}
 
-[node name="Player2" parent="PlayerInfo/PlayerB" instance=ExtResource("8")]
-layout_mode = 2
-size_flags_horizontal = 0
+[node name="Player" parent="PlayerInfo/PlayerB/Player" instance=ExtResource( 10 )]
+offset_right = 700.0
 
 [node name="Panel" type="Panel" parent="."]
-layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -184.0
+offset_left = -192.0
 offset_top = -284.0
-offset_right = 184.0
+offset_right = 192.0
 offset_bottom = 284.0
-theme_override_styles/panel = ExtResource("4")
+theme_override_styles/panel = ExtResource( 4 )
+
+[node name="TeamName" type="Control" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -262.0
+offset_right = 192.0
+offset_bottom = -200.0
+custom_minimum_size = Vector2( 30, 50 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="A" type="Label" parent="Panel/TeamName"]
+offset_right = 192.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 30, 50 )
+theme_override_fonts/font = ExtResource( 9 )
+text = "0"
+align = 1
+valign = 1
+
+[node name="B" type="Label" parent="Panel/TeamName"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -192.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 30, 50 )
+theme_override_fonts/font = ExtResource( 9 )
+text = "0"
+align = 1
+valign = 1
 
 [node name="mainLabel" type="HBoxContainer" parent="."]
-layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -144.0
-offset_top = -230.0
-offset_right = 136.0
-offset_bottom = -150.0
+offset_left = -192.0
+offset_top = -206.0
+offset_right = 192.0
+offset_bottom = -126.0
 theme_override_constants/separation = 10
 alignment = 1
-metadata/_edit_group_ = true
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="logoA" type="TextureRect" parent="mainLabel"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-texture = ExtResource("2")
-expand_mode = 1
-stretch_mode = 5
+offset_left = 52.0
+offset_right = 132.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 80, 80 )
+texture = ExtResource( 2 )
+expand = true
 
 [node name="goalA" type="Label" parent="mainLabel"]
-custom_minimum_size = Vector2(30, 50)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_left = 142.0
+offset_top = 15.0
+offset_right = 172.0
+offset_bottom = 65.0
+custom_minimum_size = Vector2( 30, 50 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="Label" type="Label" parent="mainLabel"]
-custom_minimum_size = Vector2(20, 0)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_left = 182.0
+offset_top = 18.0
+offset_right = 202.0
+offset_bottom = 61.0
+custom_minimum_size = Vector2( 20, 0 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "-"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="goalB" type="Label" parent="mainLabel"]
-custom_minimum_size = Vector2(30, 50)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_left = 212.0
+offset_top = 15.0
+offset_right = 242.0
+offset_bottom = 65.0
+custom_minimum_size = Vector2( 30, 50 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="logoB" type="TextureRect" parent="mainLabel"]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-texture = ExtResource("2")
-expand_mode = 1
-stretch_mode = 5
+offset_left = 252.0
+offset_right = 332.0
+offset_bottom = 80.0
+custom_minimum_size = Vector2( 80, 80 )
+texture = ExtResource( 2 )
+expand = true
 
 [node name="Label" type="VBoxContainer" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 8
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -80.0
-offset_top = -126.0
-offset_right = 82.0
-offset_bottom = 164.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = -110.0
+offset_right = 83.0
+offset_bottom = 170.0
 theme_override_constants/separation = 10
-metadata/_edit_group_ = true
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="teamBall" type="Label" parent="Label" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_right = 163.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "Ball Control"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="teamShot" type="Label" parent="Label" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 47.0
+offset_right = 163.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "ShotOn"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="teamMiss" type="Label" parent="Label" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 94.0
+offset_right = 163.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "Miss"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="teamPass" type="Label" parent="Label" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 141.0
+offset_right = 163.0
+offset_bottom = 178.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "Pass"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="teamBlock" type="Label" parent="Label" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 188.0
+offset_right = 163.0
+offset_bottom = 225.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "Defend"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="teamKeeper" type="Label" parent="Label" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 235.0
+offset_right = 163.0
+offset_bottom = 272.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "Saves"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TeamA" type="VBoxContainer" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 8
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -184.0
-offset_top = -126.0
+offset_left = -192.0
+offset_top = -110.0
 offset_right = -64.0
-offset_bottom = 164.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_bottom = 170.0
 theme_override_constants/separation = 10
-metadata/_edit_group_ = true
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="ball" type="Label" parent="TeamA" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_right = 128.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="shot" type="Label" parent="TeamA" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 47.0
+offset_right = 128.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="miss" type="Label" parent="TeamA" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 94.0
+offset_right = 128.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="pass" type="Label" parent="TeamA" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 141.0
+offset_right = 128.0
+offset_bottom = 178.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="block" type="Label" parent="TeamA" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 188.0
+offset_right = 128.0
+offset_bottom = 225.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="force" type="Label" parent="TeamA" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 235.0
+offset_right = 128.0
+offset_bottom = 272.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TeamB" type="VBoxContainer" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 8
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 64.0
-offset_top = -126.0
-offset_right = 184.0
-offset_bottom = 164.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_top = -110.0
+offset_right = 192.0
+offset_bottom = 170.0
 theme_override_constants/separation = 10
-metadata/_edit_group_ = true
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="ball" type="Label" parent="TeamB" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_right = 128.0
+offset_bottom = 37.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
 
 [node name="shot" type="Label" parent="TeamB" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 47.0
+offset_right = 128.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="miss" type="Label" parent="TeamB" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 94.0
+offset_right = 128.0
+offset_bottom = 131.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="pass" type="Label" parent="TeamB" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 141.0
+offset_right = 128.0
+offset_bottom = 178.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="block" type="Label" parent="TeamB" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 188.0
+offset_right = 128.0
+offset_bottom = 225.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="force" type="Label" parent="TeamB" groups=["labels"]]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("6_xcadj")
-theme_override_font_sizes/font_size = 30
+offset_top = 235.0
+offset_right = 128.0
+offset_bottom = 272.0
+theme_override_fonts/font = ExtResource( 9 )
 text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ButtonClose" parent="." instance=ExtResource("7")]
-layout_mode = 1
-anchors_preset = 8
+[node name="ButtonClose" parent="." instance=ExtResource( 7 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -48.0
 offset_top = 178.0
-offset_right = 48.0
+offset_right = 40.0
 offset_bottom = 266.0
-grow_horizontal = 2
-grow_vertical = 2
+theme_override_fonts/font = SubResource( 3 )
 icon_alignment = 1
+
+[connection signal="pressed" from="ButtonClose" to="." method="_on_ButtonClose_pressed"]

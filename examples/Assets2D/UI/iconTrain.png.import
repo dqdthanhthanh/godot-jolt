@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m6ucjy1yxp4j"
-path.etc2="res://.godot/imported/iconTrain.png-2932b8b599934768c1608863a34d560f.etc2.ctex"
+uid="uid://eeqioj70qh3q"
+path="res://.godot/imported/iconTrain.png-2932b8b599934768c1608863a34d560f.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets2D/UI/iconTrain.png"
-dest_files=["res://.godot/imported/iconTrain.png-2932b8b599934768c1608863a34d560f.etc2.ctex"]
+dest_files=["res://.godot/imported/iconTrain.png-2932b8b599934768c1608863a34d560f.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

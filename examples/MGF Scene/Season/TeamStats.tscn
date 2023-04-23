@@ -3,7 +3,6 @@
 [ext_resource path="res://Assets2D/Fonts/UISmall.tres" type="FontFile" id=1]
 [ext_resource path="res://Assets2D/Theme/btnUINO.tres" type="StyleBox" id=2]
 
-
 [node name="TeamAStats" type="Panel"]
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -11,14 +10,14 @@ offset_left = 320.0
 offset_top = 24.0
 offset_right = 512.0
 offset_bottom = 152.0
-custom_styles/panel = ExtResource( 2 )
+theme_override_styles/panel = ExtResource( 2 )
 
 [node name="teamOve" type="Label" parent="." groups=["labels"]]
 offset_left = 120.0
 offset_top = 24.0
 offset_right = 288.0
 offset_bottom = 63.0
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "0"
 
 [node name="teamAtk" type="Label" parent="." groups=["labels"]]
@@ -26,7 +25,7 @@ offset_left = 120.0
 offset_top = 48.0
 offset_right = 288.0
 offset_bottom = 91.0
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "0
 "
 __meta__ = {
@@ -38,7 +37,7 @@ offset_left = 120.0
 offset_top = 72.0
 offset_right = 288.0
 offset_bottom = 115.0
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "0
 "
 __meta__ = {
@@ -50,7 +49,7 @@ offset_left = 120.0
 offset_top = 96.0
 offset_right = 288.0
 offset_bottom = 139.0
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "0
 "
 __meta__ = {
@@ -62,7 +61,7 @@ offset_left = 64.0
 offset_top = 24.0
 offset_right = 232.0
 offset_bottom = 63.0
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "AVG"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -73,7 +72,7 @@ offset_left = 64.0
 offset_top = 48.0
 offset_right = 232.0
 offset_bottom = 91.0
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "ATK
 "
 __meta__ = {
@@ -85,7 +84,7 @@ offset_left = 64.0
 offset_top = 72.0
 offset_right = 232.0
 offset_bottom = 138.0
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "MID
 
 "
@@ -98,7 +97,7 @@ offset_left = 64.0
 offset_top = 96.0
 offset_right = 232.0
 offset_bottom = 162.0
-custom_fonts/font = ExtResource( 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "DEF
 
 "

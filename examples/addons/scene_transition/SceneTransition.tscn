@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://7g6ktx48maux"]
 
-[ext_resource type="Script" path="res://addons/scene_transition/SceneTransition.gd" id="1_u8su0"]
-[ext_resource type="Texture2D" uid="uid://bkl6xrksnb1hu" path="res://Assets2D/UI/iconLoad.png" id="2_0yusm"]
+[ext_resource type="Script" path="res://addons/scene_transition/scene_transition.gd" id="1_v0oku"]
+[ext_resource type="Texture2D" uid="uid://cijfkwgf08v44" path="res://Assets2D/UI/iconLoad.png" id="2_0yusm"]
 
 [sub_resource type="Animation" id="1"]
 resource_name = "RESET"
@@ -89,7 +89,16 @@ _data = {
 [node name="SceneTransition" type="CanvasLayer"]
 process_mode = 3
 layer = 9
-script = ExtResource("1_u8su0")
+script = ExtResource("1_v0oku")
+
+[node name="BG" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="dissolve_rect" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0)

@@ -1,31 +1,35 @@
-extends TabBar
+extends Control
 
 var index:int = 0
 
-#onready var bxh = $TabBar/League/VScrollBarBXH/VBoxContainer
-@onready var bxh = get_parent().get_node("NextMatch/League/VScrollBarBXH/VBoxContainer")
-@onready var bxhMG = get_parent().get_node("SeasonManager/League/VScrollBarBXH/VBoxContainer")
-var insTeamIndex = preload("res://MGF Scene/Season/TeamIndex.tscn")
+@onready var bxh: = get_parent().get_node("NextMatch/League/VScrollBarBXH/VBoxContainer")
+@onready var bxhMG: = get_parent().get_node("SeasonManager/League/VScrollBarBXH/VBoxContainer")
 
-@onready var playerStats = $TabBar/Players/PlayerStats
-@onready var players = $TabBar/Players/PlayerStats/Players
+@onready var playerStats: = $Players/PlayerStats
+@onready var players: = $Players/PlayerStats/Players
+@onready var tab: = $TabBtns
+@onready var tabstt: = $Players/MainBtn
 
-@onready var insPlayer = load("res://MGF Scene/Season/PlayerStats.tscn")
-
-func load_setup():
-	$TabBar/Players.show()
-	get_players_stats($TabBar/Players/PlayerTab.current_tab)
+func load_setup() -> void:
+	get_players_stats($TabBtns.current_tab)
 	create_league_table(bxh)
 	create_league_table(bxhMG,false)
 
-func create_league_table(parent = bxh,value = true):
+func create_league_table(parent = bxh,value = true) -> void:
+	var insTeamIndex: = load("res://MGF Scene/Season/TeamIndex.tscn")
+	
 	##Create League Table
 	var data = GameData.season_load_data()
 	var teamData = data.teams
 	
+	if parent.get_child_count()>0:
+		for i in parent.get_child_count():
+			if i > 0:
+				parent.get_child(i).queue_free()
+	
 	if value == true:
-		teamData.sort_custom(Callable(MyCustomSorter,"sort_ascending_goal"))
-		teamData.sort_custom(Callable(MyCustomSorter,"sort_ascending_point"))
+		teamData.sort_custom(Callable(MyCustomSorter, "sort_ascending_goal"))
+		teamData.sort_custom(Callable(MyCustomSorter, "sort_ascending_point"))
 		for n in range(teamData.size()):
 			n+=1
 			var team = insTeamIndex.instantiate()
@@ -33,44 +37,53 @@ func create_league_table(parent = bxh,value = true):
 			if SeasonData.teamA == teamData[n-1].id:
 				index = n
 			team.index = n
+			teamData[n-1].index = n
 			team.id = teamData[n-1].id
 			team.teamName = teamData[n-1].name
-			team.teamIcon = load(teamData[n-1].icon)
-
+			team.teamIcon = Team.load_team_icon(teamData[n-1].icon)
+			
 			team.matchTime = teamData[n-1].statS[0]
 			team.matchW = teamData[n-1].statS[2]
 			team.matchD = teamData[n-1].statS[3]
 			team.matchL = teamData[n-1].statS[4]
-
+			
 			team.point = teamData[n-1].statS[1]
 			team.pointW = teamData[n-1].statS[5]
 			team.pointL = teamData[n-1].statS[6]
 			team.cup = int(teamData[n-1].statS[5])-int(teamData[n-1].statS[6])
 			team.get_team_data()
 	else:
-		teamData.sort_custom(Callable(MyCustomSorter,"sort_ascending_id"))
+		teamData.sort_custom(Callable(MyCustomSorter, "sort_ascending_id"))
 		var teamSelect = teamData[SeasonData.teamA]
 		var team = insTeamIndex.instantiate()
 		parent.add_child(team)
 		team.index = index
 		team.id = SeasonData.teamA
 		team.teamName = teamSelect.name
-		team.teamIcon = load(teamSelect.icon)
-
+		team.teamIcon = Team.load_team_icon(teamSelect.icon)
+		
 		team.matchTime = teamSelect.statS[0]
 		team.matchW = teamSelect.statS[2]
 		team.matchD = teamSelect.statS[3]
 		team.matchL = teamSelect.statS[4]
-
+		
 		team.point = teamSelect.statS[1]
 		team.pointW = teamSelect.statS[5]
 		team.pointL = teamSelect.statS[6]
 		team.cup = int(teamSelect.statS[5])-int(teamSelect.statS[6])
 		team.get_team_data()
 
+func _on_TabBtns_on_tab_select(id):
+	await get_tree().create_timer(Global.btntime).timeout
+	get_players_stats(id)
 
-func get_players_stats(value):
-	$TabBar/Players.show()
+func _on_MainBtn_on_tab_select(id):
+	await get_tree().create_timer(Global.btntime).timeout
+	get_players_stats(tab.current_tab)
+
+func get_players_stats(value:int) -> void:
+	var insPlayer: = load("res://MGF Scene/Season/PlayerStats.tscn")
+	
 	if players.get_child_count() > 0:
 		for i in players.get_children():
 			i.queue_free()
@@ -78,32 +91,45 @@ func get_players_stats(value):
 			i.queue_free()
 	var data = GameData.season_load_data()
 	var playerData = data.players
-	playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_points"))
+	playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_points"))
 	match value:
 		0:
-			playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_points"))
+			playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_points"))
 		1:
-			playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_goals"))
+			playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_goals"))
 		2:
-			playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_assits"))
+			playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_assits"))
 		3:
-			playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_shots"))
+			playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_shots"))
 		4:
-			playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_passes"))
+			playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_passes"))
 		5:
-			playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_defends"))
+			playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_defends"))
 		6:
-			playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_saves"))
+			playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_saves"))
 	
 	if value != 7:
-		for i in playerData.size()+1:
+		var sizeMax:float = (playerData.size()*1.0/12)
+		var size:int = int(sizeMax)
+		var Max:int
+		var MinSize:int = tabstt.current_tab*12
+		var MaxSize:int = (tabstt.current_tab+1)*12+1
+		if sizeMax > size:
+			Max = size + 1
+		if MaxSize > playerData.size()+1:
+			MaxSize = playerData.size()+1
+		tabstt.create_btn(Max)
+		
+#		for i in playerData.size()+1:
+		for i in range(MinSize,MaxSize):
 			var player = playerData[i-1]
 			var ins = insPlayer.instantiate()
 			players.add_child(ins)
 			ins.get_node("pos").text = "P"
 			if i > 0:
 				ins.get_node("name").text = str(player.PlayerID) + " " +str(player.Name)
-				ins.get_node("team/team").texture = load(data.teams[int(player.Team[0])].icon)
+				if ins.get_node("team/icon").visible == true:
+					ins.get_node("team/icon").texture = Team.load_team_icon(data.teams[int(player.Team[0])].icon)
 				ins.get_node("team").text = ""
 				ins.get_node("pos").text = str(player.Season[0])
 				if int(player.Season[0]) > 0:
@@ -125,136 +151,58 @@ func get_players_stats(value):
 	
 	## Best Team
 	elif value == 7:
+		tabstt.create_btn(0)
 		for i in 8:
 			if i == 0:
 				var ins = insPlayer.instantiate()
 				players.add_child(ins)
 				ins.get_node("pos").text = "P"
 			elif i == 1:
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_points"))
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_gk"))
-				var ins = insPlayer.instantiate()
-				players.add_child(ins)
-				
-				ins.get_node("name").text = str(playerData[0].PlayerID) + " " +str(playerData[0].Name)
-				ins.get_node("team/team").texture = load(data.teams[int(playerData[0].Team[0])].icon)
-				ins.get_node("team").text = ""
-				ins.get_node("pos").text = str(playerData[0].Season[0])
-				if int(playerData[0].Season[0]) > 0:
-					ins.get_node("saves").text = str("%.0f" % (float(playerData[0].Season[10])/float(playerData[0].Season[0])))
-					ins.get_node("pos").text = str("%.1f" % (float(playerData[0].Season[1])/float(playerData[0].Season[0])))
-				ins.get_node("goal").text = str(playerData[0].Season[2])
-				ins.get_node("assits").text = str(playerData[0].Season[3])
-				ins.get_node("shots").text = str(playerData[0].Season[4])
-				ins.get_node("passes").text = str(playerData[0].Season[5])
-				ins.get_node("blocks").text = str(playerData[0].Season[8])
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_points"))
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_gk"))
+				find_best_player(insPlayer,data,playerData)
 			elif i == 2:
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_points"))
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_cb"))
-				var ins = insPlayer.instantiate()
-				players.add_child(ins)
-				
-				ins.get_node("name").text = str(playerData[0].PlayerID) + " " +str(playerData[0].Name)
-				ins.get_node("team/team").texture = load(data.teams[int(playerData[0].Team[0])].icon)
-				ins.get_node("team").text = ""
-				ins.get_node("pos").text = str(playerData[0].Season[0])
-				if int(playerData[0].Season[0]) > 0:
-					ins.get_node("pos").text = str("%.1f" % (float(playerData[0].Season[1])/float(playerData[0].Season[0])))
-				ins.get_node("goal").text = str(playerData[0].Season[2])
-				ins.get_node("assits").text = str(playerData[0].Season[3])
-				ins.get_node("shots").text = str(playerData[0].Season[4])
-				ins.get_node("passes").text = str(playerData[0].Season[5])
-				ins.get_node("blocks").text = str(playerData[0].Season[8])
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_points"))
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_cb"))
+				find_best_player(insPlayer,data,playerData)
 			elif i == 3:
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_points"))
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_rb"))
-				var ins = insPlayer.instantiate()
-				players.add_child(ins)
-				
-				ins.get_node("name").text = str(playerData[0].PlayerID) + " " +str(playerData[0].Name)
-				ins.get_node("team/team").texture = load(data.teams[int(playerData[0].Team[0])].icon)
-				ins.get_node("team").text = ""
-				ins.get_node("pos").text = str(playerData[0].Season[0])
-				if int(playerData[0].Season[0]) > 0:
-					ins.get_node("pos").text = str("%.1f" % (float(playerData[0].Season[1])/float(playerData[0].Season[0])))
-				ins.get_node("goal").text = str(playerData[0].Season[2])
-				ins.get_node("assits").text = str(playerData[0].Season[3])
-				ins.get_node("shots").text = str(playerData[0].Season[4])
-				ins.get_node("passes").text = str(playerData[0].Season[5])
-				ins.get_node("blocks").text = str(playerData[0].Season[8])
-				ins.get_node("saves").text = str(playerData[0].Season[9])
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_points"))
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_rb"))
+				find_best_player(insPlayer,data,playerData)
 			elif i == 4:
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_points"))
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_lb"))
-				var ins = insPlayer.instantiate()
-				players.add_child(ins)
-				
-				ins.get_node("name").text = str(playerData[0].PlayerID) + " " +str(playerData[0].Name)
-				ins.get_node("team/team").texture = load(data.teams[int(playerData[0].Team[0])].icon)
-				ins.get_node("team").text = ""
-				ins.get_node("pos").text = str(playerData[0].Season[0])
-				if int(playerData[0].Season[0]) > 0:
-					ins.get_node("pos").text = str("%.1f" % (float(playerData[0].Season[1])/float(playerData[0].Season[0])))
-				ins.get_node("goal").text = str(playerData[0].Season[2])
-				ins.get_node("assits").text = str(playerData[0].Season[3])
-				ins.get_node("shots").text = str(playerData[0].Season[4])
-				ins.get_node("passes").text = str(playerData[0].Season[5])
-				ins.get_node("blocks").text = str(playerData[0].Season[8])
-				ins.get_node("saves").text = str(playerData[0].Season[9])
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_points"))
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_lb"))
+				find_best_player(insPlayer,data,playerData)
 			elif i == 5:
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_points"))
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_cm"))
-				var ins = insPlayer.instantiate()
-				players.add_child(ins)
-				
-				ins.get_node("name").text = str(playerData[0].PlayerID) + " " +str(playerData[0].Name)
-				ins.get_node("team/team").texture = load(data.teams[int(playerData[0].Team[0])].icon)
-				ins.get_node("team").text = ""
-				ins.get_node("pos").text = str(playerData[0].Season[0])
-				if int(playerData[0].Season[0]) > 0:
-					ins.get_node("pos").text = str("%.1f" % (float(playerData[0].Season[1])/float(playerData[0].Season[0])))
-				ins.get_node("goal").text = str(playerData[0].Season[2])
-				ins.get_node("assits").text = str(playerData[0].Season[3])
-				ins.get_node("shots").text = str(playerData[0].Season[4])
-				ins.get_node("passes").text = str(playerData[0].Season[5])
-				ins.get_node("blocks").text = str(playerData[0].Season[8])
-				ins.get_node("saves").text = str(playerData[0].Season[9])
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_points"))
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_cm"))
+				find_best_player(insPlayer,data,playerData)
 			elif i == 6:
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_points"))
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_rf"))
-				var ins = insPlayer.instantiate()
-				players.add_child(ins)
-				
-				ins.get_node("name").text = str(playerData[0].PlayerID) + " " +str(playerData[0].Name)
-				ins.get_node("team/team").texture = load(data.teams[int(playerData[0].Team[0])].icon)
-				ins.get_node("team").text = ""
-				ins.get_node("pos").text = str(playerData[0].Season[0])
-				if int(playerData[0].Season[0]) > 0:
-					ins.get_node("pos").text = str("%.1f" % (float(playerData[0].Season[1])/float(playerData[0].Season[0])))
-				ins.get_node("goal").text = str(playerData[0].Season[2])
-				ins.get_node("assits").text = str(playerData[0].Season[3])
-				ins.get_node("shots").text = str(playerData[0].Season[4])
-				ins.get_node("passes").text = str(playerData[0].Season[5])
-				ins.get_node("blocks").text = str(playerData[0].Season[8])
-				ins.get_node("saves").text = str(playerData[0].Season[9])
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_points"))
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_rf"))
+				find_best_player(insPlayer,data,playerData)
 			elif i == 7:
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_ascending_player_points"))
-				playerData.sort_custom(Callable(MyCustomSorter,"sort_lf"))
-				var ins = insPlayer.instantiate()
-				players.add_child(ins)
-				
-				ins.get_node("name").text = str(playerData[0].PlayerID) + " " +str(playerData[0].Name)
-				ins.get_node("team/team").texture = load(data.teams[int(playerData[0].Team[0])].icon)
-				ins.get_node("team").text = ""
-				ins.get_node("pos").text = str(playerData[0].Season[0])
-				if int(playerData[0].Season[0]) > 0:
-					ins.get_node("pos").text = str("%.1f" % (float(playerData[0].Season[1])/float(playerData[0].Season[0])))
-				ins.get_node("goal").text = str(playerData[0].Season[2])
-				ins.get_node("assits").text = str(playerData[0].Season[3])
-				ins.get_node("shots").text = str(playerData[0].Season[4])
-				ins.get_node("passes").text = str(playerData[0].Season[5])
-				ins.get_node("blocks").text = str(playerData[0].Season[8])
-				ins.get_node("saves").text = str(playerData[0].Season[9])
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_ascending_player_points"))
+				playerData.sort_custom(Callable(MyCustomSorter, "sort_lf"))
+				find_best_player(insPlayer,data,playerData)
+
+func find_best_player(insPlayer,data,playerData) -> void:
+	var ins = insPlayer.instantiate()
+	players.add_child(ins)
+	
+	ins.get_node("name").text = str(playerData[0].PlayerID) + " " +str(playerData[0].Name)
+	if ins.get_node("team/icon").visible == true:
+		ins.get_node("team/icon").texture = Team.load_team_icon(data.teams[int(playerData[0].Team[0])].icon)
+	ins.get_node("team").text = ""
+	ins.get_node("pos").text = str(playerData[0].Season[0])
+	if int(playerData[0].Season[0]) > 0:
+		ins.get_node("saves").text = str("%.0f" % (float(playerData[0].Season[10])/float(playerData[0].Season[0])))
+		ins.get_node("pos").text = str("%.1f" % (float(playerData[0].Season[1])/float(playerData[0].Season[0])))
+	ins.get_node("goal").text = str(playerData[0].Season[2])
+	ins.get_node("assits").text = str(playerData[0].Season[3])
+	ins.get_node("shots").text = str(playerData[0].Season[4])
+	ins.get_node("passes").text = str(playerData[0].Season[5])
+	ins.get_node("blocks").text = str(playerData[0].Season[8])
 
 class MyCustomSorter:
 	static func sort_ascending_id(a, b):
@@ -314,7 +262,7 @@ class MyCustomSorter:
 		return false
 
 	static func sort_ascending_player_points(a, b):
-		if float(a.Season[1]) > float(b.Season[1]):
+		if float(a.Season[1]/(a.Season[0]+1)) > float(b.Season[1]/(b.Season[0]+1)):
 			return true
 		return false
 
@@ -359,29 +307,5 @@ class MyCustomSorter:
 		else:
 			return typeof(a) < typeof(b)
 
-func _on_PlayerTab_tab_changed(tab):
-	get_players_stats(tab)
-
-func _on_BtnPlayers_pressed():
-	$TabBar/Players/PlayerTab.current_tab = 0
-
-func _on_BtnGoals_pressed():
-	$TabBar/Players/PlayerTab.current_tab = 1
-
-func _on_BtnAssits_pressed():
-	$TabBar/Players/PlayerTab.current_tab = 2
-
-func _on_BtnShots_pressed():
-	$TabBar/Players/PlayerTab.current_tab = 3
-
-func _on_BtnPasses_pressed():
-	$TabBar/Players/PlayerTab.current_tab = 4
-
-func _on_BtnDefends_pressed():
-	$TabBar/Players/PlayerTab.current_tab = 5
-
-func _on_BtnSaves_pressed():
-	$TabBar/Players/PlayerTab.current_tab = 6
-
-func _on_BtnTeam_pressed():
-	$TabBar/Players/PlayerTab.current_tab = 7
+func _exit_tree():
+	queue_free()

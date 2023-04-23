@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets2D/UI/T_ShotState.png" type="Texture2D" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.784314 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 1, 1, 1, 1 )
+shadow_color = Color( 0, 0, 0, 0.117647 )
+
+[node name="check" type="Panel"]
+offset_left = 312.0
+offset_top = 728.0
+offset_right = 376.0
+offset_bottom = 792.0
+custom_minimum_size = Vector2( 64, 0 )
+pivot_offset = Vector2( 64, 0 )
+mouse_filter = 2
+theme_override_styles/panel = SubResource( 1 )
+
+[node name="icon" type="TextureRect" parent="."]
+visible = false
+modulate = Color( 0, 1, 0.0862745, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 1 )
+expand = true

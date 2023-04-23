@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var addEffect = $AddEffectClick
 @onready var drawForce = $DrawForce
 @onready var drawForceAI = $DrawForceAI
-@onready var tween = get_tree().create_tween()
+@onready var tween: Tween
 
 func _ready():
 #	UINormal.get_theme_stylebox("panel").bg_color = Color.NAVY_BLUE
@@ -15,10 +15,12 @@ func _input(event):
    # Mouse in viewport coordinates.
 	if event is InputEventMouseButton:
 		if Input.is_action_just_pressed("click"):
+			SoundGlobal.get_node("SfxrClick").play()
 			create_ins_effect(event)
 
 	if event is InputEventScreenTouch:
 		if event.index == 1 and event.is_pressed():
+			SoundGlobal.get_node("SfxrClick").play()
 			create_ins_effect(event)
 
 func create_ins_effect(event):

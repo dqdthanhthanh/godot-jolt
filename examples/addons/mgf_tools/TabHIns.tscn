@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://bb0ag22uugssh"]
+
+[ext_resource type="PackedScene" path="res://addons/mgf_tools/BtnStt.tscn" id="1"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUICN.tres" id="2"]
+[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="3"]
+[ext_resource type="Texture2D" uid="uid://6tei33hkviot" path="res://Assets2D/UI/IconMoveLeft.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://db2enp2x7akio" path="res://Assets2D/UI/IconMoveRight.png" id="5"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUICP.tres" id="6"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnOp.tres" id="8"]
+[ext_resource type="Script" path="res://addons/mgf_tools/TabsBtn.gd" id="10"]
+
+[node name="MainBtn" type="Panel"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -384.0
+offset_top = 8.0
+offset_right = 384.0
+offset_bottom = 120.0
+theme_override_styles/panel = ExtResource("8")
+script = ExtResource("10")
+groupPath = NodePath("group")
+n = ExtResource("2")
+p = ExtResource("6")
+isIns = true
+
+[node name="group" type="HBoxContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -19.0
+offset_bottom = -16.0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="BtnStt" parent="group" instance=ExtResource("1")]
+layout_mode = 2
+
+[node name="BtnL" type="Button" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 0
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -40.0
+offset_right = 96.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3")
+theme_override_styles/normal = ExtResource("2")
+theme_override_styles/hover = ExtResource("6")
+theme_override_styles/pressed = ExtResource("6")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/focus = ExtResource("6")
+icon = ExtResource("4")
+expand_icon = true
+
+[node name="BtnR" type="Button" parent="."]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 0
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -40.0
+offset_right = -16.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3")
+theme_override_styles/normal = ExtResource("2")
+theme_override_styles/hover = ExtResource("6")
+theme_override_styles/pressed = ExtResource("6")
+theme_override_styles/disabled = ExtResource("2")
+theme_override_styles/focus = ExtResource("6")
+icon = ExtResource("5")
+expand_icon = true
+
+[connection signal="pressed" from="BtnL" to="." method="_on_BtnL_pressed"]
+[connection signal="pressed" from="BtnR" to="." method="_on_BtnR_pressed"]

@@ -7,8 +7,8 @@ var expression = Expression.new()
 
 @onready var line_edit = $VBoxContainer/LineEdit
 
-func _ready():
-	$VBoxContainer/GridContainer.get_child(0).group.connect("pressed",Callable(self,"_on_CharButton_pressed"))
+func _ready() -> void:
+	$VBoxContainer/GridContainer.get_child(0).group.connect("pressed", Callable(self, "_on_CharButton_pressed"))
 	
 func _on_CharButton_pressed(button):
 	line_edit.text += button.text

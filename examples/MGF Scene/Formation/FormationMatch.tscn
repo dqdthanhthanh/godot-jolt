@@ -1,0 +1,326 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://MGF Scene/Formation/FormationSlots.tscn" type="PackedScene" id=2]
+[ext_resource path="res://MGF Scene/Formation/FormationMatch.gd" type="Script" id=3]
+[ext_resource path="res://Assets2D/Theme/broadBorderWhite.tres" type="StyleBox" id=7]
+[ext_resource path="res://Assets2D/UI/Soccer_Field_Transparant.png" type="Texture2D" id=22]
+
+[node name="FormationMatch" type="Control"]
+process_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="Main" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+scale = Vector2( 0.7, 0.7 )
+pivot_offset = Vector2( 900, 200 )
+
+[node name="UI" type="Control" parent="Main"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="Main/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -168.571
+offset_top = 874.286
+offset_right = -1251.57
+offset_bottom = 241.286
+theme_override_styles/panel = ExtResource( 7 )
+
+[node name="Panel2" type="Panel" parent="Main/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1260.43
+offset_top = 874.286
+offset_right = 177.428
+offset_bottom = 240.286
+theme_override_styles/panel = ExtResource( 7 )
+
+[node name="Line" type="TextureRect" parent="Main/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -167.143
+offset_top = 111.429
+offset_right = -1250.14
+offset_bottom = 26.4286
+texture = ExtResource( 22 )
+expand = true
+
+[node name="Line2" type="TextureRect" parent="Main/UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1261.86
+offset_top = 111.429
+offset_right = 173.857
+offset_bottom = 26.4286
+texture = ExtResource( 22 )
+expand = true
+
+[node name="TeamA" type="Control" parent="Main"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="slot1" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -788.86
+offset_top = 271.714
+offset_right = -638.86
+offset_bottom = 421.714
+pos = "GK"
+
+[node name="slot2" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -788.86
+offset_top = 98.8575
+offset_right = -638.86
+offset_bottom = 248.858
+uid = 1
+pos = "CB"
+
+[node name="slot3" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -580.288
+offset_top = 101.715
+offset_right = -430.288
+offset_bottom = 251.715
+uid = 2
+pos = "LB"
+
+[node name="slot4" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1001.71
+offset_top = 94.5718
+offset_right = -851.714
+offset_bottom = 244.572
+uid = 3
+pos = "RB"
+
+[node name="slot5" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -788.86
+offset_top = -118.286
+offset_right = -638.86
+offset_bottom = 31.7146
+uid = 4
+pos = "CM"
+
+[node name="slot6" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -983.145
+offset_top = -261.143
+offset_right = -833.145
+offset_bottom = -111.143
+uid = 5
+pos = "LF"
+
+[node name="slot7" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -580.288
+offset_top = -265.429
+offset_right = -430.288
+offset_bottom = -115.428
+uid = 6
+pos = "RF"
+
+[node name="slot8" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = -0.082111
+anchor_top = 1.01622
+anchor_right = 0.00159451
+anchor_bottom = 1.19738
+offset_left = 1.42863
+offset_top = 55.7127
+offset_right = 1.42863
+offset_bottom = 55.7127
+uid = 7
+
+[node name="slot9" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.0135523
+anchor_top = 1.01622
+anchor_right = 0.0972577
+anchor_bottom = 1.19738
+offset_left = 1.42863
+offset_top = 55.7127
+offset_right = 1.42863
+offset_bottom = 55.7127
+uid = 8
+
+[node name="slot10" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.11081
+anchor_top = 1.01622
+anchor_right = 0.194515
+anchor_bottom = 1.19938
+offset_left = 1.42863
+offset_top = 55.7127
+offset_right = 1.42926
+offset_bottom = 55.7126
+uid = 9
+
+[node name="slot11" parent="Main/TeamA" instance=ExtResource( 2 )]
+anchor_left = 0.20727
+anchor_top = 1.01622
+anchor_right = 0.290976
+anchor_bottom = 1.19938
+offset_left = 1.42862
+offset_top = 55.7127
+offset_right = 1.42859
+offset_bottom = 55.7126
+uid = 10
+
+[node name="TeamB" type="Control" parent="Main"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="slot1" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 1.29799
+anchor_top = 0.5
+anchor_right = 1.29799
+anchor_bottom = 0.5
+offset_left = -788.86
+offset_top = 271.714
+offset_right = -638.86
+offset_bottom = 421.714
+pos = "GK"
+
+[node name="slot2" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 1.29799
+anchor_top = 0.5
+anchor_right = 1.29799
+anchor_bottom = 0.5
+offset_left = -788.86
+offset_top = 98.8575
+offset_right = -638.86
+offset_bottom = 248.858
+uid = 1
+pos = "CB"
+
+[node name="slot3" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 1.29799
+anchor_top = 0.5
+anchor_right = 1.29799
+anchor_bottom = 0.5
+offset_left = -580.288
+offset_top = 101.715
+offset_right = -430.288
+offset_bottom = 251.715
+uid = 2
+pos = "LB"
+
+[node name="slot4" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 1.29799
+anchor_top = 0.5
+anchor_right = 1.29799
+anchor_bottom = 0.5
+offset_left = -1001.71
+offset_top = 94.5718
+offset_right = -851.714
+offset_bottom = 244.572
+uid = 3
+pos = "RB"
+
+[node name="slot5" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 1.29799
+anchor_top = 0.5
+anchor_right = 1.29799
+anchor_bottom = 0.5
+offset_left = -788.86
+offset_top = -118.286
+offset_right = -638.86
+offset_bottom = 31.7146
+uid = 4
+pos = "CM"
+
+[node name="slot6" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 1.29799
+anchor_top = 0.5
+anchor_right = 1.29799
+anchor_bottom = 0.5
+offset_left = -983.145
+offset_top = -261.143
+offset_right = -833.145
+offset_bottom = -111.143
+uid = 5
+pos = "LF"
+
+[node name="slot7" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 1.29799
+anchor_top = 0.5
+anchor_right = 1.29799
+anchor_bottom = 0.5
+offset_left = -580.288
+offset_top = -265.429
+offset_right = -430.288
+offset_bottom = -115.428
+uid = 6
+pos = "RF"
+
+[node name="slot8" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 0.71588
+anchor_top = 1.01622
+anchor_right = 0.799586
+anchor_bottom = 1.19738
+offset_left = 1.42871
+offset_top = 55.7127
+offset_right = 1.42871
+offset_bottom = 55.7127
+uid = 7
+
+[node name="slot9" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 0.811543
+anchor_top = 1.01622
+anchor_right = 0.895249
+anchor_bottom = 1.19738
+offset_left = 1.42859
+offset_top = 55.7127
+offset_right = 1.42859
+offset_bottom = 55.7127
+uid = 8
+
+[node name="slot10" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 0.908801
+anchor_top = 1.01622
+anchor_right = 0.992506
+anchor_bottom = 1.19938
+offset_left = 1.42883
+offset_top = 55.7127
+offset_right = 1.42944
+offset_bottom = 55.7126
+uid = 9
+
+[node name="slot11" parent="Main/TeamB" instance=ExtResource( 2 )]
+anchor_left = 1.00526
+anchor_top = 1.01622
+anchor_right = 1.08897
+anchor_bottom = 1.19938
+offset_left = 1.42859
+offset_top = 55.7127
+offset_right = 1.42859
+offset_bottom = 55.7126
+uid = 10
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0

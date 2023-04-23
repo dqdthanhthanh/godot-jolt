@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets2D/UI/MiniMap.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets2D/UI/IconCircle.png" type="Texture2D" id=2]
+[ext_resource path="res://MGF Scene/MiniMap/MiniMap.gd" type="Script" id=3]
+[ext_resource path="res://MGF Scene/MiniMap/unit_minimap.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets2D/UI/IconMove.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets2D/Theme/btnUIBGO.tres" type="StyleBox" id=6]
+[ext_resource path="res://Assets2D/Theme/btnUIBGOBorder.tres" type="StyleBox" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.27451 )
+border_color = Color( 1, 1, 1, 1 )
+border_blend = true
+shadow_color = Color( 0, 0, 0, 0.117647 )
+
+[node name="MiniMap" type="MarginContainer"]
+offset_right = 256.0
+offset_bottom = 150.0
+custom_minimum_size = Vector2( 256, 150 )
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 256.0
+offset_bottom = 150.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource( 1 )
+
+[node name="Map" type="TextureRect" parent="."]
+offset_right = 256.0
+offset_bottom = 150.0
+mouse_filter = 2
+texture = ExtResource( 1 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 256.0
+offset_bottom = 150.0
+mouse_filter = 2
+
+[node name="unit" parent="MarginContainer" instance=ExtResource( 4 )]
+position = Vector2( 128, 72 )
+
+[node name="Ball" type="MarginContainer" parent="."]
+offset_right = 256.0
+offset_bottom = 150.0
+mouse_filter = 2
+
+[node name="unit" type="Sprite2D" parent="Ball"]
+position = Vector2( 128, 80 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="unit" type="Sprite2D" parent="Ball/unit"]
+modulate = Color( 1, 1, 1, 0.196078 )
+light_mask = 4097
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 5 )
+
+[node name="BtnMiniMap" type="Button" parent="."]
+offset_right = 256.0
+offset_bottom = 150.0
+mouse_filter = 1
+theme_override_styles/hover = ExtResource( 7 )
+theme_override_styles/pressed = ExtResource( 7 )
+theme_override_styles/focus = ExtResource( 6 )
+theme_override_styles/disabled = ExtResource( 6 )
+theme_override_styles/normal = ExtResource( 6 )
+icon_alignment = 1

@@ -1,35 +1,28 @@
-extends TabBar
+extends Control
 
-@onready var playerStats = $PlayerStats
-@onready var players = $PlayerStats/Players
+@onready var playerStats: = $PlayerStats
+@onready var players: = $PlayerStats/Players
 
-@onready var insPlayer = load("res://MGF Scene/Season/PlayerStats.tscn")
+@onready var insPlayer: = load("res://MGF Scene/Season/PlayerStats.tscn")
 
-@onready var TabManager = get_parent()
+@onready var TabManager: = get_parent()
+@onready var TabControl: = get_parent().get_parent().get_node("MainBtn")
 
 
-func load_setup():
+
+func load_setup() -> void:
+	Global.gameModeCur = 1
+	await get_tree().create_timer(Global.btntime).timeout
 	get_players_stats()
 
-
-func _on_BtnMarket_pressed():
-	TabManager.current_tab = 3
-
-func _on_BtnStartMatch_pressed():
-	_on_BtnNextMatch_pressed()
-	await get_tree().create_timer(0.5).timeout
-	TabManager.nextMatch.go_match()
-	
-
-func _on_BtnNextMatch_pressed():
+func _on_BtnStartMatch_pressed() -> void:
+	await get_tree().create_timer(Global.btntime).timeout
 	SeasonData.find_match()
-	get_parent().nextMatch.load_setup()
-	TabManager.current_tab = 1
+	TabManager.nextMatch.load_setup()
+	TabControl.tab_select(1)
+	TabManager.nextMatch.go_match()
 
-func _on_BtnLeague_pressed():
-	TabManager.current_tab = 2
-
-func get_players_stats():
+func get_players_stats() -> void:
 	if players.get_child_count() > 0:
 		for i in players.get_children():
 			i.queue_free()
@@ -48,7 +41,7 @@ func get_players_stats():
 		
 		if i > 0:
 			ins.get_node("name").text = str(playerData[id].PlayerID) + " " + str(playerData[id].Name)
-			ins.get_node("team/team").texture = load(data.teams[int(teamSelect)].icon)
+			ins.get_node("team/icon").texture = Team.load_team_icon(data.teams[int(teamSelect)].icon)
 			ins.get_node("team").text = ""
 			if int(playerData[id].Season[0]) > 0:
 				ins.get_node("pos").text = str("%.1f" % (float(playerData[id].Season[1])/float(playerData[id].Season[0])))
@@ -78,11 +71,19 @@ class MyCustomSorter:
 		else:
 			return typeof(a) < typeof(b)
 
-
-func _on_BtnFormation_pressed():
+func _on_BtnFormation_pressed() -> void:
+	await get_tree().create_timer(Global.btntime).timeout
+	FormationData.CanFormation = true
 	FormationData.isDisable = false
 	var data = GameData.season_load_data()
 	var leagueData = data.season
 	FormationData.teamForm = leagueData.teamA
 	FormationData.teamFor = 1
 	SceneTransition.change_scene_to_file("res://MGF Scene/Formation/Formation.tscn")
+
+func _on_BtnTrainning_pressed() -> void:
+	Global.gameModeCur = 2
+	SceneTransition.change_scene_to_file("res://MGF Scene/MainGame.tscn")
+
+func _exit_tree():
+	queue_free()

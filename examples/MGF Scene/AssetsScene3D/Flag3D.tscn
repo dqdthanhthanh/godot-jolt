@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets3D/Shader/Flag3D_mat.tres" type="Material" id=1]
+
+[sub_resource type="StandardMaterial3D" id=18]
+albedo_color = Color( 0.709804, 0.713726, 0.760784, 1 )
+metallic = 0.56
+metallic_specular = 0.24
+roughness = 0.63
+
+[sub_resource type="CylinderMesh" id=6]
+material = SubResource( 18 )
+top_radius = 0.1
+bottom_radius = 0.1
+height = 4.105
+
+[sub_resource type="StandardMaterial3D" id=20]
+resource_name = "M_COT"
+vertex_color_use_as_albedo = true
+params_cull_mode = 2
+albedo_color = Color( 0.906332, 0.906332, 0.906332, 1 )
+roughness = 0.5
+
+[sub_resource type="PlaneMesh" id=19]
+material = ExtResource( 1 )
+size = Vector2( 3.2, 2 )
+subdivide_width = 32
+subdivide_depth = 32
+
+[node name="Flag3D" type="Node3D"]
+
+[node name="Pole" type="MeshInstance3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 20 )
+
+[node name="pivot" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.99299, 0 )
+
+[node name="Flag" type="MeshInstance3D" parent="pivot"]
+transform = Transform3D( 0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0.867151, 0.520499, 0.0184554 )
+mesh = SubResource( 19 )
+skeleton = NodePath("../..")

@@ -8,15 +8,15 @@ signal change()
 @onready var board: Control = get_node("../../../VBoxContainer")
 
 var title: String
-var details: String : set = __set_details
+var details: String: set = __set_details
 var category
 
 @onready var details_edit: TextEdit = $VBoxContainer/TextEdit
 @onready var category_option: OptionButton = $VBoxContainer/HBoxContainer/OptionButton
 
-func _ready():
-	details_edit.connect("text_changed",Callable(self,"__on_details_edit_changed"))
-	category_option.connect("item_selected",Callable(self,"__on_category_selected"))
+func _ready() -> void:
+	details_edit.connect("text_changed", Callable(self, "__on_details_edit_changed"))
+	category_option.connect("item_selected", Callable(self, "__on_category_selected"))
 
 func show_popup(title, details, category):
 	if visible:

@@ -1,0 +1,45 @@
+[gd_resource type="ShaderMaterial" load_steps=12 format=2]
+
+[ext_resource path="res://Assets3D/StadiumShader/Snow005_2K_Normal.jpg" type="Texture2D" id=1]
+[ext_resource path="res://Assets3D/StadiumShader/drops512.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets3D/StadiumShader/rain.gdshader" type="Shader" id=3]
+[ext_resource path="res://Assets2D/Stadium/grass_r.jpg" type="Texture2D" id=4]
+[ext_resource path="res://Assets2D/Stadium/grass_n.jpg" type="Texture2D" id=5]
+[ext_resource path="res://Assets2D/Stadium/grass.jpg" type="Texture2D" id=6]
+[ext_resource path="res://Assets3D/StadiumShader/ripples512.png" type="Texture2D" id=7]
+[ext_resource path="res://Assets3D/StadiumShader/streaks512.png" type="Texture2D" id=8]
+[ext_resource path="res://Assets3D/StadiumShader/snow_tex.jpg" type="Texture2D" id=9]
+
+[sub_resource type="FastNoiseLite" id=1]
+octaves = 4
+persistence = 1.0
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=2]
+noise = SubResource( 1 )
+
+[resource]
+shader = ExtResource( 3 )
+shader_param/scale_UV_material = 1.0
+shader_param/scale_UV_rain = 0.5
+shader_param/cam_heightmap_world_position = Vector3( 0, 20, 0 )
+shader_param/cam_heightmap_size = 30.0
+shader_param/rain = false
+shader_param/wet_level = 0.0
+shader_param/water_metallnes = 0.0
+shader_param/dry_angle = -1.0
+shader_param/puddles_noise = true
+shader_param/streaks_length = 0.5
+shader_param/streaks_angle = 0.95
+shader_param/snow_amount = 0.0
+shader_param/without_snow_angle = 0.0
+shader_param/snow_brightness = 0.7
+shader_param/Material_Albedo = ExtResource( 6 )
+shader_param/Material_Norm = ExtResource( 5 )
+shader_param/Material_Rough = ExtResource( 4 )
+shader_param/puddles_tex = ExtResource( 9 )
+shader_param/noise_tex = SubResource( 2 )
+shader_param/drops_tex = ExtResource( 2 )
+shader_param/ripples_tex = ExtResource( 7 )
+shader_param/streaks_tex = ExtResource( 8 )
+shader_param/snow_norm = ExtResource( 1 )

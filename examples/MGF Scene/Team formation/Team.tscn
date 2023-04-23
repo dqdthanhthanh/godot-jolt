@@ -1,23 +1,23 @@
-[gd_scene load_steps=128 format=3 uid="uid://db4d54u3vld75"]
+[gd_scene load_steps=128 format=3 uid="uid://b256qunxr3jfn"]
 
-[ext_resource type="PackedScene" uid="uid://8hlhpu15p310" path="res://MGF Scene/AssetsScene3D/Player/CB/SieuLucSi.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bb508rut2s21c" path="res://MGF Scene/AssetsScene3D/Player/CB/SieuLucSi.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/CB/ChienBinhBang.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://dv0ju24e3k1py" path="res://MGF Scene/AssetsScene3D/Player/CB/KiemLua.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/CB/KiemLua.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/ChimMay.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://br1enl5inay3a" path="res://MGF Scene/AssetsScene3D/Player/CB/ChienBinhNuoc.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://drk52u65os7ip" path="res://MGF Scene/AssetsScene3D/Player/DV/SuTu.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://bljotkpnskows" path="res://MGF Scene/AssetsScene3D/Player/CB/ChienBinhNuoc.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/SuTu.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/CB/MayBua.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/DeMay.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/GauChien.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/SoiMay.tscn" id="10"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/TrauChien.tscn" id="11"]
-[ext_resource type="PackedScene" uid="uid://1sijg2elcwrf" path="res://MGF Scene/AssetsScene3D/Player/CB/VoSi.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/CB/VoSi.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/CB/HoangTuThienNhien.tscn" id="13"]
-[ext_resource type="PackedScene" uid="uid://bgy64g0hqxwu1" path="res://MGF Scene/AssetsScene3D/Player/CB/VuTru.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/CB/VuTru.tscn" id="14"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/ChimUng.tscn" id="15"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/DV/SieuNhanUng.tscn" id="16"]
-[ext_resource type="PackedScene" uid="uid://clygi8mx7fxfb" path="res://MGF Scene/AssetsScene3D/Player/KH/NhaDa.tscn" id="17"]
-[ext_resource type="PackedScene" uid="uid://bnnceq51tf7l4" path="res://MGF Scene/AssetsScene3D/Player/KH/MayTinhTinh.tscn" id="18"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/NhaDa.tscn" id="17"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/MayTinhTinh.tscn" id="18"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/GiapMangXa.tscn" id="19"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/GiapSi.tscn" id="20"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/KH/HiepKhach.tscn" id="21"]
@@ -28,7 +28,7 @@
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/KhongGian.tscn" id="26"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/MaySang.tscn" id="27"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/MayTa.tscn" id="28"]
-[ext_resource type="PackedScene" uid="uid://cygdensj272fb" path="res://MGF Scene/AssetsScene3D/Player/MN/Robodo.tscn" id="29"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/Robodo.tscn" id="29"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/MayBay.tscn" id="30"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/MaySat.tscn" id="31"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/MN/ThanMay.tscn" id="32"]
@@ -71,19 +71,19 @@
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_MayChien.tscn" id="69"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_MayDa.tscn" id="70"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_MayBinhSi.tscn" id="71"]
-[ext_resource type="PackedScene" uid="uid://dflyw8qg650ll" path="res://MGF Scene/AssetsScene3D/Player/RB/S_Boxing.tscn" id="72"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_Boxing.tscn" id="72"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RB/S_MayDien.tscn" id="73"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongTinhThach.tscn" id="74"]
-[ext_resource type="PackedScene" uid="uid://dytqcsxkdjnuj" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongQuy.tscn" id="75"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongQuy.tscn" id="75"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongSung.tscn" id="76"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongMay.tscn" id="77"]
-[ext_resource type="PackedScene" uid="uid://n1gs3dffvrr1" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongLua.tscn" id="78"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongLua.tscn" id="78"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongHaiDau.tscn" id="79"]
-[ext_resource type="PackedScene" uid="uid://1pceypwsutxm" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongBang.tscn" id="80"]
-[ext_resource type="PackedScene" uid="uid://dyvodclwjjpvg" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongKhungLong.tscn" id="81"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongBang.tscn" id="80"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/RO/S_RongKhungLong.tscn" id="81"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuDo.tscn" id="82"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuNinJa.tscn" id="83"]
-[ext_resource type="PackedScene" uid="uid://b2ms6wanrlo7g" path="res://MGF Scene/AssetsScene3D/Player/ST/S_PhapSu.tscn" id="84"]
+[ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_PhapSu.tscn" id="84"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_KiemSi.tscn" id="85"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuKiem.tscn" id="86"]
 [ext_resource type="PackedScene" path="res://MGF Scene/AssetsScene3D/Player/ST/S_SatThuKiemSi.tscn" id="87"]
@@ -175,201 +175,200 @@ bounce = 0.3
 [node name="CB" type="Node3D" parent="."]
 
 [node name="SieuLucSi" parent="CB" instance=ExtResource("1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.36513, 0, 0)
-mass = 1000.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.40863, 0, 0)
+collision_mask = 0
 
 [node name="ChienBinhBang" parent="CB" instance=ExtResource("2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.86524, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.32244, 0, 0)
 
 [node name="ChienBinhNuoc" parent="CB" instance=ExtResource("5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.420011, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0896, 0, 0)
 
 [node name="MayBua" parent="CB" instance=ExtResource("7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0182619, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.995838, 0, 0)
 
 [node name="KiemLua" parent="CB" instance=ExtResource("3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.397397, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.766781, 0, 0)
 
 [node name="VuTru" parent="CB" instance=ExtResource("14")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.738622, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.68457, 0, 0)
 
 [node name="VoSi" parent="CB" instance=ExtResource("12")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.07942, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53184, 0, 0)
 
 [node name="HoangTu" parent="CB" instance=ExtResource("13")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4354, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.36532, 0, 0)
 
 [node name="DV" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.439816)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.57105)
 
 [node name="SuTu" parent="DV" instance=ExtResource("6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52786, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.64577, 0, 0)
 
 [node name="TrauChien" parent="DV" instance=ExtResource("11")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05254, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.34662, 0, 0)
 
 [node name="GauChien" parent="DV" instance=ExtResource("9")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.488091, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.51242, 0, 0)
 
 [node name="SoiMay" parent="DV" instance=ExtResource("10")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00781476, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25448, 0, 0)
 
 [node name="DeMay" parent="DV" instance=ExtResource("8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.383338, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.855013, 0, 0)
 
 [node name="SieuNhanUng" parent="DV" instance=ExtResource("16")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.84876, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.77176, 0, 0)
 
 [node name="ChimMay" parent="DV" instance=ExtResource("4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27704, 0, 0)
-playerPositionMath = "GK"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.70418, 0, 0)
 
 [node name="ChimUng" parent="DV" instance=ExtResource("15")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65829, 0, 0)
-playerPositionMath = "RF"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.32483, 0, 0)
 
 [node name="KH" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.07022)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.59541)
 
 [node name="NhaDa" parent="KH" instance=ExtResource("17")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24864, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.7325, 0, 0)
 physics_material_override = SubResource("2")
 
 [node name="MayTinhTinh" parent="KH" instance=ExtResource("18")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.790431, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.38316, 0, 0)
 physics_material_override = SubResource("3")
 
 [node name="GiapMangXa" parent="KH" instance=ExtResource("19")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.429495, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.40126, 0, 0)
 physics_material_override = SubResource("4")
 
 [node name="GiapSi" parent="KH" instance=ExtResource("20")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.32829, 0, 0)
 physics_material_override = SubResource("5")
 
 [node name="HiepKhach" parent="KH" instance=ExtResource("21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.373735, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.959084, 0, 0)
 physics_material_override = SubResource("6")
 
 [node name="PhuThuyNho" parent="KH" instance=ExtResource("22")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.724925, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.84118, 0, 0)
 physics_material_override = SubResource("7")
 
 [node name="XuongSo" parent="KH" instance=ExtResource("23")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.00921, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65638, 0, 0)
 physics_material_override = SubResource("8")
 
 [node name="ThanBinh" parent="KH" instance=ExtResource("24")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34488, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.52296, 0, 0)
 
 [node name="NM" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.60712)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.6898)
 
 [node name="MayBay" parent="NM" instance=ExtResource("30")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.06884, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.73281, 0, 0)
 physics_material_override = SubResource("9")
 
 [node name="MaySat" parent="NM" instance=ExtResource("31")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.698674, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.55102, 0, 0)
 physics_material_override = SubResource("10")
 
 [node name="ThanMay" parent="NM" instance=ExtResource("32")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.343366, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.38268, 0, 0.0341883)
 physics_material_override = SubResource("11")
 
 [node name="MayTa" parent="NM" instance=ExtResource("28")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19824, 0, 0)
 physics_material_override = SubResource("12")
 
 [node name="RoBoDo" parent="NM" instance=ExtResource("29")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.415024, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24802, 0, 0)
 physics_material_override = SubResource("13")
 
 [node name="MayQuy" parent="NM" instance=ExtResource("25")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.801878, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98568, 0, 0.00557899)
 physics_material_override = SubResource("14")
 
 [node name="KhongGian" parent="NM" instance=ExtResource("26")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14188, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.87911, 0, 0)
 physics_material_override = SubResource("15")
 
 [node name="MaySang" parent="NM" instance=ExtResource("27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.49703, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.51752, 0, 0)
 physics_material_override = SubResource("16")
 
 [node name="QB" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.13965)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.6924)
 
 [node name="ChienBinhRet" parent="QB" instance=ExtResource("33")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87713, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.74007, 0, 0)
 physics_material_override = SubResource("17")
 
 [node name="ChienBinhDiaNguc" parent="QB" instance=ExtResource("34")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46967, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.50273, 0, 0)
 physics_material_override = SubResource("18")
 
 [node name="DoVat" parent="QB" instance=ExtResource("35")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.06917, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.25505, 0, 0)
 physics_material_override = SubResource("19")
 
 [node name="ThoDan" parent="QB" instance=ExtResource("38")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.532841, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29005, 0, 0)
 physics_material_override = SubResource("20")
 
 [node name="LucSi" parent="QB" instance=ExtResource("39")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.407467, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.22958, 0, 0)
 physics_material_override = SubResource("21")
-playerPosition = "CM"
 
 [node name="BongDem" parent="QB" instance=ExtResource("40")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.825382, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11863, 0, 0)
 physics_material_override = SubResource("22")
-playerPositionMath = "RF"
 
 [node name="SieuNhan" parent="QB" instance=ExtResource("37")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25559, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.97671, 0, 0)
 physics_material_override = SubResource("23")
-playerPositionMath = "LF"
 
 [node name="BinhSi" parent="QB" instance=ExtResource("36")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.74995, 0, 0)
 physics_material_override = SubResource("24")
 
 [node name="QD" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.71023)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 14.8883)
 
 [node name="QuyDiaNguc" parent="QD" instance=ExtResource("49")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.26075, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.78327, 0, 0)
 physics_material_override = SubResource("25")
 
 [node name="TinhTinh" parent="QD" instance=ExtResource("41")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.851341, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.45882, 0, 0)
 physics_material_override = SubResource("26")
 
 [node name="Demon" parent="QD" instance=ExtResource("42")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.459722, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.37969, 0, 0)
 physics_material_override = SubResource("27")
 
 [node name="QuaiMay" parent="QD" instance=ExtResource("43")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0271006, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.22163, 0, 0)
 physics_material_override = SubResource("28")
 
 [node name="GiapMa" parent="QD" instance=ExtResource("44")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.479509, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.27586, 0, 0)
 physics_material_override = SubResource("29")
 
 [node name="DauLau" parent="QD" instance=ExtResource("48")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.898916, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17422, 0, 0)
 
 [node name="QuyDoi" parent="QD" instance=ExtResource("46")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.40553, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00809, 0, 0)
 physics_material_override = SubResource("30")
 
 [node name="QuaiThu" parent="QD" instance=ExtResource("47")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88458, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.83335, 0, 0)
 
 [node name="QuyGiap" parent="QD" instance=ExtResource("45")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29551, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.8197, 0, 0)
 
 [node name="QP" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.50903)
+visible = false
 
 [node name="LaChan" parent="QP" instance=ExtResource("56")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55291, 0, 0)
@@ -396,6 +395,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.700007, 0, 0)
 
 [node name="QV" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.16519)
+visible = false
 
 [node name="QuaiLaVa" parent="QV" instance=ExtResource("58")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.68923, 0, 0)
@@ -410,7 +410,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.820599, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41255, 0, 0)
 
 [node name="MaQuai" parent="QV" instance=ExtResource("62")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.994091, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.970708, 0, -0.0389719)
 
 [node name="QuySoi" parent="QV" instance=ExtResource("63")]
 transform = Transform3D(0.999805, 0, 0, 0, 0.999805, 0, 0, 0, 0.999805, 0.0142882, 0, 0)
@@ -423,6 +423,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.34625, 0, 0)
 
 [node name="RB" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.76429)
+visible = false
 
 [node name="SamuraiGiap" parent="RB" instance=ExtResource("66")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73896, 0, 0)
@@ -450,12 +451,13 @@ transform = Transform3D(0.999805, 0, 0, 0, 0.999805, 0, 0, 0, 0.999805, 0.96154,
 
 [node name="RO" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.51555)
+visible = false
 
 [node name="RongTinhThach" parent="RO" instance=ExtResource("74")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.52465, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71844, 0, 0)
 
 [node name="RongMay" parent="RO" instance=ExtResource("77")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17964, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3066, 0, 0)
 
 [node name="RongLua" parent="RO" instance=ExtResource("78")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.850885, 0, 0)
@@ -477,6 +479,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06597, 0, 0)
 
 [node name="ST" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.05759)
+visible = false
 
 [node name="SatThuKiem" parent="ST" instance=ExtResource("86")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5646, 0, 0)
@@ -507,9 +510,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55213, 0, 0)
 
 [node name="VT" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.68522)
+visible = false
 
 [node name="ThanPhuThuy" parent="VT" instance=ExtResource("91")]
-transform = Transform3D(0.999805, 0, 0, 0, 0.999805, 0, 0, 0, 0.999805, -1.52773, 0, 0)
+transform = Transform3D(0.999805, 0, 0, 0, 0.999805, 0, 0, 0, 0.999805, -1.65804, 0, 0)
 
 [node name="ThanSet" parent="VT" instance=ExtResource("92")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.17319, 0, 0)
@@ -520,11 +524,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79287, 0, 0)
 [node name="BaoHo" parent="VT" instance=ExtResource("94")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.348089, 0, 0)
 
-[node name="ThanTrang" parent="VT" instance=ExtResource("95")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.453712, 0, 0)
-
 [node name="SucManh" parent="VT" instance=ExtResource("96")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0322304, 0, 0)
+
+[node name="ThanTrang" parent="VT" instance=ExtResource("95")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.453712, 0, 0)
 
 [node name="ThanChet" parent="VT" instance=ExtResource("97")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.844439, 0, 0)

@@ -43,7 +43,7 @@ var dd = 0
 var ll = 0
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	reset_team_data()
 	randomize()
 	arrayTest.shuffle()
@@ -78,7 +78,7 @@ func caculate(value1, value2):
 
 func round_robin_gen():
 	if len(teams) % 2:
-		teams.append('Day unchecked')
+		teams.append('Day off')
 	var n = len(teams)
 	var matchs = []
 	var return_matchs = []
@@ -146,7 +146,7 @@ func get_fixtures_data():
 					newArr[e-1].teamPointW += int(goalB.text)
 					newArr[e-1].teamPointL += int(goalA.text)
 
-	newArr.sort_custom(Callable(MyCustomSorter,"sort_ascending"))
+	newArr.sort_custom(Callable(MyCustomSorter, "sort_ascending"))
 	
 	for n in range(newArr.size()):
 		n+=1
@@ -176,7 +176,7 @@ func get_fixtures_data():
 	bxh.get_child(1).get_team_data()
 
 func reset_team_data():
-	newArr.sort_custom(Callable(MyCustomSorter,"sort_reset"))
+	newArr.sort_custom(Callable(MyCustomSorter, "sort_reset"))
 	for n in range(newArr.size()):
 		n+=1
 		newArr[n-1].teamIndex = str(n-1)
@@ -204,3 +204,6 @@ class MyCustomSorter:
 			return a > b
 		else:
 			return typeof(a) < typeof(b)
+
+func _exit_tree():
+	queue_free()

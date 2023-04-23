@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bf7eksdvckbk4"
+uid="uid://duggify7mxkx3"
 path="res://.godot/imported/stadium.glb-1a43ad057e628ac7f12dd43ea6c7e207.scn"
 
 [deps]
@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/stadium.glb-1a43ad057e628ac7f12dd43ea6c7e207.
 
 [params]
 
-nodes/root_type="Spatial"
+nodes/root_type="Node3D"
 nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
@@ -28,5 +28,44 @@ animation/fps=15
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""
-_subresources={}
+_subresources={
+"materials": {
+"DEN": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Stadium/DEN.material"
+},
+"che": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Stadium/che.material"
+},
+"gach": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Stadium/gach.material"
+},
+"khandai": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Stadium/khandai.material"
+},
+"kimloai": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Stadium/kimloai.material"
+},
+"kinh": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Stadium/kinh.material"
+},
+"san": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Stadium/san.material"
+},
+"thang": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Stadium/thang.material"
+},
+"tuong": {
+"use_external/enabled": true,
+"use_external/path": "res://Assets3D/Stadium/tuong.material"
+}
+}
+}
 gltf/embedded_image_handling=1

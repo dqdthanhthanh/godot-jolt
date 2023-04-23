@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5x6q0vhc8236"
-path.etc2="res://.godot/imported/iconFormation.png-98a7ad57bc448ab24fa2805005dbced3.etc2.ctex"
+uid="uid://bq0ponx4ifp0u"
+path="res://.godot/imported/iconFormation.png-98a7ad57bc448ab24fa2805005dbced3.ctex"
 metadata={
-"imported_formats": ["etc2_astc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets2D/UI/iconFormation.png"
-dest_files=["res://.godot/imported/iconFormation.png-98a7ad57bc448ab24fa2805005dbced3.etc2.ctex"]
+dest_files=["res://.godot/imported/iconFormation.png-98a7ad57bc448ab24fa2805005dbced3.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

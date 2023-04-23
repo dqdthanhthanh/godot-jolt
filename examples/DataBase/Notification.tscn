@@ -1,0 +1,130 @@
+[gd_scene load_steps=9 format=3 uid="uid://cxbjgi0ya51r2"]
+
+[ext_resource type="PackedScene" uid="uid://ccclwffojl3jf" path="res://MGF Scene/Setup/ButtonBase.tscn" id="1"]
+[ext_resource type="Script" path="res://DataBase/Notification.gd" id="2"]
+[ext_resource type="FontFile" uid="uid://digsjq1ccbknq" path="res://Assets2D/Fonts/FiraSansFont/FiraSans-Medium.otf" id="3"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedN.tres" id="5"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnUIN.tres" id="6"]
+[ext_resource type="StyleBox" path="res://Assets2D/Theme/btnRedP.tres" id="7"]
+
+[sub_resource type="StyleBoxFlat" id="1"]
+bg_color = Color(0, 0, 0, 0.588235)
+
+[sub_resource type="FontFile" id="2"]
+fallbacks = Array[Font]([ExtResource("3")])
+face_index = null
+embolden = null
+transform = null
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/30/0/ascent = 0.0
+cache/0/30/0/descent = 0.0
+cache/0/30/0/underline_position = 0.0
+cache/0/30/0/underline_thickness = 0.0
+cache/0/30/0/scale = 1.0
+cache/0/30/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/30/0/kerning_overrides/25/0 = Vector2(0, 0)
+cache/0/25/0/ascent = 0.0
+cache/0/25/0/descent = 0.0
+cache/0/25/0/underline_position = 0.0
+cache/0/25/0/underline_thickness = 0.0
+cache/0/25/0/scale = 1.0
+cache/0/25/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/30/0 = Vector2(0, 0)
+cache/0/25/0/kerning_overrides/25/0 = Vector2(0, 0)
+
+[node name="Notification" type="CanvasLayer"]
+process_mode = 3
+layer = 100
+script = ExtResource("2")
+
+[node name="Popup" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackGround" type="Panel" parent="Popup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("1")
+
+[node name="Panel" type="Panel" parent="Popup"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -144.0
+offset_right = 384.0
+offset_bottom = 144.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popup/Panel"]
+layout_mode = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -144.0
+offset_right = 384.0
+offset_bottom = 144.0
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="TextContainer" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Popup/Panel/VBoxContainer/TextContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_fonts/font = SubResource("2")
+theme_override_font_sizes/font_size = 25
+text = "Test"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Popup/Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 120
+alignment = 1
+
+[node name="BtnYes" parent="Popup/Panel/VBoxContainer/HBoxContainer" instance=ExtResource("1")]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+theme_override_fonts/font = SubResource("2")
+text = "Yes"
+
+[node name="BtnNo" parent="Popup/Panel/VBoxContainer/HBoxContainer" instance=ExtResource("1")]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+theme_override_fonts/font = SubResource("2")
+theme_override_styles/normal = ExtResource("5")
+theme_override_styles/hover = ExtResource("7")
+theme_override_styles/pressed = ExtResource("7")
+theme_override_styles/disabled = ExtResource("5")
+theme_override_styles/focus = ExtResource("7")
+text = "No"
+
+[connection signal="pressed" from="Popup/Panel/VBoxContainer/HBoxContainer/BtnYes" to="." method="_on_BtnYes_pressed"]
+[connection signal="pressed" from="Popup/Panel/VBoxContainer/HBoxContainer/BtnNo" to="." method="_on_BtnNo_pressed"]

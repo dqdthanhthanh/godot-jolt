@@ -1,51 +1,67 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource type="StyleBox" path="res://Assets2D/Theme/broadBorderBlack.tres" id="2"]
-[ext_resource type="StyleBox" uid="uid://dagwd3331fh2k" path="res://Assets2D/Theme/broadBorderWhite.tres" id="3"]
-[ext_resource type="StyleBox" uid="uid://bvc4xkbpf56rx" path="res://Assets2D/Theme/broadBorder.tres" id="3_n5mvk"]
-[ext_resource type="FontFile" path="res://Assets2D/Fonts/UI.tres" id="3_w21s0"]
-[ext_resource type="Script" path="res://MGF Scene/Season/TeamIndex.gd" id="4"]
+[ext_resource path="res://Assets2D/Fonts/UI.tres" type="FontFile" id=1]
+[ext_resource path="res://Assets2D/Theme/broadBorderBlack.tres" type="StyleBox" id=2]
+[ext_resource path="res://Assets2D/Theme/broadBorderWhite.tres" type="StyleBox" id=3]
+[ext_resource path="res://MGF Scene/Season/TeamIndex.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 0.588235 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+shadow_color = Color( 0, 0, 0, 0.117647 )
+shadow_size = 30
 
 [node name="TeamIndex" type="Panel"]
-custom_minimum_size = Vector2(700, 48)
 offset_right = 695.0
 offset_bottom = 55.2
+custom_minimum_size = Vector2( 700, 48 )
 mouse_filter = 2
-theme_override_styles/panel = ExtResource("3")
-script = ExtResource("4")
+theme_override_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
 
 [node name="HBox" type="HBoxContainer" parent="."]
-layout_mode = 0
 anchor_right = 1.86559
 anchor_bottom = 1.0
 offset_right = -704.0
 theme_override_constants/separation = -2
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Index" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_top = 3.0
+offset_right = 64.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "Stt"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Logo" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_left = 62.0
+offset_top = 3.0
+offset_right = 126.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "L"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Sprite2D" type="TextureRect" parent="HBox/Logo"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -54,118 +70,153 @@ offset_left = -24.0
 offset_top = -24.0
 offset_right = 24.0
 offset_bottom = 24.0
-expand_mode = 1
-stretch_mode = 5
+custom_minimum_size = Vector2( 48, 48 )
+expand = true
 
 [node name="Label" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_left = 124.0
+offset_top = 3.0
+offset_right = 188.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "T"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Match" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_left = 186.0
+offset_top = 3.0
+offset_right = 250.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "M"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="W" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_left = 248.0
+offset_top = 3.0
+offset_right = 312.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "W"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="D" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_left = 310.0
+offset_top = 3.0
+offset_right = 374.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "D"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="L" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_left = 372.0
+offset_top = 3.0
+offset_right = 436.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "L"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Point" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = ExtResource("2")
+offset_left = 434.0
+offset_top = 3.0
+offset_right = 498.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
+theme_override_styles/normal = ExtResource( 2 )
 text = "P"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="Cup" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_left = 496.0
+offset_top = 3.0
+offset_right = 560.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "+/-"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="PW" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_left = 558.0
+offset_top = 3.0
+offset_right = 622.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "F"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="PL" type="Label" parent="HBox"]
-custom_minimum_size = Vector2(64, 48)
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_w21s0")
-theme_override_font_sizes/font_size = 25
+offset_left = 620.0
+offset_top = 3.0
+offset_right = 684.0
+offset_bottom = 51.0
+custom_minimum_size = Vector2( 64, 48 )
+theme_override_colors/font_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 1 )
 text = "A"
-horizontal_alignment = 1
-vertical_alignment = 1
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [node name="BtnFormation" type="Button" parent="."]
-layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
-theme_override_styles/normal = ExtResource("2")
-theme_override_styles/hover = ExtResource("3_n5mvk")
-theme_override_styles/pressed = ExtResource("3_n5mvk")
-theme_override_styles/disabled = ExtResource("2")
-theme_override_styles/focus = ExtResource("3_n5mvk")
+theme_override_styles/hover = ExtResource( 3 )
+theme_override_styles/pressed = ExtResource( 3 )
+theme_override_styles/focus = ExtResource( 3 )
+theme_override_styles/disabled = ExtResource( 2 )
+theme_override_styles/normal = ExtResource( 2 )
 
 [connection signal="pressed" from="BtnFormation" to="." method="_on_BtnFormation_pressed"]

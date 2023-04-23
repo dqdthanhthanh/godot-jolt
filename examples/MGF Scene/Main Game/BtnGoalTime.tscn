@@ -1,7 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets2D/Logo/CB.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets2D/TeamLogo/High/CB.png" type="Texture2D" id=1]
 [ext_resource path="res://Assets2D/Fonts/FiraSansFont/FiraSans-Medium.otf" type="FontFile" id=2]
+[ext_resource path="res://Assets2D/Theme/btnUICPReplay.tres" type="StyleBox" id=3]
+[ext_resource path="res://Assets2D/Theme/btnUICNReplay.tres" type="StyleBox" id=4]
+[ext_resource path="res://Assets2D/Fonts/UIMenuBig.tres" type="FontFile" id=5]
+
 
 [sub_resource type="FontFile" id=3]
 size = 40
@@ -9,49 +13,30 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 1, 0.0392157, 0.0392157, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 35
-corner_radius_top_right = 35
-corner_radius_bottom_right = 35
-corner_radius_bottom_left = 35
-shadow_color = Color( 0, 0, 0, 0.117647 )
-shadow_size = 30
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.741176, 0.0705882, 0.0705882, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 35
-corner_radius_top_right = 35
-corner_radius_bottom_right = 35
-corner_radius_bottom_left = 35
-shadow_color = Color( 0, 0, 0, 0.117647 )
-shadow_size = 30
-
 [node name="BtnGoalTime" type="Button"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -800.0
-offset_top = -44.0
-offset_right = -712.0
-offset_bottom = 44.0
-custom_minimum_size = Vector2( 88, 88 )
-custom_fonts/font = SubResource( 3 )
-custom_styles/hover = SubResource( 7 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/disabled = SubResource( 2 )
-custom_styles/normal = SubResource( 2 )
-text = "10"
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
+custom_minimum_size = Vector2( 72, 72 )
+theme_override_fonts/font = SubResource( 3 )
+theme_override_styles/hover = ExtResource( 3 )
+theme_override_styles/pressed = ExtResource( 3 )
+theme_override_styles/focus = ExtResource( 3 )
+theme_override_styles/disabled = ExtResource( 4 )
+theme_override_styles/normal = ExtResource( 4 )
 icon = ExtResource( 1 )
 icon_alignment = 1
 expand_icon = true
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_fonts/font = ExtResource( 5 )
+text = "1"
+align = 1
+valign = 1
