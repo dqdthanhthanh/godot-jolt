@@ -4,7 +4,7 @@
 #Requires -Version 7.2
 
 param (
-	[Parameter(Mandatory = $true, HelpMessage = "Path to directory with source files")]
+	[Parameter(HelpMessage = "Path to directory with source files", Mandatory)]
 	[ValidateNotNullOrEmpty()]
 	[string]$SourcePath,
 
@@ -15,7 +15,7 @@ param (
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
-$SourceFiles = Get-ChildItem -Recurse -Path $SourcePath -Include ("*.cpp", "*.h")
+$SourceFiles = Get-ChildItem -Recurse -Path $SourcePath -Include ("*.cpp", "*.hpp")
 
 $Outputs = [Collections.Concurrent.ConcurrentBag[psobject]]::new()
 

@@ -1,5 +1,23 @@
 name: 🪟 Build (Windows)
-on: [push, pull_request, workflow_dispatch]
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - 'docs/**'
+      - 'examples/**'
+      - '**.md'
+      - '**.txt'
+      - '!**/CMakeLists.txt'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'examples/**'
+      - '**.md'
+      - '**.txt'
+      - '!**/CMakeLists.txt'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -21,8 +39,10 @@ jobs:
         arch: [x64, x86]
         editor: [false, true]
         config: [debug, development, distribution]
-        version: [17]
 
+        # HACK(mihe): 32-bit clang-cl builds are compiled using a 32-bit compiler, which tend to run
+        # out of memory randomly when IPO/LTO is enabled, so we disable that for all 32-bit clang-cl
+        # builds by injecting the relevant CMake argument using `include`
         include:
           - platform: windows-clangcl
             arch: x86
@@ -35,7 +55,6 @@ jobs:
       - name: Set up environment
         uses: ./.github/actions/setup-windows
         with:
-          version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
 
       - name: Configure
@@ -44,6 +63,8 @@ jobs:
           platform: ${{ matrix.platform }}
           arch: ${{ matrix.arch }}
           args: ${{ matrix.args }}
+        env:
+          CXXFLAGS: /WX
 
       - name: Build
         uses: ./.github/actions/cmake-build

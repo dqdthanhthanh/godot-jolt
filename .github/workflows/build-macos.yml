@@ -1,5 +1,23 @@
 name: 🍎 Build (macOS)
-on: [push, pull_request, workflow_dispatch]
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - 'docs/**'
+      - 'examples/**'
+      - '**.md'
+      - '**.txt'
+      - '!**/CMakeLists.txt'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'examples/**'
+      - '**.md'
+      - '**.txt'
+      - '!**/CMakeLists.txt'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -7,7 +25,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: macos-12
+    runs-on: macos-13
     name: "\
       ${{ matrix.platform }}-\
       ${{ matrix.editor == true && 'editor-' || '' }}\
@@ -19,7 +37,6 @@ jobs:
         platform: [macos-clang]
         editor: [false, true]
         config: [debug, development, distribution]
-        version: [14.1]
 
     steps:
       - name: Checkout code
@@ -27,13 +44,13 @@ jobs:
 
       - name: Set up environment
         uses: ./.github/actions/setup-macos
-        with:
-          version: ${{ matrix.version }}
 
       - name: Configure
         uses: ./.github/actions/cmake-configure
         with:
           platform: ${{ matrix.platform }}
+        env:
+          CXXFLAGS: -Werror
 
       - name: Build
         uses: ./.github/actions/cmake-build

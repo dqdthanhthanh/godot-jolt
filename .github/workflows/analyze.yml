@@ -1,5 +1,23 @@
 name: 🔍 Analyze
-on: [push, pull_request, workflow_dispatch]
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - 'docs/**'
+      - 'examples/**'
+      - '**.md'
+      - '**.txt'
+      - '!**/CMakeLists.txt'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'examples/**'
+      - '**.md'
+      - '**.txt'
+      - '!**/CMakeLists.txt'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -8,7 +26,7 @@ concurrency:
 jobs:
   clang-format:
     name: Formatting
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
 
     steps:
       - name: Checkout code
@@ -18,7 +36,6 @@ jobs:
         uses: ./.github/actions/setup-linux
         with:
           toolchain: llvm
-          version: 14
 
       - name: Identify clang-format
         shell: pwsh
@@ -30,7 +47,7 @@ jobs:
 
   clang-tidy:
     name: Linting (${{ matrix.arch }})
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
 
     strategy:
       fail-fast: false
@@ -45,7 +62,6 @@ jobs:
         uses: ./.github/actions/setup-linux
         with:
           toolchain: llvm
-          version: 14
 
       - name: Configure
         uses: ./.github/actions/cmake-configure

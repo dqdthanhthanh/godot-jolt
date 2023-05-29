@@ -3,7 +3,7 @@
 #include "spaces/jolt_debug_renderer_3d.hpp"
 
 class JoltDebugGeometry3D final : public GeometryInstance3D {
-	GDCLASS_NO_WARN(JoltDebugGeometry3D, GeometryInstance3D) // NOLINT
+	GDCLASS_NO_WARN(JoltDebugGeometry3D, GeometryInstance3D)
 
 public:
 	enum ColorScheme {
@@ -14,7 +14,7 @@ public:
 		COLOR_SCHEME_ISLAND
 	};
 
-protected:
+private:
 	// NOLINTNEXTLINE(readability-identifier-naming)
 	static void _bind_methods();
 

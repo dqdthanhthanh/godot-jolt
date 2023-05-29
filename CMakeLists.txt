@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.22 FATAL_ERROR)
 
+set(bin_dir ${CMAKE_CURRENT_LIST_DIR}/bin)
 set(source_dir ${CMAKE_CURRENT_LIST_DIR}/src)
 set(cmake_dir ${CMAKE_CURRENT_LIST_DIR}/cmake)
 set(templates_dir ${cmake_dir}/templates)
@@ -8,10 +9,7 @@ list(APPEND CMAKE_MODULE_PATH ${cmake_dir})
 
 include(GodotJoltPrelude)
 
-project(godot-jolt
-	VERSION 0.1.0
-	LANGUAGES CXX
-)
+project(godot-jolt VERSION 0.2.0 LANGUAGES CXX)
 
 include(GodotJoltSetup)
 include(GodotJoltExternalGodotCpp)
@@ -21,27 +19,28 @@ include(GodotJoltExternalMimalloc)
 gdj_get_build_id(PROJECT_VERSION_BUILD)
 
 set(PROJECT_TITLE "Godot Jolt")
-set(PROJECT_DESCRIPTION "Godot extension that integrates the Jolt physics engine")
-set(PROJECT_COPYRIGHT "Copyright (c) 2022 Mikael Hermansson and Godot Jolt contributors")
+set(PROJECT_DESCRIPTION "Godot extension that integrates the Jolt physics engine.")
+set(PROJECT_COPYRIGHT "Copyright (c) Mikael Hermansson and Godot Jolt contributors.")
 set(PROJECT_BUNDLE_IDENTIFIER "org.godot-jolt.godot-jolt")
+set(PROJECT_ENTRY_POINT "godot_jolt_main")
 set(PROJECT_VERSION_STATUS "dev")
 set(PROJECT_VERSION_WITH_STATUS ${PROJECT_VERSION}-${PROJECT_VERSION_STATUS})
 set(PROJECT_VERSION_WITH_BUILD ${PROJECT_VERSION_WITH_STATUS}+${PROJECT_VERSION_BUILD})
 
-file(GLOB_RECURSE godot-jolt_SOURCES CONFIGURE_DEPENDS ${source_dir}/*.cpp)
-file(GLOB_RECURSE godot-jolt_HEADERS CONFIGURE_DEPENDS ${source_dir}/*.hpp)
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS ${source_dir}/*.cpp)
+file(GLOB_RECURSE headers CONFIGURE_DEPENDS ${source_dir}/*.hpp)
 
 set(pch_file ${source_dir}/precompiled.hpp)
 
 if(CMAKE_SYSTEM_NAME STREQUAL Windows)
 	gdj_generate_rc_file(rc_file)
-	list(APPEND godot-jolt_SOURCES ${rc_file})
+	list(APPEND sources ${rc_file})
 elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
 	gdj_generate_info_file(info_file)
-	list(APPEND godot-jolt_SOURCES ${info_file})
+	list(APPEND sources ${info_file})
 endif()
 
-add_library(godot-jolt SHARED ${godot-jolt_SOURCES} ${godot-jolt_HEADERS})
+add_library(godot-jolt SHARED ${sources} ${headers})
 add_library(godot-jolt::godot-jolt ALIAS godot-jolt)
 
 target_link_libraries(godot-jolt
@@ -99,15 +98,22 @@ set_target_properties(godot-jolt PROPERTIES
 	OUTPUT_NAME godot-jolt${suffix}
 	PREFIX ""
 	VERSION ${PROJECT_VERSION}
-	SOVERSION ${PROJECT_VERSION}
-	NO_SONAME TRUE
 	INCLUDE_DIRECTORIES ${source_dir}
-	MSVC_RUNTIME_LIBRARY ${msvcrt}
-	CXX_VISIBILITY_PRESET hidden
+	DEFINE_SYMBOL ""
 	INTERPROCEDURAL_OPTIMIZATION_DEVELOPMENT ${GDJ_INTERPROCEDURAL_OPTIMIZATION}
 	INTERPROCEDURAL_OPTIMIZATION_DISTRIBUTION ${GDJ_INTERPROCEDURAL_OPTIMIZATION}
 	INTERPROCEDURAL_OPTIMIZATION_EDITORDEVELOPMENT ${GDJ_INTERPROCEDURAL_OPTIMIZATION}
 	INTERPROCEDURAL_OPTIMIZATION_EDITORDISTRIBUTION ${GDJ_INTERPROCEDURAL_OPTIMIZATION}
+
+	# Properties relevant only to Windows/MSVC
+	MSVC_RUNTIME_LIBRARY ${msvcrt}
+
+	# Properties relevant only to Unix-based platforms
+	SOVERSION ${PROJECT_VERSION}
+	NO_SONAME TRUE
+	CXX_VISIBILITY_PRESET hidden
+
+	# Properties relevant only to macOS/Xcode
 	FRAMEWORK TRUE
 	MACOSX_FRAMEWORK_INFO_PLIST ${templates_dir}/info.plist.in
 	XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${PROJECT_BUNDLE_IDENTIFIER}
@@ -130,6 +136,7 @@ target_compile_definitions(godot-jolt
 	PRIVATE $<${is_windows}:VC_EXTRALEAN>
 	PRIVATE $<${is_windows}:NOMINMAX>
 	PRIVATE $<${is_windows}:STRICT>
+	PRIVATE $<${is_msvc_like}:_HAS_EXCEPTIONS=0>
 )
 
 if(GDJ_PRECOMPILE_HEADERS)
@@ -143,6 +150,9 @@ else()
 endif()
 
 if(MSVC)
+	# Disable support for exception-handling
+	string(REPLACE "/EHsc" "/EHs-c-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+
 	set(pdb_file $<TARGET_PDB_FILE:godot-jolt>)
 	set(pdb_file_name $<TARGET_PDB_FILE_NAME:godot-jolt>)
 
@@ -153,7 +163,7 @@ if(MSVC)
 		PRIVATE /w44365 # Enable another implicit conversion warning
 		PRIVATE /w44800 # Enable another implicit conversion warning
 		PRIVATE /wd4324 # Disable structure padding warning
-		PRIVATE /EHsc # Enable exception handling
+		PRIVATE /wd4530 # Disable lack of unwind semantics warning
 		PRIVATE /GF # Enable string pooling
 		PRIVATE /Gy # Enable function-level linking
 		PRIVATE /permissive- # Enable standard conformance
@@ -197,6 +207,7 @@ else()
 		PRIVATE -Wundef # Enable warnings about undefined identifiers in `#if` directives
 		PRIVATE -pthread # Use POSIX threads
 		PRIVATE -ffast-math # Enable aggressive floating-point optimizations
+		PRIVATE -fno-exceptions # Disable support for exception-handling
 		PRIVATE ${macro_prefix_option} # Make `__FILE__` relative
 		PRIVATE $<${use_sse2}:-msse2> # Enable SSE2 instructions
 		PRIVATE $<${use_sse4_2}:-msse4.2> # Enable SSE4.2 instructions
@@ -213,7 +224,15 @@ else()
 		PRIVATE $<${is_gcc}:-no-integrated-cpp> # Workaround for GCC ignoring _Pragma (GCC#53431)
 	)
 
+	if(APPLE)
+		gdj_generate_exports_ld64(exports_file)
+	else()
+		gdj_generate_exports_ld(exports_file)
+	endif()
+
 	target_link_options(godot-jolt
+		PRIVATE $<${is_linux}:-Wl,--version-script,${exports_file}>
+		PRIVATE $<${is_macos}:-Wl,-exported_symbols_list,${exports_file}>
 		PRIVATE $<${use_static_crt}:-static-libgcc> # Link libgcc statically
 		PRIVATE $<${use_static_crt}:-static-libstdc++> # Link libstdc++ statically
 	)
@@ -276,15 +295,33 @@ else()
 	set(debug_symbols ${debug_file})
 endif()
 
-install(
-	TARGETS godot-jolt
-	RUNTIME DESTINATION bin
-	LIBRARY DESTINATION bin NAMELINK_SKIP
-	FRAMEWORK DESTINATION bin
+set(addon_dir addons/godot-jolt)
+
+string(CONCAT addon_platform_dir
+	${addon_dir}/
+		$<${is_windows}:windows>
+		$<${is_linux}:linux>
+		$<${is_macos}:macos>
 )
 
 install(
-	FILES ${debug_symbols}
-	CONFIGURATIONS Distribution EditorDistribution
-	DESTINATION bin
+	FILES
+		godot-jolt.gdextension
+		LICENSE.txt
+		THIRDPARTY.txt
+	DESTINATION ${addon_dir}
 )
+
+install(
+	TARGETS godot-jolt
+	RUNTIME DESTINATION ${addon_platform_dir}
+	LIBRARY DESTINATION ${addon_platform_dir} NAMELINK_SKIP
+	FRAMEWORK DESTINATION ${addon_platform_dir}
+)
+
+if(GDJ_INSTALL_DEBUG_SYMBOLS)
+	install(
+		FILES ${debug_symbols}
+		DESTINATION ${addon_platform_dir}
+	)
+endif()

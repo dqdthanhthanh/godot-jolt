@@ -1,5 +1,23 @@
 name: 🐧 Build (Linux)
-on: [push, pull_request, workflow_dispatch]
+
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - 'docs/**'
+      - 'examples/**'
+      - '**.md'
+      - '**.txt'
+      - '!**/CMakeLists.txt'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - 'examples/**'
+      - '**.md'
+      - '**.txt'
+      - '!**/CMakeLists.txt'
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -7,7 +25,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     name: "\
       ${{ matrix.platform }}-\
       ${{ matrix.arch }}-\
@@ -25,10 +43,8 @@ jobs:
         include:
           - platform: linux-clang
             toolchain: llvm
-            version: 14
           - platform: linux-gcc
             toolchain: gcc
-            version: 11
 
     steps:
       - name: Checkout code
@@ -38,13 +54,14 @@ jobs:
         uses: ./.github/actions/setup-linux
         with:
           toolchain: ${{ matrix.toolchain }}
-          version: ${{ matrix.version }}
 
       - name: Configure
         uses: ./.github/actions/cmake-configure
         with:
           platform: ${{ matrix.platform }}
           arch: ${{ matrix.arch }}
+        env:
+          CXXFLAGS: -Werror
 
       - name: Build
         uses: ./.github/actions/cmake-build

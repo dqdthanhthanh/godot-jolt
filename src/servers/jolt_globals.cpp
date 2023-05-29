@@ -1,8 +1,8 @@
 #include "jolt_globals.hpp"
 
-#include "shapes/jolt_empty_shape.hpp"
-#include "shapes/jolt_override_user_data_shape.hpp"
-#include "shapes/jolt_ray_shape.hpp"
+#include "shapes/jolt_custom_empty_shape.hpp"
+#include "shapes/jolt_custom_ray_shape.hpp"
+#include "shapes/jolt_custom_user_data_shape.hpp"
 
 void* jolt_alloc(size_t p_size) {
 	return mi_malloc(p_size);
@@ -64,9 +64,9 @@ void jolt_initialize() {
 
 	JPH::RegisterTypes();
 
-	JoltEmptyShape::register_type();
-	JoltRayShape::register_type();
-	JoltOverrideUserDataShape::register_type();
+	JoltCustomEmptyShape::register_type();
+	JoltCustomRayShape::register_type();
+	JoltCustomUserDataShape::register_type();
 }
 
 void jolt_deinitialize() {

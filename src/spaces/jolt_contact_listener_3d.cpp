@@ -1,7 +1,8 @@
 #include "jolt_contact_listener_3d.hpp"
 
-#include "objects/jolt_area_3d.hpp"
-#include "objects/jolt_body_3d.hpp"
+#include "objects/jolt_area_impl_3d.hpp"
+#include "objects/jolt_body_impl_3d.hpp"
+#include "servers/jolt_project_settings.hpp"
 #include "spaces/jolt_space_3d.hpp"
 
 namespace {
@@ -16,7 +17,7 @@ JPH::SubShapeIDPair pair_contact(
 
 } // namespace
 
-void JoltContactListener3D::listen_for(JoltCollisionObject3D* p_object) {
+void JoltContactListener3D::listen_for(JoltObjectImpl3D* p_object) {
 	listening_for.insert(p_object->get_jolt_id());
 }
 
@@ -45,6 +46,8 @@ void JoltContactListener3D::OnContactAdded(
 	add_debug_contacts(p_manifold);
 #endif // GDJ_CONFIG_EDITOR
 
+	apply_surface_velocities(p_body1, p_body2, p_manifold, p_settings);
+
 	if (!is_listening_for(p_body1) && !is_listening_for(p_body2)) {
 		return;
 	}
@@ -71,6 +74,8 @@ void JoltContactListener3D::OnContactPersisted(
 	add_debug_contacts(p_manifold);
 #endif // GDJ_CONFIG_EDITOR
 
+	apply_surface_velocities(p_body1, p_body2, p_manifold, p_settings);
+
 	if (p_body1.IsSensor() || p_body2.IsSensor()) {
 		return;
 	}
@@ -92,7 +97,7 @@ void JoltContactListener3D::OnContactRemoved(const JPH::SubShapeIDPair& p_shape_
 	}
 }
 
-bool JoltContactListener3D::is_listening_for(const JPH::Body& p_body) {
+bool JoltContactListener3D::is_listening_for(const JPH::Body& p_body) const {
 	return listening_for.has(p_body.GetID());
 }
 
@@ -100,7 +105,7 @@ void JoltContactListener3D::update_contacts(
 	const JPH::Body& p_body1,
 	const JPH::Body& p_body2,
 	const JPH::ContactManifold& p_manifold,
-	JPH::ContactSettings& p_settings
+	const JPH::ContactSettings& p_settings
 ) {
 	const JPH::SubShapeIDPair shape_pair = pair_contact(p_body1, p_body2, p_manifold);
 
@@ -126,7 +131,7 @@ void JoltContactListener3D::update_contacts(
 		collision,
 		p_settings.mCombinedFriction,
 		p_settings.mCombinedRestitution,
-		1.0f,
+		JoltProjectSettings::get_bounce_velocity_threshold(),
 		5
 	);
 
@@ -171,10 +176,10 @@ void JoltContactListener3D::flush_contacts() {
 			false
 		);
 
-		JoltBody3D* body1 = jolt_bodies[0].as_body();
+		JoltBodyImpl3D* body1 = jolt_bodies[0].as_body();
 		ERR_FAIL_NULL(body1);
 
-		JoltBody3D* body2 = jolt_bodies[1].as_body();
+		JoltBodyImpl3D* body2 = jolt_bodies[1].as_body();
 		ERR_FAIL_NULL(body2);
 
 		const int32_t shape_index1 = body1->find_shape_index(shape_pair.GetSubShapeID1());
@@ -236,8 +241,8 @@ void JoltContactListener3D::flush_area_enters() {
 			continue;
 		}
 
-		JoltArea3D* area1 = jolt_body1.as_area();
-		JoltArea3D* area2 = jolt_body2.as_area();
+		JoltAreaImpl3D* area1 = jolt_body1.as_area();
+		JoltAreaImpl3D* area2 = jolt_body2.as_area();
 
 		if (area1 != nullptr && area2 != nullptr) {
 			if (area2->is_monitorable()) {
@@ -261,7 +266,7 @@ void JoltContactListener3D::flush_area_shifts() {
 	for (const JPH::SubShapeIDPair& shape_pair : area_overlaps) {
 		auto is_shifted = [&](const JPH::BodyID& p_body_id, const JPH::SubShapeID& p_sub_shape_id) {
 			const JoltReadableBody3D jolt_body = space->read_body(p_body_id, false);
-			const JoltCollisionObject3D* object = jolt_body.as_object();
+			const JoltObjectImpl3D* object = jolt_body.as_object();
 			ERR_FAIL_NULL_V(object, false);
 
 			if (object->get_previous_jolt_shape() == nullptr) {
@@ -305,11 +310,11 @@ void JoltContactListener3D::flush_area_exits() {
 		const JoltReadableBody3D jolt_body1 = jolt_bodies[0];
 		const JoltReadableBody3D jolt_body2 = jolt_bodies[1];
 
-		JoltArea3D* area1 = jolt_body1.as_area();
-		JoltArea3D* area2 = jolt_body2.as_area();
+		JoltAreaImpl3D* area1 = jolt_body1.as_area();
+		JoltAreaImpl3D* area2 = jolt_body2.as_area();
 
-		JoltBody3D* body1 = jolt_body1.as_body();
-		JoltBody3D* body2 = jolt_body2.as_body();
+		const JoltBodyImpl3D* body1 = jolt_body1.as_body();
+		const JoltBodyImpl3D* body2 = jolt_body2.as_body();
 
 		if (area1 != nullptr && area2 != nullptr) {
 			area1->area_shape_exited(body_id2, sub_shape_id2, sub_shape_id1);
@@ -326,6 +331,79 @@ void JoltContactListener3D::flush_area_exits() {
 	}
 
 	area_exits.clear();
+}
+
+void JoltContactListener3D::apply_surface_velocities(
+	const JPH::Body& p_body1,
+	const JPH::Body& p_body2,
+	const JPH::ContactManifold& p_manifold,
+	JPH::ContactSettings& p_settings
+) {
+	if (p_body1.IsSensor() || p_body2.IsSensor()) {
+		return;
+	}
+
+	const bool supports_surface_velocity1 = !p_body1.IsDynamic();
+	const bool supports_surface_velocity2 = !p_body2.IsDynamic();
+
+	if (supports_surface_velocity1 == supports_surface_velocity2) {
+		return;
+	}
+
+	auto has_surface_velocity = [](const JPH::Body& p_jolt_body) {
+		const auto* body = reinterpret_cast<JoltBodyImpl3D*>(p_jolt_body.GetUserData());
+
+		const Vector3 linear_velocity = body->get_linear_surface_velocity();
+		const Vector3 angular_velocity = body->get_angular_surface_velocity();
+
+		return linear_velocity != Vector3() || angular_velocity != Vector3();
+	};
+
+	const bool has_surface_velocity1 = supports_surface_velocity1 && has_surface_velocity(p_body1);
+	const bool has_surface_velocity2 = supports_surface_velocity2 && has_surface_velocity(p_body2);
+
+	if (has_surface_velocity1 == has_surface_velocity2) {
+		return;
+	}
+
+	auto average_contacts = [](const JPH::ContactPoints& p_contacts) {
+		JPH::Vec3 sum = JPH::Vec3::sZero();
+
+		for (const JPH::Vec3& contact : p_contacts) {
+			sum += contact;
+		}
+
+		return sum / (float)p_contacts.size();
+	};
+
+	auto calculate_surface_velocity = [](const JPH::Body& p_jolt_body, JPH::Vec3Arg p_point) {
+		const auto* body = reinterpret_cast<JoltBodyImpl3D*>(p_jolt_body.GetUserData());
+
+		const JPH::Vec3 linear_velocity = to_jolt(body->get_linear_surface_velocity());
+		const JPH::Vec3 angular_velocity = to_jolt(body->get_angular_surface_velocity());
+
+		const JPH::Vec3 to_point = p_point - p_jolt_body.GetCenterOfMassPosition();
+
+		return linear_velocity + angular_velocity.Cross(to_point);
+	};
+
+	JPH::Vec3 surface_velocity1 = JPH::Vec3::sZero();
+
+	if (has_surface_velocity1) {
+		const JPH::Vec3 relative_point = average_contacts(p_manifold.mRelativeContactPointsOn1);
+		const JPH::Vec3 point = p_manifold.mBaseOffset + relative_point;
+		surface_velocity1 = calculate_surface_velocity(p_body1, point);
+	}
+
+	JPH::Vec3 surface_velocity2 = JPH::Vec3::sZero();
+
+	if (has_surface_velocity2) {
+		const JPH::Vec3 relative_point = average_contacts(p_manifold.mRelativeContactPointsOn2);
+		const JPH::Vec3 point = p_manifold.mBaseOffset + relative_point;
+		surface_velocity2 = calculate_surface_velocity(p_body2, point);
+	}
+
+	p_settings.mRelativeSurfaceVelocity = surface_velocity2 - surface_velocity1;
 }
 
 #ifdef GDJ_CONFIG_EDITOR

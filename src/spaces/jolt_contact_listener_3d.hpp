@@ -1,6 +1,6 @@
 #pragma once
 
-class JoltCollisionObject3D;
+class JoltObjectImpl3D;
 class JoltSpace3D;
 
 class JoltContactListener3D final : public JPH::ContactListener {
@@ -56,7 +56,7 @@ public:
 	explicit JoltContactListener3D(JoltSpace3D* p_space)
 		: space(p_space) { }
 
-	void listen_for(JoltCollisionObject3D* p_object);
+	void listen_for(JoltObjectImpl3D* p_object);
 
 	void pre_step();
 
@@ -89,13 +89,13 @@ private:
 
 	void OnContactRemoved(const JPH::SubShapeIDPair& p_shape_pair) override;
 
-	bool is_listening_for(const JPH::Body& p_body);
+	bool is_listening_for(const JPH::Body& p_body) const;
 
 	void update_contacts(
 		const JPH::Body& p_body1,
 		const JPH::Body& p_body2,
 		const JPH::ContactManifold& p_manifold,
-		JPH::ContactSettings& p_settings
+		const JPH::ContactSettings& p_settings
 	);
 
 	void flush_contacts();
@@ -105,6 +105,13 @@ private:
 	void flush_area_shifts();
 
 	void flush_area_exits();
+
+	void apply_surface_velocities(
+		const JPH::Body& p_body1,
+		const JPH::Body& p_body2,
+		const JPH::ContactManifold& p_manifold,
+		JPH::ContactSettings& p_settings
+	);
 
 #ifdef GDJ_CONFIG_EDITOR
 	void add_debug_contacts(const JPH::ContactManifold& p_manifold);
