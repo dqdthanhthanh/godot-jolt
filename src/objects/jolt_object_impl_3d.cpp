@@ -20,7 +20,7 @@ JoltObjectImpl3D::~JoltObjectImpl3D() {
 }
 
 GodotObject* JoltObjectImpl3D::get_instance() const {
-	return internal::gde_interface->object_get_instance_from_id(instance_id);
+	return internal::gdextension_interface_object_get_instance_from_id(instance_id);
 }
 
 Object* JoltObjectImpl3D::get_instance_unsafe() const {
@@ -113,19 +113,7 @@ void JoltObjectImpl3D::set_transform(Transform3D p_transform, bool p_lock) {
 		shapes_changed(p_lock);
 	}
 
-	if (space == nullptr) {
-		jolt_settings->mPosition = to_jolt(p_transform.origin);
-		jolt_settings->mRotation = to_jolt(p_transform.basis);
-		transform_changed(p_lock);
-		return;
-	}
-
-	space->get_body_iface(p_lock).SetPositionAndRotation(
-		jolt_id,
-		to_jolt(p_transform.origin),
-		to_jolt(p_transform.basis),
-		JPH::EActivation::DontActivate
-	);
+	apply_transform(p_transform);
 
 	transform_changed(p_lock);
 }
@@ -430,10 +418,36 @@ void JoltObjectImpl3D::destroy_in_space(bool p_lock) {
 	jolt_id = {};
 }
 
-void JoltObjectImpl3D::pre_step([[maybe_unused]] float p_step) { }
+void JoltObjectImpl3D::apply_transform(const Transform3D& p_transform, bool p_lock) {
+	if (space == nullptr) {
+		jolt_settings->mPosition = to_jolt(p_transform.origin);
+		jolt_settings->mRotation = to_jolt(p_transform.basis);
+		return;
+	}
 
-void JoltObjectImpl3D::post_step([[maybe_unused]] float p_step) {
+	space->get_body_iface(p_lock).SetPositionAndRotation(
+		jolt_id,
+		to_jolt(p_transform.origin),
+		to_jolt(p_transform.basis),
+		JPH::EActivation::DontActivate
+	);
+}
+
+void JoltObjectImpl3D::pre_step(
+	[[maybe_unused]] float p_step,
+	[[maybe_unused]] JPH::Body& p_jolt_body
+) { }
+
+void JoltObjectImpl3D::post_step(
+	[[maybe_unused]] float p_step,
+	[[maybe_unused]] JPH::Body& p_jolt_body
+) {
 	previous_jolt_shape = nullptr;
+}
+
+String JoltObjectImpl3D::to_string() const {
+	Object* instance = ObjectDB::get_instance(instance_id);
+	return instance != nullptr ? instance->to_string() : "<unknown>";
 }
 
 JPH::ObjectLayer JoltObjectImpl3D::get_object_layer() const {
@@ -466,9 +480,10 @@ JPH::Body* JoltObjectImpl3D::create_end() {
 	ERR_FAIL_NULL_D_MSG(
 		body,
 		vformat(
-			"Failed to create Jolt body. "
+			"Failed to create Jolt body for '%s'. "
 			"Consider increasing maximum number of bodies in project settings. "
 			"Maximum number of bodies is currently set to %d.",
+			to_string(),
 			JoltProjectSettings::get_max_bodies()
 		)
 	);

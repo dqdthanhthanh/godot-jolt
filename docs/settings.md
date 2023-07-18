@@ -188,6 +188,35 @@ These settings are exposed by Godot Jolt and can be found under "Physics" - "Jol
       <td>-</td>
     </tr>
     <tr>
+      <td>Collisions</td>
+      <td>Use Shape Margins</td>
+      <td>
+        Whether or not the <code>margin</code> property on <code>Shape3D</code> should be respected
+        for the applicable convex shape types.
+      </td>
+      <td>
+        When disabled this will force a shape margin of 0, trading in performance for accuracy,
+        which can make things like collision normals more intuitive.
+        <br><br>This only applies to <code>BoxShape3D</code>, <code>CylinderShape3D</code> and
+        <code>ConvexPolygonShape3D</code>. Other shape types do not utilize margins.
+      </td>
+    </tr>
+    <tr>
+      <td>Collisions</td>
+      <td>Areas Detect Static Bodies</td>
+      <td>
+        Whether or not <code>Area3D</code> is able to detect overlaps with <code>StaticBody3D</code>
+        and <code>RigidBody3D</code> frozen with <code>FREEZE_MODE_STATIC</code>.
+      </td>
+      <td>
+        ⚠️ This can come at a heavy performance and memory cost if you allow many/large areas to
+        overlap with complex static geometry, such as <code>ConcavePolygonShape3D</code> or
+        <code>HeightMapShape3D</code>.
+        <br><br>It is strongly recommended that you set up your collision layers and masks in such a
+        way that only a few small <code>Area3D</code> can detect static bodies.
+      </td>
+    </tr>
+    <tr>
       <td>Continuous CD</td>
       <td>Movement Threshold</td>
       <td>

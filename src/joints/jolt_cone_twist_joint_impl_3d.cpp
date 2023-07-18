@@ -12,76 +12,14 @@ constexpr double DEFAULT_RELAXATION = 1.0;
 } // namespace
 
 JoltConeTwistJointImpl3D::JoltConeTwistJointImpl3D(
-	JoltSpace3D* p_space,
 	JoltBodyImpl3D* p_body_a,
 	JoltBodyImpl3D* p_body_b,
 	const Transform3D& p_local_ref_a,
 	const Transform3D& p_local_ref_b,
 	bool p_lock
 )
-	: JoltJointImpl3D(p_space, p_body_a, p_body_b) {
-	const JPH::BodyID body_ids[] = {body_a->get_jolt_id(), body_b->get_jolt_id()};
-	const JoltWritableBodies3D bodies = space->write_bodies(body_ids, count_of(body_ids), p_lock);
-
-	const JoltWritableBody3D jolt_body_a = bodies[0];
-	ERR_FAIL_COND(jolt_body_a.is_invalid());
-
-	const JoltWritableBody3D jolt_body_b = bodies[1];
-	ERR_FAIL_COND(jolt_body_b.is_invalid());
-
-	const JoltObjectImpl3D& object_a = *jolt_body_a.as_object();
-	const JoltObjectImpl3D& object_b = *jolt_body_b.as_object();
-
-	const JPH::Vec3 point_scaled_a = to_jolt(p_local_ref_a.origin * object_a.get_scale());
-	const JPH::Vec3 point_scaled_b = to_jolt(p_local_ref_b.origin * object_b.get_scale());
-
-	const JPH::Vec3 com_scaled_a = jolt_body_a->GetShape()->GetCenterOfMass();
-	const JPH::Vec3 com_scaled_b = jolt_body_b->GetShape()->GetCenterOfMass();
-
-	JPH::SwingTwistConstraintSettings constraint_settings;
-	constraint_settings.mSpace = JPH::EConstraintSpace::LocalToBodyCOM;
-	constraint_settings.mPosition1 = point_scaled_a - com_scaled_a;
-	constraint_settings.mTwistAxis1 = to_jolt(-p_local_ref_a.basis.get_column(Vector3::AXIS_X));
-	constraint_settings.mPlaneAxis1 = to_jolt(-p_local_ref_a.basis.get_column(Vector3::AXIS_Z));
-	constraint_settings.mPosition2 = point_scaled_b - com_scaled_b;
-	constraint_settings.mTwistAxis2 = to_jolt(-p_local_ref_b.basis.get_column(Vector3::AXIS_X));
-	constraint_settings.mPlaneAxis2 = to_jolt(-p_local_ref_b.basis.get_column(Vector3::AXIS_Z));
-
-	jolt_ref = constraint_settings.Create(*jolt_body_a, *jolt_body_b);
-
-	space->add_joint(this);
-}
-
-JoltConeTwistJointImpl3D::JoltConeTwistJointImpl3D(
-	JoltSpace3D* p_space,
-	JoltBodyImpl3D* p_body_a,
-	const Transform3D& p_local_ref_a,
-	const Transform3D& p_local_ref_b,
-	bool p_lock
-)
-	: JoltJointImpl3D(p_space, p_body_a) {
-	const JoltWritableBody3D jolt_body_a = space->write_body(*body_a, p_lock);
-	ERR_FAIL_COND(jolt_body_a.is_invalid());
-
-	const JoltObjectImpl3D& object_a = *jolt_body_a.as_object();
-
-	const JPH::Vec3 point_scaled_a = to_jolt(p_local_ref_a.origin * object_a.get_scale());
-	const JPH::Vec3 point_scaled_b = to_jolt(p_local_ref_b.origin);
-
-	const JPH::Vec3 com_scaled_a = jolt_body_a->GetShape()->GetCenterOfMass();
-
-	JPH::SwingTwistConstraintSettings constraint_settings;
-	constraint_settings.mSpace = JPH::EConstraintSpace::LocalToBodyCOM;
-	constraint_settings.mPosition1 = point_scaled_a - com_scaled_a;
-	constraint_settings.mTwistAxis1 = to_jolt(-p_local_ref_a.basis.get_column(Vector3::AXIS_X));
-	constraint_settings.mPlaneAxis1 = to_jolt(-p_local_ref_a.basis.get_column(Vector3::AXIS_Z));
-	constraint_settings.mPosition2 = point_scaled_b;
-	constraint_settings.mTwistAxis2 = to_jolt(-p_local_ref_b.basis.get_column(Vector3::AXIS_X));
-	constraint_settings.mPlaneAxis2 = to_jolt(-p_local_ref_b.basis.get_column(Vector3::AXIS_Z));
-
-	jolt_ref = constraint_settings.Create(*jolt_body_a, JPH::Body::sFixedToWorld);
-
-	space->add_joint(this);
+	: JoltJointImpl3D(p_body_a, p_body_b, p_local_ref_a, p_local_ref_b) {
+	rebuild(p_lock);
 }
 
 double JoltConeTwistJointImpl3D::get_param(PhysicsServer3D::ConeTwistJointParam p_param) const {
@@ -109,39 +47,46 @@ double JoltConeTwistJointImpl3D::get_param(PhysicsServer3D::ConeTwistJointParam 
 
 void JoltConeTwistJointImpl3D::set_param(
 	PhysicsServer3D::ConeTwistJointParam p_param,
-	double p_value
+	double p_value,
+	bool p_lock
 ) {
 	switch (p_param) {
 		case PhysicsServer3D::CONE_TWIST_JOINT_SWING_SPAN: {
 			swing_span = p_value;
-			spans_changed();
+			limits_changed(p_lock);
 		} break;
 		case PhysicsServer3D::CONE_TWIST_JOINT_TWIST_SPAN: {
 			twist_span = p_value;
-			spans_changed();
+			limits_changed(p_lock);
 		} break;
 		case PhysicsServer3D::CONE_TWIST_JOINT_BIAS: {
 			if (!Math::is_equal_approx(p_value, DEFAULT_BIAS)) {
-				WARN_PRINT(
+				WARN_PRINT(vformat(
 					"Cone twist joint bias is not supported by Godot Jolt. "
-					"Any such value will be ignored."
-				);
+					"Any such value will be ignored. "
+					"This joint connects %s.",
+					bodies_to_string()
+				));
 			}
 		} break;
 		case PhysicsServer3D::CONE_TWIST_JOINT_SOFTNESS: {
 			if (!Math::is_equal_approx(p_value, DEFAULT_SOFTNESS)) {
-				WARN_PRINT(
+				WARN_PRINT(vformat(
 					"Cone twist joint softness is not supported by Godot Jolt. "
-					"Any such value will be ignored."
-				);
+					"Any such value will be ignored. ",
+					"This joint connects %s.",
+					bodies_to_string()
+				));
 			}
 		} break;
 		case PhysicsServer3D::CONE_TWIST_JOINT_RELAXATION: {
 			if (!Math::is_equal_approx(p_value, DEFAULT_RELAXATION)) {
-				WARN_PRINT(
+				WARN_PRINT(vformat(
 					"Cone twist joint relaxation is not supported by Godot Jolt. "
-					"Any such value will be ignored."
-				);
+					"Any such value will be ignored. "
+					"This joint connects %s.",
+					bodies_to_string()
+				));
 			}
 		} break;
 		default: {
@@ -150,35 +95,94 @@ void JoltConeTwistJointImpl3D::set_param(
 	}
 }
 
-void JoltConeTwistJointImpl3D::spans_changed() {
-	auto* jolt_constraint = static_cast<JPH::SwingTwistConstraint*>(jolt_ref.GetPtr());
-	ERR_FAIL_NULL(jolt_constraint);
+void JoltConeTwistJointImpl3D::rebuild(bool p_lock) {
+	destroy();
 
-	constexpr double basically_zero = -CMP_EPSILON;
-	constexpr double basically_pi = Math_PI + CMP_EPSILON;
+	JoltSpace3D* space = get_space();
 
-	if (twist_span >= basically_zero && twist_span <= basically_pi) {
-		const float twist_span_clamped = clamp((float)twist_span, 0.0f, JPH::JPH_PI);
-
-		jolt_constraint->SetTwistMinAngle(-twist_span_clamped);
-		jolt_constraint->SetTwistMaxAngle(twist_span_clamped);
-	} else {
-		jolt_constraint->SetTwistMinAngle(-JPH::JPH_PI);
-		jolt_constraint->SetTwistMaxAngle(JPH::JPH_PI);
+	if (space == nullptr) {
+		return;
 	}
 
-	if (swing_span >= basically_zero && swing_span <= basically_pi) {
-		const float swing_span_clamped = clamp((float)swing_span, 0.0f, JPH::JPH_PI);
+	JPH::BodyID body_ids[2] = {body_a->get_jolt_id()};
+	int32_t body_count = 1;
 
-		jolt_constraint->SetNormalHalfConeAngle(swing_span_clamped);
-		jolt_constraint->SetPlaneHalfConeAngle(swing_span_clamped);
+	if (body_b != nullptr) {
+		body_ids[1] = body_b->get_jolt_id();
+		body_count = 2;
+	}
+
+	const JoltWritableBodies3D jolt_bodies = space->write_bodies(body_ids, body_count, p_lock);
+
+	auto* jolt_body_a = static_cast<JPH::Body*>(jolt_bodies[0]);
+	ERR_FAIL_COND(jolt_body_a == nullptr);
+
+	auto* jolt_body_b = static_cast<JPH::Body*>(jolt_bodies[1]);
+	ERR_FAIL_COND(jolt_body_b == nullptr && body_count == 2);
+
+	Transform3D shifted_ref_a;
+	Transform3D shifted_ref_b;
+
+	shift_reference_frames(Vector3(), Vector3(), shifted_ref_a, shifted_ref_b);
+
+	jolt_ref = build_swing_twist(
+		jolt_body_a,
+		jolt_body_b,
+		shifted_ref_a,
+		shifted_ref_b,
+		(float)swing_span,
+		(float)twist_span
+	);
+
+	space->add_joint(this);
+}
+
+JPH::Constraint* JoltConeTwistJointImpl3D::build_swing_twist(
+	JPH::Body* p_jolt_body_a,
+	JPH::Body* p_jolt_body_b,
+	const Transform3D& p_shifted_ref_a,
+	const Transform3D& p_shifted_ref_b,
+	float p_swing_limit,
+	float p_twist_limit
+) {
+	JPH::SwingTwistConstraintSettings constraint_settings;
+
+	if (p_twist_limit >= 0 && p_twist_limit <= JPH::JPH_PI) {
+		constraint_settings.mTwistMinAngle = -p_twist_limit;
+		constraint_settings.mTwistMaxAngle = p_twist_limit;
 	} else {
-		jolt_constraint->SetNormalHalfConeAngle(JPH::JPH_PI);
-		jolt_constraint->SetPlaneHalfConeAngle(JPH::JPH_PI);
+		constraint_settings.mTwistMinAngle = -JPH::JPH_PI;
+		constraint_settings.mTwistMaxAngle = JPH::JPH_PI;
+	}
 
-		// HACK(mihe): As far as I can tell this emulates the behavior of Godot Physics, where the
+	if (p_swing_limit >= 0 && p_swing_limit <= JPH::JPH_PI) {
+		constraint_settings.mNormalHalfConeAngle = p_swing_limit;
+		constraint_settings.mPlaneHalfConeAngle = p_swing_limit;
+	} else {
+		constraint_settings.mNormalHalfConeAngle = JPH::JPH_PI;
+		constraint_settings.mPlaneHalfConeAngle = JPH::JPH_PI;
+
+		// NOTE(mihe): As far as I can tell this emulates the behavior of Godot Physics, where the
 		// twist axis becomes unbounded if the swing span is a nonsensical value.
-		jolt_constraint->SetTwistMinAngle(-JPH::JPH_PI);
-		jolt_constraint->SetTwistMaxAngle(JPH::JPH_PI);
+		constraint_settings.mTwistMinAngle = -JPH::JPH_PI;
+		constraint_settings.mTwistMaxAngle = JPH::JPH_PI;
 	}
+
+	constraint_settings.mSpace = JPH::EConstraintSpace::LocalToBodyCOM;
+	constraint_settings.mPosition1 = to_jolt(p_shifted_ref_a.origin);
+	constraint_settings.mTwistAxis1 = to_jolt(-p_shifted_ref_a.basis.get_column(Vector3::AXIS_X));
+	constraint_settings.mPlaneAxis1 = to_jolt(-p_shifted_ref_a.basis.get_column(Vector3::AXIS_Z));
+	constraint_settings.mPosition2 = to_jolt(p_shifted_ref_b.origin);
+	constraint_settings.mTwistAxis2 = to_jolt(-p_shifted_ref_b.basis.get_column(Vector3::AXIS_X));
+	constraint_settings.mPlaneAxis2 = to_jolt(-p_shifted_ref_b.basis.get_column(Vector3::AXIS_Z));
+
+	if (p_jolt_body_b != nullptr) {
+		return constraint_settings.Create(*p_jolt_body_a, *p_jolt_body_b);
+	} else {
+		return constraint_settings.Create(*p_jolt_body_a, JPH::Body::sFixedToWorld);
+	}
+}
+
+void JoltConeTwistJointImpl3D::limits_changed(bool p_lock) {
+	rebuild(p_lock);
 }

@@ -1,9 +1,12 @@
 #pragma once
 
+#include "objects/jolt_group_filter_rid.hpp"
 #include "objects/jolt_object_impl_3d.hpp"
 #include "objects/jolt_physics_direct_body_state_3d.hpp"
 
 class JoltAreaImpl3D;
+class JoltGroupFilterRID;
+class JoltJointImpl3D;
 
 class JoltBodyImpl3D final : public JoltObjectImpl3D {
 public:
@@ -26,6 +29,8 @@ public:
 
 		Vector3 collider_position;
 
+		Vector3 velocity;
+
 		Vector3 collider_velocity;
 
 		Vector3 impulse;
@@ -47,11 +52,11 @@ public:
 
 	void set_state_sync_callback(const Callable& p_callback) { body_state_callback = p_callback; }
 
-	bool has_force_integration_callback() const { return force_integration_callback.is_valid(); }
+	bool has_custom_integration_callback() const { return custom_integration_callback.is_valid(); }
 
-	void set_force_integration_callback(const Callable& p_callback, const Variant& p_userdata) {
-		force_integration_callback = p_callback;
-		force_integration_userdata = p_userdata;
+	void set_custom_integration_callback(const Callable& p_callback, const Variant& p_userdata) {
+		custom_integration_callback = p_callback;
+		custom_integration_userdata = p_userdata;
 	}
 
 	bool has_custom_integrator() const { return custom_integrator; }
@@ -106,6 +111,7 @@ public:
 		const Vector3& p_normal,
 		const Vector3& p_position,
 		const Vector3& p_collider_position,
+		const Vector3& p_velocity,
 		const Vector3& p_collider_velocity,
 		const Vector3& p_impulse
 	);
@@ -146,19 +152,23 @@ public:
 
 	void remove_collision_exception(const RID& p_excepted_body, bool p_lock = true);
 
-	bool has_collision_exception(const RID& p_excepted_body, bool p_lock = true) const;
+	bool has_collision_exception(const RID& p_excepted_body) const;
 
-	TypedArray<RID> get_collision_exceptions(bool p_lock = true) const;
+	TypedArray<RID> get_collision_exceptions() const;
 
 	void add_area(JoltAreaImpl3D* p_area, bool p_lock = true);
 
 	void remove_area(JoltAreaImpl3D* p_area, bool p_lock = true);
 
-	void integrate_forces(float p_step, bool p_lock = true);
+	void add_joint(JoltJointImpl3D* p_joint, bool p_lock = true);
 
-	void call_queries();
+	void remove_joint(JoltJointImpl3D* p_joint, bool p_lock = true);
 
-	void pre_step(float p_step) override;
+	void call_queries(JPH::Body& p_jolt_body);
+
+	void pre_step(float p_step, JPH::Body& p_jolt_body) override;
+
+	void move_kinematic(float p_step, JPH::Body& p_jolt_body);
 
 	JoltPhysicsDirectBodyState3D* get_direct_state();
 
@@ -237,6 +247,16 @@ private:
 
 	void create_in_space() override;
 
+	void integrate_forces(float p_step, JPH::Body& p_jolt_body);
+
+	void pre_step_static(float p_step, JPH::Body& p_jolt_body);
+
+	void pre_step_rigid(float p_step, JPH::Body& p_jolt_body);
+
+	void pre_step_kinematic(float p_step, JPH::Body& p_jolt_body);
+
+	void apply_transform(const Transform3D& p_transform, bool p_lock = true) override;
+
 	JPH::MassProperties calculate_mass_properties(const JPH::Shape& p_shape) const;
 
 	JPH::MassProperties calculate_mass_properties() const;
@@ -244,6 +264,14 @@ private:
 	void update_mass_properties(bool p_lock = true);
 
 	void update_damp(bool p_lock = true);
+
+	void update_kinematic_transform(bool p_lock = true);
+
+	void update_group_filter(bool p_lock = true);
+
+	void update_joint_constraints(bool p_lock = true);
+
+	void destroy_joint_constraints();
 
 	void update_axes_constraint(bool p_lock = true);
 
@@ -259,9 +287,13 @@ private:
 
 	void areas_changed(bool p_lock = true);
 
+	void joints_changed(bool p_lock = true);
+
 	void transform_changed(bool p_lock = true) override;
 
 	void motion_changed(bool p_lock = true);
+
+	void exceptions_changed(bool p_lock = true);
 
 	void axis_lock_changed(bool p_lock = true);
 
@@ -269,7 +301,11 @@ private:
 
 	LocalVector<JoltAreaImpl3D*> areas;
 
-	Variant force_integration_userdata;
+	LocalVector<JoltJointImpl3D*> joints;
+
+	Variant custom_integration_userdata;
+
+	Transform3D kinematic_transform;
 
 	Vector3 inertia;
 
@@ -287,9 +323,11 @@ private:
 
 	Callable body_state_callback;
 
-	Callable force_integration_callback;
+	Callable custom_integration_callback;
 
 	JoltPhysicsDirectBodyState3D* direct_state = nullptr;
+
+	JPH::Ref<JoltGroupFilterRID> group_filter;
 
 	JPH::Ref<JPH::Constraint> axes_constraint;
 
@@ -314,6 +352,8 @@ private:
 	int32_t contact_count = 0;
 
 	uint32_t locked_axes = 0;
+
+	bool sync_state = false;
 
 	bool custom_center_of_mass = false;
 

@@ -1,6 +1,7 @@
 #include "jolt_area_impl_3d.hpp"
 
 #include "objects/jolt_body_impl_3d.hpp"
+#include "servers/jolt_project_settings.hpp"
 #include "spaces/jolt_broad_phase_layer.hpp"
 #include "spaces/jolt_space_3d.hpp"
 
@@ -98,34 +99,42 @@ void JoltAreaImpl3D::set_param(PhysicsServer3D::AreaParameter p_param, const Var
 		} break;
 		case PhysicsServer3D::AREA_PARAM_WIND_FORCE_MAGNITUDE: {
 			if (!Math::is_equal_approx((double)p_value, DEFAULT_WIND_FORCE_MAGNITUDE)) {
-				WARN_PRINT(
+				WARN_PRINT(vformat(
+					"Invalid wind force magnitude for '%s'. "
 					"Area wind force magnitude is not supported by Godot Jolt. "
-					"Any such value will be ignored."
-				);
+					"Any such value will be ignored.",
+					to_string()
+				));
 			}
 		} break;
 		case PhysicsServer3D::AREA_PARAM_WIND_SOURCE: {
 			if (!((Vector3)p_value).is_equal_approx(DEFAULT_WIND_SOURCE)) {
-				WARN_PRINT(
+				WARN_PRINT(vformat(
+					"Invalid wind source for '%s'. "
 					"Area wind source is not supported by Godot Jolt. "
-					"Any such value will be ignored."
-				);
+					"Any such value will be ignored.",
+					to_string()
+				));
 			}
 		} break;
 		case PhysicsServer3D::AREA_PARAM_WIND_DIRECTION: {
 			if (!((Vector3)p_value).is_equal_approx(DEFAULT_WIND_DIRECTION)) {
-				WARN_PRINT(
+				WARN_PRINT(vformat(
+					"Invalid wind direction for '%s'. "
 					"Area wind direction is not supported by Godot Jolt. "
-					"Any such value will be ignored."
-				);
+					"Any such value will be ignored.",
+					to_string()
+				));
 			}
 		} break;
 		case PhysicsServer3D::AREA_PARAM_WIND_ATTENUATION_FACTOR: {
 			if (!Math::is_equal_approx((double)p_value, DEFAULT_WIND_ATTENUATION_FACTOR)) {
-				WARN_PRINT(
+				WARN_PRINT(vformat(
+					"Invalid wind attenuation for '%s'. "
 					"Area wind attenuation is not supported by Godot Jolt. "
-					"Any such value will be ignored."
-				);
+					"Any such value will be ignored.",
+					to_string()
+				));
 			}
 		} break;
 		default: {
@@ -252,7 +261,7 @@ bool JoltAreaImpl3D::shape_exited(
 		area_shape_exited(p_body_id, p_other_shape_id, p_self_shape_id);
 }
 
-void JoltAreaImpl3D::call_queries() {
+void JoltAreaImpl3D::call_queries([[maybe_unused]] JPH::Body& p_jolt_body) {
 	flush_events(bodies_by_id, body_monitor_callback);
 	flush_events(areas_by_id, area_monitor_callback);
 }
@@ -262,6 +271,10 @@ void JoltAreaImpl3D::create_in_space() {
 
 	jolt_settings->mIsSensor = true;
 	jolt_settings->mUseManifoldReduction = false;
+
+	if (JoltProjectSettings::areas_detect_static_bodies()) {
+		jolt_settings->mSensorDetectsStatic = true;
+	}
 
 	create_end();
 }

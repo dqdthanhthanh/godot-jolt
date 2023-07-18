@@ -1,5 +1,7 @@
 #include "jolt_convex_polygon_shape_impl_3d.hpp"
 
+#include "servers/jolt_project_settings.hpp"
+
 Variant JoltConvexPolygonShapeImpl3D::get_data() const {
 	return vertices;
 }
@@ -37,8 +39,10 @@ JPH::ShapeRefC JoltConvexPolygonShapeImpl3D::build() const {
 		vertex_count < 3,
 		vformat(
 			"Failed to build convex polygon shape with %s. "
-			"It must have a vertex count of at least 3.",
-			to_string()
+			"It must have a vertex count of at least 3. "
+			"This shape belongs to %s.",
+			to_string(),
+			owners_to_string()
 		)
 	);
 
@@ -52,16 +56,20 @@ JPH::ShapeRefC JoltConvexPolygonShapeImpl3D::build() const {
 		jolt_vertices.emplace_back(vertex->x, vertex->y, vertex->z);
 	}
 
-	const JPH::ConvexHullShapeSettings shape_settings(jolt_vertices, margin);
+	const float actual_margin = JoltProjectSettings::use_shape_margins() ? margin : 0.0f;
+
+	const JPH::ConvexHullShapeSettings shape_settings(jolt_vertices, actual_margin);
 	const JPH::ShapeSettings::ShapeResult shape_result = shape_settings.Create();
 
 	ERR_FAIL_COND_D_MSG(
 		shape_result.HasError(),
 		vformat(
 			"Failed to build convex polygon shape with %s. "
-			"It returned the following error: '%s'.",
+			"It returned the following error: '%s'. "
+			"This shape belongs to %s.",
 			to_string(),
-			to_godot(shape_result.GetError())
+			to_godot(shape_result.GetError()),
+			owners_to_string()
 		)
 	);
 

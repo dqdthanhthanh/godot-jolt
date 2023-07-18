@@ -8,9 +8,10 @@ public:
 	JoltJointImpl3D() = default;
 
 	JoltJointImpl3D(
-		JoltSpace3D* p_space,
 		JoltBodyImpl3D* p_body_a,
-		JoltBodyImpl3D* p_body_b = nullptr
+		JoltBodyImpl3D* p_body_b,
+		const Transform3D& p_local_ref_a,
+		const Transform3D& p_local_ref_b
 	);
 
 	virtual ~JoltJointImpl3D();
@@ -21,7 +22,7 @@ public:
 
 	void set_rid(const RID& p_rid) { rid = p_rid; }
 
-	JoltSpace3D* get_space() const { return space; }
+	JoltSpace3D* get_space() const;
 
 	JPH::Constraint* get_jolt_ref() const { return jolt_ref; }
 
@@ -33,16 +34,31 @@ public:
 
 	void set_collision_disabled(bool p_disabled);
 
-protected:
-	RID rid;
+	void destroy();
 
-	JoltSpace3D* space = nullptr;
+	virtual void rebuild([[maybe_unused]] bool p_lock = true) { }
+
+protected:
+	void shift_reference_frames(
+		const Vector3& p_linear_shift,
+		const Vector3& p_angular_shift,
+		Transform3D& p_shifted_ref_a,
+		Transform3D& p_shifted_ref_b
+	);
+
+	String bodies_to_string() const;
+
+	bool collision_disabled = false;
+
+	JPH::Ref<JPH::Constraint> jolt_ref;
 
 	JoltBodyImpl3D* body_a = nullptr;
 
 	JoltBodyImpl3D* body_b = nullptr;
 
-	JPH::Ref<JPH::Constraint> jolt_ref;
+	RID rid;
 
-	bool collision_disabled = false;
+	Transform3D local_ref_a;
+
+	Transform3D local_ref_b;
 };

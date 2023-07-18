@@ -37,23 +37,26 @@ should not be relied upon if determinism is a hard requirement.
 
 ## What's not supported?
 
-- Joints do not support springs or soft limits (yet)
+- Joints do not support soft limits (yet)
 - `SoftBody3D` is not supported
 - `WorldBoundaryShape3D` is not supported
 - The physics server is not thread-safe (yet)
+- Double-precision builds of Godot are not supported (yet)
 - Memory usage is not reflected in Godot's performance monitors (yet)
 
 ## What else is different?
 
-- Collision layers/masks behave like they did in Godot 3, meaning no asymmetrical collisions
+- `Area3D` detecting static bodies is opt-in, with a potentially [heavy performance/memory
+  cost][jst]
+- Springs are actually implemented in `Generic6DOFJoint3D`
 - Ray-casts will hit the back-faces of all shape types, not just concave polygons and height maps
 - Shape-casts should be more accurate, but their cost also scale with the cast distance
+- Shape margins are used, but are treated as an upper bound and scale with the shape's extents
 - Manipulating a body's shape(s) after it has entered a scene tree can be costly
 - Contact impulses are estimations and won't be accurate when colliding with multiple bodies
-- `Area3D` is not able to detect overlaps with static bodies, including the static freeze mode
 - `HeightMapShape3D` only supports square height maps with dimensions that are power-of-two
 - Axis-locking is implemented using joints, which means a body can technically deviate a bit from
-  its locked axes, but they do a better job of conserving energy
+  its locked axes
 
 Also consider this note from Jolt's [documentation][jdc]:
 
@@ -78,7 +81,7 @@ compatible with the one found in Ubuntu 20.04 (Focal Fossa).
 
 ## How do I get started?
 
-1. Download the [latest release][rls] from GitHub
+1. Download it from [GitHub][rls] or from [Godot Asset Library][ast]
 2. Extract the files to your project directory
 3. Start (or restart) Godot
 4. Open your project settings
@@ -130,8 +133,10 @@ Godot Jolt is distributed under the MIT license. See [`LICENSE.txt`][lic] for mo
 [log]: docs/logo.svg
 [god]: https://godotengine.org/
 [jlt]: https://github.com/jrouwe/JoltPhysics
+[jst]: docs/settings.md#jolt-3d
 [jdc]: https://jrouwe.github.io/JoltPhysics/
 [rls]: https://github.com/godot-jolt/godot-jolt/releases/latest
+[ast]: https://godotengine.org/asset-library/asset/1918
 [prj]: https://github.com/orgs/godot-jolt/projects/1
 [set]: docs/settings.md
 [bld]: docs/building.md

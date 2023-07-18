@@ -466,7 +466,7 @@ void JoltPhysicsServer3D::_area_set_ray_pickable(const RID& p_area, bool p_enabl
 	JoltAreaImpl3D* area = area_owner.get_or_null(p_area);
 	ERR_FAIL_NULL(area);
 
-	area->set_ray_pickable(p_enable);
+	area->set_pickable(p_enable);
 }
 
 RID JoltPhysicsServer3D::_body_create() {
@@ -954,14 +954,14 @@ void JoltPhysicsServer3D::_body_set_force_integration_callback(
 	JoltBodyImpl3D* body = body_owner.get_or_null(p_body);
 	ERR_FAIL_NULL(body);
 
-	body->set_force_integration_callback(p_callable, p_userdata);
+	body->set_custom_integration_callback(p_callable, p_userdata);
 }
 
 void JoltPhysicsServer3D::_body_set_ray_pickable(const RID& p_body, bool p_enable) {
 	JoltBodyImpl3D* body = body_owner.get_or_null(p_body);
 	ERR_FAIL_NULL(body);
 
-	body->set_ray_pickable(p_enable);
+	body->set_pickable(p_enable);
 }
 
 bool JoltPhysicsServer3D::_body_test_motion(
@@ -971,6 +971,7 @@ bool JoltPhysicsServer3D::_body_test_motion(
 	double p_margin,
 	int32_t p_max_collisions,
 	bool p_collide_separation_ray,
+	bool p_recovery_as_collision,
 	PhysicsServer3DExtensionMotionResult* p_result
 ) const {
 	JoltBodyImpl3D* body = body_owner.get_or_null(p_body);
@@ -986,6 +987,7 @@ bool JoltPhysicsServer3D::_body_test_motion(
 		(float)p_margin,
 		p_max_collisions,
 		p_collide_separation_ray,
+		p_recovery_as_collision,
 		p_result
 	);
 }
@@ -1265,12 +1267,7 @@ void JoltPhysicsServer3D::_joint_make_pin(
 	JoltBodyImpl3D* body_b = body_owner.get_or_null(p_body_b);
 	ERR_FAIL_COND(body_a == body_b);
 
-	JoltSpace3D* space = body_a->get_space();
-	ERR_FAIL_NULL(space);
-
-	JoltJointImpl3D* new_joint = body_b != nullptr
-		? memnew(JoltPinJointImpl3D(space, body_a, body_b, p_local_a, p_local_b))
-		: memnew(JoltPinJointImpl3D(space, body_a, p_local_a, p_local_b));
+	JoltJointImpl3D* new_joint = memnew(JoltPinJointImpl3D(body_a, body_b, p_local_a, p_local_b));
 
 	new_joint->set_rid(old_joint->get_rid());
 	new_joint->set_collision_disabled(old_joint->is_collision_disabled());
@@ -1359,12 +1356,7 @@ void JoltPhysicsServer3D::_joint_make_hinge(
 	JoltBodyImpl3D* body_b = body_owner.get_or_null(p_body_b);
 	ERR_FAIL_COND(body_a == body_b);
 
-	JoltSpace3D* space = body_a->get_space();
-	ERR_FAIL_NULL(space);
-
-	JoltJointImpl3D* new_joint = body_b != nullptr
-		? memnew(JoltHingeJointImpl3D(space, body_a, body_b, p_hinge_a, p_hinge_b))
-		: memnew(JoltHingeJointImpl3D(space, body_a, p_hinge_a, p_hinge_b));
+	JoltJointImpl3D* new_joint = memnew(JoltHingeJointImpl3D(body_a, body_b, p_hinge_a, p_hinge_b));
 
 	new_joint->set_rid(old_joint->get_rid());
 	new_joint->set_collision_disabled(old_joint->is_collision_disabled());
@@ -1452,12 +1444,9 @@ void JoltPhysicsServer3D::_joint_make_slider(
 	JoltBodyImpl3D* body_b = body_owner.get_or_null(p_body_b);
 	ERR_FAIL_COND(body_a == body_b);
 
-	JoltSpace3D* space = body_a->get_space();
-	ERR_FAIL_NULL(space);
-
-	JoltJointImpl3D* new_joint = body_b != nullptr
-		? memnew(JoltSliderJointImpl3D(space, body_a, body_b, p_local_ref_a, p_local_ref_b))
-		: memnew(JoltSliderJointImpl3D(space, body_a, p_local_ref_a, p_local_ref_b));
+	JoltJointImpl3D* new_joint = memnew(
+		JoltSliderJointImpl3D(body_a, body_b, p_local_ref_a, p_local_ref_b)
+	);
 
 	new_joint->set_rid(old_joint->get_rid());
 	new_joint->set_collision_disabled(old_joint->is_collision_disabled());
@@ -1507,12 +1496,9 @@ void JoltPhysicsServer3D::_joint_make_cone_twist(
 	JoltBodyImpl3D* body_b = body_owner.get_or_null(p_body_b);
 	ERR_FAIL_COND(body_a == body_b);
 
-	JoltSpace3D* space = body_a->get_space();
-	ERR_FAIL_NULL(space);
-
-	JoltJointImpl3D* new_joint = body_b != nullptr
-		? memnew(JoltConeTwistJointImpl3D(space, body_a, body_b, p_local_ref_a, p_local_ref_b))
-		: memnew(JoltConeTwistJointImpl3D(space, body_a, p_local_ref_a, p_local_ref_b));
+	JoltJointImpl3D* new_joint = memnew(
+		JoltConeTwistJointImpl3D(body_a, body_b, p_local_ref_a, p_local_ref_b)
+	);
 
 	new_joint->set_rid(old_joint->get_rid());
 	new_joint->set_collision_disabled(old_joint->is_collision_disabled());
@@ -1564,12 +1550,9 @@ void JoltPhysicsServer3D::_joint_make_generic_6dof(
 	JoltBodyImpl3D* body_b = body_owner.get_or_null(p_body_b);
 	ERR_FAIL_COND(body_a == body_b);
 
-	JoltSpace3D* space = body_a->get_space();
-	ERR_FAIL_NULL(space);
-
-	JoltJointImpl3D* new_joint = body_b != nullptr
-		? memnew(JoltGeneric6DOFJointImpl3D(space, body_a, body_b, p_local_ref_a, p_local_ref_b))
-		: memnew(JoltGeneric6DOFJointImpl3D(space, body_a, p_local_ref_a, p_local_ref_b));
+	JoltJointImpl3D* new_joint = memnew(
+		JoltGeneric6DOFJointImpl3D(body_a, body_b, p_local_ref_a, p_local_ref_b)
+	);
 
 	new_joint->set_rid(old_joint->get_rid());
 	new_joint->set_collision_disabled(old_joint->is_collision_disabled());
@@ -1686,7 +1669,7 @@ void JoltPhysicsServer3D::_free_rid(const RID& p_rid) {
 	} else if (JoltSpace3D* space = space_owner.get_or_null(p_rid)) {
 		free_space(space);
 	} else {
-		ERR_FAIL_MSG("Invalid ID.");
+		ERR_FAIL_MSG("Failed to free RID: The specified RID has no owner.");
 	}
 }
 

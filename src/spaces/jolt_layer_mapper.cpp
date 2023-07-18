@@ -1,16 +1,17 @@
 #include "jolt_layer_mapper.hpp"
 
+#include "servers/jolt_project_settings.hpp"
 #include "spaces/jolt_broad_phase_layer.hpp"
 
 namespace {
 
 template<uint8_t TSize = JoltBroadPhaseLayer::COUNT>
-class JoltBroadPhaseLayerTable {
+class JoltBroadPhaseMatrix {
 	using LayerType = JPH::BroadPhaseLayer;
 	using UnderlyingType = LayerType::Type;
 
 public:
-	constexpr JoltBroadPhaseLayerTable() {
+	JoltBroadPhaseMatrix() {
 		using namespace JoltBroadPhaseLayer;
 
 		allow_collision(BODY_STATIC, BODY_DYNAMIC);
@@ -26,26 +27,33 @@ public:
 
 		allow_collision(AREA_UNDETECTABLE, BODY_DYNAMIC);
 		allow_collision(AREA_UNDETECTABLE, AREA_DETECTABLE);
+
+		if (JoltProjectSettings::areas_detect_static_bodies()) {
+			allow_collision(BODY_STATIC, AREA_DETECTABLE);
+			allow_collision(BODY_STATIC, AREA_UNDETECTABLE);
+			allow_collision(AREA_DETECTABLE, BODY_STATIC);
+			allow_collision(AREA_UNDETECTABLE, BODY_STATIC);
+		}
 	}
 
-	constexpr void allow_collision(UnderlyingType p_layer1, UnderlyingType p_layer2) {
-		table[p_layer1][p_layer2] = true;
+	void allow_collision(UnderlyingType p_layer1, UnderlyingType p_layer2) {
+		masks[p_layer1] |= uint8_t(1U << p_layer2);
 	}
 
-	constexpr void allow_collision(LayerType p_layer1, LayerType p_layer2) {
+	void allow_collision(LayerType p_layer1, LayerType p_layer2) {
 		allow_collision((UnderlyingType)p_layer1, (UnderlyingType)p_layer2);
 	}
 
-	constexpr bool should_collide(UnderlyingType p_layer1, UnderlyingType p_layer2) const {
-		return table[p_layer1][p_layer2];
+	bool should_collide(UnderlyingType p_layer1, UnderlyingType p_layer2) const {
+		return (masks[p_layer1] & uint8_t(1U << p_layer2)) != 0;
 	}
 
-	constexpr bool should_collide(LayerType p_layer1, LayerType p_layer2) const {
+	bool should_collide(LayerType p_layer1, LayerType p_layer2) const {
 		return should_collide((UnderlyingType)p_layer1, (UnderlyingType)p_layer2);
 	}
 
 private:
-	bool table[TSize][TSize] = {};
+	uint8_t masks[TSize] = {};
 };
 
 constexpr JPH::ObjectLayer encode_layers(
@@ -104,7 +112,14 @@ JPH::ObjectLayer JoltLayerMapper::to_object_layer(
 
 		ERR_FAIL_COND_D_MSG(
 			next_object_layer == object_layer_count,
-			vformat("Maximum number of object layers (%d) reached.", object_layer_count)
+			vformat(
+				"Maximum number of object layers (%d) reached. "
+				"This means there are %d combinations of collision layers and masks. "
+				"This should not happen under normal circumstances. "
+				"Consider reporting this issue.",
+				object_layer_count,
+				object_layer_count
+			)
 		);
 
 		object_layer = allocate_object_layer(collision);
@@ -187,13 +202,13 @@ bool JoltLayerMapper::ShouldCollide(
 	JPH::ObjectLayer p_encoded_layer1,
 	JPH::BroadPhaseLayer p_broad_phase_layer2
 ) const {
-	static constexpr JoltBroadPhaseLayerTable table;
+	static const JoltBroadPhaseMatrix matrix;
 
 	JPH::BroadPhaseLayer broad_phase_layer1 = {};
 	JPH::ObjectLayer object_layer1 = 0;
 	decode_layers(p_encoded_layer1, broad_phase_layer1, object_layer1);
 
-	return table.should_collide(broad_phase_layer1, p_broad_phase_layer2);
+	return matrix.should_collide(broad_phase_layer1, p_broad_phase_layer2);
 }
 
 JPH::ObjectLayer JoltLayerMapper::allocate_object_layer(uint64_t p_collision) {

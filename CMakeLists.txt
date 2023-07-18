@@ -9,7 +9,7 @@ list(APPEND CMAKE_MODULE_PATH ${cmake_dir})
 
 include(GodotJoltPrelude)
 
-project(godot-jolt VERSION 0.2.0 LANGUAGES CXX)
+project(godot-jolt VERSION 0.4.1 LANGUAGES CXX)
 
 include(GodotJoltSetup)
 include(GodotJoltExternalGodotCpp)
@@ -23,7 +23,7 @@ set(PROJECT_DESCRIPTION "Godot extension that integrates the Jolt physics engine
 set(PROJECT_COPYRIGHT "Copyright (c) Mikael Hermansson and Godot Jolt contributors.")
 set(PROJECT_BUNDLE_IDENTIFIER "org.godot-jolt.godot-jolt")
 set(PROJECT_ENTRY_POINT "godot_jolt_main")
-set(PROJECT_VERSION_STATUS "dev")
+set(PROJECT_VERSION_STATUS "stable")
 set(PROJECT_VERSION_WITH_STATUS ${PROJECT_VERSION}-${PROJECT_VERSION_STATUS})
 set(PROJECT_VERSION_WITH_BUILD ${PROJECT_VERSION_WITH_STATUS}+${PROJECT_VERSION_BUILD})
 
@@ -92,8 +92,6 @@ set(is_llvm_clang $<CXX_COMPILER_ID:Clang>)
 set(is_gcc $<CXX_COMPILER_ID:GNU>)
 set(is_clang_cl $<AND:${is_msvc_like},${is_llvm_clang}>)
 
-set(macro_prefix_option -fmacro-prefix-map=${source_dir}=.)
-
 set_target_properties(godot-jolt PROPERTIES
 	OUTPUT_NAME godot-jolt${suffix}
 	PREFIX ""
@@ -153,9 +151,6 @@ if(MSVC)
 	# Disable support for exception-handling
 	string(REPLACE "/EHsc" "/EHs-c-" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 
-	set(pdb_file $<TARGET_PDB_FILE:godot-jolt>)
-	set(pdb_file_name $<TARGET_PDB_FILE_NAME:godot-jolt>)
-
 	target_compile_options(godot-jolt
 		PRIVATE /utf-8 # Treat lack of BOM as UTF-8
 		PRIVATE /W4 # Warning level 4
@@ -179,9 +174,10 @@ if(MSVC)
 		PRIVATE $<${target_avx2}:/arch:AVX2> # Enable AVX2 instructions
 		PRIVATE $<${target_avx512}:/arch:AVX512> # Enable AVX-512 instructions
 		PRIVATE $<${is_msvc_cl}:/MP> # Multi-threaded compilation
-		PRIVATE $<${is_clang_cl}:/clang:${macro_prefix_option}> # Make `__FILE__` relative
 		PRIVATE $<${is_clang_cl}:-Qunused-arguments> # Disable warnings about unused arguments
 	)
+
+	set(pdb_file_name $<TARGET_PDB_FILE_NAME:godot-jolt>)
 
 	target_link_options(godot-jolt
 		PRIVATE $<${is_distribution_config}:/PDBALTPATH:${pdb_file_name}> # Strip PDB path
@@ -208,7 +204,6 @@ else()
 		PRIVATE -pthread # Use POSIX threads
 		PRIVATE -ffast-math # Enable aggressive floating-point optimizations
 		PRIVATE -fno-exceptions # Disable support for exception-handling
-		PRIVATE ${macro_prefix_option} # Make `__FILE__` relative
 		PRIVATE $<${use_sse2}:-msse2> # Enable SSE2 instructions
 		PRIVATE $<${use_sse4_2}:-msse4.2> # Enable SSE4.2 instructions
 		PRIVATE $<${use_sse4_2}:-mpopcnt> # Enable the POPCNT instruction
@@ -239,7 +234,7 @@ else()
 endif()
 
 if(MSVC)
-	set(debug_symbols ${pdb_file})
+	set(debug_symbols $<TARGET_PDB_FILE:godot-jolt>)
 elseif(APPLE)
 	if(GDJ_INTERPROCEDURAL_OPTIMIZATION)
 		# HACK(mihe): When compiling with LTO enabled on macOS we need to tell its linker not to

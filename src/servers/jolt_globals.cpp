@@ -20,6 +20,8 @@ void jolt_aligned_free(void* p_mem) {
 	mi_free(p_mem);
 }
 
+#ifdef JPH_ENABLE_ASSERTS
+
 void jolt_trace(const char* p_format, ...) {
 	// NOLINTNEXTLINE(cppcoreguidelines-init-variables)
 	va_list args;
@@ -30,18 +32,14 @@ void jolt_trace(const char* p_format, ...) {
 	UtilityFunctions::print_verbose(buffer);
 }
 
-#ifdef JPH_ENABLE_ASSERTS
-
 bool jolt_assert(const char* p_expr, const char* p_msg, const char* p_file, uint32_t p_line) {
-	ERR_PRINT(vformat(
+	CRASH_NOW_MSG(vformat(
 		"Assertion '%s' failed with message '%s' at '%s:%d'",
 		p_expr,
 		p_msg != nullptr ? p_msg : "",
 		p_file,
 		p_line
 	));
-
-	CRASH_NOW();
 
 	return false;
 }
@@ -54,9 +52,8 @@ void jolt_initialize() {
 	JPH::AlignedAllocate = &jolt_aligned_alloc;
 	JPH::AlignedFree = &jolt_aligned_free;
 
-	JPH::Trace = &jolt_trace;
-
 #ifdef JPH_ENABLE_ASSERTS
+	JPH::Trace = &jolt_trace;
 	JPH::AssertFailed = jolt_assert;
 #endif // JPH_ENABLE_ASSERTS
 
