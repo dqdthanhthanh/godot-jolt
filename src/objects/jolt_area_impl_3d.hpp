@@ -2,6 +2,8 @@
 
 #include "objects/jolt_object_impl_3d.hpp"
 
+class JoltBodyImpl3D;
+
 class JoltAreaImpl3D final : public JoltObjectImpl3D {
 	struct BodyIDHasher {
 		static uint32_t hash(const JPH::BodyID& p_id) {
@@ -52,11 +54,11 @@ class JoltAreaImpl3D final : public JoltObjectImpl3D {
 public:
 	using OverrideMode = PhysicsServer3D::AreaSpaceOverrideMode;
 
+	JoltAreaImpl3D();
+
 	Variant get_param(PhysicsServer3D::AreaParameter p_param) const;
 
 	void set_param(PhysicsServer3D::AreaParameter p_param, const Variant& p_value);
-
-	JPH::BroadPhaseLayer get_broad_phase_layer() const override;
 
 	bool has_body_monitor_callback() const { return body_monitor_callback.is_valid(); }
 
@@ -66,15 +68,19 @@ public:
 
 	void set_area_monitor_callback(const Callable& p_callback);
 
-	bool is_monitoring() const {
-		return has_body_monitor_callback() || has_area_monitor_callback();
-	}
-
 	bool is_monitorable() const { return monitorable; }
 
 	void set_monitorable(bool p_monitorable, bool p_lock = true);
 
-	bool generates_contacts() const override { return is_monitoring(); }
+	bool can_monitor(const JoltBodyImpl3D& p_other) const;
+
+	bool can_monitor(const JoltAreaImpl3D& p_other) const;
+
+	bool can_interact_with(const JoltBodyImpl3D& p_other) const;
+
+	bool can_interact_with(const JoltAreaImpl3D& p_other) const;
+
+	bool generates_contacts() const override { return false; }
 
 	bool is_point_gravity() const { return point_gravity; }
 
@@ -155,26 +161,28 @@ public:
 	Vector3 get_center_of_mass_custom() const override { return {0, 0, 0}; }
 
 private:
-	JPH::EMotionType get_motion_type() const override { return JPH::EMotionType::Kinematic; }
+	JPH::BroadPhaseLayer _get_broad_phase_layer() const override;
 
-	void create_in_space() override;
+	JPH::EMotionType _get_motion_type() const override { return JPH::EMotionType::Kinematic; }
 
-	void add_shape_pair(
+	void _create_in_space() override;
+
+	void _add_shape_pair(
 		Overlap& p_overlap,
 		const JPH::BodyID& p_body_id,
 		const JPH::SubShapeID& p_other_shape_id,
 		const JPH::SubShapeID& p_self_shape_id
 	);
 
-	bool remove_shape_pair(
+	bool _remove_shape_pair(
 		Overlap& p_overlap,
 		const JPH::SubShapeID& p_other_shape_id,
 		const JPH::SubShapeID& p_self_shape_id
 	);
 
-	void flush_events(OverlapsById& p_objects, const Callable& p_callback);
+	void _flush_events(OverlapsById& p_objects, const Callable& p_callback);
 
-	void report_event(
+	void _report_event(
 		const Callable& p_callback,
 		PhysicsServer3D::AreaBodyStatus p_status,
 		const RID& p_other_rid,
@@ -183,25 +191,29 @@ private:
 		int32_t p_self_shape_index
 	) const;
 
-	void notify_body_entered(const JPH::BodyID& p_body_id, bool p_lock = true);
+	void _notify_body_entered(const JPH::BodyID& p_body_id, bool p_lock = true);
 
-	void notify_body_exited(const JPH::BodyID& p_body_id, bool p_lock = true);
+	void _notify_body_exited(const JPH::BodyID& p_body_id, bool p_lock = true);
 
-	void force_bodies_entered();
+	void _force_bodies_entered();
 
-	void force_bodies_exited(bool p_remove, bool p_lock = true);
+	void _force_bodies_exited(bool p_remove, bool p_lock = true);
 
-	void force_areas_entered();
+	void _force_areas_entered();
 
-	void force_areas_exited(bool p_remove, bool p_lock = true);
+	void _force_areas_exited(bool p_remove, bool p_lock = true);
 
-	void space_changing(bool p_lock = true) override;
+	void _update_group_filter(bool p_lock = true);
 
-	void body_monitoring_changed();
+	void _space_changing(bool p_lock = true) override;
 
-	void area_monitoring_changed();
+	void _space_changed(bool p_lock = true) override;
 
-	void monitorable_changed(bool p_lock = true);
+	void _body_monitoring_changed();
+
+	void _area_monitoring_changed();
+
+	void _monitorable_changed(bool p_lock = true);
 
 	OverlapsById bodies_by_id;
 

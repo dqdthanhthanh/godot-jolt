@@ -1,11 +1,9 @@
 #pragma once
 
-#include "objects/jolt_group_filter_rid.hpp"
 #include "objects/jolt_object_impl_3d.hpp"
 #include "objects/jolt_physics_direct_body_state_3d.hpp"
 
 class JoltAreaImpl3D;
-class JoltGroupFilterRID;
 class JoltJointImpl3D;
 
 class JoltBodyImpl3D final : public JoltObjectImpl3D {
@@ -36,6 +34,8 @@ public:
 		Vector3 impulse;
 	};
 
+	JoltBodyImpl3D();
+
 	~JoltBodyImpl3D() override;
 
 	Variant get_state(PhysicsServer3D::BodyState p_state);
@@ -45,8 +45,6 @@ public:
 	Variant get_param(PhysicsServer3D::BodyParameter p_param) const;
 
 	void set_param(PhysicsServer3D::BodyParameter p_param, const Variant& p_value);
-
-	JPH::BroadPhaseLayer get_broad_phase_layer() const override;
 
 	bool has_state_sync_callback() const { return body_state_callback.is_valid(); }
 
@@ -242,60 +240,70 @@ public:
 
 	bool are_axes_locked() const { return locked_axes != 0; }
 
+	bool can_collide_with(const JoltBodyImpl3D& p_other) const;
+
+	bool can_interact_with(const JoltBodyImpl3D& p_other) const;
+
 private:
-	JPH::EMotionType get_motion_type() const override;
+	JPH::BroadPhaseLayer _get_broad_phase_layer() const override;
 
-	void create_in_space() override;
+	JPH::EMotionType _get_motion_type() const override;
 
-	void integrate_forces(float p_step, JPH::Body& p_jolt_body);
+	void _create_in_space() override;
 
-	void pre_step_static(float p_step, JPH::Body& p_jolt_body);
+	void _integrate_forces(float p_step, JPH::Body& p_jolt_body);
 
-	void pre_step_rigid(float p_step, JPH::Body& p_jolt_body);
+	void _pre_step_static(float p_step, JPH::Body& p_jolt_body);
 
-	void pre_step_kinematic(float p_step, JPH::Body& p_jolt_body);
+	void _pre_step_rigid(float p_step, JPH::Body& p_jolt_body);
 
-	void apply_transform(const Transform3D& p_transform, bool p_lock = true) override;
+	void _pre_step_kinematic(float p_step, JPH::Body& p_jolt_body);
 
-	JPH::MassProperties calculate_mass_properties(const JPH::Shape& p_shape) const;
+	void _apply_transform(const Transform3D& p_transform, bool p_lock = true) override;
 
-	JPH::MassProperties calculate_mass_properties() const;
+	JPH::EAllowedDOFs _calculate_allowed_dofs() const;
 
-	void update_mass_properties(bool p_lock = true);
+	JPH::MassProperties _calculate_mass_properties(const JPH::Shape& p_shape) const;
 
-	void update_damp(bool p_lock = true);
+	JPH::MassProperties _calculate_mass_properties() const;
 
-	void update_kinematic_transform(bool p_lock = true);
+	void _stop_locked_axes(JPH::Body& p_jolt_body) const;
 
-	void update_group_filter(bool p_lock = true);
+	void _update_mass_properties(bool p_lock = true);
 
-	void update_joint_constraints(bool p_lock = true);
+	void _update_gravity(JPH::Body& p_jolt_body);
 
-	void destroy_joint_constraints();
+	void _update_damp(bool p_lock = true);
 
-	void update_axes_constraint(bool p_lock = true);
+	void _update_kinematic_transform(bool p_lock = true);
 
-	void destroy_axes_constraint();
+	void _update_group_filter(bool p_lock = true);
 
-	void mode_changed(bool p_lock = true);
+	void _update_joint_constraints(bool p_lock = true);
 
-	void shapes_built(bool p_lock) override;
+	void _destroy_joint_constraints();
 
-	void space_changing(bool p_lock = true) override;
+	void _mode_changed(bool p_lock = true);
 
-	void space_changed(bool p_lock = true) override;
+	void _shapes_built(bool p_lock) override;
 
-	void areas_changed(bool p_lock = true);
+	void _space_changing(bool p_lock = true) override;
 
-	void joints_changed(bool p_lock = true);
+	void _space_changed(bool p_lock = true) override;
 
-	void transform_changed(bool p_lock = true) override;
+	void _areas_changed(bool p_lock = true);
 
-	void motion_changed(bool p_lock = true);
+	void _joints_changed(bool p_lock = true);
 
-	void exceptions_changed(bool p_lock = true);
+	void _transform_changed(bool p_lock = true) override;
 
-	void axis_lock_changed(bool p_lock = true);
+	void _motion_changed(bool p_lock = true);
+
+	void _exceptions_changed(bool p_lock = true);
+
+	void _axis_lock_changed(bool p_lock = true);
+
+	LocalVector<RID> exceptions;
 
 	LocalVector<Contact> contacts;
 
@@ -326,10 +334,6 @@ private:
 	Callable custom_integration_callback;
 
 	JoltPhysicsDirectBodyState3D* direct_state = nullptr;
-
-	JPH::Ref<JoltGroupFilterRID> group_filter;
-
-	JPH::Ref<JPH::Constraint> axes_constraint;
 
 	PhysicsServer3D::BodyMode mode = PhysicsServer3D::BODY_MODE_RIGID;
 

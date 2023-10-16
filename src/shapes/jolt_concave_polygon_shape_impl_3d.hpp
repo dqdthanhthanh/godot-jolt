@@ -19,7 +19,9 @@ public:
 	String to_string() const;
 
 private:
-	JPH::ShapeRefC build() const override;
+	JPH::ShapeRefC _build() const override;
+
+	JPH::ShapeRefC _build_double_sided(const JPH::Shape* p_shape) const;
 
 	PackedVector3Array faces;
 

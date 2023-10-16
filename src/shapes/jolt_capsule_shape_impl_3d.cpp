@@ -9,7 +9,7 @@ Variant JoltCapsuleShapeImpl3D::get_data() const {
 
 void JoltCapsuleShapeImpl3D::set_data(const Variant& p_data) {
 	ON_SCOPE_EXIT {
-		invalidated();
+		_invalidated();
 	};
 
 	destroy();
@@ -32,37 +32,37 @@ String JoltCapsuleShapeImpl3D::to_string() const {
 	return vformat("{height=%f radius=%f}", height, radius);
 }
 
-JPH::ShapeRefC JoltCapsuleShapeImpl3D::build() const {
+JPH::ShapeRefC JoltCapsuleShapeImpl3D::_build() const {
 	ERR_FAIL_COND_D_MSG(
 		radius <= 0.0f,
 		vformat(
-			"Failed to build capsule shape with %s. "
+			"Godot Jolt failed to build capsule shape with %s. "
 			"Its radius must be greater than 0. "
 			"This shape belongs to %s.",
 			to_string(),
-			owners_to_string()
+			_owners_to_string()
 		)
 	);
 
 	ERR_FAIL_COND_D_MSG(
 		height <= 0.0f,
 		vformat(
-			"Failed to build capsule shape with %s. "
+			"Godot Jolt failed to build capsule shape with %s. "
 			"Its height must be greater than 0. "
 			"This shape belongs to %s.",
 			to_string(),
-			owners_to_string()
+			_owners_to_string()
 		)
 	);
 
 	ERR_FAIL_COND_D_MSG(
 		height < radius * 2.0f,
 		vformat(
-			"Failed to build capsule shape with %s. "
+			"Godot Jolt failed to build capsule shape with %s. "
 			"Its height must be at least double that of its radius. "
 			"This shape belongs to %s.",
 			to_string(),
-			owners_to_string()
+			_owners_to_string()
 		)
 	);
 
@@ -75,12 +75,12 @@ JPH::ShapeRefC JoltCapsuleShapeImpl3D::build() const {
 	ERR_FAIL_COND_D_MSG(
 		shape_result.HasError(),
 		vformat(
-			"Failed to build capsule shape with %s. "
+			"Godot Jolt failed to build capsule shape with %s. "
 			"It returned the following error: '%s'. "
 			"This shape belongs to %s.",
 			to_string(),
 			to_godot(shape_result.GetError()),
-			owners_to_string()
+			_owners_to_string()
 		)
 	);
 

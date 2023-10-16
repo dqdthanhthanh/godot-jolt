@@ -6,71 +6,76 @@
 
 void JoltDebugGeometry3D::_bind_methods() {
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_bodies);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_bodies);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_bodies, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_shapes);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_shapes);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_shapes, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_constraints);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_constraints);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_constraints, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_bounding_boxes);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_bounding_boxes);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_bounding_boxes, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_centers_of_mass);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_centers_of_mass);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_centers_of_mass, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_transforms);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_transforms);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_transforms, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_velocities);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_velocities);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_velocities, "enabled");
+
+	BIND_METHOD(JoltDebugGeometry3D, get_draw_triangle_outlines);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_triangle_outlines, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_constraint_reference_frames);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_constraint_reference_frames);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_constraint_reference_frames, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_constraint_limits);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_constraint_limits);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_constraint_limits, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_as_wireframe);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_as_wireframe);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_as_wireframe, "enabled");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_draw_with_color_scheme);
-	BIND_METHOD(JoltDebugGeometry3D, set_draw_with_color_scheme);
+	BIND_METHOD(JoltDebugGeometry3D, set_draw_with_color_scheme, "color_scheme");
 
 	BIND_METHOD(JoltDebugGeometry3D, get_material_depth_test);
-	BIND_METHOD(JoltDebugGeometry3D, set_material_depth_test);
+	BIND_METHOD(JoltDebugGeometry3D, set_material_depth_test, "enabled");
 
 	ADD_GROUP("Draw", "draw_");
 
-	BIND_PROPERTY(draw_bodies, Variant::BOOL);
+	BIND_PROPERTY("draw_bodies", Variant::BOOL);
 
-	BIND_PROPERTY(draw_shapes, Variant::BOOL);
+	BIND_PROPERTY("draw_shapes", Variant::BOOL);
 
-	BIND_PROPERTY(draw_constraints, Variant::BOOL);
+	BIND_PROPERTY("draw_constraints", Variant::BOOL);
 
-	BIND_PROPERTY(draw_bounding_boxes, Variant::BOOL);
+	BIND_PROPERTY("draw_bounding_boxes", Variant::BOOL);
 
-	BIND_PROPERTY(draw_centers_of_mass, Variant::BOOL);
+	BIND_PROPERTY("draw_centers_of_mass", Variant::BOOL);
 
-	BIND_PROPERTY(draw_transforms, Variant::BOOL);
+	BIND_PROPERTY("draw_transforms", Variant::BOOL);
 
-	BIND_PROPERTY(draw_velocities, Variant::BOOL);
+	BIND_PROPERTY("draw_velocities", Variant::BOOL);
 
-	BIND_PROPERTY(draw_constraint_reference_frames, Variant::BOOL);
+	BIND_PROPERTY("draw_triangle_outlines", Variant::BOOL);
 
-	BIND_PROPERTY(draw_constraint_limits, Variant::BOOL);
+	BIND_PROPERTY("draw_constraint_reference_frames", Variant::BOOL);
 
-	BIND_PROPERTY(draw_as_wireframe, Variant::BOOL);
+	BIND_PROPERTY("draw_constraint_limits", Variant::BOOL);
+
+	BIND_PROPERTY("draw_as_wireframe", Variant::BOOL);
 
 	BIND_PROPERTY_ENUM(
-		draw_with_color_scheme,
+		"draw_with_color_scheme",
 		"Instance,Shape Type,Motion Type,Sleep State,Island"
 	);
 
 	ADD_GROUP("Material", "material_");
 
-	BIND_PROPERTY(material_depth_test, Variant::BOOL);
+	BIND_PROPERTY("material_depth_test", Variant::BOOL);
 
 	BIND_ENUM_CONSTANT(COLOR_SCHEME_INSTANCE);
 	BIND_ENUM_CONSTANT(COLOR_SCHEME_SHAPE_TYPE);
@@ -242,6 +247,21 @@ bool JoltDebugGeometry3D::get_draw_velocities() const {
 void JoltDebugGeometry3D::set_draw_velocities([[maybe_unused]] bool p_enabled) {
 #ifdef JPH_DEBUG_RENDERER
 	draw_settings.draw_velocities = p_enabled;
+#endif // JPH_DEBUG_RENDERER
+}
+
+bool JoltDebugGeometry3D::get_draw_triangle_outlines() const {
+#ifdef JPH_DEBUG_RENDERER
+	return JPH::MeshShape::sDrawTriangleOutlines;
+#else // JPH_DEBUG_RENDERER
+	return false;
+#endif // JPH_DEBUG_RENDERER
+}
+
+void JoltDebugGeometry3D::set_draw_triangle_outlines([[maybe_unused]] bool p_enabled) {
+#ifdef JPH_DEBUG_RENDERER
+	JPH::MeshShape::sDrawTriangleOutlines = p_enabled;
+	JPH::HeightFieldShape::sDrawTriangleOutlines = p_enabled;
 #endif // JPH_DEBUG_RENDERER
 }
 

@@ -9,7 +9,7 @@ list(APPEND CMAKE_MODULE_PATH ${cmake_dir})
 
 include(GodotJoltPrelude)
 
-project(godot-jolt VERSION 0.4.1 LANGUAGES CXX)
+project(godot-jolt VERSION 0.9.1 LANGUAGES CXX)
 
 include(GodotJoltSetup)
 include(GodotJoltExternalGodotCpp)
@@ -23,7 +23,7 @@ set(PROJECT_DESCRIPTION "Godot extension that integrates the Jolt physics engine
 set(PROJECT_COPYRIGHT "Copyright (c) Mikael Hermansson and Godot Jolt contributors.")
 set(PROJECT_BUNDLE_IDENTIFIER "org.godot-jolt.godot-jolt")
 set(PROJECT_ENTRY_POINT "godot_jolt_main")
-set(PROJECT_VERSION_STATUS "stable")
+set(PROJECT_VERSION_STATUS "dev")
 set(PROJECT_VERSION_WITH_STATUS ${PROJECT_VERSION}-${PROJECT_VERSION_STATUS})
 set(PROJECT_VERSION_WITH_BUILD ${PROJECT_VERSION_WITH_STATUS}+${PROJECT_VERSION_BUILD})
 
@@ -168,7 +168,6 @@ if(MSVC)
 		PRIVATE /Zc:preprocessor # Enable standard-conforming preprocessor
 		PRIVATE /Zc:referenceBinding # Enforce reference binding rules
 		PRIVATE /volatile:iso # Enable standard-conforming interpretation of `volatile`
-		PRIVATE /fp:fast # Enable aggressive floating-point optimizations
 		PRIVATE $<${is_optimized_config}:/GS-> # Disable security checks
 		PRIVATE $<${target_avx}:/arch:AVX> # Enable AVX instructions
 		PRIVATE $<${target_avx2}:/arch:AVX2> # Enable AVX2 instructions
@@ -201,8 +200,8 @@ else()
 		PRIVATE -Wcast-qual # Enable warnings about casting away qualifiers
 		PRIVATE -Wshadow # Enable variable/type shadowing warnings
 		PRIVATE -Wundef # Enable warnings about undefined identifiers in `#if` directives
+		PRIVATE -Wno-gnu-zero-variadic-macro-arguments # Disable zero variadic macro args warning
 		PRIVATE -pthread # Use POSIX threads
-		PRIVATE -ffast-math # Enable aggressive floating-point optimizations
 		PRIVATE -fno-exceptions # Disable support for exception-handling
 		PRIVATE $<${use_sse2}:-msse2> # Enable SSE2 instructions
 		PRIVATE $<${use_sse4_2}:-msse4.2> # Enable SSE4.2 instructions

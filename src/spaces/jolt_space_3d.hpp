@@ -89,6 +89,8 @@ public:
 	void remove_joint(JoltJointImpl3D* p_joint);
 
 #ifdef GDJ_CONFIG_EDITOR
+	void dump_debug_snapshot(const String& p_dir);
+
 	const PackedVector3Array& get_debug_contacts() const;
 
 	int32_t get_debug_contact_count() const;
@@ -99,9 +101,9 @@ public:
 #endif // GDJ_CONFIG_EDITOR
 
 private:
-	void pre_step(float p_step);
+	void _pre_step(float p_step);
 
-	void post_step(float p_step);
+	void _post_step(float p_step);
 
 	JoltBodyWriter3D body_accessor;
 

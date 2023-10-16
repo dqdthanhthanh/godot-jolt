@@ -12,24 +12,31 @@ constexpr double DEFAULT_IMPULSE_CLAMP = 0.0;
 } // namespace
 
 JoltPinJointImpl3D::JoltPinJointImpl3D(
+	const JoltJointImpl3D& p_old_joint,
 	JoltBodyImpl3D* p_body_a,
 	JoltBodyImpl3D* p_body_b,
 	const Vector3& p_local_a,
 	const Vector3& p_local_b,
 	bool p_lock
 )
-	: JoltJointImpl3D(p_body_a, p_body_b, Transform3D({}, p_local_a), Transform3D({}, p_local_b)) {
+	: JoltJointImpl3D(
+		  p_old_joint,
+		  p_body_a,
+		  p_body_b,
+		  Transform3D({}, p_local_a),
+		  Transform3D({}, p_local_b)
+	  ) {
 	rebuild(p_lock);
 }
 
 void JoltPinJointImpl3D::set_local_a(const Vector3& p_local_a, bool p_lock) {
 	local_ref_a = Transform3D({}, p_local_a);
-	points_changed(p_lock);
+	_points_changed(p_lock);
 }
 
 void JoltPinJointImpl3D::set_local_b(const Vector3& p_local_b, bool p_lock) {
 	local_ref_b = Transform3D({}, p_local_b);
-	points_changed(p_lock);
+	_points_changed(p_lock);
 }
 
 double JoltPinJointImpl3D::get_param(PhysicsServer3D::PinJointParam p_param) const {
@@ -57,7 +64,7 @@ void JoltPinJointImpl3D::set_param(PhysicsServer3D::PinJointParam p_param, doubl
 					"Pin joint bias is not supported by Godot Jolt. "
 					"Any such value will be ignored. "
 					"This joint connects %s.",
-					bodies_to_string()
+					_bodies_to_string()
 				));
 			}
 		} break;
@@ -67,7 +74,7 @@ void JoltPinJointImpl3D::set_param(PhysicsServer3D::PinJointParam p_param, doubl
 					"Pin joint damping is not supported by Godot Jolt. "
 					"Any such value will be ignored. "
 					"This joint connects %s.",
-					bodies_to_string()
+					_bodies_to_string()
 				));
 			}
 		} break;
@@ -77,7 +84,7 @@ void JoltPinJointImpl3D::set_param(PhysicsServer3D::PinJointParam p_param, doubl
 					"Pin joint impulse clamp is not supported by Godot Jolt. "
 					"Any such value will be ignored. "
 					"This joint connects %s.",
-					bodies_to_string()
+					_bodies_to_string()
 				));
 			}
 		} break;
@@ -85,6 +92,19 @@ void JoltPinJointImpl3D::set_param(PhysicsServer3D::PinJointParam p_param, doubl
 			ERR_FAIL_MSG(vformat("Unhandled pin joint parameter: '%d'", p_param));
 		} break;
 	}
+}
+
+float JoltPinJointImpl3D::get_applied_force() const {
+	auto* constraint = static_cast<JPH::PointConstraint*>(jolt_ref.GetPtr());
+	ERR_FAIL_NULL_D(constraint);
+
+	JoltSpace3D* space = get_space();
+	ERR_FAIL_NULL_D(space);
+
+	const float last_step = space->get_last_step();
+	QUIET_FAIL_COND_D(last_step == 0.0f);
+
+	return constraint->GetTotalLambdaPosition().Length() / last_step;
 }
 
 void JoltPinJointImpl3D::rebuild(bool p_lock) {
@@ -115,14 +135,17 @@ void JoltPinJointImpl3D::rebuild(bool p_lock) {
 	Transform3D shifted_ref_a;
 	Transform3D shifted_ref_b;
 
-	shift_reference_frames(Vector3(), Vector3(), shifted_ref_a, shifted_ref_b);
+	_shift_reference_frames(Vector3(), Vector3(), shifted_ref_a, shifted_ref_b);
 
-	jolt_ref = build_pin(jolt_body_a, jolt_body_b, shifted_ref_a, shifted_ref_b);
+	jolt_ref = _build_pin(jolt_body_a, jolt_body_b, shifted_ref_a, shifted_ref_b);
 
 	space->add_joint(this);
+
+	_update_enabled();
+	_update_iterations();
 }
 
-JPH::Constraint* JoltPinJointImpl3D::build_pin(
+JPH::Constraint* JoltPinJointImpl3D::_build_pin(
 	JPH::Body* p_jolt_body_a,
 	JPH::Body* p_jolt_body_b,
 	const Transform3D& p_shifted_ref_a,
@@ -140,6 +163,6 @@ JPH::Constraint* JoltPinJointImpl3D::build_pin(
 	}
 }
 
-void JoltPinJointImpl3D::points_changed(bool p_lock) {
+void JoltPinJointImpl3D::_points_changed(bool p_lock) {
 	rebuild(p_lock);
 }

@@ -1,5 +1,7 @@
 #include "jolt_globals.hpp"
 
+#include "objects/jolt_group_filter.hpp"
+#include "shapes/jolt_custom_double_sided_shape.hpp"
 #include "shapes/jolt_custom_empty_shape.hpp"
 #include "shapes/jolt_custom_ray_shape.hpp"
 #include "shapes/jolt_custom_user_data_shape.hpp"
@@ -64,9 +66,15 @@ void jolt_initialize() {
 	JoltCustomEmptyShape::register_type();
 	JoltCustomRayShape::register_type();
 	JoltCustomUserDataShape::register_type();
+	JoltCustomDoubleSidedShape::register_type();
+
+	JoltGroupFilter::instance = new JoltGroupFilter();
+	JoltGroupFilter::instance->SetEmbedded();
 }
 
 void jolt_deinitialize() {
+	delete_safely(JoltGroupFilter::instance);
+
 	JPH::UnregisterTypes();
 
 	delete_safely(JPH::Factory::sInstance);

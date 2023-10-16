@@ -58,7 +58,7 @@ public:
 
 	float GetInnerRadius() const override { return 0.0f; }
 
-	JPH::MassProperties GetMassProperties() const override { return {}; }
+	JPH::MassProperties GetMassProperties() const override;
 
 	JPH::Vec3 GetSurfaceNormal(
 		[[maybe_unused]] const JPH::SubShapeID& p_sub_shape_id,
@@ -122,6 +122,18 @@ public:
 		[[maybe_unused]] JPH::CollidePointCollector& p_collector,
 		[[maybe_unused]] const JPH::ShapeFilter& p_shape_filter = {}
 	) const override { }
+
+	void CollideSoftBodyVertices(
+		[[maybe_unused]] JPH::Mat44Arg p_center_of_mass_transform,
+		[[maybe_unused]] JPH::Vec3Arg p_scale,
+		[[maybe_unused]] JPH::SoftBodyVertex* p_vertices,
+		[[maybe_unused]] JPH::uint p_num_vertices,
+		[[maybe_unused]] float p_delta_time,
+		[[maybe_unused]] JPH::Vec3Arg p_displacement_due_to_gravity,
+		[[maybe_unused]] int p_colliding_shape_index
+	) const override {
+		ERR_FAIL_NOT_IMPL();
+	}
 
 	JPH::Shape::Stats GetStats() const override { return {sizeof(*this), 0}; }
 

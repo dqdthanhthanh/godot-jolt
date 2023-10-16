@@ -9,12 +9,151 @@ Breaking changes are denoted with ⚠️.
 
 ## [Unreleased]
 
+## [0.9.0] - 2023-10-12
+
+### Changed
+
+- Changed `ConvexPolygonShape3D` to no longer emit errors about failing to build the shape when
+  adding one to the scene tree with 0 points.
+
+### Added
+
+- Added new project setting, "Active Edge Threshold", for tuning the cut-off angle for Jolt's active
+  edge detection, which can help balance trade-offs related to triangle edge collisions.
+
+### Fixed
+
+- ⚠️ Fixed issue where `Generic6DOFJoint` and `JoltGeneric6DOFJoint` would lock up any axis that
+  used a spring stiffness/frequency of 0.
+- Greatly reduced creation/modification/loading times for `ConcavePolygonShape3D`.
+
+## [0.8.0] - 2023-09-28
+
+### Changed
+
+- ⚠️ Changed `apply_force` and `apply_impulse` to be applied at an offset relative to the body's
+  origin rather than at an offset relative to the body's center-of-mass, to match Godot Physics.
+- ⚠️ Changed collision layers and masks for `Area3D` to behave like they do in Godot Physics,
+  allowing for asymmetrical setups, where overlaps are only reported if the mask of an `Area3D`
+  contains the layer of the overlapping object.
+- ⚠️ Changed the `body_set_force_integration_callback` method of `PhysicsServer3D` to behave like it
+  does with Godot Physics, where omitting the binding of `userdata` requires that the callback also
+  doesn't take any `userdata`. It also will no longer be called when the body is sleeping.
+
+### Added
+
+- Added timings of Jolt's various jobs to the "Physics 3D" profiler category.
+- Added registering of `JoltPhysicsServer3D` as an actual singleton, which makes Jolt-specific
+  server methods (e.g. `pin_joint_get_applied_force`) easier to deal with from dynamic scripting
+  languages like GDScript.
+- Added `space_dump_debug_snapshot` to `JoltPhysicsServer3D`, for dumping a binary debug snapshot of
+  a particular physics space.
+- Added `dump_debug_snapshots` to `JoltPhysicsServer3D`, for dumping binary debug snapshots of all
+  currently active physics spaces.
+- Added a "Dump Debug Snapshots" menu option to "Project / Tools / Jolt Physics", for dumping binary
+  debug snapshots of all the editor's physics spaces.
+
+### Fixed
+
+- Fixed issue with `move_and_slide`, where under certain conditions you could get stuck on internal
+  edges of a `ConcavePolygonShape3D` if the floor was within 5-ish degrees of `floor_max_angle`.
+- Fixed issue with `move_and_slide`, where under certain conditions, while using a `BoxShape3D` or
+  `CylinderShape3D` shape, you could get stuck on internal edges of a `ConcavePolygonShape3D`.
+- Fixed issue where collision with `ConvexPolygonShape3D` could yield a flipped contact normal.
+- Fixed issue where an `Area3D` with `monitoring` disabled wouldn't emit any entered events for
+  already overlapping bodies once `monitoring` was enabled.
+- Fixed issue where changing the center-of-mass of a `RigidBody3D` attached to a joint would shift
+  its transform relative to the joint.
+- Fixed issue where the `total_gravity` property on `PhysicsDirectBodyState3D` would always return a
+  zero vector for kinematic bodies.
+- Fixed issue with `Area3D` detecting overlaps slightly outside of its collision shapes.
+
+## [0.7.0] - 2023-08-29
+
+### Removed
+
+- ⚠️ Disabled the `JoltDebugGeometry3D` node for all distributed builds. If you still need it, build
+  from source using the `*-development` or `*-debug` configurations.
+
+### Changed
+
+- ⚠️ Ray-casts will no longer hit the back-faces of `ConcavePolygonShape3D` if its `hit_back_faces`
+  parameter is set to `false`, regardless of what the `backface_collision` property of the
+  `ConcavePolygonShape3D` is set to.
+- ⚠️ Changed the triangulation of `HeightMapShape3D` to match Godot Physics.
+
+### Fixed
+
+- ⚠️ Fixed regression where a motored `HingeJoint3D` (or `JoltHingeJoint3D`) would rotate
+  counter-clockwise instead of clockwise.
+- Fixed issue where ray-casting a `ConcavePolygonShape3D` that had `backface_collision` enabled, you
+  would sometimes end up with a flipped normal.
+- Fixed issue where a `CharacterBody3D` using `move_and_slide` could sometimes get stuck when
+  sliding along a wall.
+- Fixed issue where attaching a `RigidBody3D` with locked axes to a joint could result in NaN
+  velocities/position and subsequently a lot of random errors being emitted from within Godot.
+
+## [0.6.0] - 2023-08-17
+
+### Changed
+
+- Changed the editor gizmo for `JoltPinJoint3D`.
+- Changed the editor gizmo for `JoltHingeJoint3D`.
+- Changed the editor gizmo for `JoltSliderJoint3D`.
+- Changed the editor gizmo for `JoltConeTwistJoint3D`.
+- Changed the editor gizmo for `JoltGeneric6DOFJoint3D`.
+
+### Added
+
+- Added support for `HeightMapShape3D` with non-power-of-two dimensions.
+- Added support for `HeightMapShape3D` with non-square dimensions.
+- Added support for `HeightMapShape3D` with no heights.
+
+### Fixed
+
+- Fixed issue where bodies would catch on internal edges of `ConcavePolygonShape3D`.
+
+## [0.5.0] - 2023-08-08
+
+### Removed
+
+- ⚠️ Removed the ability to lock all six axes of a `RigidBody3D`. Consider freezing the body as
+  static instead.
+
+### Added
+
+- Added substitutes for all the joint nodes, to better align with the interface that Jolt offers,
+  which consist of `JoltPinJoint3D`, `JoltHingeJoint3D`, `JoltSliderJoint3D`, `JoltConeTwistJoint3D`
+  and `JoltGeneric6DOFJoint3D`. These differ in the following ways:
+  - You can enable/disable the limits on all joints.
+  - You can enable/disable the joint itself using its `enabled` property.
+  - You can fetch the magnitude of the force/torque that was last applied to keep the joint
+    together, using the `get_applied_force` and `get_applied_torque` methods. These coupled with the
+    `enabled` property allows for creating breakable joints.
+  - You can increase the joint's solver iterations, to improve stability, using its
+    `solver_velocity_iterations` and `solver_position_iterations` properties.
+  - Springs use frequency and damping instead of stiffness and damping.
+  - Soft limits are achieved with limit springs.
+  - `JoltConeTwistJoint3D` can be configured with a motor.
+  - Angular motor velocities are set in radians per second, but displayed in degrees per second.
+  - Any motion parameters like bias, damping and relaxation are omitted.
+  - Any angular motion parameters for the slider joint are omitted.
+
+### Fixed
+
+- Fixed issue where linear axis locks could be budged a bit if enough force was applied.
+- Fixed issue where `CharacterBody3D` and other kinematic bodies wouldn't respect locked axes.
+- Fixed issue where passing `null` to the `result` parameter (or omitting it entirely) of the
+  `body_test_motion` method in `PhysicsServer3D` would cause a crash.
+- Fixed issue where the `body_is_omitting_force_integration` method in `PhysicsServer3D` would
+  always return `false`.
+
 ## [0.4.1] - 2023-07-08
 
 ### Fixed
 
-- Fixed issue where colliding with certain types of degenerate triangles would cause the application
-  to hang or emit a vast amount of errors.
+- Fixed issue where colliding with certain types of degenerate triangles in `ConcavePolygonShape3D`
+  would cause the application to hang or emit a vast amount of errors.
 
 ## [0.4.0] - 2023-07-08
 
@@ -134,7 +273,12 @@ Breaking changes are denoted with ⚠️.
 
 Initial release.
 
-[Unreleased]: https://github.com/godot-jolt/godot-jolt/compare/v0.4.1-stable...HEAD
+[Unreleased]: https://github.com/godot-jolt/godot-jolt/compare/v0.9.0-stable...HEAD
+[0.9.0]: https://github.com/godot-jolt/godot-jolt/compare/v0.8.0-stable...v0.9.0-stable
+[0.8.0]: https://github.com/godot-jolt/godot-jolt/compare/v0.7.0-stable...v0.8.0-stable
+[0.7.0]: https://github.com/godot-jolt/godot-jolt/compare/v0.6.0-stable...v0.7.0-stable
+[0.6.0]: https://github.com/godot-jolt/godot-jolt/compare/v0.5.0-stable...v0.6.0-stable
+[0.5.0]: https://github.com/godot-jolt/godot-jolt/compare/v0.4.1-stable...v0.5.0-stable
 [0.4.1]: https://github.com/godot-jolt/godot-jolt/compare/v0.4.0-stable...v0.4.1-stable
 [0.4.0]: https://github.com/godot-jolt/godot-jolt/compare/v0.3.0-stable...v0.4.0-stable
 [0.3.0]: https://github.com/godot-jolt/godot-jolt/compare/v0.2.3-stable...v0.3.0-stable

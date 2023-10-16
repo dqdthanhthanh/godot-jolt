@@ -10,13 +10,17 @@ constexpr int32_t DEFAULT_SOLVER_PRIORITY = 1;
 } // namespace
 
 JoltJointImpl3D::JoltJointImpl3D(
+	const JoltJointImpl3D& p_old_joint,
 	JoltBodyImpl3D* p_body_a,
 	JoltBodyImpl3D* p_body_b,
 	const Transform3D& p_local_ref_a,
 	const Transform3D& p_local_ref_b
 )
-	: body_a(p_body_a)
+	: enabled(p_old_joint.enabled)
+	, collision_disabled(p_old_joint.collision_disabled)
+	, body_a(p_body_a)
 	, body_b(p_body_b)
+	, rid(p_old_joint.rid)
 	, local_ref_a(p_local_ref_a)
 	, local_ref_b(p_local_ref_b) {
 	body_a->add_joint(this);
@@ -51,12 +55,22 @@ JoltSpace3D* JoltJointImpl3D::get_space() const {
 				"Joint was found to connect bodies in different physics spaces. "
 				"This joint will effectively be disabled. "
 				"This joint connects %s.",
-				bodies_to_string()
+				_bodies_to_string()
 			)
 		);
 	}
 
 	return space_a;
+}
+
+void JoltJointImpl3D::set_enabled(bool p_enabled) {
+	if (enabled == p_enabled) {
+		return;
+	}
+
+	enabled = p_enabled;
+
+	_enabled_changed();
 }
 
 int32_t JoltJointImpl3D::get_solver_priority() const {
@@ -69,9 +83,29 @@ void JoltJointImpl3D::set_solver_priority(int32_t p_priority) {
 			"Joint solver priority is not supported by Godot Jolt. "
 			"Any such value will be ignored."
 			"This joint connects %s.",
-			bodies_to_string()
+			_bodies_to_string()
 		));
 	}
+}
+
+void JoltJointImpl3D::set_solver_velocity_iterations(int32_t p_iterations) {
+	if (velocity_iterations == p_iterations) {
+		return;
+	}
+
+	velocity_iterations = p_iterations;
+
+	_iterations_changed();
+}
+
+void JoltJointImpl3D::set_solver_position_iterations(int32_t p_iterations) {
+	if (position_iterations == p_iterations) {
+		return;
+	}
+
+	position_iterations = p_iterations;
+
+	_iterations_changed();
 }
 
 void JoltJointImpl3D::set_collision_disabled(bool p_disabled) {
@@ -106,7 +140,7 @@ void JoltJointImpl3D::destroy() {
 	jolt_ref = nullptr;
 }
 
-void JoltJointImpl3D::shift_reference_frames(
+void JoltJointImpl3D::_shift_reference_frames(
 	const Vector3& p_linear_shift,
 	const Vector3& p_angular_shift,
 	Transform3D& p_shifted_ref_a,
@@ -126,6 +160,10 @@ void JoltJointImpl3D::shift_reference_frames(
 	const Basis& basis_a = local_ref_a.basis;
 	const Basis& basis_b = local_ref_b.basis;
 
+	// HACK(mihe): Ideally we would add the linear shift here, not subtract it, but this is how
+	// Godot Physics seems to behave, so we emulate that. This does have the annoying side-effect of
+	// effectively making the upper limit instead be the lower limit and vice versa.
+
 	const Basis shifted_basis_a = basis_a * Basis::from_euler(p_angular_shift);
 	const Vector3 shifted_origin_a = origin_a - basis_a.xform(p_linear_shift);
 
@@ -133,7 +171,28 @@ void JoltJointImpl3D::shift_reference_frames(
 	p_shifted_ref_b = Transform3D(basis_b, origin_b);
 }
 
-String JoltJointImpl3D::bodies_to_string() const {
+void JoltJointImpl3D::_update_enabled() {
+	if (jolt_ref != nullptr) {
+		jolt_ref->SetEnabled(enabled);
+	}
+}
+
+void JoltJointImpl3D::_update_iterations() {
+	if (jolt_ref != nullptr) {
+		jolt_ref->SetNumVelocityStepsOverride(velocity_iterations);
+		jolt_ref->SetNumPositionStepsOverride(position_iterations);
+	}
+}
+
+void JoltJointImpl3D::_enabled_changed() {
+	_update_enabled();
+}
+
+void JoltJointImpl3D::_iterations_changed() {
+	_update_iterations();
+}
+
+String JoltJointImpl3D::_bodies_to_string() const {
 	return vformat(
 		"'%s' and '%s'",
 		body_a != nullptr ? body_a->to_string() : "<unknown>",

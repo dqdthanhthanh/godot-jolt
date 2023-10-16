@@ -8,6 +8,7 @@ class JoltSpace3D;
 class JoltPinJointImpl3D final : public JoltJointImpl3D {
 public:
 	JoltPinJointImpl3D(
+		const JoltJointImpl3D& p_old_joint,
 		JoltBodyImpl3D* p_body_a,
 		JoltBodyImpl3D* p_body_b,
 		const Vector3& p_local_a,
@@ -29,15 +30,17 @@ public:
 
 	void set_param(PhysicsServer3D::PinJointParam p_param, double p_value);
 
+	float get_applied_force() const;
+
 	void rebuild(bool p_lock = true) override;
 
 private:
-	static JPH::Constraint* build_pin(
+	static JPH::Constraint* _build_pin(
 		JPH::Body* p_jolt_body_a,
 		JPH::Body* p_jolt_body_b,
 		const Transform3D& p_shifted_ref_a,
 		const Transform3D& p_shifted_ref_b
 	);
 
-	void points_changed(bool p_lock = true);
+	void _points_changed(bool p_lock = true);
 };

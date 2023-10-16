@@ -2,14 +2,42 @@
 
 #include "shapes/jolt_shape_instance_3d.hpp"
 
+class JoltAreaImpl3D;
+class JoltBodyImpl3D;
 class JoltShapeImpl3D;
 class JoltSpace3D;
 
 class JoltObjectImpl3D {
 public:
-	JoltObjectImpl3D();
+	enum ObjectType : int8_t {
+		OBJECT_TYPE_INVALID,
+		OBJECT_TYPE_BODY,
+		OBJECT_TYPE_AREA
+	};
+
+	explicit JoltObjectImpl3D(ObjectType p_object_type);
 
 	virtual ~JoltObjectImpl3D() = 0;
+
+	bool is_body() const { return object_type == OBJECT_TYPE_BODY; };
+
+	bool is_area() const { return object_type == OBJECT_TYPE_AREA; };
+
+	JoltBodyImpl3D* as_body() {
+		return is_body() ? reinterpret_cast<JoltBodyImpl3D*>(this) : nullptr;
+	}
+
+	const JoltBodyImpl3D* as_body() const {
+		return is_body() ? reinterpret_cast<const JoltBodyImpl3D*>(this) : nullptr;
+	}
+
+	JoltAreaImpl3D* as_area() {
+		return is_area() ? reinterpret_cast<JoltAreaImpl3D*>(this) : nullptr;
+	}
+
+	const JoltAreaImpl3D* as_area() const {
+		return is_area() ? reinterpret_cast<const JoltAreaImpl3D*>(this) : nullptr;
+	}
 
 	RID get_rid() const { return rid; }
 
@@ -127,41 +155,41 @@ public:
 protected:
 	friend class JoltShapeImpl3D;
 
-	virtual JPH::BroadPhaseLayer get_broad_phase_layer() const = 0;
+	virtual JPH::BroadPhaseLayer _get_broad_phase_layer() const = 0;
 
-	JPH::ObjectLayer get_object_layer() const;
+	JPH::ObjectLayer _get_object_layer() const;
 
-	virtual JPH::EMotionType get_motion_type() const = 0;
+	virtual JPH::EMotionType _get_motion_type() const = 0;
 
-	virtual void create_in_space() = 0;
+	virtual void _create_in_space() = 0;
 
-	virtual void add_to_space(bool p_lock = true);
+	virtual void _add_to_space(bool p_lock = true);
 
-	virtual void remove_from_space(bool p_lock = true);
+	virtual void _remove_from_space(bool p_lock = true);
 
-	virtual void destroy_in_space(bool p_lock = true);
+	virtual void _destroy_in_space(bool p_lock = true);
 
-	virtual void apply_transform(const Transform3D& p_transform, bool p_lock = true);
+	virtual void _apply_transform(const Transform3D& p_transform, bool p_lock = true);
 
-	void create_begin();
+	void _create_begin();
 
-	JPH::Body* create_end();
+	JPH::Body* _create_end();
 
-	void update_object_layer(bool p_lock = true);
+	void _update_object_layer(bool p_lock = true);
 
-	virtual void collision_layer_changed(bool p_lock = true);
+	virtual void _collision_layer_changed(bool p_lock = true);
 
-	virtual void collision_mask_changed(bool p_lock = true);
+	virtual void _collision_mask_changed(bool p_lock = true);
 
-	virtual void shapes_changed(bool p_lock = true);
+	virtual void _shapes_changed(bool p_lock = true);
 
-	virtual void shapes_built([[maybe_unused]] bool p_lock = true) { }
+	virtual void _shapes_built([[maybe_unused]] bool p_lock = true) { }
 
-	virtual void space_changing([[maybe_unused]] bool p_lock = true) { }
+	virtual void _space_changing([[maybe_unused]] bool p_lock = true) { }
 
-	virtual void space_changed([[maybe_unused]] bool p_lock = true) { }
+	virtual void _space_changed([[maybe_unused]] bool p_lock = true) { }
 
-	virtual void transform_changed([[maybe_unused]] bool p_lock = true) { }
+	virtual void _transform_changed([[maybe_unused]] bool p_lock = true) { }
 
 	LocalVector<JoltShapeInstance3D> shapes;
 
@@ -184,6 +212,8 @@ protected:
 	uint32_t collision_layer = 1;
 
 	uint32_t collision_mask = 1;
+
+	ObjectType object_type = OBJECT_TYPE_INVALID;
 
 	bool pickable = false;
 };

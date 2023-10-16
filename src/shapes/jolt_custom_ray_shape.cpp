@@ -98,9 +98,18 @@ void collide_ray_vs_shape(
 	const JPH::Vec3 hit_point_on_1 = ray_start + ray_vector;
 	const JPH::Vec3 hit_point_on_2 = transform2 * hit_point2;
 
-	const JPH::Vec3 hit_normal2 = shape1->slide_on_slope
-		? p_shape2->GetSurfaceNormal(hit.mSubShapeID2, hit_point2)
-		: -ray_direction2;
+	JPH::Vec3 hit_normal2 = JPH::Vec3::sZero();
+
+	if (shape1->slide_on_slope) {
+		hit_normal2 = p_shape2->GetSurfaceNormal(hit.mSubShapeID2, hit_point2);
+
+		// HACK(mihe): If we got a back-face normal we need to flip it
+		if (hit_normal2.Dot(ray_direction2) > 0) {
+			hit_normal2 = -hit_normal2;
+		}
+	} else {
+		hit_normal2 = -ray_direction2;
+	}
 
 	const JPH::Vec3 hit_normal = transform2.Multiply3x3(hit_normal2);
 
@@ -200,6 +209,17 @@ void JoltCustomRayShape::register_type() {
 
 JPH::AABox JoltCustomRayShape::GetLocalBounds() const {
 	return {JPH::Vec3::sZero(), JPH::Vec3(0.0f, 0.0f, length)};
+}
+
+JPH::MassProperties JoltCustomRayShape::GetMassProperties() const {
+	JPH::MassProperties mass_properties;
+
+	// HACK(mihe): Since this shape has no volume we can't really give it a correct set of mass
+	// properties, so instead we just give it some random/arbitrary ones.
+	mass_properties.mMass = 1.0f;
+	mass_properties.mInertia = JPH::Mat44::sScale(0.1f);
+
+	return mass_properties;
 }
 
 #ifdef JPH_DEBUG_RENDERER

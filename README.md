@@ -1,4 +1,8 @@
-# ![Godot Jolt][log]
+<p align="center">
+  <a href="https://github.com/godot-jolt/godot-jolt">
+    <img alt="Godot Jolt" src="docs/logo.svg">
+  </a>
+</p>
 
 Godot Jolt is a native extension for the [Godot game engine][god] that allows you to use the [Jolt
 physics engine][jlt] to power Godot's 3D physics.
@@ -26,8 +30,9 @@ would use normally, like `RigidBody3D` or `CharacterBody3D`.
 Better performance, mainly, but also just having different characteristics compared to Godot
 Physics.
 
-At the moment Godot Jolt is purely a drop-in replacement with no additional nodes or features. This
-allows you to quickly switch between physics engines with little risk or effort.
+There are also (completely optional) substitute nodes available for all the joints, which line up
+better with the interface that Jolt offers than what the default joints do. This allows for things
+like breakable joints, soft limits and the ability to override solver iterations per-joint.
 
 ## What about determinism?
 
@@ -37,8 +42,7 @@ should not be relied upon if determinism is a hard requirement.
 
 ## What's not supported?
 
-- Joints do not support soft limits (yet)
-- `SoftBody3D` is not supported
+- `SoftBody3D` is not supported (yet)
 - `WorldBoundaryShape3D` is not supported
 - The physics server is not thread-safe (yet)
 - Double-precision builds of Godot are not supported (yet)
@@ -48,15 +52,14 @@ should not be relied upon if determinism is a hard requirement.
 
 - `Area3D` detecting static bodies is opt-in, with a potentially [heavy performance/memory
   cost][jst]
-- Springs are actually implemented in `Generic6DOFJoint3D`
-- Ray-casts will hit the back-faces of all shape types, not just concave polygons and height maps
+- Joints only support soft limits through their substitutes (`JoltHingeJoint3D`, etc.)
+- Springs and linear motors are actually implemented in `Generic6DOFJoint3D`
+- Ray-casts using `hit_back_faces` will hit the back/inside of all shapes, not only concave ones
+- Ray-casts are not affected by the `backface_collision` property of `ConcavePolygonShape3D`
 - Shape-casts should be more accurate, but their cost also scale with the cast distance
 - Shape margins are used, but are treated as an upper bound and scale with the shape's extents
 - Manipulating a body's shape(s) after it has entered a scene tree can be costly
 - Contact impulses are estimations and won't be accurate when colliding with multiple bodies
-- `HeightMapShape3D` only supports square height maps with dimensions that are power-of-two
-- Axis-locking is implemented using joints, which means a body can technically deviate a bit from
-  its locked axes
 
 Also consider this note from Jolt's [documentation][jdc]:
 
@@ -94,7 +97,6 @@ compatible with the one found in Ubuntu 20.04 (Focal Fossa).
 
 In no particular order, here are some of the bigger items:
 
-- Adding substitutes for the joints, allowing for things like springs
 - Adding new types of joints, like Jolt's `DistanceConstraint`
 - Adding support for double-precision, allowing for large worlds
 - Adding support for iOS and Android
@@ -130,7 +132,6 @@ See [`CHANGELOG.md`][chl] for details about what notable changes were included i
 Godot Jolt is distributed under the MIT license. See [`LICENSE.txt`][lic] for more details and
 [`THIRDPARTY.txt`][trd] for third-party licenses.
 
-[log]: docs/logo.svg
 [god]: https://godotengine.org/
 [jlt]: https://github.com/jrouwe/JoltPhysics
 [jst]: docs/settings.md#jolt-3d

@@ -66,15 +66,17 @@ public:
 
 	static JPH::ShapeRefC with_user_data(const JPH::Shape* p_shape, uint64_t p_user_data);
 
+	static JPH::ShapeRefC without_custom_shapes(const JPH::Shape* p_shape);
+
 	template<typename TCallable>
 	static JPH::ShapeRefC as_compound(TCallable&& p_callable);
 
 protected:
-	virtual JPH::ShapeRefC build() const = 0;
+	virtual JPH::ShapeRefC _build() const = 0;
 
-	virtual void invalidated(bool p_lock = true);
+	virtual void _invalidated(bool p_lock = true);
 
-	String owners_to_string() const;
+	String _owners_to_string() const;
 
 	HashMap<JoltObjectImpl3D*, int32_t> ref_counts_by_owner;
 

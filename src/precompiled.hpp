@@ -1,5 +1,9 @@
 #pragma once
 
+// NOLINTBEGIN(readability-duplicate-include): We need to be able to include certain headers
+// multiple times when they're conditionally included through multiple preprocessor definitions that
+// might not be perfectly mutually exclusive.
+
 #ifdef _MSC_VER
 // HACK(mihe): CMake's Visual Studio generator doesn't support system include paths
 #pragma warning(push, 0)
@@ -12,12 +16,11 @@
 
 #include <gdextension_interface.h>
 
-#include <godot_cpp/classes/camera3d.hpp>
 #include <godot_cpp/classes/engine.hpp>
 #include <godot_cpp/classes/geometry_instance3d.hpp>
-#include <godot_cpp/classes/mesh.hpp>
 #include <godot_cpp/classes/object.hpp>
 #include <godot_cpp/classes/os.hpp>
+#include <godot_cpp/classes/physics_body3d.hpp>
 #include <godot_cpp/classes/physics_direct_body_state3d_extension.hpp>
 #include <godot_cpp/classes/physics_direct_space_state3d_extension.hpp>
 #include <godot_cpp/classes/physics_server3d_extension.hpp>
@@ -28,11 +31,7 @@
 #include <godot_cpp/classes/physics_server3d_manager.hpp>
 #include <godot_cpp/classes/physics_server3d_rendering_server_handler.hpp>
 #include <godot_cpp/classes/project_settings.hpp>
-#include <godot_cpp/classes/rendering_server.hpp>
-#include <godot_cpp/classes/standard_material3d.hpp>
-#include <godot_cpp/classes/viewport.hpp>
 #include <godot_cpp/classes/worker_thread_pool.hpp>
-#include <godot_cpp/classes/world3d.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/core/defs.hpp>
 #include <godot_cpp/core/error_macros.hpp>
@@ -44,6 +43,36 @@
 #include <godot_cpp/variant/builtin_types.hpp>
 #include <godot_cpp/variant/utility_functions.hpp>
 #include <godot_cpp/variant/variant.hpp>
+
+#ifdef GDJ_CONFIG_EDITOR
+
+#include <godot_cpp/classes/control.hpp>
+#include <godot_cpp/classes/editor_file_dialog.hpp>
+#include <godot_cpp/classes/editor_interface.hpp>
+#include <godot_cpp/classes/editor_node3d_gizmo.hpp>
+#include <godot_cpp/classes/editor_node3d_gizmo_plugin.hpp>
+#include <godot_cpp/classes/editor_plugin.hpp>
+#include <godot_cpp/classes/editor_settings.hpp>
+#include <godot_cpp/classes/engine_debugger.hpp>
+#include <godot_cpp/classes/file_access.hpp>
+#include <godot_cpp/classes/popup_menu.hpp>
+#include <godot_cpp/classes/standard_material3d.hpp>
+#include <godot_cpp/classes/theme.hpp>
+#include <godot_cpp/classes/time.hpp>
+#include <godot_cpp/classes/timer.hpp>
+#include <godot_cpp/templates/spin_lock.hpp>
+
+#endif // GDJ_CONFIG_EDITOR
+
+#ifdef JPH_DEBUG_RENDERER
+
+#include <godot_cpp/classes/camera3d.hpp>
+#include <godot_cpp/classes/rendering_server.hpp>
+#include <godot_cpp/classes/standard_material3d.hpp>
+#include <godot_cpp/classes/viewport.hpp>
+#include <godot_cpp/classes/world3d.hpp>
+
+#endif // JPH_DEBUG_RENDERER
 
 #include <Jolt/Jolt.h>
 
@@ -75,6 +104,7 @@
 #include <Jolt/Physics/Collision/Shape/CylinderShape.h>
 #include <Jolt/Physics/Collision/Shape/HeightFieldShape.h>
 #include <Jolt/Physics/Collision/Shape/MeshShape.h>
+#include <Jolt/Physics/Collision/Shape/MutableCompoundShape.h>
 #include <Jolt/Physics/Collision/Shape/OffsetCenterOfMassShape.h>
 #include <Jolt/Physics/Collision/Shape/RotatedTranslatedShape.h>
 #include <Jolt/Physics/Collision/Shape/ScaledShape.h>
@@ -86,11 +116,14 @@
 #include <Jolt/Physics/Constraints/SixDOFConstraint.h>
 #include <Jolt/Physics/Constraints/SliderConstraint.h>
 #include <Jolt/Physics/Constraints/SwingTwistConstraint.h>
+#include <Jolt/Physics/PhysicsScene.h>
 #include <Jolt/Physics/PhysicsSystem.h>
 #include <Jolt/RegisterTypes.h>
 
 #ifdef JPH_DEBUG_RENDERER
+
 #include <Jolt/Renderer/DebugRenderer.h>
+
 #endif // JPH_DEBUG_RENDERER
 
 #include <mimalloc.h>
@@ -125,7 +158,11 @@ using namespace godot;
 #include "misc/bind_macros.hpp"
 #include "misc/error_macros.hpp"
 #include "misc/gdclass_macros.hpp"
+#include "misc/jolt_stream_wrappers.hpp"
 #include "misc/math.hpp"
 #include "misc/scope_guard.hpp"
 #include "misc/type_conversions.hpp"
 #include "misc/utility_functions.hpp"
+#include "misc/utility_macros.hpp"
+
+// NOLINTEND(readability-duplicate-include)
